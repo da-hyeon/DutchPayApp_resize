@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/selector_payment_number">
+
+    <RadioGroup
+        android:id="@+id/radioGroup"
+        android:layout_width="0dp"
+        android:layout_height="26dp"
+        android:layout_marginTop="11dp"
+        android:background="@drawable/box7"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="@+id/recyclerView"
+        app:layout_constraintStart_toStartOf="@+id/recyclerView"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout">
+
+        <RadioButton
+            android:id="@+id/radioButton3"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:button="@android:color/transparent"
+            android:fontFamily="@font/malgunfont"
+            android:gravity="center"
+            android:includeFontPadding="false"
+            android:text="1주"
+            android:textColor="#2a2a2a"
+            android:textSize="10.3dp" />
+
+        <View
+            android:id="@+id/view6"
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0"
+            android:background="#cecdcd" />
+
+        <RadioButton
+            android:id="@+id/radioButton4"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:button="@android:color/transparent"
+            android:fontFamily="@font/malgunfont"
+            android:gravity="center"
+            android:includeFontPadding="false"
+            android:text="1개월"
+            android:textColor="#2a2a2a"
+            android:textSize="10.3dp" />
+
+        <View
+            android:id="@+id/view7"
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0"
+            android:background="#cecdcd" />
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:button="@android:color/transparent"
+            android:fontFamily="@font/malgunfont"
+            android:gravity="center"
+            android:includeFontPadding="false"
+            android:text="3개월"
+            android:textColor="#2a2a2a"
+            android:textSize="10.3dp" />
+
+        <View
+            android:id="@+id/view8"
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0"
+            android:background="#cecdcd" />
+
+        <RadioButton
+            android:id="@+id/radioButton2"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:button="@android:color/transparent"
+            android:fontFamily="@font/malgunfont"
+            android:gravity="center"
+            android:includeFontPadding="false"
+            android:text="6개월"
+            android:textColor="#2a2a2a"
+            android:textSize="10.3dp" />
+    </RadioGroup>
+
+    <TextView
+        android:id="@+id/textView44"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="17dp"
+        android:layout_marginTop="21dp"
+        android:text="결제 정보 관리"
+        android:textColor="#2a2a2a"
+        android:textSize="17.1dp"
+        android:textStyle="bold"
+        android:fontFamily="@font/malgunfont"
+        android:includeFontPadding="false"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/constraintLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:background="#ffffff"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView44">
+
+        <Button
+            android:id="@+id/button8"
+            android:layout_width="0dp"
+            android:layout_height="42.29dp"
+            android:layout_marginStart="17dp"
+            android:layout_marginTop="23dp"
+            android:layout_marginEnd="17dp"
+            android:layout_marginBottom="50dp"
+            android:background="@drawable/new_start_btn"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <RadioGroup
+            android:layout_width="wrap_content"
+            android:layout_height="20.29dp"
+            android:layout_marginTop="24dp"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="@+id/button8"
+            app:layout_constraintTop_toBottomOf="@+id/button8">
+
+            <RadioButton
+                android:id="@+id/radioButton5"
+                android:layout_width="56.57dp"
+                android:layout_height="20.29dp"
+                android:layout_marginEnd="8dp"
+                android:layout_weight="0"
+                android:background="@drawable/view_all"
+                android:button="@android:color/transparent" />
+
+            <RadioButton
+                android:id="@+id/radioButton7"
+                android:layout_width="56.57dp"
+                android:layout_height="20.29dp"
+                android:layout_marginEnd="8dp"
+                android:layout_weight="0"
+                android:background="@drawable/ing_btn"
+                android:button="@android:color/transparent" />
+
+            <RadioButton
+                android:id="@+id/radioButton6"
+                android:layout_width="56.57dp"
+                android:layout_height="20.29dp"
+                android:layout_weight="0"
+                android:background="@drawable/finish_btn"
+                android:button="@android:color/transparent" />
+        </RadioGroup>
+    </android.support.constraint.ConstraintLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="17dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="17dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
+
+</android.support.constraint.ConstraintLayout>
