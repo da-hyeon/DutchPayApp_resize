@@ -1,0 +1,74 @@
+<resources>
+    <string name="app_name">DutchPayApp</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+
+    <!--contentMain-->
+    <string name="welcome_userName">님, 안녕하세요!</string>
+    <string name="welcome_userMoney"> 원</string>
+    <string name="welcome_title">에 오신것을 환영합니다.</string>
+    <string name="welcome_logoText">언제 어디서나 바로바로 손쉽게</string>
+    <string name="welcome_eventTitle">아이유와 함께 하는 더치페이 할인 이벤트</string>
+
+    <!--로그인-->
+    <string name="login_firstText">언제어디서나 바로바로 손쉽게</string>
+    <string name="login_IdHint">이메일 또는 핸드폰 번호를 입력해 주세요.</string>
+    <string name="login_PWHint">비밀번호를 입력해 주세요.</string>
+    <string name="login_autoLoginText">로그인 상태 유지하기</string>
+    <string name="login_registerText">회원가입</string>
+    <string name="login_fineIdText">아이디 찾기</string>
+    <string name="login_finePWText">비밀번호 찾기</string>
+
+    <!--회원가입 약관동의-->
+    <string name="register_titleText">약관동의</string>
+    <string name="register_agreeTitleText">이용약관 전체 동의</string>
+    <string name="register_agree1Text">서비스 기본 약관 [필수]</string>
+    <string name="register_agree2Text">개인정보 수집 약관 [필수]</string>
+    <string name="register_agree3Text">휴대폰 인증서비스 약관 [필수]</string>
+    <string name="register_agree4Text">전자거래 이용 약관 [필수]</string>
+    <string name="register_agree5Text">푸시 서비스 약관 [선택]</string>
+    <string name="register_agree6Text">마케팅 이용 동의 약관 [선택]</string>
+    <string name="register_agree7Text">회원가입과 동시에 선택 약관에 동의하시게 됩니다.</string>
+
+    <!--회원가입 약관전체보기-->
+    <string name="agreeAll_titleText">이용 약관 상세보기</string>
+    <string name="agreeAll_agreeTitleText">서비스 기본 약관 [필수]</string>
+    <string name="agreeAll_agreeContentText">약관 글귀</string>
+
+    <!--회원가입 폼-->
+    <string name="register_form_titleText">회원가입을 위한 정보를 입력해 주세요.</string>
+    <string name="register_form_emailHintText">이메일</string>
+    <string name="register_form_PWHintText">비밀번호</string>
+    <string name="register_form_PWCheckHintText">비밀번호 확인</string>
+    <string name="register_form_nameHintText">이름</string>
+    <string name="register_form_RRHintText">주민등록번호</string>
+    <string name="register_form_RRbackHintText">1</string>
+    <string name="register_form_RRHideText">* * * * * *</string>
+    <string name="register_form_phoneHintText">핸드폰 번호</string>
+    <string name="register_form_CNHintText">인증번호를 입력해 주세요.</string>
+
+    <!--회원가입 결제비밀번호 등록-->
+    <string name="register_PaymentPassword_titleText">결제시 이용할 암호를 입력해주세요.</string>
+    <string name="register_PaymentPassword_middleText">결제 비밀번호</string>
+    <string name="register_PaymentPassword_1">1</string>
+    <string name="register_PaymentPassword_2">2</string>
+    <string name="register_PaymentPassword_3">3</string>
+    <string name="register_PaymentPassword_4">4</string>
+    <string name="register_PaymentPassword_5">5</string>
+    <string name="register_PaymentPassword_6">6</string>
+    <string name="register_PaymentPassword_7">7</string>
+    <string name="register_PaymentPassword_8">8</string>
+    <string name="register_PaymentPassword_9">9</string>
+    <string name="register_PaymentPassword_0">0</string>
+    <string name="register_PaymentPassword_clear">삭제</string>
+    <string name="register_PaymentPassword_ok">확인</string>
+
+    <!--회원가입 완료-->
+    <string name="register_success_titleText">언제 어디서나 바로바로 손쉽게</string>
+    <string name="register_success_middleText">더치페이에 가입하신 것을 환영합니다.</string>
+    <string name="register_success_lastText">이제부터 더치페이의 모든 서비스를\n사용하실 수 있습니다.</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>

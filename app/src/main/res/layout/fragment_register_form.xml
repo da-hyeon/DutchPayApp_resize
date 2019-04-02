@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#f3f1f1">
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="17.14dp"
+            android:layout_marginRight="17.14dp">
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="29.14dp"
+                android:fontFamily="@font/malgunfont"
+                android:text="@string/register_form_titleText"
+                android:textColor="#1e1e1e"
+                android:textSize="13.71dp"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <EditText
+                android:id="@+id/etEmail"
+                android:layout_width="match_parent"
+                android:layout_height="47.42dp"
+                android:layout_marginTop="6dp"
+                android:background="#ffffff"
+                android:fontFamily="@font/malgunfont"
+                android:hint="@string/register_form_emailHintText"
+                android:paddingLeft="10.50dp"
+                android:textColorHint="#afafaf"
+                android:textSize="13.71dp"
+                android:inputType="textEmailAddress"
+                app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+            <EditText
+                android:id="@+id/etPassword"
+                android:layout_width="match_parent"
+                android:layout_height="47.42dp"
+                android:layout_marginTop="3.71dp"
+                android:background="#ffffff"
+                android:hint="@string/register_form_PWHintText"
+                android:inputType="textPassword"
+                android:paddingLeft="10.50dp"
+                android:textColorHint="#afafaf"
+                android:textSize="13.71dp"
+                app:layout_constraintTop_toBottomOf="@+id/etEmail" />
+
+            <EditText
+                android:id="@+id/etPasswordCheck"
+                android:layout_width="match_parent"
+                android:layout_height="47.42dp"
+                android:layout_marginTop="3.71dp"
+                android:background="#ffffff"
+                android:fontFamily="@font/malgunfont"
+                android:hint="@string/register_form_PWCheckHintText"
+                android:paddingLeft="10.50dp"
+                android:inputType="textPassword"
+                android:textColorHint="#afafaf"
+                android:textSize="13.71dp"
+                app:layout_constraintTop_toBottomOf="@+id/etPassword" />
+
+            <EditText
+                android:id="@+id/etName"
+                android:layout_width="match_parent"
+                android:layout_height="47.42dp"
+                android:layout_marginTop="3.71dp"
+                android:background="#ffffff"
+                android:fontFamily="@font/malgunfont"
+                android:hint="@string/register_form_nameHintText"
+                android:maxLength="4"
+                android:paddingLeft="10.50dp"
+                android:textColorHint="#afafaf"
+                android:textSize="13.71dp"
+                app:layout_constraintTop_toBottomOf="@+id/etPasswordCheck" />
+
+            <LinearLayout
+                android:id="@+id/linearLayout"
+                android:layout_width="match_parent"
+                android:layout_height="47.42dp"
+                android:layout_marginTop="3.71dp"
+                android:orientation="horizontal"
+                app:layout_constraintTop_toBottomOf="@+id/etName">
+
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1">
+
+                    <EditText
+                        android:id="@+id/etBirth"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginRight="10dp"
+                        android:layout_weight="1"
+                        android:background="#ffffff"
+                        android:inputType="number"
+                        android:fontFamily="@font/malgunfont"
+                        android:hint="@string/register_form_RRHintText"
+                        android:maxLength="6"
+                        android:paddingLeft="10.50dp"
+                        android:textColorHint="#afafaf"
+                        android:textSize="13.71dp" />
+
+                    <View
+                        android:id="@+id/view"
+                        android:layout_width="7.25dp"
+                        android:layout_height="3dp"
+                        android:layout_gravity="center"
+                        android:background="#cdcdcd" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1">
+
+                    <EditText
+                        android:id="@+id/etFirstRN"
+                        android:inputType="number"
+                        android:layout_width="0dp"
+                        android:background="#ffffff"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="10dp"
+                        android:layout_weight="2"
+                        android:fontFamily="@font/malgunfont"
+                        android:maxLength="1"
+                        android:gravity="center"
+                        android:hint="@string/register_form_RRbackHintText"
+                        android:textColorHint="#afafaf"
+                        android:textSize="13.71dp"
+                        />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="8dp"
+                        android:layout_weight="8"
+                        android:fontFamily="@font/malgunfont"
+                        android:text="@string/register_form_RRHideText"
+                        android:textColor="#605f5f"
+                        android:textSize="25.14dp" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linearLayout1"
+                android:layout_width="match_parent"
+                android:layout_height="47.42dp"
+                android:layout_marginTop="48dp"
+                android:orientation="horizontal"
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout">
+
+                <EditText
+                    android:id="@+id/etPhone"
+                    android:layout_width="0dp"
+                    android:layout_height="47.42dp"
+                    android:layout_weight="7"
+                    android:background="#ffffff"
+                    android:fontFamily="@font/malgunfont"
+                    android:hint="@string/register_form_phoneHintText"
+                    android:paddingLeft="10.50dp"
+                    android:textColorHint="#afafaf"
+                    android:inputType="number"
+                    android:maxLength="11"
+                    android:textSize="13.71dp" />
+
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="6dp"
+                    android:layout_weight="3"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/find_id_request_btn" />
+            </LinearLayout>
+
+            <EditText
+                android:id="@+id/etCN"
+                android:layout_width="match_parent"
+                android:layout_height="47.42dp"
+                android:layout_marginTop="3.71dp"
+                android:background="#ffffff"
+                android:fontFamily="@font/malgunfont"
+                android:hint="@string/register_form_CNHintText"
+                android:inputType="number"
+                android:maxLength="6"
+                android:paddingLeft="10.50dp"
+                android:textColorHint="#afafaf"
+                android:textSize="13.71dp"
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout1" />
+
+
+            <ImageView
+                android:id="@+id/btNext"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="84.75dp"
+                android:layout_marginBottom="15dp"
+                android:scaleType="fitXY"
+                android:src="@drawable/next_btn"
+                app:layout_constraintBottom_toBottomOf="parent" />
+
+        </android.support.constraint.ConstraintLayout>
+    </android.support.constraint.ConstraintLayout>
+</layout>

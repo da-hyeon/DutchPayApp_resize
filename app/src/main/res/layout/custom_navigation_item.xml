@@ -1,0 +1,479 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <android.support.constraint.ConstraintLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#f3f1f2"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="130dp"
+            android:layout_weight="2"
+            android:background="@color/colorSplashBG" />
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="22.2dp"
+            android:layout_marginTop="16.75dp"
+            android:layout_marginRight="22.2dp">
+
+            <ImageView
+                android:id="@+id/image_exit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/right_menu_close"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/image_home"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="18.57dp"
+                android:src="@drawable/right_menu_off_home"
+                app:layout_constraintRight_toLeftOf="@+id/image_setting" />
+
+            <ImageView
+                android:id="@+id/image_setting"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16.25dp"
+                android:src="@drawable/right_menu_off_setup"
+                app:layout_constraintRight_toRightOf="parent" />
+
+            <ImageView
+                android:id="@+id/imageView4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="22.75dp"
+                android:src="@drawable/right_menu_off_welcome"
+                app:layout_constraintLeft_toLeftOf="@+id/image_exit"
+                app:layout_constraintTop_toBottomOf="@+id/image_exit" />
+
+            <TextView
+                android:id="@+id/textView1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="7dp"
+                android:layout_marginTop="2dp"
+                android:text="에 오신것을 환영합니다"
+                android:textColor="#afd3ff"
+                android:textSize="14.85dp"
+                app:layout_constraintBottom_toBottomOf="@+id/imageView4"
+                app:layout_constraintLeft_toRightOf="@+id/imageView4"
+                app:layout_constraintTop_toTopOf="@+id/imageView4" />
+
+
+            <LinearLayout
+                android:id="@+id/layout_login"
+                android:layout_width="match_parent"
+                android:layout_height="84dp"
+                android:layout_marginTop="15.75dp"
+                android:background="@drawable/outline_round_custom_layout"
+                android:orientation="horizontal"
+                app:layout_constraintLeft_toLeftOf="@+id/image_exit"
+                app:layout_constraintTop_toBottomOf="@+id/imageView4" />
+
+            <!-- 레이아웃 -->
+            <LinearLayout
+                android:id="@+id/llLogin"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/layout_login"
+                app:layout_constraintBottom_toBottomOf="@+id/layout_login"
+                app:layout_constraintRight_toRightOf="@+id/view"
+                android:orientation="horizontal" />
+
+            <LinearLayout
+                android:id="@+id/llRegister"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintLeft_toLeftOf="@id/view"
+                app:layout_constraintTop_toTopOf="@+id/layout_login"
+                app:layout_constraintBottom_toBottomOf="@+id/layout_login"
+                app:layout_constraintRight_toRightOf="@+id/view1"
+                android:orientation="horizontal" />
+
+            <LinearLayout
+                android:id="@+id/llSolopayStart"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/linearLayout2"
+                app:layout_constraintBottom_toBottomOf="@+id/linearLayout2"
+                app:layout_constraintRight_toRightOf="@+id/view"
+                android:orientation="horizontal" />
+
+            <LinearLayout
+                android:id="@+id/llDutchpayStart"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintLeft_toLeftOf="@id/view"
+                app:layout_constraintTop_toTopOf="@+id/linearLayout2"
+                app:layout_constraintBottom_toBottomOf="@+id/linearLayout2"
+                app:layout_constraintRight_toRightOf="@+id/view1"
+                android:orientation="horizontal" />
+
+            <LinearLayout
+                android:id="@+id/llEvent"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/linearLayout3"
+                app:layout_constraintBottom_toBottomOf="@+id/linearLayout3"
+                app:layout_constraintRight_toRightOf="@+id/view"
+                android:orientation="horizontal" />
+
+            <LinearLayout
+                android:id="@+id/llMyGroup"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/linearLayout4"
+                app:layout_constraintBottom_toBottomOf="@+id/linearLayout4"
+                app:layout_constraintRight_toRightOf="@+id/view"
+                android:orientation="horizontal" />
+
+            <LinearLayout
+                android:id="@+id/llMyWallet"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintLeft_toLeftOf="@id/view"
+                app:layout_constraintTop_toTopOf="@+id/linearLayout4"
+                app:layout_constraintBottom_toBottomOf="@+id/linearLayout4"
+                app:layout_constraintRight_toRightOf="@+id/view1"
+                android:orientation="horizontal" />
+
+            <LinearLayout
+                android:id="@+id/llNotice"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/linearLayout5"
+                app:layout_constraintBottom_toBottomOf="@+id/linearLayout5"
+                app:layout_constraintRight_toRightOf="@+id/view"
+                android:orientation="horizontal" />
+
+            <LinearLayout
+                android:id="@+id/llService"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintLeft_toLeftOf="@id/view"
+                app:layout_constraintTop_toTopOf="@+id/linearLayout5"
+                app:layout_constraintBottom_toBottomOf="@+id/linearLayout5"
+                app:layout_constraintRight_toRightOf="@+id/view1"
+                android:orientation="horizontal" />
+
+            <LinearLayout
+                android:id="@+id/llCustomerCenter"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintLeft_toLeftOf="@id/view1"
+                app:layout_constraintTop_toTopOf="@+id/linearLayout5"
+                app:layout_constraintBottom_toBottomOf="@+id/linearLayout5"
+                app:layout_constraintRight_toRightOf="@+id/view2"
+                android:orientation="horizontal" />
+            <!-- 레이아웃 -->
+
+            <!-- 경계선 -->
+            <View
+                android:id="@+id/view"
+                android:layout_width="1dp"
+                android:layout_height="0dp"
+                app:layout_constraintLeft_toRightOf="@+id/image_login"
+                app:layout_constraintRight_toLeftOf="@+id/image_register"/>
+
+
+            <View
+                android:id="@+id/view1"
+                android:layout_width="1dp"
+                android:layout_height="0dp"
+                app:layout_constraintLeft_toRightOf="@+id/image_info"
+                app:layout_constraintRight_toLeftOf="@+id/image_customerService"/>
+
+            <View
+                android:id="@+id/view2"
+                android:layout_width="1dp"
+                android:layout_height="0dp"
+                app:layout_constraintLeft_toRightOf="@+id/view1"
+                app:layout_constraintRight_toRightOf="parent"/>
+
+            <!-- 경계선 -->
+
+            <ImageView
+                android:id="@+id/image_login"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="24dp"
+                android:layout_marginTop="18dp"
+                android:src="@drawable/right_menu_off_login"
+                app:layout_constraintLeft_toLeftOf="@+id/layout_login"
+                app:layout_constraintTop_toTopOf="@+id/layout_login" />
+
+            <TextView
+                android:id="@+id/tvLogin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4.28dp"
+                android:fontFamily="@font/malgunfont"
+                android:text="로그인"
+                android:textColor="#2a2a2a"
+                android:textSize="12.57dp"
+                app:layout_constraintLeft_toLeftOf="@+id/image_login"
+                app:layout_constraintRight_toRightOf="@+id/image_login"
+                app:layout_constraintTop_toBottomOf="@+id/image_login" />
+
+            <ImageView
+                android:id="@+id/image_register"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="50.85dp"
+                android:layout_marginTop="18dp"
+                android:src="@drawable/right_menu_off_join"
+                app:layout_constraintLeft_toRightOf="@+id/image_login"
+                app:layout_constraintTop_toTopOf="@+id/layout_login" />
+
+            <TextView
+                android:id="@+id/tvRegister"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4.28dp"
+                android:fontFamily="@font/malgunfont"
+                android:text="회원가입"
+                android:textColor="#2a2a2a"
+                android:textSize="12.57dp"
+                app:layout_constraintLeft_toLeftOf="@+id/image_register"
+                app:layout_constraintRight_toRightOf="@+id/image_register"
+                app:layout_constraintTop_toBottomOf="@+id/image_login" />
+
+
+            <LinearLayout
+                android:id="@+id/linearLayout2"
+                android:layout_width="match_parent"
+                android:layout_height="84dp"
+                android:layout_marginTop="10.85dp"
+                android:background="@drawable/outline_round_custom_layout"
+                android:orientation="horizontal"
+                app:layout_constraintLeft_toLeftOf="@+id/layout_login"
+                app:layout_constraintTop_toBottomOf="@+id/layout_login" />
+
+
+            <ImageView
+                android:id="@+id/image_soloPay"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="24dp"
+                android:layout_marginTop="13.14dp"
+                android:src="@drawable/right_menu_off_payment"
+                app:layout_constraintLeft_toLeftOf="@+id/linearLayout2"
+                app:layout_constraintTop_toTopOf="@+id/linearLayout2" />
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/malgunfont"
+                android:text="개인결제\n시작하기"
+                android:textColor="#2a2a2a"
+                android:textSize="12.57dp"
+                app:layout_constraintLeft_toLeftOf="@+id/image_soloPay"
+                app:layout_constraintRight_toRightOf="@+id/image_soloPay"
+                app:layout_constraintTop_toBottomOf="@+id/image_soloPay"
+                tools:ignore="HardcodedText" />
+
+            <ImageView
+                android:id="@+id/image_dutchPay"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="50.85dp"
+                android:src="@drawable/right_menu_off_dutchpay"
+                app:layout_constraintLeft_toRightOf="@+id/image_soloPay"
+                app:layout_constraintTop_toTopOf="@+id/image_soloPay" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/malgunfont"
+                android:text="더치페이\n시작하기"
+                android:textColor="#2a2a2a"
+                android:textSize="12.57dp"
+                app:layout_constraintLeft_toLeftOf="@+id/image_dutchPay"
+                app:layout_constraintRight_toRightOf="@+id/image_dutchPay"
+                app:layout_constraintTop_toBottomOf="@+id/image_dutchPay" />
+
+            <LinearLayout
+                android:id="@+id/linearLayout3"
+                android:layout_width="match_parent"
+                android:layout_height="84dp"
+                android:layout_marginTop="10.85dp"
+                android:background="@drawable/outline_round_custom_layout"
+                android:orientation="horizontal"
+                app:layout_constraintLeft_toLeftOf="@+id/linearLayout2"
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
+
+            <ImageView
+                android:id="@+id/image_event"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="24dp"
+                android:layout_marginTop="16.25dp"
+                android:src="@drawable/right_menu_off_event"
+                app:layout_constraintLeft_toLeftOf="@+id/linearLayout3"
+                app:layout_constraintTop_toTopOf="@+id/linearLayout3" />
+
+            <TextView
+                android:id="@+id/textVie4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4.28dp"
+                android:fontFamily="@font/malgunfont"
+                android:text="이벤트"
+                android:textColor="#2a2a2a"
+                android:textSize="12.57dp"
+                app:layout_constraintLeft_toLeftOf="@+id/image_event"
+                app:layout_constraintRight_toRightOf="@+id/image_event"
+                app:layout_constraintTop_toBottomOf="@+id/image_event" />
+
+            <LinearLayout
+                android:id="@+id/linearLayout4"
+                android:layout_width="match_parent"
+                android:layout_height="84dp"
+                android:layout_marginTop="10.85dp"
+                android:background="@drawable/outline_round_custom_layout"
+                android:orientation="horizontal"
+                app:layout_constraintLeft_toLeftOf="@+id/linearLayout3"
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout3" />
+
+            <ImageView
+                android:id="@+id/imageView10"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="24dp"
+                android:layout_marginTop="16.25dp"
+                android:src="@drawable/right_menu_off_my_group"
+                app:layout_constraintLeft_toLeftOf="@+id/linearLayout4"
+                app:layout_constraintTop_toTopOf="@+id/linearLayout4" />
+
+            <TextView
+                android:id="@+id/image_myGroup"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4.28dp"
+                android:fontFamily="@font/malgunfont"
+                android:text="My 그룹"
+                android:textColor="#2a2a2a"
+                android:textSize="12.57dp"
+                app:layout_constraintLeft_toLeftOf="@+id/imageView10"
+                app:layout_constraintRight_toRightOf="@+id/imageView10"
+                app:layout_constraintTop_toBottomOf="@+id/imageView10" />
+
+            <ImageView
+                android:id="@+id/image_myWallet"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="50.85dp"
+                android:layout_marginTop="16.25dp"
+                android:src="@drawable/right_menu_off_my_wallet"
+                app:layout_constraintLeft_toRightOf="@+id/imageView10"
+                app:layout_constraintTop_toTopOf="@+id/linearLayout4" />
+
+            <TextView
+                android:id="@+id/textVie6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4.28dp"
+                android:fontFamily="@font/malgunfont"
+                android:text="My 지갑"
+                android:textColor="#2a2a2a"
+                android:textSize="12.57dp"
+                app:layout_constraintLeft_toLeftOf="@+id/image_myWallet"
+                app:layout_constraintRight_toRightOf="@+id/image_myWallet"
+                app:layout_constraintTop_toBottomOf="@+id/imageView10" />
+
+            <LinearLayout
+                android:id="@+id/linearLayout5"
+                android:layout_width="match_parent"
+                android:layout_height="84dp"
+                android:layout_marginTop="10.85dp"
+                android:background="@drawable/outline_round_custom_layout"
+                android:orientation="horizontal"
+                app:layout_constraintLeft_toLeftOf="@+id/linearLayout4"
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout4" />
+
+
+            <ImageView
+                android:id="@+id/image_notice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="24dp"
+                android:layout_marginTop="16.25dp"
+                android:src="@drawable/right_menu_off_notice"
+                app:layout_constraintLeft_toLeftOf="@+id/linearLayout5"
+                app:layout_constraintTop_toTopOf="@+id/linearLayout5" />
+
+            <TextView
+                android:id="@+id/textVie7"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4.28dp"
+                android:fontFamily="@font/malgunfont"
+                android:text="공지사항"
+                android:textColor="#2a2a2a"
+                android:textSize="12.57dp"
+                app:layout_constraintLeft_toLeftOf="@+id/image_notice"
+                app:layout_constraintRight_toRightOf="@+id/image_notice"
+                app:layout_constraintTop_toBottomOf="@+id/image_notice" />
+
+            <ImageView
+                android:id="@+id/image_info"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="50.85dp"
+                android:layout_marginTop="16.25dp"
+                android:src="@drawable/right_menu_off_info"
+                app:layout_constraintLeft_toRightOf="@+id/image_notice"
+                app:layout_constraintTop_toTopOf="@+id/linearLayout5" />
+
+            <TextView
+                android:id="@+id/textVie8"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4.28dp"
+                android:fontFamily="@font/malgunfont"
+                android:text="이용안내"
+                android:textColor="#2a2a2a"
+                android:textSize="12.57dp"
+                app:layout_constraintLeft_toLeftOf="@+id/image_info"
+                app:layout_constraintRight_toRightOf="@+id/image_info"
+                app:layout_constraintTop_toBottomOf="@+id/image_info" />
+
+            <ImageView
+                android:id="@+id/image_customerService"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="50.85dp"
+                android:layout_marginTop="16.25dp"
+                android:src="@drawable/right_menu_off_customer_service"
+                app:layout_constraintLeft_toRightOf="@+id/image_info"
+                app:layout_constraintTop_toTopOf="@+id/linearLayout5" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4.28dp"
+                android:fontFamily="@font/malgunfont"
+                android:text="고객센터"
+                android:textColor="#2a2a2a"
+                android:textSize="12.57dp"
+                app:layout_constraintLeft_toLeftOf="@+id/image_customerService"
+                app:layout_constraintRight_toRightOf="@+id/image_customerService"
+                app:layout_constraintTop_toBottomOf="@+id/image_customerService" />
+        </android.support.constraint.ConstraintLayout>
+
+    </android.support.constraint.ConstraintLayout>
+</layout>
