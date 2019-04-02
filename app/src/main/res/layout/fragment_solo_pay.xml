@@ -29,6 +29,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <LinearLayout
+                android:id="@+id/llButtons"
                 android:layout_width="match_parent"
                 android:layout_height="42.8dp"
                 android:layout_marginTop="34.85dp"
@@ -70,11 +71,47 @@
                         android:text="결제번호"
                         android:textColor="#5f5f5f"
                         android:textSize="15dp" />
-
                 </LinearLayout>
-
             </LinearLayout>
 
+            <android.support.constraint.ConstraintLayout
+                android:id="@+id/clScanView"
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8.57dp"
+                app:layout_constraintTop_toBottomOf="@+id/llButtons">
+
+                <SurfaceView
+                    android:id="@+id/svCamera"
+                    android:layout_width="match_parent"
+                    android:layout_height="343.71dp"
+                    android:layout_centerInParent="true"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="29.14dp"
+                    android:fontFamily="@font/malgunfont"
+                    android:includeFontPadding="false"
+                    android:text="QR코드 및 바코드를 화면에 위치 시켜주세요."
+                    android:textColor="#2a2a2a"
+                    android:textSize="9.14dp"
+                    android:textStyle="bold"
+                    app:layout_constraintTop_toBottomOf="@+id/svCamera" />
+            </android.support.constraint.ConstraintLayout>
+
+            <android.support.constraint.ConstraintLayout
+                android:id="@+id/clPaymentNumberView"
+                android:visibility="visible"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8.57dp"
+                app:layout_constraintTop_toBottomOf="@+id/llButtons">
+
+                <!--todo-->
+
+            </android.support.constraint.ConstraintLayout>
 
         </android.support.constraint.ConstraintLayout>
     </android.support.constraint.ConstraintLayout>
