@@ -69,6 +69,16 @@
     <string name="register_success_middleText">더치페이에 가입하신 것을 환영합니다.</string>
     <string name="register_success_lastText">이제부터 더치페이의 모든 서비스를\n사용하실 수 있습니다.</string>
 
+    <!--개인결제-->
+    <string name="solopay_titleText">결제번호로 읽기</string>
+    <string name="solopay_buttonText">결제정보 확인하기</string>
+
+    <!--개인결제 Dialog-->
+    <string name="solopay_dialog_titleText">더치머니 결제</string>
+    <string name="solopay_dialog_topViewText">결제 금액</string>
+    <string name="solopay_dialog_bottomViewText">My 더치머니</string>
+    <string name="solopay_dialog_infoText">결제하시겠습니까?</string>
+    <string name="solopay_dialog_ButtonText">확인</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

@@ -3,8 +3,10 @@ package com.dutch.hdh.dutchpayapp.ui.main.fragment;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 
+import com.dutch.hdh.dutchpayapp.base.BaseContract;
+
 public interface MainFragmentContract {
-    interface View{
+    interface View extends BaseContract.View {
         //init
         void initData();
 
