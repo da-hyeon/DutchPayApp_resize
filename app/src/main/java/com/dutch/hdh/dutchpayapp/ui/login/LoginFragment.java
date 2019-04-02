@@ -36,6 +36,7 @@ public class LoginFragment extends BaseFragment implements LoginContract.View{
                     mPresenter.clickLogin(mBinding.editUserID.getText().toString(), mBinding.editUserPW.getText().toString());
                 }
         );
+
         //회원가입 버튼 클릭
         mBinding.layoutRegister.setOnClickListener(v->
             mPresenter.clickRegister()
@@ -76,5 +77,12 @@ public class LoginFragment extends BaseFragment implements LoginContract.View{
     @Override
     public void removeAllExceptMains(){
         super.setDefaultMainStack();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        mBinding.editUserID.setText("");
+        mBinding.editUserPW.setText("");
     }
 }

@@ -74,8 +74,7 @@ public class LoginPresenter implements LoginContract.Presenter {
         FragmentTransaction fragmentTransaction = mFragmentManager.beginTransaction();
         fragmentTransaction.setCustomAnimations(R.anim.fade_in, 0,0, R.anim.fade_out);
 
-        Register_TermsConditionsAgreementFragment mRegister_termsConditionsAgreementFragment = Register_TermsConditionsAgreementFragment.getInstance();
-        fragmentTransaction.replace(R.id.flFragmentContainer, mRegister_termsConditionsAgreementFragment , Register_TermsConditionsAgreementFragment.class.getName());
+        fragmentTransaction.replace(R.id.flFragmentContainer, mMyApplication.getRegister_TermsConditionsAgreementFragment() , Register_TermsConditionsAgreementFragment.class.getName());
         fragmentTransaction.addToBackStack(Register_TermsConditionsAgreementFragment.class.getName());
         fragmentTransaction.commit();
     }

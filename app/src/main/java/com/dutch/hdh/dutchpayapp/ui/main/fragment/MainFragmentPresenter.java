@@ -5,12 +5,15 @@ import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 
 import com.dutch.hdh.dutchpayapp.MyApplication;
 import com.dutch.hdh.dutchpayapp.R;
 import com.dutch.hdh.dutchpayapp.adapter.EventImageSliderAdapter;
+import com.dutch.hdh.dutchpayapp.ui.login.LoginFragment;
+import com.dutch.hdh.dutchpayapp.ui.solopay.SoloPayFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -62,7 +65,13 @@ public class MainFragmentPresenter implements MainFragmentContract.Presenter{
      */
     @Override
     public void clickSolopay() {
-
+        //프래그먼트 이동
+        FragmentTransaction fragmentTransaction = mFragmentManager.beginTransaction();
+        fragmentTransaction.setCustomAnimations(R.anim.fade_in, 0, 0, R.anim.fade_out);
+        SoloPayFragment soloPayFragment = new SoloPayFragment();
+        fragmentTransaction.replace(R.id.flFragmentContainer, soloPayFragment, SoloPayFragment.class.getName());
+        fragmentTransaction.addToBackStack(SoloPayFragment.class.getName());
+        fragmentTransaction.commit();
     }
 
     /**
