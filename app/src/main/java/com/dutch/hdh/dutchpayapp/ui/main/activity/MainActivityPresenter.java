@@ -55,7 +55,7 @@ public class MainActivityPresenter implements MainActivityContract.Presenter {
     }
 
     /**
-     * MainFragmnet 등록
+     * MainFragment 등록
      */
     @Override
     public void onFragmentResume() {
@@ -91,7 +91,7 @@ public class MainActivityPresenter implements MainActivityContract.Presenter {
     }
 
     /**
-     * MainFragmnet 등록
+     * MainFragment 등록
      */
     @Override
     public void initMainFragment() {

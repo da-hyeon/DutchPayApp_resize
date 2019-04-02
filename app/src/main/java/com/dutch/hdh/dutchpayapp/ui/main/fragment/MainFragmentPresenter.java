@@ -64,7 +64,7 @@ public class MainFragmentPresenter implements MainFragmentContract.Presenter{
      * 개인결제 시작하기 클릭 이벤트 처리
      */
     @Override
-    public void clickSolopay() {
+    public void clickPayment() {
         //프래그먼트 이동
         FragmentTransaction fragmentTransaction = mFragmentManager.beginTransaction();
         fragmentTransaction.setCustomAnimations(R.anim.fade_in, 0, 0, R.anim.fade_out);
@@ -78,7 +78,7 @@ public class MainFragmentPresenter implements MainFragmentContract.Presenter{
      * 더치페이 시작하기 클릭 이벤트 처리
      */
     @Override
-    public void clickDutchpay() {
+    public void clickDutchPay() {
 
     }
 }

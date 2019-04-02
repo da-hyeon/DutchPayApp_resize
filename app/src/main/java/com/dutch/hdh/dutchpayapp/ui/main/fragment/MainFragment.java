@@ -32,7 +32,7 @@ public class MainFragment extends BaseFragment implements MainFragmentContract.V
 
         //개인결제 시작하기 버튼 클릭
         mBinding.ivSoloPay.setOnClickListener(v->{
-            mPresenter.clickSolopay();
+            mPresenter.clickPayment();
         });
 
         //더치페이 시작하기 버튼 클릭

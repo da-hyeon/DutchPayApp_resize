@@ -19,7 +19,7 @@ public interface MainFragmentContract {
         void setAdapter(ViewPager viewPager , TabLayout tabLayout);
 
         //click
-        void clickSolopay();
-        void clickDutchpay();
+        void clickPayment();
+        void clickDutchPay();
     }
 }
