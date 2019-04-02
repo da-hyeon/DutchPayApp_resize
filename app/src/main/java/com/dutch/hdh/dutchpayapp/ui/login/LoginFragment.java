@@ -36,7 +36,6 @@ public class LoginFragment extends BaseFragment implements LoginContract.View{
                     mPresenter.clickLogin(mBinding.editUserID.getText().toString(), mBinding.editUserPW.getText().toString());
                 }
         );
-asdfsadfasdf
         //회원가입 버튼 클릭
         mBinding.layoutRegister.setOnClickListener(v->
             mPresenter.clickRegister()
