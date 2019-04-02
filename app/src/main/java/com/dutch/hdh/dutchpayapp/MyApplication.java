@@ -81,7 +81,7 @@ public class MyApplication extends Application {
             CookieManager cookieManager = new CookieManager();
             cookieManager.setCookiePolicy(CookiePolicy.ACCEPT_ALL);
 
-            //OkHttpClient를 생성합니다.
+            //OkHttpClient를 생성합니다.//
             client = configureClient(new OkHttpClient().newBuilder()) //인증서 무시
                     .connectTimeout(CONNECT_TIMEOUT, TimeUnit.SECONDS) //연결 타임아웃 시간 설정
                     .writeTimeout(WRITE_TIMEOUT, TimeUnit.SECONDS) //쓰기 타임아웃 시간 설정
