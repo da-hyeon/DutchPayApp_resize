@@ -250,6 +250,4 @@ public class MainActivity extends AppCompatActivity implements MainActivityContr
     public void removeActivity() {
         finish();
     }
-
-
 }

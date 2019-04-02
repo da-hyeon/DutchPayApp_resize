@@ -7,4 +7,6 @@
     <color name="transparent">#00ff0000</color>
     <color name="layoutBG">#f3f1f2</color>
     <color name="background1">#D9000000</color>
+    <color name="buttonDefault">#e0e0e0</color>
+    <color name="buttonSelect">#0f69fe</color>
 </resources>

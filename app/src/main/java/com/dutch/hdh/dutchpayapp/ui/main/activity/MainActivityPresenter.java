@@ -17,6 +17,7 @@ import com.dutch.hdh.dutchpayapp.ui.register.form.Register_FormFragment;
 import com.dutch.hdh.dutchpayapp.ui.register.password.Register_PaymentPasswordFragment;
 import com.dutch.hdh.dutchpayapp.ui.register.success.Register_SuccessFragment;
 import com.dutch.hdh.dutchpayapp.ui.register.term.Register_TermsConditionsAgreementFragment;
+import com.dutch.hdh.dutchpayapp.ui.solopay.SoloPayFragment;
 
 import java.util.List;
 
@@ -33,7 +34,6 @@ public class MainActivityPresenter implements MainActivityContract.Presenter {
 
     private MainFragment mMainFragment;
     private LoginFragment mLoginFragment;
-    public Register_TermsConditionsAgreementFragment mRegister_termsConditionsAgreementFragment;
 
     //private ArrayList<SimpleTarget> targetArrayList;
 
@@ -48,7 +48,6 @@ public class MainActivityPresenter implements MainActivityContract.Presenter {
         this.mActivity = mActivity;
 
         mLoginFragment = new LoginFragment();
-        mRegister_termsConditionsAgreementFragment = Register_TermsConditionsAgreementFragment.getInstance();
         mMainFragment = new MainFragment();
 
         myApplication = MyApplication.getInstance();
@@ -75,6 +74,12 @@ public class MainActivityPresenter implements MainActivityContract.Presenter {
         }
         else if (getCurrentFragment() instanceof Register_SuccessFragment) {
             mView.changeTitle("회원가입 완료");
+        }
+
+        else if(getCurrentFragment() instanceof SoloPayFragment){
+            mView.changeTitle("결제");
+            mView.hideBell();
+            mView.showExit();
         }
 
         else if (getCurrentFragment() instanceof MainFragment) {
@@ -191,7 +196,6 @@ public class MainActivityPresenter implements MainActivityContract.Presenter {
             }
         }
 
-
         if (mFragmentManager.getBackStackEntryCount() > 1) {
             mFragmentManager.popBackStack();
             return;
@@ -234,7 +238,7 @@ public class MainActivityPresenter implements MainActivityContract.Presenter {
         //프래그먼트 이동
         FragmentTransaction fragmentTransaction = mFragmentManager.beginTransaction();
         fragmentTransaction.setCustomAnimations(R.anim.fade_in, 0, 0, R.anim.fade_out);
-        fragmentTransaction.replace(R.id.flFragmentContainer, mRegister_termsConditionsAgreementFragment, Register_TermsConditionsAgreementFragment.class.getName());
+        fragmentTransaction.replace(R.id.flFragmentContainer, myApplication.getRegister_TermsConditionsAgreementFragment(), Register_TermsConditionsAgreementFragment.class.getName());
         fragmentTransaction.addToBackStack(Register_TermsConditionsAgreementFragment.class.getName());
         fragmentTransaction.commit();
     }

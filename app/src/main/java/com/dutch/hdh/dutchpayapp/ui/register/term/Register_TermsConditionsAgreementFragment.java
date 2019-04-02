@@ -23,18 +23,6 @@ public class Register_TermsConditionsAgreementFragment extends BaseFragment impl
     private CheckBox mTermsConditions[];
     private ImageView mAllView[];
 
-
-
-    private static Register_TermsConditionsAgreementFragment curr = null;
-
-    public static Register_TermsConditionsAgreementFragment getInstance(){
-        if(curr == null){
-            curr = new Register_TermsConditionsAgreementFragment();
-        }
-        return curr;
-    }
-
-
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {

@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 
 
+import com.dutch.hdh.dutchpayapp.MyApplication;
 import com.dutch.hdh.dutchpayapp.ui.register.term.Register_TermsConditionsAgreementFragment;
 
 public class Register_ViewAllTermsConditionsPresenter implements Register_ViewAllTermsConditionsContract.Presenter {
@@ -14,6 +15,7 @@ public class Register_ViewAllTermsConditionsPresenter implements Register_ViewAl
     private Context mContext;
     private FragmentManager mFragmentManager;
     private Activity mActivity;
+    private MyApplication mMyApplication;
 
     private String mTermsConditionsTitles[];
     private String mTermsConditionsContents[];
@@ -26,7 +28,7 @@ public class Register_ViewAllTermsConditionsPresenter implements Register_ViewAl
         this.mContext = mContext;
         this.mFragmentManager = mFragmentManager;
         this.mActivity = mActivity;
-
+        mMyApplication = MyApplication.getInstance();
         //제목
         mTermsConditionsTitles = new String[]{
                 "서비스 기본 약관 [필수]" ,
@@ -72,8 +74,7 @@ public class Register_ViewAllTermsConditionsPresenter implements Register_ViewAl
         bundle.putInt("num" , mTermsConditionsNumber);
         bundle.putBooleanArray("checkArray", mTermsConditionsChecked);
 
-        Register_TermsConditionsAgreementFragment mRegister_termsConditionsAgreementFragment = Register_TermsConditionsAgreementFragment.getInstance();
-        mRegister_termsConditionsAgreementFragment.setArguments(bundle);
+        mMyApplication.getRegister_TermsConditionsAgreementFragment().setArguments(bundle);
         mFragmentManager.popBackStack();
     }
 }
