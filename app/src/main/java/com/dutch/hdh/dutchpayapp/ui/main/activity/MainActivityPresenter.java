@@ -10,6 +10,8 @@ import android.support.v4.widget.DrawerLayout;
 
 import com.dutch.hdh.dutchpayapp.MyApplication;
 import com.dutch.hdh.dutchpayapp.R;
+import com.dutch.hdh.dutchpayapp.ui.dutchpay.newdutchpay.DutchpayNewFragment;
+import com.dutch.hdh.dutchpayapp.ui.dutchpay.start.DutchpayStartFragment;
 import com.dutch.hdh.dutchpayapp.ui.login.LoginFragment;
 import com.dutch.hdh.dutchpayapp.ui.main.fragment.MainFragment;
 import com.dutch.hdh.dutchpayapp.ui.register.allview.Register_ViewAllTermsConditionsFragment;
@@ -87,6 +89,16 @@ public class MainActivityPresenter implements MainActivityContract.Presenter {
             mView.changeTitle("");
             mView.showBell();
             mView.hideExit();
+        }
+
+        else if (getCurrentFragment() instanceof DutchpayStartFragment) {
+            mView.changeTitle("더치페이");
+            mView.hideBell();
+            mView.showExit();
+        }
+
+        else if (getCurrentFragment() instanceof DutchpayNewFragment) {
+            mView.changeTitle("신규 더치페이");
         }
     }
 
