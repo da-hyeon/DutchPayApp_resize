@@ -65,6 +65,7 @@ public class MainFragmentPresenter implements MainFragmentContract.Presenter{
      */
     @Override
     public void clickSolopay() {
+
         //프래그먼트 이동
         FragmentTransaction fragmentTransaction = mFragmentManager.beginTransaction();
         fragmentTransaction.setCustomAnimations(R.anim.fade_in, 0, 0, R.anim.fade_out);

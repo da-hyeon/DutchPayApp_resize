@@ -4,6 +4,7 @@
     package="com.dutch.hdh.dutchpayapp">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CAMERA" />
 
     <application
         android:allowBackup="true"
@@ -32,6 +33,11 @@
 
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".ui.dialog.payment_info.Payment_InfomationDialog"
+            android:theme="@android:style/Theme.Dialog"></activity>
+
     </application>
 
 </manifest>

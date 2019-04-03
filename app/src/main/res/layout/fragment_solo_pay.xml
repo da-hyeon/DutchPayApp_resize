@@ -76,17 +76,17 @@
 
             <android.support.constraint.ConstraintLayout
                 android:id="@+id/clScanView"
-                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8.57dp"
+                android:visibility="visible"
                 app:layout_constraintTop_toBottomOf="@+id/llButtons">
 
                 <SurfaceView
                     android:id="@+id/svCamera"
                     android:layout_width="match_parent"
                     android:layout_height="343.71dp"
-                    android:layout_centerInParent="true"/>
+                    android:layout_centerInParent="true" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -103,13 +103,114 @@
 
             <android.support.constraint.ConstraintLayout
                 android:id="@+id/clPaymentNumberView"
-                android:visibility="visible"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="218dp"
                 android:layout_marginTop="8.57dp"
+                android:background="#ffffff"
+                android:visibility="gone"
                 app:layout_constraintTop_toBottomOf="@+id/llButtons">
 
-                <!--todo-->
+                <View
+                    android:id="@+id/vCenter"
+                    android:layout_width="1dp"
+                    android:layout_height="0dp"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent" />
+
+                <TextView
+                    android:id="@+id/tvPaymentNumberTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="40dp"
+                    android:fontFamily="@font/malgunfont"
+                    android:includeFontPadding="false"
+                    android:text="@string/solopay_titleText"
+                    android:textColor="#2a2a2a"
+                    android:textSize="13.71dp"
+                    app:layout_constraintLeft_toLeftOf="@+id/etPaymentNumber0"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <EditText
+                    android:id="@+id/etPaymentNumber0"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_marginRight="12dp"
+                    android:background="@drawable/outline_round_out"
+                    android:fontFamily="@font/malgunfont"
+                    android:gravity="center"
+                    android:includeFontPadding="false"
+                    android:inputType="number"
+                    android:maxLength="1"
+                    android:orientation="horizontal"
+                    android:textSize="13.71dp"
+                    android:nextFocusDown="@+id/etPaymentNumber1"
+                    app:layout_constraintRight_toLeftOf="@+id/etPaymentNumber1"
+                    app:layout_constraintTop_toTopOf="@+id/etPaymentNumber1" />
+
+                <EditText
+                    android:id="@+id/etPaymentNumber1"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="6dp"
+                    android:background="@drawable/outline_round_out"
+                    android:fontFamily="@font/malgunfont"
+                    android:gravity="center"
+                    android:includeFontPadding="false"
+                    android:inputType="number"
+                    android:maxLength="1"
+                    android:orientation="horizontal"
+                    android:textSize="13.71dp"
+                    app:layout_constraintRight_toRightOf="@+id/vCenter"
+                    app:layout_constraintTop_toBottomOf="@+id/tvPaymentNumberTitle" />
+
+                <EditText
+                    android:id="@+id/etPaymentNumber2"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_marginLeft="6dp"
+                    android:background="@drawable/outline_round_out"
+                    android:fontFamily="@font/malgunfont"
+                    android:gravity="center"
+                    android:includeFontPadding="false"
+                    android:inputType="number"
+                    android:maxLength="1"
+                    android:orientation="horizontal"
+                    android:textSize="13.71dp"
+                    app:layout_constraintLeft_toLeftOf="@+id/vCenter"
+                    app:layout_constraintTop_toTopOf="@+id/etPaymentNumber1" />
+
+
+                <EditText
+                    android:id="@+id/etPaymentNumber3"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_marginLeft="12dp"
+                    android:background="@drawable/outline_round_out"
+                    android:fontFamily="@font/malgunfont"
+                    android:gravity="center"
+                    android:includeFontPadding="false"
+                    android:inputType="number"
+                    android:maxLength="1"
+                    android:orientation="horizontal"
+                    android:textSize="13.71dp"
+                    app:layout_constraintLeft_toRightOf="@+id/etPaymentNumber2"
+                    app:layout_constraintTop_toTopOf="@+id/etPaymentNumber2" />
+
+                <Button
+                    android:id="@+id/btPaymentInfoCheck"
+                    android:layout_width="0dp"
+                    android:layout_height="41.71dp"
+                    android:background="@drawable/outline_round_out"
+                    android:fontFamily="@font/malgunfont"
+                    android:includeFontPadding="false"
+                    android:text="@string/solopay_buttonText"
+                    android:textColor="#707070"
+                    android:textSize="20dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toLeftOf="@+id/etPaymentNumber0"
+                    app:layout_constraintRight_toRightOf="@id/etPaymentNumber3"
+                    app:layout_constraintTop_toBottomOf="@+id/etPaymentNumber0" />
 
             </android.support.constraint.ConstraintLayout>
 

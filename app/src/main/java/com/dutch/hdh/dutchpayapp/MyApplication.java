@@ -2,10 +2,12 @@ package com.dutch.hdh.dutchpayapp;
 
 import android.app.Activity;
 import android.app.Application;
+import android.graphics.Color;
 
 import com.dutch.hdh.dutchpayapp.data.db.UserInfo;
 import com.dutch.hdh.dutchpayapp.data.util.ServerAPI;
 import com.dutch.hdh.dutchpayapp.ui.register.term.Register_TermsConditionsAgreementFragment;
+import com.kinda.alert.KAlertDialog;
 
 import java.net.CookieManager;
 import java.net.CookiePolicy;
@@ -173,5 +175,6 @@ public class MyApplication extends Application {
 
         return builder;
     }
+
 
 }
