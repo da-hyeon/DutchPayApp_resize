@@ -161,6 +161,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <RadioGroup
+                android:id="@+id/rgFiltering"
                 android:layout_width="wrap_content"
                 android:layout_height="20.29dp"
                 android:layout_marginTop="24dp"
@@ -175,24 +176,27 @@
                     android:layout_marginEnd="8dp"
                     android:layout_weight="0"
                     android:background="@drawable/view_all"
-                    android:button="@android:color/transparent" />
+                    android:button="@android:color/transparent"
+                    android:clickable="true" />
 
                 <RadioButton
-                    android:id="@+id/radioButton7"
+                    android:id="@+id/rbIng"
                     android:layout_width="56.57dp"
                     android:layout_height="20.29dp"
                     android:layout_marginEnd="8dp"
                     android:layout_weight="0"
                     android:background="@drawable/ing_btn"
-                    android:button="@android:color/transparent" />
+                    android:button="@android:color/transparent"
+                    android:clickable="true" />
 
                 <RadioButton
-                    android:id="@+id/radioButton6"
+                    android:id="@+id/rbComplete"
                     android:layout_width="56.57dp"
                     android:layout_height="20.29dp"
                     android:layout_weight="0"
                     android:background="@drawable/finish_btn"
-                    android:button="@android:color/transparent" />
+                    android:button="@android:color/transparent"
+                    android:clickable="true" />
             </RadioGroup>
         </android.support.constraint.ConstraintLayout>
 

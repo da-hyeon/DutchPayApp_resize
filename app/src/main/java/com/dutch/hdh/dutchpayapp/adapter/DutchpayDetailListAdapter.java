@@ -8,8 +8,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.dutch.hdh.dutchpayapp.databinding.ItemDutchpayListDetailBinding;
-import com.dutch.hdh.dutchpayapp.ui.dutchpay.detail.DutchpayDetailContract;
-import com.dutch.hdh.dutchpayapp.ui.dutchpay.detail.TempDetailListModel;
+import com.dutch.hdh.dutchpayapp.ui.dutchpay.startdetail.DutchpayDetailContract;
+import com.dutch.hdh.dutchpayapp.ui.dutchpay.startdetail.TempDetailListModel;
 
 public class DutchpayDetailListAdapter extends RecyclerView.Adapter<DutchpayDetailListAdapter.dDetailViewHolder> {
 

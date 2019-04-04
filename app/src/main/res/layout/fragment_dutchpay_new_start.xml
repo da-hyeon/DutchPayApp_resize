@@ -237,10 +237,10 @@
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rvMemberlist"
             bind:item="@{memberList}"
-            android:overScrollMode="never"
             android:layout_width="0dp"
-            android:layout_height="357dp"
-            android:layout_marginTop="11dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="8dp"
+            android:overScrollMode="never"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/constraintLayout5"
             app:layout_constraintStart_toStartOf="@+id/constraintLayout5"

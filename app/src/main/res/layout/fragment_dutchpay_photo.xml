@@ -1,13 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <import type="android.databinding.ObservableArrayList"/>
+        <import type="com.dutch.hdh.dutchpayapp.ui.dutchpay.photo.TempPhotoListModel"/>
+
+        <variable
+            name="photoList"
+            type="ObservableArrayList&lt;TempPhotoListModel&gt;"/>
+
+        <variable
+            name="Fragment"
+            type="com.dutch.hdh.dutchpayapp.ui.dutchpay.photo.DutchpayPhotoFragment"/>
+    </data>
+
+<android.support.constraint.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#ffffff">
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/btAddPhoto"
         android:layout_width="0dp"
         android:layout_height="47.43dp"
         android:layout_marginStart="17dp"
@@ -22,11 +36,13 @@
         android:textColor="#1e1e1e"
         android:textSize="17dp"
         android:textStyle="bold"
+        android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <android.support.v7.widget.RecyclerView
+        android:id="@+id/rvPhotoList"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="17dp"
@@ -35,20 +51,23 @@
         android:layout_marginEnd="17dp"
         android:layout_marginRight="17dp"
         android:layout_marginBottom="16dp"
-        app:layout_constraintBottom_toTopOf="@+id/button2"
+        android:overScrollMode="never"
+        app:layout_constraintBottom_toTopOf="@+id/btAddPhoto"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <android.support.constraint.ConstraintLayout
+        android:id="@+id/clPhotoFirst"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/photo_bg"
+        android:visibility="gone"
         tools:layout_editor_absoluteX="25dp"
         tools:layout_editor_absoluteY="0dp">
 
         <Button
-            android:id="@+id/button3"
+            android:id="@+id/btAddFirstPhoto"
             android:layout_width="66dp"
             android:layout_height="66dp"
             android:layout_marginStart="8dp"
@@ -70,15 +89,16 @@
             android:layout_marginTop="19dp"
             android:layout_marginEnd="8dp"
             android:layout_marginRight="8dp"
+            android:fontFamily="@font/malgunfont"
+            android:includeFontPadding="false"
             android:text="사진을 등록해주세요"
             android:textColor="#ffffff"
             android:textSize="20dp"
             android:textStyle="bold"
-            android:fontFamily="@font/malgunfont"
-            android:includeFontPadding="false"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/button3" />
+            app:layout_constraintTop_toBottomOf="@+id/btAddFirstPhoto" />
     </android.support.constraint.ConstraintLayout>
 
 </android.support.constraint.ConstraintLayout>
+</layout>

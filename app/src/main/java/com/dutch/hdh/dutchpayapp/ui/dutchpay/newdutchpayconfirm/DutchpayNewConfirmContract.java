@@ -1,12 +1,10 @@
-package com.dutch.hdh.dutchpayapp.ui.dutchpay.newdutchpay;
+package com.dutch.hdh.dutchpayapp.ui.dutchpay.newdutchpayconfirm;
 
 import android.support.v4.app.FragmentManager;
 
-import com.dutch.hdh.dutchpayapp.ui.dutchpay.start.TempStartListModel;
+public interface DutchpayNewConfirmContract {
 
-public interface DutchpayNewContract {
     interface View{
-
         //어댑터 셋팅
         void adapterInit();
 
@@ -19,8 +17,6 @@ public interface DutchpayNewContract {
         void listInit();
 
         //Click
-        void onNextClick();
 
     }
-
 }

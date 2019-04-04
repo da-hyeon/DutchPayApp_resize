@@ -8,80 +8,108 @@
             type="com.dutch.hdh.dutchpayapp.ui.dutchpay.newdutchpay.TempNewListModel"/>
     </data>
 
-<android.support.constraint.ConstraintLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="@drawable/box9">
-
-    <Button
-        android:id="@+id/button20"
-        android:layout_width="88.86dp"
-        android:layout_height="27.71dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="11dp"
-        android:background="@drawable/dutchpay3_2"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/button18"
-        app:layout_constraintTop_toBottomOf="@+id/button18" />
-
-    <TextView
-        android:id="@+id/textView72"
-        android:layout_width="wrap_content"
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/malgunfont"
-        android:includeFontPadding="false"
-        android:text="10,000원"
-        android:textColor="#ff6060"
-        android:textSize="13.7dp"
-        app:layout_constraintBottom_toBottomOf="@+id/button19"
-        app:layout_constraintStart_toStartOf="@+id/textView71" />
+        android:background="@color/transparent">
 
-    <TextView
-        android:id="@+id/textView71"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="17dp"
-        android:layout_marginTop="15dp"
-        android:fontFamily="@font/malgunfont"
-        android:includeFontPadding="false"
-        android:text="최윤미"
-        android:textColor="#2a2a2a"
-        android:textSize="13.7dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <Button
+            android:id="@+id/btNext"
+            android:layout_width="0dp"
+            android:layout_height="47.43dp"
+            android:background="#cfcfcf"
+            android:fontFamily="@font/malgunfont"
+            android:includeFontPadding="false"
+            android:text="다음"
+            android:textColor="#6d6b6c"
+            android:textSize="17dp"
+            android:textStyle="bold"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/button19"
-        android:layout_width="88.86dp"
-        android:layout_height="27.71dp"
-        android:layout_marginEnd="5dp"
-        android:background="@drawable/dutchpay3_1"
-        app:layout_constraintBottom_toBottomOf="@+id/button20"
-        app:layout_constraintEnd_toStartOf="@+id/button20" />
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/clMember"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/box9"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-    <Button
-        android:id="@+id/button18"
-        android:layout_width="19dp"
-        android:layout_height="19dp"
-        android:layout_marginTop="12dp"
-        android:layout_marginEnd="17dp"
-        android:background="@drawable/setting_icon"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+            <Button
+                android:id="@+id/button18"
+                android:layout_width="19dp"
+                android:layout_height="19dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="17dp"
+                android:background="@drawable/setting_icon"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/textView73"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="12dp"
-        android:fontFamily="@font/malgunfont"
-        android:includeFontPadding="false"
-        android:text="010-1234-5678"
-        android:textColor="#acacac"
-        android:textSize="13.7dp"
-        app:layout_constraintBottom_toBottomOf="@+id/button18"
-        app:layout_constraintEnd_toStartOf="@+id/button18"
-        app:layout_constraintTop_toTopOf="@+id/button18" />
+            <Button
+                android:id="@+id/button19"
+                android:layout_width="88.86dp"
+                android:layout_height="27.71dp"
+                android:layout_marginEnd="5dp"
+                android:background="@drawable/dutchpay3_1"
+                app:layout_constraintBottom_toBottomOf="@+id/button20"
+                app:layout_constraintEnd_toStartOf="@+id/button20" />
 
-</android.support.constraint.ConstraintLayout>
+            <TextView
+                android:id="@+id/textView73"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="12dp"
+                android:fontFamily="@font/malgunfont"
+                android:includeFontPadding="false"
+                android:text="010-1234-5678"
+                android:textColor="#acacac"
+                android:textSize="13.7dp"
+                app:layout_constraintBottom_toBottomOf="@+id/button18"
+                app:layout_constraintEnd_toStartOf="@+id/button18"
+                app:layout_constraintTop_toTopOf="@+id/button18" />
+
+            <Button
+                android:id="@+id/button20"
+                android:layout_width="88.86dp"
+                android:layout_height="27.71dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="11dp"
+                android:background="@drawable/dutchpay3_2"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/button18"
+                app:layout_constraintTop_toBottomOf="@+id/button18" />
+
+            <TextView
+                android:id="@+id/textView72"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/malgunfont"
+                android:includeFontPadding="false"
+                android:text="10,000원"
+                android:textColor="#ff6060"
+                android:textSize="13.7dp"
+                app:layout_constraintBottom_toBottomOf="@+id/button19"
+                app:layout_constraintStart_toStartOf="@+id/textView71" />
+
+            <TextView
+                android:id="@+id/textView71"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="17dp"
+                android:fontFamily="@font/malgunfont"
+                android:includeFontPadding="false"
+                android:text="최윤미"
+                android:textColor="#2a2a2a"
+                android:textSize="13.7dp"
+                app:layout_constraintBottom_toBottomOf="@+id/textView73"
+                app:layout_constraintStart_toStartOf="parent" />
+        </android.support.constraint.ConstraintLayout>
+
+    </android.support.constraint.ConstraintLayout>
 </layout>

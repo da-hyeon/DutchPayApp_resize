@@ -1,4 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
+<layout>
+    <data>
+        <import type="android.databinding.ObservableArrayList"/>
+        <import type="com.dutch.hdh.dutchpayapp.ui.dutchpay.newdutchpayconfirm.TempConfirmListModel"/>
+
+        <variable
+            name="memberList"
+            type="ObservableArrayList&lt;TempConfirmListModel&gt;"/>
+
+        <variable
+            name="Fragment"
+            type="com.dutch.hdh.dutchpayapp.ui.dutchpay.newdutchpayconfirm.DutchpayNewConfirmFragment"/>
+        <variable
+            name="Presenter"
+            type="com.dutch.hdh.dutchpayapp.ui.dutchpay.newdutchpayconfirm.DutchpayNewConfirmPresenter"/>
+    </data>
+
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -178,6 +195,7 @@
     </android.support.constraint.ConstraintLayout>
 
     <android.support.v7.widget.RecyclerView
+        android:id="@+id/rvMemberlist"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="17dp"
@@ -185,6 +203,7 @@
         android:layout_marginEnd="17dp"
         android:layout_marginRight="17dp"
         android:layout_marginBottom="10dp"
+        android:overScrollMode="never"
         app:layout_constraintBottom_toTopOf="@+id/button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -210,3 +229,4 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 </android.support.constraint.ConstraintLayout>
+</layout>

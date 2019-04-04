@@ -5,9 +5,11 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RadioGroup;
 
 import com.dutch.hdh.dutchpayapp.R;
 import com.dutch.hdh.dutchpayapp.base.BaseFragment;
@@ -28,6 +30,17 @@ public class DutchpayStartFragment extends BaseFragment implements DutchpayStart
 
         //리스트 초기 생성
         mPresenter.listInit();
+
+        //내역 필터링 버튼 설정
+        mBinding.rgFiltering.setOnCheckedChangeListener((group, checkedId) -> {
+            if(checkedId == mBinding.rbIng.getId()){
+                mPresenter.onIngClick();
+            } else if(checkedId == mBinding.rbComplete.getId()){
+                mPresenter.onCompleteClick();
+            } else {
+                mPresenter.onAllClick();
+            }
+        });
 
         return mBinding.getRoot();
     }

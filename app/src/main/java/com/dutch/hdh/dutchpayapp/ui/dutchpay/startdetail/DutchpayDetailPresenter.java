@@ -1,10 +1,14 @@
-package com.dutch.hdh.dutchpayapp.ui.dutchpay.detail;
+package com.dutch.hdh.dutchpayapp.ui.dutchpay.startdetail;
 
 import android.databinding.BindingAdapter;
 import android.databinding.ObservableArrayList;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.RecyclerView;
 
+import com.dutch.hdh.dutchpayapp.R;
 import com.dutch.hdh.dutchpayapp.adapter.DutchpayDetailListAdapter;
+import com.dutch.hdh.dutchpayapp.ui.dutchpay.photo.DutchpayPhotoFragment;
 
 public class DutchpayDetailPresenter implements DutchpayDetailContract.Presenter {
 
@@ -48,5 +52,17 @@ public class DutchpayDetailPresenter implements DutchpayDetailContract.Presenter
         if(adapter != null) {
             adapter.setItem(list);
         }
+    }
+
+    public void onPhotoClick(){
+        FragmentManager fm = mView.getFragmentManager();
+
+        FragmentTransaction fragmentTransaction = fm.beginTransaction();
+        fragmentTransaction.setCustomAnimations(R.anim.fade_in, 0, 0, R.anim.fade_out);
+
+        DutchpayPhotoFragment dutchpayPhotoFragment = new DutchpayPhotoFragment();
+        fragmentTransaction.replace(R.id.flFragmentContainer,dutchpayPhotoFragment , DutchpayPhotoFragment.class.getName());
+        fragmentTransaction.addToBackStack(DutchpayPhotoFragment.class.getName());
+        fragmentTransaction.commit();
     }
 }

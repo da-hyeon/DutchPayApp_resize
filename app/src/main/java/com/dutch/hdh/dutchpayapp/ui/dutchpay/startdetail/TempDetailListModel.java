@@ -1,4 +1,4 @@
-package com.dutch.hdh.dutchpayapp.ui.dutchpay.detail;
+package com.dutch.hdh.dutchpayapp.ui.dutchpay.startdetail;
 
 public class TempDetailListModel {
     String name;

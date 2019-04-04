@@ -6,6 +6,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
+import com.dutch.hdh.dutchpayapp.Constants;
+import com.dutch.hdh.dutchpayapp.R;
 import com.dutch.hdh.dutchpayapp.databinding.ItemDutchpayListBinding;
 import com.dutch.hdh.dutchpayapp.ui.dutchpay.start.DutchpayStartContract;
 import com.dutch.hdh.dutchpayapp.ui.dutchpay.start.TempStartListModel;
@@ -27,6 +29,22 @@ public class DutchpayStartListAdapter extends RecyclerView.Adapter<DutchpayStart
 
         void bind(TempStartListModel item) {
             mBinding.setItem(item);
+
+            //더치페이 상태 반영
+            switch (item.getState()) {
+                case Constants.DUTCHPAY_STATE_WAIT:
+                    mBinding.ivDutchpayState.setImageResource(R.drawable.dutchpay_4);
+                    break;
+                case Constants.DUTCHPAY_STATE_REQUEST:
+                    mBinding.ivDutchpayState.setImageResource(R.drawable.dutchpay_1);
+                    break;
+                case Constants.DUTCHPAY_STATE_COMPLETE:
+                    mBinding.ivDutchpayState.setImageResource(R.drawable.dutchpay_2);
+                    break;
+                case Constants.DUTCHPAY_STATE_CANCEL:
+                    mBinding.ivDutchpayState.setImageResource(R.drawable.dutchpay_3);
+                    break;
+            }
 
             mBinding.getRoot().setOnClickListener(v -> mDSatrtPresenter.onItemClick(item));
         }

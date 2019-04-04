@@ -1,10 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+<layout >
     <data>
         <import type="android.databinding.ObservableArrayList"/>
-        <import type="com.dutch.hdh.dutchpayapp.ui.dutchpay.detail.TempDetailListModel"/>
+        <import type="com.dutch.hdh.dutchpayapp.ui.dutchpay.startdetail.TempDetailListModel"/>
 
         <variable
             name="memberList"
@@ -12,225 +10,229 @@
 
         <variable
             name="Fragment"
-            type="com.dutch.hdh.dutchpayapp.ui.dutchpay.detail.DutchpayDetailFragment"/>
+            type="com.dutch.hdh.dutchpayapp.ui.dutchpay.startdetail.DutchpayDetailFragment"/>
         <variable
             name="Presenter"
-            type="com.dutch.hdh.dutchpayapp.ui.dutchpay.detail.DutchpayDetailPresenter"/>
+            type="com.dutch.hdh.dutchpayapp.ui.dutchpay.startdetail.DutchpayDetailPresenter"/>
+
     </data>
 
-<android.support.constraint.ConstraintLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#f3f1f2">
+    <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#f3f1f2">
 
-    <TextView
-        android:id="@+id/textView53"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="17dp"
-        android:layout_marginTop="15dp"
-        android:fontFamily="@font/malgunfont"
-        android:includeFontPadding="false"
-        android:text="더치페이 내역"
-        android:textColor="#2a2a2a"
-        android:textSize="17.1dp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <android.support.constraint.ConstraintLayout
-        android:id="@+id/constraintLayout"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginTop="15dp"
-        android:background="#ffffff"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView53"
-        app:layout_constraintVertical_bias="1.0">
-
-        <Button
-            android:id="@+id/button8"
-            android:layout_width="0dp"
-            android:layout_height="42.29dp"
-            android:layout_margin="17dp"
+        <TextView
+            android:id="@+id/textView53"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginLeft="17dp"
-            android:layout_marginTop="21dp"
-            android:layout_marginRight="17dp"
-            android:background="@drawable/new_photo_btn"
-            android:textColor="#ffffff"
-            android:textSize="14dp"
+            android:layout_marginTop="15dp"
+            android:fontFamily="@font/malgunfont"
+            android:includeFontPadding="false"
+            android:text="더치페이 내역"
+            android:textColor="#2a2a2a"
+            android:textSize="17.1dp"
             android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <Button
-            android:id="@+id/button10"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="28dp"
-            android:background="#0f69fe"
-            android:fontFamily="@font/malgunfont"
-            android:includeFontPadding="false"
-            android:text="미입금 전체 재요청"
-            android:textColor="#ffffff"
-            android:textSize="15dp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="@+id/button8"
-            app:layout_constraintStart_toStartOf="@+id/button8"
-            app:layout_constraintTop_toBottomOf="@+id/constraintLayout4" />
-
         <android.support.constraint.ConstraintLayout
-            android:id="@+id/constraintLayout4"
+            android:id="@+id/constraintLayout"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="21dp"
-            android:background="#f3f2f2"
-            app:layout_constraintEnd_toEndOf="@+id/button8"
-            app:layout_constraintStart_toStartOf="@+id/button8"
-            app:layout_constraintTop_toBottomOf="@+id/button8">
+            android:layout_height="0dp"
+            android:layout_marginTop="15dp"
+            android:background="#ffffff"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView53"
+            app:layout_constraintVertical_bias="1.0">
 
-            <TextView
-                android:id="@+id/textView58"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/malgunfont"
-                android:includeFontPadding="false"
-                android:text="원"
-                android:textColor="#959595"
-                android:textSize="11dp"
-                app:layout_constraintBottom_toBottomOf="@+id/textView57"
-                app:layout_constraintEnd_toEndOf="@+id/textView56" />
-
-            <TextView
-                android:id="@+id/textView57"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="8dp"
-                android:text="50,000"
-                android:textColor="#ff3737"
-                android:textSize="12.6dp"
+            <Button
+                android:id="@+id/button8"
+                android:layout_width="0dp"
+                android:layout_height="42.29dp"
+                android:layout_margin="17dp"
+                android:layout_marginLeft="17dp"
+                android:layout_marginTop="21dp"
+                android:layout_marginRight="17dp"
+                android:background="@drawable/new_photo_btn"
+                android:textColor="#ffffff"
+                android:textSize="14dp"
                 android:textStyle="bold"
-                android:fontFamily="@font/malgunfont"
-                android:includeFontPadding="false"
-                app:layout_constraintBottom_toBottomOf="@+id/textView55"
-                app:layout_constraintEnd_toStartOf="@+id/textView58" />
-
-            <TextView
-                android:id="@+id/textView56"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="31dp"
-                android:text="[BAR 홍대점]"
-                android:textColor="#959595"
-                android:textSize="13.7dp"
-                android:fontFamily="@font/malgunfont"
-                android:includeFontPadding="false"
+                android:onClick="@{()-> Presenter.onPhotoClick()}"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/textView54" />
-
-            <TextView
-                android:id="@+id/textView60"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="명"
-                android:fontFamily="@font/malgunfont"
-                android:includeFontPadding="false"
-                android:textColor="#959595"
-                android:textSize="11dp"
-                app:layout_constraintBottom_toBottomOf="@+id/textView59"
-                app:layout_constraintEnd_toEndOf="@+id/textView58" />
-
-            <TextView
-                android:id="@+id/textView54"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="31dp"
-                android:layout_marginTop="19dp"
-                android:text="더치페이 요청 내역"
-                android:textColor="#2a2a2a"
-                android:textSize="13.7dp"
-                android:fontFamily="@font/malgunfont"
-                android:includeFontPadding="false"
+                app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
-                android:id="@+id/textView55"
-                android:layout_width="wrap_content"
+            <Button
+                android:id="@+id/button10"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="14dp"
-                android:text="총 가격"
+                android:layout_marginTop="28dp"
+                android:background="#0f69fe"
                 android:fontFamily="@font/malgunfont"
                 android:includeFontPadding="false"
-                android:textColor="#2a2a2a"
-                android:textSize="13.7dp"
-                app:layout_constraintStart_toStartOf="@+id/textView54"
-                app:layout_constraintTop_toBottomOf="@+id/textView54" />
-
-            <TextView
-                android:id="@+id/textView61"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="14dp"
-                android:text="참여자"
-                android:textColor="#2a2a2a"
-                android:textSize="13.7dp"
-                android:fontFamily="@font/malgunfont"
-                android:includeFontPadding="false"
-                app:layout_constraintStart_toStartOf="@+id/textView55"
-                app:layout_constraintTop_toBottomOf="@+id/textView55" />
-
-            <TextView
-                android:id="@+id/textView59"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="8dp"
-                android:layout_marginBottom="8dp"
-                android:text="5"
-                android:textColor="#1462f1"
-                android:textSize="12.6dp"
+                android:text="미입금 전체 재요청"
+                android:textColor="#ffffff"
+                android:textSize="15dp"
                 android:textStyle="bold"
-                android:fontFamily="@font/malgunfont"
-                android:includeFontPadding="false"
-                app:layout_constraintBottom_toBottomOf="@+id/textView61"
-                app:layout_constraintEnd_toStartOf="@+id/textView60" />
+                app:layout_constraintEnd_toEndOf="@+id/button8"
+                app:layout_constraintStart_toStartOf="@+id/button8"
+                app:layout_constraintTop_toBottomOf="@+id/constraintLayout4" />
 
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/recyclerView2"
-                bind:item="@{memberList}"
-                android:layout_width="match_parent"
-                android:layout_height="220dp"
-                android:layout_marginStart="17dp"
-                android:layout_marginTop="12dp"
-                android:layout_marginEnd="17dp"
-                android:background="#ffffff"
-                android:overScrollMode="never"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView61" />
-
-            <TextView
-                android:id="@+id/textView63"
-                android:layout_width="wrap_content"
+            <android.support.constraint.ConstraintLayout
+                android:id="@+id/constraintLayout4"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                android:layout_marginBottom="12dp"
-                android:fontFamily="@font/malgunfont"
-                android:includeFontPadding="false"
-                android:text="더치페이 요청을 보냈습니다"
-                android:textColor="#2a2a2a"
-                android:textSize="11dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/recyclerView2"
-                app:layout_constraintTop_toBottomOf="@+id/recyclerView2" />
+                android:layout_marginTop="21dp"
+                android:background="#f3f2f2"
+                app:layout_constraintEnd_toEndOf="@+id/button8"
+                app:layout_constraintStart_toStartOf="@+id/button8"
+                app:layout_constraintTop_toBottomOf="@+id/button8">
+
+                <TextView
+                    android:id="@+id/textView58"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/malgunfont"
+                    android:includeFontPadding="false"
+                    android:text="원"
+                    android:textColor="#959595"
+                    android:textSize="11dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/textView57"
+                    app:layout_constraintEnd_toEndOf="@+id/textView56" />
+
+                <TextView
+                    android:id="@+id/textView57"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="8dp"
+                    android:text="50,000"
+                    android:textColor="#ff3737"
+                    android:textSize="12.6dp"
+                    android:textStyle="bold"
+                    android:fontFamily="@font/malgunfont"
+                    android:includeFontPadding="false"
+                    app:layout_constraintBottom_toBottomOf="@+id/textView55"
+                    app:layout_constraintEnd_toStartOf="@+id/textView58" />
+
+                <TextView
+                    android:id="@+id/textView56"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="31dp"
+                    android:text="[BAR 홍대점]"
+                    android:textColor="#959595"
+                    android:textSize="13.7dp"
+                    android:fontFamily="@font/malgunfont"
+                    android:includeFontPadding="false"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/textView54" />
+
+                <TextView
+                    android:id="@+id/textView60"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="명"
+                    android:fontFamily="@font/malgunfont"
+                    android:includeFontPadding="false"
+                    android:textColor="#959595"
+                    android:textSize="11dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/textView59"
+                    app:layout_constraintEnd_toEndOf="@+id/textView58" />
+
+                <TextView
+                    android:id="@+id/textView54"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="31dp"
+                    android:layout_marginTop="19dp"
+                    android:text="더치페이 요청 내역"
+                    android:textColor="#2a2a2a"
+                    android:textSize="13.7dp"
+                    android:fontFamily="@font/malgunfont"
+                    android:includeFontPadding="false"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/textView55"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="14dp"
+                    android:text="총 가격"
+                    android:fontFamily="@font/malgunfont"
+                    android:includeFontPadding="false"
+                    android:textColor="#2a2a2a"
+                    android:textSize="13.7dp"
+                    app:layout_constraintStart_toStartOf="@+id/textView54"
+                    app:layout_constraintTop_toBottomOf="@+id/textView54" />
+
+                <TextView
+                    android:id="@+id/textView61"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="14dp"
+                    android:text="참여자"
+                    android:textColor="#2a2a2a"
+                    android:textSize="13.7dp"
+                    android:fontFamily="@font/malgunfont"
+                    android:includeFontPadding="false"
+                    app:layout_constraintStart_toStartOf="@+id/textView55"
+                    app:layout_constraintTop_toBottomOf="@+id/textView55" />
+
+                <TextView
+                    android:id="@+id/textView59"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:text="5"
+                    android:textColor="#1462f1"
+                    android:textSize="12.6dp"
+                    android:textStyle="bold"
+                    android:fontFamily="@font/malgunfont"
+                    android:includeFontPadding="false"
+                    app:layout_constraintBottom_toBottomOf="@+id/textView61"
+                    app:layout_constraintEnd_toStartOf="@+id/textView60" />
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/recyclerView2"
+                    android:layout_width="match_parent"
+                    android:layout_height="220dp"
+                    android:layout_marginStart="17dp"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginEnd="17dp"
+                    android:background="#ffffff"
+                    android:overScrollMode="never"
+                    android:visibility="visible"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView61" />
+
+                <TextView
+                    android:id="@+id/textView63"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginBottom="12dp"
+                    android:fontFamily="@font/malgunfont"
+                    android:includeFontPadding="false"
+                    android:text="더치페이 요청을 보냈습니다"
+                    android:textColor="#2a2a2a"
+                    android:textSize="11dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/recyclerView2"
+                    app:layout_constraintTop_toBottomOf="@+id/recyclerView2" />
+            </android.support.constraint.ConstraintLayout>
+
         </android.support.constraint.ConstraintLayout>
 
     </android.support.constraint.ConstraintLayout>
-
-</android.support.constraint.ConstraintLayout>
 </layout>
