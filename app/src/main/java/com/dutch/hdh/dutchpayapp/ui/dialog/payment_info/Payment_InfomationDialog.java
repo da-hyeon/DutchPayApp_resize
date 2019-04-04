@@ -1,30 +1,36 @@
 package com.dutch.hdh.dutchpayapp.ui.dialog.payment_info;
 
-import android.app.Activity;
+import android.app.Dialog;
+import android.content.Context;
 import android.databinding.DataBindingUtil;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.view.LayoutInflater;
 import android.view.Window;
 
 import com.dutch.hdh.dutchpayapp.R;
-import com.dutch.hdh.dutchpayapp.databinding.CustomDialogBinding;
+import com.dutch.hdh.dutchpayapp.databinding.DialogPaymentInfomationBinding;
 
-public class Payment_InfomationDialog extends Activity implements  Payment_InfomationDialogContract.View{
+public class Payment_InfomationDialog extends Dialog implements  Payment_InfomationDialogContract.View{
 
-    private CustomDialogBinding mBinding;
+    private DialogPaymentInfomationBinding mBinding;
     private Payment_InfomationDialogContract.Presenter mPresenter;
+
+    public Payment_InfomationDialog(@NonNull Context context) {
+        super(context);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
-        getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        mBinding = DataBindingUtil.setContentView(this , R.layout.custom_dialog);
-        mBinding.setDialog(this);
-        mPresenter = new Payment_InfomationDialogPresenter(this, this , this);
+        //getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
-        mPresenter.getIntent(getIntent());
+        mBinding = DataBindingUtil.inflate(LayoutInflater.from(getContext()), R.layout.dialog_payment_infomation, null , false);
+        setContentView(mBinding.getRoot());
+
+        mPresenter = new Payment_InfomationDialogPresenter(this, getContext());
+
     }
     /**
      * 객체생성 및 데이터초기화

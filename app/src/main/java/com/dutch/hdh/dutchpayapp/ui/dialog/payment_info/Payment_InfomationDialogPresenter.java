@@ -16,25 +16,12 @@ public class Payment_InfomationDialogPresenter implements Payment_InfomationDial
 
     private int mAmount;
 
-    public Payment_InfomationDialogPresenter(Payment_InfomationDialogContract.View mView, Context mContext, Activity mActivity) {
+    public Payment_InfomationDialogPresenter(Payment_InfomationDialogContract.View mView, Context mContext) {
         this.mView = mView;
         this.mContext = mContext;
-        this.mActivity = mActivity;
 
         this.mView.initData();
 
         mMyApplication = MyApplication.getInstance();
-    }
-
-    @Override
-    public void getIntent(Intent intent) {
-        mAmount = intent.getIntExtra("amount" , 0);
-        int userMoney = mMyApplication.getUserInfo().getUserMoney();
-
-        if( userMoney >= mAmount){
-            //결제 진행
-        } else {
-            //충전 유도
-        }
     }
 }

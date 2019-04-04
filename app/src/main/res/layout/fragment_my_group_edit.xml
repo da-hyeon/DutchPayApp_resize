@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/layoutBG">
+
+
+        <EditText
+            android:id="@+id/etGroupName"
+            android:layout_width="match_parent"
+            android:layout_height="47.42dp"
+            android:layout_marginTop="22dp"
+            android:background="#ffffff"
+            android:fontFamily="@font/malgunfont"
+            android:layout_marginLeft="17.14dp"
+            android:layout_marginRight="17.14dp"
+            android:hint="그룹명을 입력해주세요."
+            android:includeFontPadding="false"
+            android:paddingLeft="12dp"
+            android:textColorHint="#afafaf"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="31.42dp"
+            android:fontFamily="@font/malgunfont"
+            android:layout_marginLeft="17.14dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:includeFontPadding="false"
+            android:text="그룹 구성원 추가"
+            android:textColor="#1e1e1e"
+            android:textSize="15.42dp"
+            app:layout_constraintTop_toBottomOf="@+id/etGroupName" />
+
+        <LinearLayout
+            android:id="@+id/llButtons"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginLeft="17.14dp"
+            android:layout_marginRight="17.14dp"
+            android:layout_marginTop="11.42dp"
+            app:layout_constraintTop_toBottomOf="@+id/tvTitle">
+
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginRight="4dp"
+                android:layout_weight="1"
+                android:background="@color/buttonSelect"
+                android:fontFamily="@font/malgunfont"
+                android:includeFontPadding="false"
+                android:text="전화부호부"
+                android:textColor="#ffffff"
+                android:textSize="20dp"
+                android:textStyle="bold" />
+
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="4dp"
+                android:layout_weight="1"
+                android:background="@color/buttonDefault"
+                android:fontFamily="@font/malgunfont"
+                android:includeFontPadding="false"
+                android:text="직접입력"
+                android:textColor="@color/textDefault"
+                android:textSize="20dp"
+                android:textStyle="bold" />
+
+
+
+        </LinearLayout>
+
+    <ListView
+        android:id="@+id/lvPhoneList"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="#ffffff"
+        android:layout_marginTop="14.85dp"
+        android:dividerHeight="0.5dp"
+        android:divider="@color/textDefault"
+        android:layout_marginBottom="17.14dp"
+        app:layout_constraintBottom_toTopOf="@+id/btComplete"
+        app:layout_constraintTop_toBottomOf="@+id/llButtons"></ListView>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="#ffffff"
+        app:layout_constraintTop_toBottomOf="@+id/lvPhoneList"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+    <Button
+        android:id="@+id/btComplete"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginLeft="17.14dp"
+        android:layout_marginRight="17.14dp"
+        android:layout_marginBottom="17.14dp"
+        android:background="@color/buttonSelect"
+        android:textColor="@color/textSelect"
+        android:text="완료"
+        android:textStyle="bold"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        />
+</android.support.constraint.ConstraintLayout>

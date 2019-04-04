@@ -61,7 +61,7 @@ public class MainActivity extends AppCompatActivity implements MainActivityContr
 
         //개인결제 시작하기 버튼
         mBinding.navigationView.llSolopayStart.setOnClickListener(v ->
-                {}
+                mPresenter.clickSolopayStart()
         );
 
         //더치페이 시작하기 버튼
@@ -76,7 +76,7 @@ public class MainActivity extends AppCompatActivity implements MainActivityContr
 
         //My그룹 버튼
         mBinding.navigationView.llMyGroup.setOnClickListener(v ->
-                {}
+               mPresenter.clickMyGroup()
         );
 
         //My지갑 버튼

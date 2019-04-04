@@ -7,6 +7,5 @@ public interface Payment_InfomationDialogContract {
         void initData();
     }
     interface Presenter{
-        void getIntent(Intent intent);
     }
 }
