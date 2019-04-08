@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout >
     <data>
+        <import type="android.databinding.ObservableArrayList"/>
+        <import type="com.dutch.hdh.dutchpayapp.ui.dutchpay.startdetail.TempDetailListModel"/>
+
+        <variable
+            name="memberList"
+            type="ObservableArrayList&lt;TempDetailListModel&gt;"/>
+
         <variable
             name="Fragment"
             type="com.dutch.hdh.dutchpayapp.ui.dutchpay.photodetail.DutchpayPhotoDetailFragment"/>
@@ -184,6 +191,7 @@
             app:layout_constraintTop_toBottomOf="@+id/textView26" />
 
         <android.support.v7.widget.RecyclerView
+            android:id="@+id/rvMemberList"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginStart="17dp"
