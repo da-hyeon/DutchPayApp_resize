@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable
+            name="Fragment"
+            type="com.dutch.hdh.dutchpayapp.ui.info.InfoFragment"/>
+    </data>
+
+<android.support.constraint.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#f1f1f1">
+
+    <include
+        android:id="@+id/viList1"
+        layout="@layout/view_info_list"
+        android:layout_width="0dp"
+        android:layout_height="57.43dp"
+        android:layout_marginStart="17dp"
+        android:layout_marginLeft="17dp"
+        android:layout_marginTop="35dp"
+        android:layout_marginEnd="17dp"
+        android:layout_marginRight="17dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <include
+        android:id="@+id/viList2"
+        layout="@layout/view_info_list"
+        android:layout_width="0dp"
+        android:layout_height="57.43dp"
+        android:layout_marginStart="17dp"
+        android:layout_marginLeft="17dp"
+        android:layout_marginEnd="17dp"
+        android:layout_marginRight="17dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/viList1" />
+
+    <include
+        android:id="@+id/viList3"
+        layout="@layout/view_info_list"
+        android:layout_width="0dp"
+        android:layout_height="57.43dp"
+        android:layout_marginStart="17dp"
+        android:layout_marginLeft="17dp"
+        android:layout_marginEnd="17dp"
+        android:layout_marginRight="17dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/viList2" />
+
+    <include
+        android:id="@+id/viList4"
+        layout="@layout/view_info_list"
+        android:layout_width="0dp"
+        android:layout_height="57.43dp"
+        android:layout_marginStart="17dp"
+        android:layout_marginLeft="17dp"
+        android:layout_marginEnd="17dp"
+        android:layout_marginRight="17dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/viList3" />
+
+</android.support.constraint.ConstraintLayout>
+</layout>

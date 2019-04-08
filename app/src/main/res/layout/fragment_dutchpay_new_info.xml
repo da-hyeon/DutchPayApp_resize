@@ -32,8 +32,8 @@
             android:visibility="visible"
             android:onClick="@{()-> Presenter.onNextClick()}"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/editText9"
-            app:layout_constraintStart_toStartOf="@+id/editText9" />
+            app:layout_constraintEnd_toEndOf="@+id/etComment"
+            app:layout_constraintStart_toStartOf="@+id/etComment" />
 
         <TextView
             android:id="@+id/textView74"
@@ -51,11 +51,11 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
-            android:id="@+id/editText7"
+            android:id="@+id/etShop"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="17dp"
-            android:layout_marginTop="18dp"
+            android:layout_marginTop="12dp"
             android:layout_marginEnd="17dp"
             android:background="@drawable/box9"
             android:ems="10"
@@ -69,23 +69,24 @@
             android:paddingBottom="10dp"
             android:textColor="#333333"
             android:textSize="17.1dp"
+            android:onTextChanged="@{Presenter::onShopTextCheanged}"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView74" />
 
         <ImageView
-            android:id="@+id/imageView16"
+            android:id="@+id/ivShop"
             android:layout_width="44.57dp"
             android:layout_height="18.57dp"
             android:layout_marginStart="17dp"
             android:layout_marginTop="15dp"
-            app:layout_constraintStart_toStartOf="@+id/editText7"
-            app:layout_constraintTop_toTopOf="@+id/editText7"
+            app:layout_constraintStart_toStartOf="@+id/etShop"
+            app:layout_constraintTop_toTopOf="@+id/etShop"
             app:srcCompat="@drawable/dutchpay4_1" />
 
         <EditText
-            android:id="@+id/editText8"
+            android:id="@+id/etDate"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
@@ -101,23 +102,24 @@
             android:paddingBottom="10dp"
             android:textColor="#333333"
             android:textSize="17.1dp"
-            app:layout_constraintEnd_toEndOf="@+id/editText7"
+            android:onTextChanged="@{Presenter::onDateTextCheanged}"
+            app:layout_constraintEnd_toEndOf="@+id/etShop"
             app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toStartOf="@+id/editText7"
-            app:layout_constraintTop_toBottomOf="@+id/editText7" />
+            app:layout_constraintStart_toStartOf="@+id/etShop"
+            app:layout_constraintTop_toBottomOf="@+id/etShop" />
 
         <ImageView
-            android:id="@+id/imageView17"
+            android:id="@+id/ivDate"
             android:layout_width="44.57dp"
             android:layout_height="18.57dp"
             android:layout_marginStart="17dp"
             android:layout_marginTop="15dp"
-            app:layout_constraintStart_toStartOf="@+id/editText8"
-            app:layout_constraintTop_toTopOf="@+id/editText8"
+            app:layout_constraintStart_toStartOf="@+id/etDate"
+            app:layout_constraintTop_toTopOf="@+id/etDate"
             app:srcCompat="@drawable/dutchpay4_2" />
 
         <EditText
-            android:id="@+id/editText9"
+            android:id="@+id/etComment"
             android:layout_width="0dp"
             android:layout_height="141.13dp"
             android:layout_marginTop="10dp"
@@ -127,29 +129,31 @@
             android:hint="더치페이 요청 메세지를 입력하세요"
             android:includeFontPadding="false"
             android:inputType="textMultiLine"
+            android:maxLength="40"
             android:paddingStart="17dp"
             android:paddingTop="40dp"
             android:paddingEnd="17dp"
             android:paddingBottom="23dp"
             android:textColor="#333333"
             android:textSize="17.1dp"
-            app:layout_constraintEnd_toEndOf="@+id/editText7"
+            android:onTextChanged="@{Presenter::onCommentTextCheanged}"
+            app:layout_constraintEnd_toEndOf="@+id/etShop"
             app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toStartOf="@+id/editText7"
-            app:layout_constraintTop_toBottomOf="@+id/editText8" />
+            app:layout_constraintStart_toStartOf="@+id/etShop"
+            app:layout_constraintTop_toBottomOf="@+id/etDate" />
 
         <ImageView
-            android:id="@+id/imageView26"
+            android:id="@+id/ivComment"
             android:layout_width="55.71dp"
             android:layout_height="18.57dp"
             android:layout_marginStart="17dp"
             android:layout_marginTop="15dp"
-            app:layout_constraintStart_toStartOf="@+id/editText9"
-            app:layout_constraintTop_toTopOf="@+id/editText9"
+            app:layout_constraintStart_toStartOf="@+id/etComment"
+            app:layout_constraintTop_toTopOf="@+id/etComment"
             app:srcCompat="@drawable/dutchpay4_3" />
 
         <TextView
-            android:id="@+id/textView75"
+            android:id="@+id/tvCount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="10dp"
@@ -159,8 +163,8 @@
             android:text="0/80byte"
             android:textColor="#2a2a2a"
             android:textSize="9.14dp"
-            app:layout_constraintBottom_toBottomOf="@+id/editText9"
-            app:layout_constraintEnd_toEndOf="@+id/editText9" />
+            app:layout_constraintBottom_toBottomOf="@+id/etComment"
+            app:layout_constraintEnd_toEndOf="@+id/etComment" />
 
     </android.support.constraint.ConstraintLayout>
 </layout>

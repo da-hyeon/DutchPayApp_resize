@@ -4,8 +4,10 @@ import android.databinding.ObservableArrayList;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
+import com.dutch.hdh.dutchpayapp.R;
 import com.dutch.hdh.dutchpayapp.databinding.ItemDutchpayListDetailBinding;
 import com.dutch.hdh.dutchpayapp.ui.dutchpay.photodetail.DutchpayPhotoDetailContract;
 import com.dutch.hdh.dutchpayapp.ui.dutchpay.startdetail.TempDetailListModel;
@@ -26,6 +28,19 @@ public class DutchpayPhotoDetailListAdapter extends RecyclerView.Adapter<Dutchpa
 
         void bind(TempDetailListModel item) {
             mBinding.setItem(item);
+
+            if(item.isImageFlag()) {
+                mBinding.ivUserIcon.setVisibility(View.VISIBLE);
+                mBinding.tvUserName.setVisibility(View.INVISIBLE);
+            } else {
+                mBinding.ivUserIcon.setVisibility(View.INVISIBLE);
+                mBinding.tvUserName.setVisibility(View.VISIBLE);
+            }
+
+            //더미 디폴트
+            mBinding.btReRequest.setVisibility(View.GONE);
+            mBinding.btCancel.setVisibility(View.GONE);
+            mBinding.ivState.setImageResource(R.drawable.dutchpay_2);
 
             //mBinding.getRoot().setOnClickListener(v -> mDSatrtPresenter.onItemClick(item));
         }

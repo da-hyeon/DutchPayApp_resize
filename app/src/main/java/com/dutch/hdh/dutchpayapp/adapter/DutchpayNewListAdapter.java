@@ -2,11 +2,15 @@ package com.dutch.hdh.dutchpayapp.adapter;
 
 import android.databinding.ObservableArrayList;
 import android.support.annotation.NonNull;
+import android.support.v7.widget.AppCompatImageView;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
+import com.dutch.hdh.dutchpayapp.R;
 import com.dutch.hdh.dutchpayapp.databinding.ItemDutchpayNewMemberBinding;
 import com.dutch.hdh.dutchpayapp.ui.dutchpay.newdutchpay.DutchpayNewContract;
 import com.dutch.hdh.dutchpayapp.ui.dutchpay.newdutchpay.TempNewListModel;
@@ -28,14 +32,43 @@ public class DutchpayNewListAdapter extends RecyclerView.Adapter<DutchpayNewList
         void bind(TempNewListModel item) {
             mBinding.setItem(item);
 
-            if(lastItemCheck(item)){
+            //뷰 셋팅
+            if(!item.isCompleteFlag()) {
+                mBinding.btPayComplete.setBackgroundResource(R.drawable.dutchpay3_1);
+            } else {
+                mBinding.btPayComplete.setBackgroundResource(R.drawable.dutchpay3_3);
+            }
+
+            if(lastItemCheck(item)){ //다음 버튼 생성
                 mBinding.clMember.setVisibility(View.INVISIBLE);
                 mBinding.btNext.setVisibility(View.VISIBLE);
 
                 mBinding.btNext.setOnClickListener(v -> mDNewPresenter.onNextClick());
+            } else {
+                mBinding.clMember.setVisibility(View.VISIBLE);
+                mBinding.btNext.setVisibility(View.GONE);
             }
 
-            //mBinding.getRoot().setOnClickListener(v -> mDSatrtPresenter.onItemClick(item));
+            //클릭 처리
+            mBinding.btPayComplete.setOnClickListener(v -> { //사전납부 버튼
+                if(item.isCompleteFlag()) {
+                    mBinding.btPayComplete.setBackgroundResource(R.drawable.dutchpay3_1);
+                    item.setCompleteFlag(false);
+                } else {
+                    mBinding.btPayComplete.setBackgroundResource(R.drawable.dutchpay3_3);
+                    item.setCompleteFlag(true);
+                }
+            });
+
+            mBinding.btDelete.setOnClickListener(v -> { //삭제 버튼
+
+                mList.remove(item);
+                notifyDataSetChanged();
+
+                if(mList.size() == 1){ //다음 버튼 제거
+                    mList.clear();
+                }
+            });
         }
     }
 
@@ -70,7 +103,7 @@ public class DutchpayNewListAdapter extends RecyclerView.Adapter<DutchpayNewList
     }
 
     private boolean lastItemCheck(TempNewListModel item){
-        if(mList.get(getItemCount()-1).equals(item)) {
+        if(mList.get(mList.size()-1).equals(item)) {
             return true;
         } else {
             return false;

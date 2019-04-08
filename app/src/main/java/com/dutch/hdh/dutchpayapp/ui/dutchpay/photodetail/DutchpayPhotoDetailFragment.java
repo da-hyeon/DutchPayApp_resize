@@ -26,6 +26,8 @@ public class DutchpayPhotoDetailFragment extends BaseFragment implements Dutchpa
         mBinding.setFragment(this);
         mPresenter = new DutchpayPhotoDetailPresenter(this);
 
+        mPresenter.listInit();
+
         return mBinding.getRoot();
     }
 

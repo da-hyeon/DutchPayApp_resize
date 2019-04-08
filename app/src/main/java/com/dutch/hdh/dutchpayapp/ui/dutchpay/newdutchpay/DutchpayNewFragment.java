@@ -18,13 +18,13 @@ import com.dutch.hdh.dutchpayapp.ui.dutchpay.start.ItemDecoration;
 public class DutchpayNewFragment extends BaseFragment implements DutchpayNewContract.View {
 
     FragmentDutchpayNewStartBinding mBinding;
-    DutchpayNewlPresenter mPresenter;
+    DutchpayNewPresenter mPresenter;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_dutchpay_new_start,container,false);
-        mPresenter = new DutchpayNewlPresenter(this);
+        mPresenter = new DutchpayNewPresenter(this);
         mBinding.setFragment(this);
 
         //입력 완료_버그 수정

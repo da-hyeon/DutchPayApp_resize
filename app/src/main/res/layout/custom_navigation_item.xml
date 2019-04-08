@@ -350,7 +350,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/linearLayout3" />
 
             <ImageView
-                android:id="@+id/imageView10"
+                android:id="@+id/ivState"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="24dp"
@@ -368,9 +368,9 @@
                 android:text="My 그룹"
                 android:textColor="#2a2a2a"
                 android:textSize="12.57dp"
-                app:layout_constraintLeft_toLeftOf="@+id/imageView10"
-                app:layout_constraintRight_toRightOf="@+id/imageView10"
-                app:layout_constraintTop_toBottomOf="@+id/imageView10" />
+                app:layout_constraintLeft_toLeftOf="@+id/ivState"
+                app:layout_constraintRight_toRightOf="@+id/ivState"
+                app:layout_constraintTop_toBottomOf="@+id/ivState" />
 
             <ImageView
                 android:id="@+id/image_myWallet"
@@ -379,7 +379,7 @@
                 android:layout_marginLeft="50.85dp"
                 android:layout_marginTop="16.25dp"
                 android:src="@drawable/right_menu_off_my_wallet"
-                app:layout_constraintLeft_toRightOf="@+id/imageView10"
+                app:layout_constraintLeft_toRightOf="@+id/ivState"
                 app:layout_constraintTop_toTopOf="@+id/linearLayout4" />
 
             <TextView
@@ -393,7 +393,7 @@
                 android:textSize="12.57dp"
                 app:layout_constraintLeft_toLeftOf="@+id/image_myWallet"
                 app:layout_constraintRight_toRightOf="@+id/image_myWallet"
-                app:layout_constraintTop_toBottomOf="@+id/imageView10" />
+                app:layout_constraintTop_toBottomOf="@+id/ivState" />
 
             <LinearLayout
                 android:id="@+id/linearLayout5"
