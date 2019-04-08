@@ -16,7 +16,6 @@ public interface SoloPayContract {
         void showScanView();
         void showPaymentNumberView();
         void showCamera(int RequestCameraPermissionID);
-        void showPayment_InfomationDialog(Intent intent);
 
         //hide
         void hideScanView();
@@ -24,10 +23,8 @@ public interface SoloPayContract {
         void hideCamera();
 
         //change
-        void changeScanButtonBackgroundColor(boolean state);
-        void changePaymentNumberButtonBackgroundColor(boolean state);
-        void changeScanButtonTextColor(boolean state);
-        void changePaymentNumberButtonTextColor(boolean state);
+        void changeScanButtonBackgroundAndTextColor(boolean state);
+        void changePaymentNumberButtonBackgroundAndTextColor(boolean state);
         void changePaymentNumberTextViewBackgroundColor(int index, boolean state);
 
     }

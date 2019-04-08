@@ -8,6 +8,8 @@ import android.util.SparseArray;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
+import com.dutch.hdh.dutchpayapp.MyApplication;
+import com.dutch.hdh.dutchpayapp.ui.dialog.charge_money.ChargeMoneyDialog;
 import com.dutch.hdh.dutchpayapp.ui.dialog.payment_info.Payment_InfomationDialog;
 import com.google.android.gms.vision.Detector;
 import com.google.android.gms.vision.barcode.Barcode;
@@ -22,7 +24,11 @@ public class SoloPayPresenter implements SoloPayContract.Presenter {
     private Context mContext;
     private FragmentManager mFragmentManager;
     private Activity mActivity;
+    private Payment_InfomationDialog mPayment_InfomationDialog;
+    private ChargeMoneyDialog mChargeMoneyDialog;
+    private MyApplication mMyApplication;
 
+    private int mAmount;
     /**
      * 생성자
      */
@@ -31,6 +37,9 @@ public class SoloPayPresenter implements SoloPayContract.Presenter {
         this.mContext = mContext;
         this.mFragmentManager = mFragmentManager;
         this.mActivity = mActivity;
+        mPayment_InfomationDialog = new Payment_InfomationDialog(this.mContext);
+        mChargeMoneyDialog = new ChargeMoneyDialog(this.mContext);
+        mMyApplication = MyApplication.getInstance();
     }
 
     /**
@@ -103,11 +112,8 @@ public class SoloPayPresenter implements SoloPayContract.Presenter {
 
         mView.showScanView();
         mView.hidePaymentNumberView();
-        mView.changeScanButtonBackgroundColor(true);
-        mView.changePaymentNumberButtonBackgroundColor(false);
-        mView.changeScanButtonTextColor(true);
-        mView.changePaymentNumberButtonTextColor(false);
-
+        mView.changeScanButtonBackgroundAndTextColor(true);
+        mView.changePaymentNumberButtonBackgroundAndTextColor(false);
         mView.showCamera(RequestCameraPermissionID);
     }
 
@@ -118,11 +124,8 @@ public class SoloPayPresenter implements SoloPayContract.Presenter {
     public void clickPaymentNumber() {
         mView.showPaymentNumberView();
         mView.hideScanView();
-        mView.changeScanButtonBackgroundColor(false);
-        mView.changePaymentNumberButtonBackgroundColor(true);
-        mView.changeScanButtonTextColor(false);
-        mView.changePaymentNumberButtonTextColor(true);
-
+        mView.changeScanButtonBackgroundAndTextColor(false);
+        mView.changePaymentNumberButtonBackgroundAndTextColor(true);
         mView.hideCamera();
     }
 
@@ -131,7 +134,11 @@ public class SoloPayPresenter implements SoloPayContract.Presenter {
      */
     @Override
     public void clickPaymentInfo() {
-
+        //if(mMyApplication.getPersonalPaymentInformation().getAmount() < mMyApplication.getUserInfo().getUserMoney()) {
+            mPayment_InfomationDialog.show();
+       // } else {
+       //     mChargeMoneyDialog.show();
+        //}
     }
 
     /**
@@ -140,10 +147,11 @@ public class SoloPayPresenter implements SoloPayContract.Presenter {
     @Override
     public void clickTemporaryButton() {
         mView.hideCamera();
-
-        Intent intent = new Intent(mContext, Payment_InfomationDialog.class);
-        intent.putExtra("amount" , 200000);
-        mView.showPayment_InfomationDialog(intent);
+        if(mMyApplication.getPersonalPaymentInformation().getAmount() < mMyApplication.getUserInfo().getUserMoney()) {
+            mPayment_InfomationDialog.show();
+        } else {
+            mChargeMoneyDialog.show();
+        }
     }
 
     /**
@@ -157,6 +165,4 @@ public class SoloPayPresenter implements SoloPayContract.Presenter {
             mView.changePaymentNumberTextViewBackgroundColor(index, true);
         }
     }
-
-
 }

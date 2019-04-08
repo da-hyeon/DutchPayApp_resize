@@ -4,13 +4,20 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
+import android.widget.Toast;
 
 import com.dutch.hdh.dutchpayapp.MyApplication;
 import com.dutch.hdh.dutchpayapp.R;
+import com.dutch.hdh.dutchpayapp.data.db.UserInfo;
 import com.dutch.hdh.dutchpayapp.ui.register.success.Register_SuccessFragment;
 
 import java.util.ArrayList;
 import java.util.Collections;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class Register_PaymentPasswordPresenter implements Register_PaymentPasswordContract.Presenter {
 
@@ -113,9 +120,31 @@ public class Register_PaymentPasswordPresenter implements Register_PaymentPasswo
         } else {
             if (mPasswordCheck.length() == 6) {
                 if (isSame()) {
-                    mView.showSuccessDialog("회원가입이 완료 되었습니다.");
-                    //프래그먼트 이동
-                    myApplication.getUserInfo().setUserState(true);
+
+                    Call<Void> userRegister = MyApplication
+                            .getRestAdapter()
+                            .setUserRegister("asd",
+                                    "asd",
+                                    "asd",
+                                    "asd" ,
+                                    "asd",
+                                    "asd");
+
+                    userRegister.enqueue(new Callback<Void>() {
+                        @Override
+                        public void onResponse(Call<Void> call, Response<Void> response) {
+                            mView.showSuccessDialog("회원가입이 완료 되었습니다.");
+                            myApplication.getUserInfo().setUserState(true);
+                        }
+
+                        @Override
+                        public void onFailure(Call<Void> call, Throwable t) {
+                            Log.d("fail" , t.getLocalizedMessage());
+                            Log.d("fail" , t.getMessage());
+                        }
+                    });
+
+
                 } else {
                     mView.showFailDialog("비밀번호가 맞지 않습니다.");
                     clickDeleteButton();

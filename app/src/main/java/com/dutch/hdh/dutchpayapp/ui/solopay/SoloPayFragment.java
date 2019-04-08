@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -146,11 +147,6 @@ public class SoloPayFragment extends BaseFragment implements SoloPayContract.Vie
         }
     }
 
-    @Override
-    public void showPayment_InfomationDialog(Intent intent) {
-        startActivity(intent);
-    }
-
     /**
      * ScanView 숨기기
      */
@@ -176,50 +172,34 @@ public class SoloPayFragment extends BaseFragment implements SoloPayContract.Vie
     }
 
     /**
-     * ScanButtonBackgroundColor 변경하기
+     * ScanButtonBackgroundAndTextColor 변경하기
      */
     @Override
-    public void changeScanButtonBackgroundColor(boolean state) {
+    public void changeScanButtonBackgroundAndTextColor(boolean state) {
         if (state) {
             mBinding.llScan.setBackgroundResource(R.color.buttonSelect);
+            mBinding.tvScan.setTextColor(getResources().getColor(R.color.textSelect));
+
         } else {
             mBinding.llScan.setBackgroundResource(R.color.buttonDefault);
+            mBinding.tvScan.setTextColor(getResources().getColor(R.color.textDefault));
+
         }
     }
 
     /**
-     * PaymentNumberButtonBackgroundColor 변경하기
+     * PaymentNumberButtonBackgroundAndTextColor 변경하기
      */
     @Override
-    public void changePaymentNumberButtonBackgroundColor(boolean state) {
+    public void changePaymentNumberButtonBackgroundAndTextColor(boolean state) {
         if (state) {
             mBinding.llPaymentNumber.setBackgroundResource(R.color.buttonSelect);
+            mBinding.tvPaymentNumber.setTextColor(getResources().getColor(R.color.textSelect));
+
         } else {
             mBinding.llPaymentNumber.setBackgroundResource(R.color.buttonDefault);
-        }
-    }
-
-    /**
-     * ScanButtonTextColor 변경하기
-     */
-    @Override
-    public void changeScanButtonTextColor(boolean state) {
-        if (state) {
-            mBinding.tvScan.setTextColor(getResources().getColor(R.color.textSelect));
-        } else {
-            mBinding.tvScan.setTextColor(getResources().getColor(R.color.textDefault));
-        }
-    }
-
-    /**
-     * PaymentNumberButtonTextColor 변경하기
-     */
-    @Override
-    public void changePaymentNumberButtonTextColor(boolean state) {
-        if (state) {
-            mBinding.tvPaymentNumber.setTextColor(getResources().getColor(R.color.textSelect));
-        } else {
             mBinding.tvPaymentNumber.setTextColor(getResources().getColor(R.color.textDefault));
+
         }
     }
 
@@ -256,6 +236,7 @@ public class SoloPayFragment extends BaseFragment implements SoloPayContract.Vie
     @Override
     public void onResume() {
         super.onResume();
+        Log.d("onResumeCheck" , "in");
         if(!onceLifetimeEntry) {
             mPresenter.surfaceViewCallback(mBinding.svCamera);
             mPresenter.setProcessor(mBarcodeDetector);

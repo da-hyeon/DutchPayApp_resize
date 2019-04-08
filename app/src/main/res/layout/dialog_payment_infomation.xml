@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="317.71dp"
+    android:layout_height="292.57dp"
+    android:background="@drawable/outline_round_dialog"
+    android:orientation="vertical">
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent">
+
+            <TextView
+                android:id="@+id/tvTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="23.42dp"
+                android:fontFamily="@font/malgunfont"
+                android:includeFontPadding="false"
+                android:text="@string/solopay_payment_dialog_titleText"
+                android:textColor="#101010"
+                android:textSize="14.85dp"
+                android:textStyle="bold"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <View
+                android:id="@+id/vTop"
+                android:layout_width="277.14dp"
+                android:layout_height="46.85dp"
+                android:layout_marginTop="15.42dp"
+                android:background="@drawable/outline_round_dialog_layout"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvTitle" />
+
+            <TextView
+                android:id="@+id/tvTopText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="12dp"
+                android:fontFamily="@font/malgunfont"
+                android:includeFontPadding="false"
+                android:text="@string/solopay_payment_dialog_topViewText"
+                android:textColor="#2a2a2a"
+                android:textSize="13.71dp"
+                app:layout_constraintBottom_toBottomOf="@+id/vTop"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/vTop" />
+
+            <TextView
+                android:id="@+id/tvPaymentAmount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="46.57dp"
+                android:fontFamily="@font/malgunfont"
+                android:includeFontPadding="false"
+                android:text="200,000,000원"
+                android:textColor="#ff2e2e"
+                android:textSize="20dp"
+                app:layout_constraintBottom_toBottomOf="@+id/vTop"
+                app:layout_constraintLeft_toRightOf="@+id/tvTopText"
+                app:layout_constraintTop_toTopOf="@+id/vTop" />
+
+            <View
+                android:id="@+id/vBottom"
+                android:layout_width="277.14dp"
+                android:layout_height="46.85dp"
+                android:layout_marginTop="7.71dp"
+                android:background="@drawable/outline_round_dialog_layout"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/vTop" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="12dp"
+                android:fontFamily="@font/malgunfont"
+                android:includeFontPadding="false"
+                android:text="@string/solopay_payment_dialog_bottomViewText"
+                android:textColor="#2a2a2a"
+                android:textSize="13.71dp"
+                app:layout_constraintBottom_toBottomOf="@+id/vBottom"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/vBottom" />
+
+            <TextView
+                android:id="@+id/tvMyDutchMoney"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/malgunfont"
+                android:includeFontPadding="false"
+                android:text="2원"
+                android:textColor="#2d7cff"
+                android:textSize="20dp"
+                app:layout_constraintBottom_toBottomOf="@+id/vBottom"
+                app:layout_constraintLeft_toLeftOf="@+id/tvPaymentAmount"
+                app:layout_constraintTop_toTopOf="@+id/vBottom" />
+
+            <TextView
+                android:id="@+id/tvInfoText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30.85dp"
+                android:text="@string/solopay_payment_dialog_infoText"
+                android:textColor="#2a2a2a"
+                android:textSize="13.71dp"
+                android:textStyle="bold"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/vBottom" />
+
+            <Button
+                android:id="@+id/btOK"
+                android:layout_width="0dp"
+                android:layout_height="41.71dp"
+                android:layout_marginTop="27.14dp"
+                android:layout_marginBottom="20dp"
+                android:background="@color/buttonSelect"
+                android:fontFamily="@font/malgunfont"
+                android:gravity="center"
+                android:includeFontPadding="false"
+                android:text="@string/solopay_payment_dialog_ButtonText"
+                android:textColor="#ffffff"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvInfoText" />
+
+
+        </android.support.constraint.ConstraintLayout>
+
+    </LinearLayout>
+</layout>
