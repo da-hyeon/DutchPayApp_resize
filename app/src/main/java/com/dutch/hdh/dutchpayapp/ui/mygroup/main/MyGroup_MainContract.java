@@ -8,5 +8,7 @@ public interface MyGroup_MainContract {
     }
     interface Presenter{
         void initListViewData(ListView listView);
+
+        void clickAddGroup();
     }
 }

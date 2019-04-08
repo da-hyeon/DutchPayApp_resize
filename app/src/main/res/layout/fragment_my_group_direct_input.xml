@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/layoutBG">
+
+        <TextView
+            android:id="@+id/tvTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="17.14dp"
+            android:layout_marginTop="22dp"
+            android:fontFamily="@font/malgunfont"
+            android:includeFontPadding="false"
+            android:text="참여자 직접 추가"
+            android:textColor="#1e1e1e"
+            android:textSize="15.42dp"
+            android:textStyle="bold"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ListView
+            android:id="@+id/lvDirectInputMember"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginLeft="17.14dp"
+            android:layout_marginTop="16.28dp"
+            android:layout_marginRight="17.14dp"
+            android:layout_marginBottom="36.85dp"
+            android:divider="@color/layoutBG"
+            android:dividerHeight="12dp"
+            app:layout_constraintBottom_toTopOf="@+id/btMemberAdditionConfirmed"
+            app:layout_constraintTop_toBottomOf="@+id/tvTitle" />
+
+        <Button
+            android:id="@+id/btMemberAdditionConfirmed"
+            android:layout_width="match_parent"
+            android:layout_height="47.42dp"
+            android:layout_marginLeft="17.14dp"
+            android:layout_marginRight="17.14dp"
+            android:layout_marginBottom="20.28dp"
+            android:background="@color/buttonSelect"
+            android:fontFamily="@string/myGroup_buttonText"
+            android:includeFontPadding="false"
+            android:text="멤버 추가하기"
+            android:textColor="#ffffff"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/llWhiteBackground" />
+
+        <View
+            android:id="@+id/llWhiteBackground"
+            android:layout_width="match_parent"
+            android:layout_height="117.14dp"
+            android:background="#ffffff"
+            app:layout_constraintBottom_toBottomOf="parent" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@string/myGroup_buttonText"
+            android:includeFontPadding="false"
+            android:text="추가인원"
+            android:textColor="#bdbcbc"
+            android:textSize="40dp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/llWhiteBackground"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="@+id/tvAddMemberCount"
+            app:layout_constraintTop_toTopOf="@+id/llWhiteBackground" />
+
+        <TextView
+            android:id="@+id/tvAddMemberCount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="40dp"
+            android:fontFamily="@string/myGroup_buttonText"
+            android:includeFontPadding="false"
+            android:layout_marginRight="25.14dp"
+            android:textColor="#929292"
+            android:textSize="60dp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/llWhiteBackground"
+            app:layout_constraintRight_toLeftOf="@+id/ibAddMember"
+            app:layout_constraintTop_toTopOf="@+id/llWhiteBackground" />
+
+        <ImageButton
+            android:id="@+id/ibAddMember"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="17.14dp"
+            android:background="@color/transparent"
+            android:src="@drawable/directinput_add"
+            app:layout_constraintBottom_toBottomOf="@+id/llWhiteBackground"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/llWhiteBackground" />
+
+
+    </android.support.constraint.ConstraintLayout>
+</layout>

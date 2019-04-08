@@ -12,7 +12,10 @@ import com.dutch.hdh.dutchpayapp.MyApplication;
 import com.dutch.hdh.dutchpayapp.R;
 import com.dutch.hdh.dutchpayapp.ui.login.LoginFragment;
 import com.dutch.hdh.dutchpayapp.ui.main.fragment.MainFragment;
+import com.dutch.hdh.dutchpayapp.ui.mygroup.directinput.MyGroup_DirectInputFragment;
+import com.dutch.hdh.dutchpayapp.ui.mygroup.edit.MyGroup_EditFragment;
 import com.dutch.hdh.dutchpayapp.ui.mygroup.main.MyGroup_MainFragment;
+import com.dutch.hdh.dutchpayapp.ui.mygroup.telephonedirectory.MyGroup_TelephoneDirectoryFragment;
 import com.dutch.hdh.dutchpayapp.ui.register.allview.Register_ViewAllTermsConditionsFragment;
 import com.dutch.hdh.dutchpayapp.ui.register.form.Register_FormFragment;
 import com.dutch.hdh.dutchpayapp.ui.register.password.Register_PaymentPasswordFragment;
@@ -27,7 +30,7 @@ public class MainActivityPresenter implements MainActivityContract.Presenter {
     private Context mContext;
     private Activity mActivity;
     private FragmentManager mFragmentManager;
-    private MyApplication myApplication;
+    private MyApplication mMyApplication;
 
     private long mLastTime;
 
@@ -51,7 +54,7 @@ public class MainActivityPresenter implements MainActivityContract.Presenter {
         mLoginFragment = new LoginFragment();
         mMainFragment = new MainFragment();
 
-        myApplication = MyApplication.getInstance();
+        mMyApplication = MyApplication.getInstance();
         //targetArrayList = new ArrayList<>();
     }
 
@@ -89,6 +92,22 @@ public class MainActivityPresenter implements MainActivityContract.Presenter {
             mView.showExit();
         }
 
+        else if(getCurrentFragment() instanceof MyGroup_EditFragment){
+            if(mMyApplication.entranceGroupPath) {
+                mView.changeTitle("My 그룹 편집");
+            } else {
+                mView.changeTitle("My 그룹 신규추가");
+            }
+            mView.hideBell();
+            mView.showExit();
+        }
+
+        else if(getCurrentFragment() instanceof MyGroup_TelephoneDirectoryFragment){
+            mView.changeTitle("전화부호부");
+            mView.hideBell();
+            mView.showExit();
+        }
+
         else if (getCurrentFragment() instanceof MainFragment) {
             initLoginState();
             mView.changeTitle("");
@@ -121,7 +140,7 @@ public class MainActivityPresenter implements MainActivityContract.Presenter {
      */
     @Override
     public void initLoginState() {
-        mView.showUserInfo(myApplication.getUserInfo().isUserState());
+        mView.showUserInfo(mMyApplication.getUserInfo().isUserState());
     }
 
 // 튜토리얼
@@ -201,6 +220,15 @@ public class MainActivityPresenter implements MainActivityContract.Presenter {
                 ((Register_ViewAllTermsConditionsFragment) fragmentList.get(i)).onBackPress();
                 return;
             }
+            if (fragmentList.get(i) instanceof MyGroup_DirectInputFragment) {
+                ((MyGroup_DirectInputFragment) fragmentList.get(i)).onBackPressed();
+                return;
+            }
+            if (fragmentList.get(i) instanceof MyGroup_EditFragment) {
+                ((MyGroup_EditFragment) fragmentList.get(i)).onBackPressed();
+                return;
+            }
+
         }
 
         if (mFragmentManager.getBackStackEntryCount() > 1) {
@@ -252,7 +280,7 @@ public class MainActivityPresenter implements MainActivityContract.Presenter {
         //프래그먼트 이동
         FragmentTransaction fragmentTransaction = mFragmentManager.beginTransaction();
         fragmentTransaction.setCustomAnimations(R.anim.fade_in, 0, 0, R.anim.fade_out);
-        fragmentTransaction.replace(R.id.flFragmentContainer, myApplication.getRegister_TermsConditionsAgreementFragment(), Register_TermsConditionsAgreementFragment.class.getName());
+        fragmentTransaction.replace(R.id.flFragmentContainer, mMyApplication.getRegister_TermsConditionsAgreementFragment(), Register_TermsConditionsAgreementFragment.class.getName());
         fragmentTransaction.addToBackStack(Register_TermsConditionsAgreementFragment.class.getName());
         fragmentTransaction.commit();
     }
@@ -311,9 +339,10 @@ public class MainActivityPresenter implements MainActivityContract.Presenter {
         //프래그먼트 이동
         FragmentTransaction fragmentTransaction = mFragmentManager.beginTransaction();
         fragmentTransaction.setCustomAnimations(R.anim.fade_in, 0, 0, R.anim.fade_out);
-        MyGroup_MainFragment myGroupFragment = new MyGroup_MainFragment();
-        fragmentTransaction.replace(R.id.flFragmentContainer, myGroupFragment, SoloPayFragment.class.getName());
-        fragmentTransaction.addToBackStack(SoloPayFragment.class.getName());
+
+        MyGroup_MainFragment mMyGroup_MainFragment = new MyGroup_MainFragment();
+        fragmentTransaction.replace(R.id.flFragmentContainer, mMyGroup_MainFragment, MyGroup_MainFragment.class.getName());
+        fragmentTransaction.addToBackStack(MyGroup_MainFragment.class.getName());
         fragmentTransaction.commit();
     }
 
@@ -357,7 +386,7 @@ public class MainActivityPresenter implements MainActivityContract.Presenter {
         mView.hideDrawerLayout();
 
         setDefaultMainStack();
-        myApplication.getUserInfo().setUserState(false);
+        mMyApplication.getUserInfo().setUserState(false);
         initLoginState();
 
         mMainFragment.showUserInfo(null, 0, false) ;

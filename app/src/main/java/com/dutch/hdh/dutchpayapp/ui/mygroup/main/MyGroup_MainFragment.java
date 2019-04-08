@@ -22,9 +22,13 @@ public class MyGroup_MainFragment extends BaseFragment implements MyGroup_MainCo
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_my_group, container, false);
-        mPresenter = new MyGroup_MainPresenter(this, getContext());
+        mPresenter = new MyGroup_MainPresenter(this, getContext(), getFragmentManager());
 
         initData();
+
+        mBinding.btAddGroup.setOnClickListener(v->
+                mPresenter.clickAddGroup()
+        );
 
         return mBinding.getRoot();
     }
