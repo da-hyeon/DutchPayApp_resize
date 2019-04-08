@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/layoutBG"
+        android:orientation="vertical">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="56.28dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_horizontal"
+                android:fontFamily="@font/malgunfont"
+                android:gravity="center"
+                android:includeFontPadding="false"
+                android:text="My 카드"
+                android:textColor="@color/topBarFontColor"
+                android:textSize="18.85dp"
+                android:textStyle="bold" />
+
+
+            <TextView
+                android:id="@+id/tvCancel"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="right"
+                android:layout_marginRight="17.14dp"
+                android:fontFamily="@font/malgunfont"
+                android:gravity="center"
+                android:includeFontPadding="false"
+                android:text="취소"
+                android:textColor="@color/topBarFontColor"
+                android:textSize="18.85dp" />
+        </FrameLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="@color/topBarLineColor" />
+
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="240dp"
+            android:background="@android:color/white">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="34.28dp"
+                android:layout_marginRight="34.28dp"
+                android:gravity="center_vertical">
+
+
+                <ImageView
+                    android:id="@+id/ivLeftArrow"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/wallet2_left" />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_weight="1" />
+
+                <ImageView
+                    android:id="@+id/ivRightArrow"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/wallet2_right" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/llCardAdd"
+                android:layout_width="270.85dp"
+                android:layout_height="171.14dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="25.71dp"
+                android:background="@drawable/my_wallet_box"
+                android:gravity="center"
+                android:orientation="vertical">
+
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/wallet2_icon" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="14.28dp"
+                    android:fontFamily="@font/malgunfont"
+                    android:includeFontPadding="false"
+                    android:text="카드를 등록해주세요"
+                    android:textColor="@color/walletQuadColor"
+                    android:textSize="10.28dp" />
+
+
+            </LinearLayout>
+
+
+            <android.support.v4.view.ViewPager
+                android:id="@+id/vpCardList"
+                android:layout_width="270dp"
+                android:layout_height="171.41dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="25.71dp" />
+
+
+            <android.support.design.widget.TabLayout
+                android:id="@+id/tlIndicator"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                app:tabBackground="@drawable/tab_selector"
+                app:tabGravity="center"
+                app:tabIndicatorHeight="0dp"
+                tools:ignore="MissingPrefix" />
+
+
+        </FrameLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <ImageView
+            android:id="@+id/ivCardAdd"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="17.14dp"
+            android:src="@drawable/wallet2_btn" />
+
+    </LinearLayout>
+</layout>

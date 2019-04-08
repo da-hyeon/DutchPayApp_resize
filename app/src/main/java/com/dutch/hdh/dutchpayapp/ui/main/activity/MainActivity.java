@@ -81,7 +81,7 @@ public class MainActivity extends AppCompatActivity implements MainActivityContr
 
         //My지갑 버튼
         mBinding.navigationView.llMyWallet.setOnClickListener(v ->
-                {}
+                mPresenter.clickMyWallet()
         );
 
         //공지사항 버튼

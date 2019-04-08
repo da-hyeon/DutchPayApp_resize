@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/layoutBG"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="52.85dp"
+            android:background="@android:color/white"
+            android:gravity="center_vertical"
+            android:paddingLeft="17.14dp"
+            android:paddingRight="17.14dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/malgunfont"
+                android:includeFontPadding="false"
+                android:text="My 더치머니"
+                android:textStyle="bold"
+                android:textColor="@color/walletFontColor"
+                android:textSize="17.14dp" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1" />
+
+            <TextView
+                android:id="@+id/tvMyMoney"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/malgunfont"
+                android:includeFontPadding="false"
+                android:text="1,500,000,000"
+                android:textColor="@color/walletSubColor"
+                android:textSize="18.85dp"
+                android:textStyle="bold" />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10.57dp"
+                android:fontFamily="@font/malgunfont"
+                android:includeFontPadding="false"
+                android:text="원"
+                android:textColor="@color/walletSubColor"
+                android:textSize="14.85dp" />
+
+
+            <ImageView
+                android:id="@+id/ivBalanceManagement"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/mywallet1_1" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="17.14dp"
+            android:layout_marginTop="37.71dp"
+            android:layout_marginRight="17.14dp"
+            android:orientation="vertical">
+
+
+            <LinearLayout
+                android:id="@+id/llCard"
+                android:layout_width="match_parent"
+                android:layout_height="47.42dp"
+                android:background="@drawable/bottom_shadow"
+                android:gravity="center_vertical"
+                android:paddingLeft="17.14dp"
+                android:paddingRight="17.14dp">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="12dp"
+                    android:src="@drawable/wallet1_icon1" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/malgunfont"
+                    android:includeFontPadding="false"
+                    android:text="카드"
+                    android:textColor="@color/walletThirdColor"
+                    android:textSize="14.28dp" />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/next_arrow_36x82" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/llAccount"
+                android:layout_width="match_parent"
+                android:layout_height="47.42dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/bottom_shadow"
+                android:gravity="center_vertical"
+                android:paddingLeft="17.14dp"
+                android:paddingRight="17.14dp">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="12dp"
+                    android:src="@drawable/wallet1_icon2" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/malgunfont"
+                    android:includeFontPadding="false"
+                    android:text="계좌"
+                    android:textColor="@color/walletThirdColor"
+                    android:textSize="14.28dp" />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/next_arrow_36x82" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/llSendAndReceive"
+                android:layout_width="match_parent"
+                android:layout_height="47.42dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/bottom_shadow"
+                android:gravity="center_vertical"
+                android:paddingLeft="17.14dp"
+                android:paddingRight="17.14dp">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="12dp"
+                    android:src="@drawable/wallet1_icon3" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/malgunfont"
+                    android:includeFontPadding="false"
+                    android:text="주고받기"
+                    android:textColor="@color/walletThirdColor"
+                    android:textSize="14.28dp" />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/next_arrow_36x82" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/llHistory"
+                android:layout_width="match_parent"
+                android:layout_height="47.42dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/bottom_shadow"
+                android:gravity="center_vertical"
+                android:paddingLeft="17.14dp"
+                android:paddingRight="17.14dp">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="12dp"
+                    android:src="@drawable/wallet1_icon4" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/malgunfont"
+                    android:includeFontPadding="false"
+                    android:text="사용내역"
+                    android:textColor="@color/walletThirdColor"
+                    android:textSize="14.28dp" />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/next_arrow_36x82" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/llGiftCard"
+                android:layout_width="match_parent"
+                android:layout_height="47.42dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/bottom_shadow"
+                android:gravity="center_vertical"
+                android:paddingLeft="17.14dp"
+                android:paddingRight="17.14dp">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="12dp"
+                    android:src="@drawable/wallet1_icon5" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/malgunfont"
+                    android:includeFontPadding="false"
+                    android:text="상품권 / 상품코드"
+                    android:textColor="@color/walletThirdColor"
+                    android:textSize="14.28dp" />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/next_arrow_36x82" />
+
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+</layout>

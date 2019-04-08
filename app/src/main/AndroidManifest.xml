@@ -32,6 +32,23 @@
 
             </intent-filter>
         </activity>
+
+
+        <activity
+            android:name=".ui.wallet.mycard.MyCardActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.FullScreen.Transparent"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
+
+        <activity
+            android:name=".ui.wallet.addcard.AddCardActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.FullScreen.Transparent"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
+
+
     </application>
 
 </manifest>

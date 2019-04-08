@@ -18,6 +18,7 @@ import com.dutch.hdh.dutchpayapp.ui.register.password.Register_PaymentPasswordFr
 import com.dutch.hdh.dutchpayapp.ui.register.success.Register_SuccessFragment;
 import com.dutch.hdh.dutchpayapp.ui.register.term.Register_TermsConditionsAgreementFragment;
 import com.dutch.hdh.dutchpayapp.ui.solopay.SoloPayFragment;
+import com.dutch.hdh.dutchpayapp.ui.wallet.MyWalletFragment;
 
 import java.util.List;
 
@@ -34,6 +35,7 @@ public class MainActivityPresenter implements MainActivityContract.Presenter {
 
     private MainFragment mMainFragment;
     private LoginFragment mLoginFragment;
+    private MyWalletFragment mMyWalletFragment;
 
     //private ArrayList<SimpleTarget> targetArrayList;
 
@@ -49,6 +51,7 @@ public class MainActivityPresenter implements MainActivityContract.Presenter {
 
         mLoginFragment = new LoginFragment();
         mMainFragment = new MainFragment();
+        mMyWalletFragment = new MyWalletFragment();
 
         myApplication = MyApplication.getInstance();
         //targetArrayList = new ArrayList<>();
@@ -87,6 +90,11 @@ public class MainActivityPresenter implements MainActivityContract.Presenter {
             mView.changeTitle("");
             mView.showBell();
             mView.hideExit();
+        }
+        else if (getCurrentFragment() instanceof MyWalletFragment) {
+            mView.changeTitle("My 지갑");
+            mView.hideBell();
+            mView.showExit();
         }
     }
 
@@ -188,6 +196,12 @@ public class MainActivityPresenter implements MainActivityContract.Presenter {
     @Override
     public void clickBack() {
 
+
+        if (mDrawerLayout.isDrawerOpen(GravityCompat.END)) {
+            mView.hideDrawerLayout();
+            return;
+        }
+
         List fragmentList = mFragmentManager.getFragments();
         for (int i = 0; i < fragmentList.size(); i++) {
             if (fragmentList.get(i) instanceof Register_ViewAllTermsConditionsFragment) {
@@ -201,10 +215,7 @@ public class MainActivityPresenter implements MainActivityContract.Presenter {
             return;
         }
 
-        if (mDrawerLayout.isDrawerOpen(GravityCompat.END)) {
-            mView.hideDrawerLayout();
-            return;
-        }
+
 
         exitApp();
     }
@@ -280,7 +291,14 @@ public class MainActivityPresenter implements MainActivityContract.Presenter {
      */
     @Override
     public void clickMyWallet() {
-
+        mView.hideDrawerLayout();
+        setDefaultMainStack();
+        //프래그먼트 이동
+        FragmentTransaction fragmentTransaction = mFragmentManager.beginTransaction();
+        fragmentTransaction.setCustomAnimations(R.anim.fade_in, 0, 0, R.anim.fade_out);
+        fragmentTransaction.replace(R.id.flFragmentContainer, mMyWalletFragment, MyWalletFragment.class.getName());
+        fragmentTransaction.addToBackStack(MyWalletFragment.class.getName());
+        fragmentTransaction.commit();
     }
 
     /**
