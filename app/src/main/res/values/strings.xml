@@ -69,6 +69,32 @@
     <string name="register_success_middleText">더치페이에 가입하신 것을 환영합니다.</string>
     <string name="register_success_lastText">이제부터 더치페이의 모든 서비스를\n사용하실 수 있습니다.</string>
 
+    <!--개인결제-->
+    <string name="solopay_titleText">결제번호로 읽기</string>
+    <string name="solopay_buttonText">결제정보 확인하기</string>
+
+    <!--개인결제 Dialog-->
+    <string name="solopay_payment_dialog_titleText">더치머니 결제</string>
+    <string name="solopay_payment_dialog_topViewText">결제 금액</string>
+    <string name="solopay_payment_dialog_bottomViewText">My 더치머니</string>
+    <string name="solopay_payment_dialog_infoText">결제하시겠습니까?</string>
+    <string name="solopay_payment_dialog_ButtonText">확인</string>
+
+    <!--머니충전 Dialog-->
+    <string name="solopay_chargeMoney_dialog_titleText">더치머니 충전</string>
+    <string name="solopay_chargeMoney_dialog_topViewText">My 더치머니</string>
+    <string name="solopay_chargeMoney_dialog_chargeAccountText">계좌충전</string>
+    <string name="solopay_chargeMoney_dialog_chargeCardText">카드충전</string>
+    <string name="solopay_chargeMoney_dialog_bottomViewText">충전하실 금액을 입력하세요.</string>
+    <string name="solopay_chargeMoney_dialog_accountInfoText">등록된 대표계좌로 충전됩니다.</string>
+    <string name="solopay_chargeMoney_dialog_cardInfoText">등록된 대표카드로 충전됩니다.</string>
+    <string name="solopay_chargeMoney_dialog_okButtonText">확인</string>
+    <string name="solopay_chargeMoney_dialog_cancelButtonText">취소</string>
+
+
+    <!--My 그룹-->
+    <string name="myGroup_buttonText">그룹 추가하기</string>
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

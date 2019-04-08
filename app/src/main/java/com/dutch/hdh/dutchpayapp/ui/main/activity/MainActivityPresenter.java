@@ -12,6 +12,7 @@ import com.dutch.hdh.dutchpayapp.MyApplication;
 import com.dutch.hdh.dutchpayapp.R;
 import com.dutch.hdh.dutchpayapp.ui.login.LoginFragment;
 import com.dutch.hdh.dutchpayapp.ui.main.fragment.MainFragment;
+import com.dutch.hdh.dutchpayapp.ui.mygroup.main.MyGroup_MainFragment;
 import com.dutch.hdh.dutchpayapp.ui.register.allview.Register_ViewAllTermsConditionsFragment;
 import com.dutch.hdh.dutchpayapp.ui.register.form.Register_FormFragment;
 import com.dutch.hdh.dutchpayapp.ui.register.password.Register_PaymentPasswordFragment;
@@ -81,6 +82,12 @@ public class MainActivityPresenter implements MainActivityContract.Presenter {
 
         else if(getCurrentFragment() instanceof SoloPayFragment){
             mView.changeTitle("결제");
+            mView.hideBell();
+            mView.showExit();
+        }
+
+        else if(getCurrentFragment() instanceof MyGroup_MainFragment){
+            mView.changeTitle("My 그룹");
             mView.hideBell();
             mView.showExit();
         }
@@ -227,6 +234,10 @@ public class MainActivityPresenter implements MainActivityContract.Presenter {
     public void clickLogin() {
         //메뉴 닫기 , 프래그먼트 닫기
         mView.hideDrawerLayout();
+
+        if (getCurrentFragment() instanceof LoginFragment)
+            return;
+
         setDefaultMainStack();
 
         //프래그먼트 이동
@@ -244,8 +255,11 @@ public class MainActivityPresenter implements MainActivityContract.Presenter {
     public void clickRegister() {
         //메뉴 닫기 , 프래그먼트 닫기
         mView.hideDrawerLayout();
-        setDefaultMainStack();
 
+        if (getCurrentFragment() instanceof Register_TermsConditionsAgreementFragment)
+            return;
+
+        setDefaultMainStack();
         //프래그먼트 이동
         FragmentTransaction fragmentTransaction = mFragmentManager.beginTransaction();
         fragmentTransaction.setCustomAnimations(R.anim.fade_in, 0, 0, R.anim.fade_out);
@@ -259,7 +273,21 @@ public class MainActivityPresenter implements MainActivityContract.Presenter {
      */
     @Override
     public void clickSolopayStart() {
+        //메뉴 닫기 , 프래그먼트 닫기
+        mView.hideDrawerLayout();
 
+        if (getCurrentFragment() instanceof SoloPayFragment)
+            return;
+
+        setDefaultMainStack();
+
+        //프래그먼트 이동
+        FragmentTransaction fragmentTransaction = mFragmentManager.beginTransaction();
+        fragmentTransaction.setCustomAnimations(R.anim.fade_in, 0, 0, R.anim.fade_out);
+        SoloPayFragment soloPayFragment = new SoloPayFragment();
+        fragmentTransaction.replace(R.id.flFragmentContainer, soloPayFragment, SoloPayFragment.class.getName());
+        fragmentTransaction.addToBackStack(SoloPayFragment.class.getName());
+        fragmentTransaction.commit();
     }
 
     /**
@@ -283,7 +311,21 @@ public class MainActivityPresenter implements MainActivityContract.Presenter {
      */
     @Override
     public void clickMyGroup() {
+        //메뉴 닫기 , 프래그먼트 닫기
+        mView.hideDrawerLayout();
 
+        if (getCurrentFragment() instanceof MyGroup_MainFragment)
+            return;
+
+        setDefaultMainStack();
+
+        //프래그먼트 이동
+        FragmentTransaction fragmentTransaction = mFragmentManager.beginTransaction();
+        fragmentTransaction.setCustomAnimations(R.anim.fade_in, 0, 0, R.anim.fade_out);
+        MyGroup_MainFragment myGroupFragment = new MyGroup_MainFragment();
+        fragmentTransaction.replace(R.id.flFragmentContainer, myGroupFragment, SoloPayFragment.class.getName());
+        fragmentTransaction.addToBackStack(SoloPayFragment.class.getName());
+        fragmentTransaction.commit();
     }
 
     /**

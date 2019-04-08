@@ -18,7 +18,7 @@ import com.dutch.hdh.dutchpayapp.ui.solopay.SoloPayFragment;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainFragmentPresenter implements MainFragmentContract.Presenter{
+public class MainFragmentPresenter implements MainFragmentContract.Presenter {
 
     private MainFragmentContract.View mView;
     private Context mContext;
@@ -41,7 +41,7 @@ public class MainFragmentPresenter implements MainFragmentContract.Presenter{
      */
     @Override
     public void initLoginState() {
-        mView.showUserInfo(myApplication.getUserInfo().getUserName(), myApplication.getUserInfo().getUserMoney() , myApplication.getUserInfo().isUserState());
+        mView.showUserInfo(myApplication.getUserInfo().getUserName(), myApplication.getUserInfo().getUserMoney(), myApplication.getUserInfo().isUserState());
     }
 
     /**
@@ -64,7 +64,7 @@ public class MainFragmentPresenter implements MainFragmentContract.Presenter{
      * 개인결제 시작하기 클릭 이벤트 처리
      */
     @Override
-    public void clickPayment() {
+    public void clickSolopay() {
         //프래그먼트 이동
         FragmentTransaction fragmentTransaction = mFragmentManager.beginTransaction();
         fragmentTransaction.setCustomAnimations(R.anim.fade_in, 0, 0, R.anim.fade_out);

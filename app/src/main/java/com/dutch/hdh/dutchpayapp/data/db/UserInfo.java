@@ -4,34 +4,56 @@ import com.google.gson.annotations.SerializedName;
 
 public class UserInfo {
 
-    @SerializedName("userEmail")
+    @SerializedName("user_Code")
+    private String userCode;
+
+    @SerializedName("email")
     private String userEmail;
 
-    @SerializedName("userPassword")
-    private String userPassword;
-
-    @SerializedName("userPaymentPassword")
-    private String userPaymentPassword;
-
-    @SerializedName("userName")
+    @SerializedName("user_Name")
     private String userName;
 
-    @SerializedName("userRN")
-    private int userRN;
+    @SerializedName("security_Number")
+    private String userSecurityNumber;
 
-    @SerializedName("userGender")
-    private int userGender;
-
-    @SerializedName("userPhone")
+    @SerializedName("phone")
     private String userPhone;
 
-    @SerializedName("userMoney")
+    @SerializedName("join_Type")
+    private String userJoinType;
+
+    @SerializedName("login_Automatic")
+    private String userLoginAutomatic;
+
+    @SerializedName("status")
+    private String userStatus;
+
+    @SerializedName("easy_Pwd")
+    private String userEasyPassword;
+
+    @SerializedName("user_Pwd")
+    private String userPassword;
+
+    @SerializedName("start_Date")
+    private String userStartDate;
+
+    @SerializedName("modify_Date")
+    private String userModifyDate;
+
     private int userMoney;
 
     private boolean userState;
 
     public UserInfo() {
 
+    }
+
+    public String getUserCode() {
+        return userCode;
+    }
+
+    public void setUserCode(String userCode) {
+        this.userCode = userCode;
     }
 
     public String getUserEmail() {
@@ -42,22 +64,6 @@ public class UserInfo {
         this.userEmail = userEmail;
     }
 
-    public String getUserPassword() {
-        return userPassword;
-    }
-
-    public void setUserPassword(String userPassword) {
-        this.userPassword = userPassword;
-    }
-
-    public String getUserPaymentPassword() {
-        return userPaymentPassword;
-    }
-
-    public void setUserPaymentPassword(String userPaymentPassword) {
-        this.userPaymentPassword = userPaymentPassword;
-    }
-
     public String getUserName() {
         return userName;
     }
@@ -66,20 +72,12 @@ public class UserInfo {
         this.userName = userName;
     }
 
-    public int getUserRN() {
-        return userRN;
+    public String getUserSecurityNumber() {
+        return userSecurityNumber;
     }
 
-    public void setUserRN(int userRN) {
-        this.userRN = userRN;
-    }
-
-    public int getUserGender() {
-        return userGender;
-    }
-
-    public void setUserGender(int userGender) {
-        this.userGender = userGender;
+    public void setUserSecurityNumber(String userSecurityNumber) {
+        this.userSecurityNumber = userSecurityNumber;
     }
 
     public String getUserPhone() {
@@ -90,12 +88,60 @@ public class UserInfo {
         this.userPhone = userPhone;
     }
 
-    public int getUserMoney() {
-        return userMoney;
+    public String getUserJoinType() {
+        return userJoinType;
     }
 
-    public void setUserMoney(int userMoney) {
-        this.userMoney = userMoney;
+    public void setUserJoinType(String userJoinType) {
+        this.userJoinType = userJoinType;
+    }
+
+    public String getUserLoginAutomatic() {
+        return userLoginAutomatic;
+    }
+
+    public void setUserLoginAutomatic(String userLoginAutomatic) {
+        this.userLoginAutomatic = userLoginAutomatic;
+    }
+
+    public String getUserStatus() {
+        return userStatus;
+    }
+
+    public void setUserStatus(String userStatus) {
+        this.userStatus = userStatus;
+    }
+
+    public String getUserEasyPassword() {
+        return userEasyPassword;
+    }
+
+    public void setUserEasyPassword(String userEasyPassword) {
+        this.userEasyPassword = userEasyPassword;
+    }
+
+    public String getUserPassword() {
+        return userPassword;
+    }
+
+    public void setUserPassword(String userPassword) {
+        this.userPassword = userPassword;
+    }
+
+    public String getUserStartDate() {
+        return userStartDate;
+    }
+
+    public void setUserStartDate(String userStartDate) {
+        this.userStartDate = userStartDate;
+    }
+
+    public String getUserModifyDate() {
+        return userModifyDate;
+    }
+
+    public void setUserModifyDate(String userModifyDate) {
+        this.userModifyDate = userModifyDate;
     }
 
     public boolean isUserState() {
@@ -106,18 +152,11 @@ public class UserInfo {
         this.userState = userState;
     }
 
-    @Override
-    public String toString() {
-        return "UserInfo{" +
-                "userEmail='" + userEmail + '\'' +
-                ", userPassword='" + userPassword + '\'' +
-                ", userPaymentPassword='" + userPaymentPassword + '\'' +
-                ", userName='" + userName + '\'' +
-                ", userRN=" + userRN +
-                ", userGender=" + userGender +
-                ", userPhone='" + userPhone + '\'' +
-                ", userMoney=" + userMoney +
-                ", userState=" + userState +
-                '}';
+    public int getUserMoney() {
+        return userMoney;
+    }
+
+    public void setUserMoney(int userMoney) {
+        this.userMoney = userMoney;
     }
 }

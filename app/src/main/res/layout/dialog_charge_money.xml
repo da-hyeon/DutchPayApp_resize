@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="317.71dp"
+        android:layout_height="292.57dp"
+        android:background="@drawable/outline_round_dialog"
+        android:orientation="vertical">
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent">
+
+            <TextView
+                android:id="@+id/tvTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="23.42dp"
+                android:fontFamily="@font/malgunfont"
+                android:includeFontPadding="false"
+                android:text="@string/solopay_chargeMoney_dialog_titleText"
+                android:textColor="#101010"
+                android:textSize="14.85dp"
+                android:textStyle="bold"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <LinearLayout
+                android:layout_width="133.71dp"
+                android:layout_height="18.57dp"
+                app:layout_constraintBottom_toBottomOf="@+id/tvTitle"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/tvTitle">
+
+                <Button
+                    android:id="@+id/btChargeAccount"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@color/buttonSelect"
+                    android:fontFamily="@font/malgunfont"
+                    android:gravity="center"
+                    android:includeFontPadding="false"
+                    android:text="@string/solopay_chargeMoney_dialog_chargeAccountText"
+                    android:textColor="#ffffff"
+                    android:textSize="10dp"
+                    android:textStyle="bold" />
+
+                <Button
+                    android:id="@+id/btChargeCard"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@color/buttonDefault"
+                    android:fontFamily="@font/malgunfont"
+                    android:gravity="center"
+                    android:includeFontPadding="false"
+                    android:text="@string/solopay_chargeMoney_dialog_chargeCardText"
+                    android:textColor="@color/textDefault"
+                    android:textSize="10dp"
+                    android:textStyle="bold" />
+
+
+            </LinearLayout>
+
+            <View
+                android:id="@+id/vTop"
+                android:layout_width="277.14dp"
+                android:layout_height="46.85dp"
+                android:layout_marginTop="15.42dp"
+                android:background="@drawable/outline_round_dialog_layout"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvTitle" />
+
+            <TextView
+                android:id="@+id/tvTopText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="12dp"
+                android:fontFamily="@font/malgunfont"
+                android:includeFontPadding="false"
+                android:text="@string/solopay_chargeMoney_dialog_topViewText"
+                android:textColor="#2a2a2a"
+                android:textSize="13.71dp"
+                app:layout_constraintBottom_toBottomOf="@+id/vTop"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/vTop" />
+
+            <TextView
+                android:id="@+id/tvPaymentAmount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="46.57dp"
+                android:fontFamily="@font/malgunfont"
+                android:includeFontPadding="false"
+                android:text="200,000,000원"
+                android:textColor="#2d7cff"
+                android:textSize="20dp"
+                app:layout_constraintBottom_toBottomOf="@+id/vTop"
+                app:layout_constraintLeft_toRightOf="@+id/tvTopText"
+                app:layout_constraintTop_toTopOf="@+id/vTop" />
+
+            <EditText
+                android:id="@+id/etChargeAmount"
+                android:layout_width="277.14dp"
+                android:layout_height="46.85dp"
+                android:layout_marginTop="7.71dp"
+                android:background="@drawable/outline_round_in"
+                android:fontFamily="@font/malgunfont"
+                android:hint="@string/solopay_chargeMoney_dialog_bottomViewText"
+                android:includeFontPadding="false"
+                android:inputType="number"
+                android:paddingLeft="12dp"
+                android:textSize="13.71dp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/vTop" />
+
+            <TextView
+                android:id="@+id/tvHangleText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
+                android:fontFamily="@font/malgunfont"
+                android:includeFontPadding="false"
+                android:textColor="#000000"
+                app:layout_constraintTop_toBottomOf="@+id/etChargeAmount" />
+
+
+            <TextView
+                android:id="@+id/tvInfoText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30.85dp"
+                android:text="@string/solopay_chargeMoney_dialog_accountInfoText"
+                android:textColor="#2a2a2a"
+                android:textSize="13.71dp"
+                android:textStyle="bold"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/etChargeAmount" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="41.71dp"
+                android:layout_marginTop="27.14dp"
+                android:layout_marginBottom="20dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvInfoText">
+
+                <Button
+                    android:id="@+id/btOK"
+                    android:layout_width="0dp"
+                    android:layout_height="41.71dp"
+                    android:layout_marginRight="3.71dp"
+                    android:layout_weight="1"
+                    android:background="@color/buttonSelect"
+                    android:fontFamily="@font/malgunfont"
+                    android:gravity="center"
+                    android:includeFontPadding="false"
+                    android:text="@string/solopay_chargeMoney_dialog_okButtonText"
+                    android:textColor="#ffffff"
+                    android:textSize="20dp"
+                    android:textStyle="bold" />
+
+                <Button
+                    android:id="@+id/btCancel"
+                    android:layout_width="0dp"
+                    android:layout_height="41.71dp"
+                    android:layout_marginLeft="3.71dp"
+                    android:layout_weight="1"
+                    android:background="@color/buttonDefault"
+                    android:fontFamily="@font/malgunfont"
+                    android:gravity="center"
+                    android:includeFontPadding="false"
+                    android:text="@string/solopay_chargeMoney_dialog_cancelButtonText"
+                    android:textColor="@color/textDefault"
+                    android:textSize="20dp"
+                    android:textStyle="bold" />
+
+
+            </LinearLayout>
+
+
+        </android.support.constraint.ConstraintLayout>
+
+    </LinearLayout>
+</layout>

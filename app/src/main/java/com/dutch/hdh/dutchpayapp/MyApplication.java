@@ -3,6 +3,7 @@ package com.dutch.hdh.dutchpayapp;
 import android.app.Activity;
 import android.app.Application;
 
+import com.dutch.hdh.dutchpayapp.data.db.PersonalPaymentInformation;
 import com.dutch.hdh.dutchpayapp.data.db.UserInfo;
 import com.dutch.hdh.dutchpayapp.data.util.ServerAPI;
 import com.dutch.hdh.dutchpayapp.ui.register.term.Register_TermsConditionsAgreementFragment;
@@ -28,7 +29,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class MyApplication extends Application {
     private static MyApplication appInstance;
 
-    private static final String BASE_URL = "http://kjg123kg.cafe24.com/";
+    private static final String BASE_URL = "http://dutchkor02.cafe24.com/";
     public static boolean tutorialCheck ;
     //타임아웃
     private static final int CONNECT_TIMEOUT = 15;
@@ -38,6 +39,8 @@ public class MyApplication extends Application {
     private static ServerAPI Interface;
 
     private UserInfo mUserInfo;
+    private PersonalPaymentInformation mPersonalPaymentInformation;
+
     private Register_TermsConditionsAgreementFragment mRegister_termsConditionsAgreementFragment;
     private Activity mActivity;
 
@@ -62,14 +65,26 @@ public class MyApplication extends Application {
      * UserInfo Singleton
      */
     public UserInfo getUserInfo() {
-        if (mUserInfo == null)
+        if (mUserInfo == null) {
             mUserInfo = new UserInfo();
+            mUserInfo.setUserMoney(200000);
+        }
 
         return mUserInfo;
     }
 
     public void setUserInfo(UserInfo mUserInfo) {
         this.mUserInfo = mUserInfo;
+    }
+
+    /**
+     * PersonalPaymentInformation Singleton
+     */
+    public PersonalPaymentInformation getPersonalPaymentInformation() {
+        if (mPersonalPaymentInformation == null)
+            mPersonalPaymentInformation = new PersonalPaymentInformation("금홍짬뽕" , "2019-04-04" , 300000);
+
+        return mPersonalPaymentInformation;
     }
 
     /**
@@ -173,5 +188,6 @@ public class MyApplication extends Application {
 
         return builder;
     }
+
 
 }

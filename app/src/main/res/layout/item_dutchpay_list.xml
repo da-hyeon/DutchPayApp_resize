@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable
+            name="item"
+            type="com.dutch.hdh.dutchpayapp.ui.dutchpay.start.TempStartListModel"/>
+    </data>
+
+<android.support.constraint.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#ffffff">
+
+    <TextView
+        android:id="@+id/textView49"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="17dp"
+        android:layout_marginTop="12dp"
+        android:fontFamily="@font/malgunfont"
+        android:includeFontPadding="false"
+        android:text="[BAR 홍대점]"
+        android:textColor="#2a2a2a"
+        android:textScaleX="1.1"
+        android:textSize="12.6dp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView50"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/malgunfont"
+        android:includeFontPadding="false"
+        android:text="국민카드"
+        android:textColor="#2a2a2a"
+        android:textScaleX="1.1"
+        android:textSize="12.6dp"
+        app:layout_constraintStart_toStartOf="@+id/textView49"
+        app:layout_constraintTop_toBottomOf="@+id/textView52" />
+
+    <TextView
+        android:id="@+id/textView51"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="10dp"
+        android:fontFamily="@font/malgunfont"
+        android:includeFontPadding="false"
+        android:text="50,000원"
+        android:textColor="#ff3737"
+        android:textSize="15.4dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/textView50"
+        app:layout_constraintTop_toBottomOf="@+id/textView50" />
+
+    <TextView
+        android:id="@+id/textView52"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="21dp"
+        android:fontFamily="@font/malgunfont"
+        android:includeFontPadding="false"
+        android:text="2019/04/26    18:36:28"
+        android:textColor="#2a2a2a"
+        android:textSize="10dp"
+        app:layout_constraintEnd_toStartOf="@+id/button9"
+        app:layout_constraintTop_toTopOf="@+id/button9" />
+
+    <Button
+        android:id="@+id/button9"
+        android:layout_width="10.29dp"
+        android:layout_height="33.71dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginEnd="17dp"
+        android:background="@drawable/next_arrow"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="47dp"
+        android:layout_height="18dp"
+        app:layout_constraintBottom_toBottomOf="@+id/button9"
+        app:layout_constraintEnd_toEndOf="@+id/textView52"
+        app:srcCompat="@drawable/dutchpay_1" />
+
+</android.support.constraint.ConstraintLayout>
+</layout>

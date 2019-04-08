@@ -1,15 +1,17 @@
 package com.dutch.hdh.dutchpayapp.base;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 
 import com.dutch.hdh.dutchpayapp.ui.main.activity.MainActivity;
+import com.kinda.alert.KAlertDialog;
 
 
-public class BaseFragment extends Fragment {
+public class BaseFragment extends Fragment implements BaseContract.View{
 
     private MainActivity mMainActivity;
 

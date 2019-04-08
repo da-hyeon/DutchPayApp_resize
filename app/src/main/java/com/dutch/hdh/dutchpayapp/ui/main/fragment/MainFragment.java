@@ -66,5 +66,4 @@ public class MainFragment extends BaseFragment implements MainFragmentContract.V
              mBinding.layoutNoneLogin.setVisibility(View.VISIBLE);
         }
     }
-
 }

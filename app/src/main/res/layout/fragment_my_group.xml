@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/layoutBG">
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginLeft="17.14dp"
+            android:layout_marginTop="22dp"
+            android:layout_marginRight="17.14dp"
+            android:layout_marginBottom="10dp"
+            app:layout_constraintBottom_toTopOf="@+id/vBottom"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ListView
+                android:id="@+id/lvMyGroup"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:dividerHeight="10dp"
+                android:divider="@color/layoutBG"/>
+
+
+        </android.support.constraint.ConstraintLayout>
+
+        <View
+            android:id="@+id/vBottom"
+            android:layout_width="match_parent"
+            android:layout_height="84dp"
+            android:background="#ffffff"
+            app:layout_constraintBottom_toBottomOf="parent" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="47.42dp"
+            android:layout_marginLeft="17.14dp"
+            android:layout_marginRight="17.14dp"
+            android:background="@color/buttonSelect"
+            android:text="@string/myGroup_buttonText"
+            android:textColor="#ffffff"
+            android:textSize="20dp"
+            android:fontFamily="@font/malgunfont"
+            android:includeFontPadding="false"
+            app:layout_constraintBottom_toBottomOf="@id/vBottom"
+            app:layout_constraintTop_toTopOf="@+id/vBottom" />
+
+    </android.support.constraint.ConstraintLayout>
+</layout>
