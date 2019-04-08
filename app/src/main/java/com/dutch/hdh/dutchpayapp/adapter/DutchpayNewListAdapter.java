@@ -7,10 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.dutch.hdh.dutchpayapp.databinding.ItemDutchpayListDetailBinding;
 import com.dutch.hdh.dutchpayapp.databinding.ItemDutchpayNewMemberBinding;
-import com.dutch.hdh.dutchpayapp.ui.dutchpay.detail.DutchpayDetailContract;
-import com.dutch.hdh.dutchpayapp.ui.dutchpay.detail.TempDetailListModel;
 import com.dutch.hdh.dutchpayapp.ui.dutchpay.newdutchpay.DutchpayNewContract;
 import com.dutch.hdh.dutchpayapp.ui.dutchpay.newdutchpay.TempNewListModel;
 
@@ -30,6 +27,13 @@ public class DutchpayNewListAdapter extends RecyclerView.Adapter<DutchpayNewList
 
         void bind(TempNewListModel item) {
             mBinding.setItem(item);
+
+            if(lastItemCheck(item)){
+                mBinding.clMember.setVisibility(View.INVISIBLE);
+                mBinding.btNext.setVisibility(View.VISIBLE);
+
+                mBinding.btNext.setOnClickListener(v -> mDNewPresenter.onNextClick());
+            }
 
             //mBinding.getRoot().setOnClickListener(v -> mDSatrtPresenter.onItemClick(item));
         }
@@ -63,5 +67,13 @@ public class DutchpayNewListAdapter extends RecyclerView.Adapter<DutchpayNewList
     @Override
     public int getItemCount() {
         return mList.size();
+    }
+
+    private boolean lastItemCheck(TempNewListModel item){
+        if(mList.get(getItemCount()-1).equals(item)) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }

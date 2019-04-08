@@ -1,4 +1,6 @@
-package com.dutch.hdh.dutchpayapp.ui.dutchpay.detail;
+package com.dutch.hdh.dutchpayapp.ui.dutchpay.startdetail;
+
+import android.support.v4.app.FragmentManager;
 
 public interface DutchpayDetailContract {
 
@@ -7,6 +9,7 @@ public interface DutchpayDetailContract {
         //어댑터 초기 설정
         void adapterInit();
 
+        FragmentManager getFragmentManager();
     }
 
     interface Presenter{

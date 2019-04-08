@@ -4,23 +4,22 @@ import android.databinding.ObservableArrayList;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 
 import com.dutch.hdh.dutchpayapp.databinding.ItemDutchpayListDetailBinding;
-import com.dutch.hdh.dutchpayapp.ui.dutchpay.startdetail.DutchpayDetailContract;
+import com.dutch.hdh.dutchpayapp.ui.dutchpay.photodetail.DutchpayPhotoDetailContract;
 import com.dutch.hdh.dutchpayapp.ui.dutchpay.startdetail.TempDetailListModel;
 
-public class DutchpayDetailListAdapter extends RecyclerView.Adapter<DutchpayDetailListAdapter.dDetailViewHolder> {
+public class DutchpayPhotoDetailListAdapter extends RecyclerView.Adapter<DutchpayPhotoDetailListAdapter.dDetailPhotoViewHolder> {
 
     private ObservableArrayList<TempDetailListModel> mList;
-    private DutchpayDetailContract.Presenter mDDetailPresenter;
+    private DutchpayPhotoDetailContract.Presenter mDPhotoPresenter;
 
-    public class dDetailViewHolder extends RecyclerView.ViewHolder{
+    public class dDetailPhotoViewHolder extends RecyclerView.ViewHolder{
 
         ItemDutchpayListDetailBinding mBinding;
 
-        public dDetailViewHolder(ItemDutchpayListDetailBinding binding) {
+        public dDetailPhotoViewHolder(ItemDutchpayListDetailBinding binding) {
             super(binding.getRoot());
             this.mBinding = binding;
         }
@@ -28,21 +27,13 @@ public class DutchpayDetailListAdapter extends RecyclerView.Adapter<DutchpayDeta
         void bind(TempDetailListModel item) {
             mBinding.setItem(item);
 
-            if(item.isImageFlag()) {
-                mBinding.ivUserIcon.setVisibility(View.VISIBLE);
-                mBinding.tvUserName.setVisibility(View.INVISIBLE);
-            } else {
-                mBinding.tvUserName.setVisibility(View.VISIBLE);
-                mBinding.ivUserIcon.setVisibility(View.INVISIBLE);
-            }
-
             //mBinding.getRoot().setOnClickListener(v -> mDSatrtPresenter.onItemClick(item));
         }
     }
 
-    public DutchpayDetailListAdapter(ObservableArrayList<TempDetailListModel> mList, DutchpayDetailContract.Presenter mDDetailPresenter) {
+    public DutchpayPhotoDetailListAdapter(ObservableArrayList<TempDetailListModel> mList, DutchpayPhotoDetailContract.Presenter mDPhotoPresenter) {
         this.mList = mList;
-        this.mDDetailPresenter = mDDetailPresenter;
+        this.mDPhotoPresenter = mDPhotoPresenter;
     }
 
     public void setItem(ObservableArrayList<TempDetailListModel> list){
@@ -53,14 +44,14 @@ public class DutchpayDetailListAdapter extends RecyclerView.Adapter<DutchpayDeta
 
     @NonNull
     @Override
-    public dDetailViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+    public dDetailPhotoViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         ItemDutchpayListDetailBinding binding = ItemDutchpayListDetailBinding.inflate(LayoutInflater.from(viewGroup.getContext()),viewGroup,false);
 
-        return new dDetailViewHolder(binding);
+        return new dDetailPhotoViewHolder(binding);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull dDetailViewHolder dDetailViewHolder, int i) {
+    public void onBindViewHolder(@NonNull dDetailPhotoViewHolder dDetailViewHolder, int i) {
         TempDetailListModel item = mList.get(i);
         dDetailViewHolder.bind(item);
     }

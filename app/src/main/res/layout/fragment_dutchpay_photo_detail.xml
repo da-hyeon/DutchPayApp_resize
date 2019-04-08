@@ -1,4 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
+<layout >
+    <data>
+        <import type="android.databinding.ObservableArrayList"/>
+        <import type="com.dutch.hdh.dutchpayapp.ui.dutchpay.startdetail.TempDetailListModel"/>
+
+        <variable
+            name="memberList"
+            type="ObservableArrayList&lt;TempDetailListModel&gt;"/>
+
+        <variable
+            name="Fragment"
+            type="com.dutch.hdh.dutchpayapp.ui.dutchpay.photodetail.DutchpayPhotoDetailFragment"/>
+    </data>
+
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -177,6 +191,7 @@
             app:layout_constraintTop_toBottomOf="@+id/textView26" />
 
         <android.support.v7.widget.RecyclerView
+            android:id="@+id/rvMemberList"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginStart="17dp"
@@ -190,6 +205,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView30" />
+
     </android.support.constraint.ConstraintLayout>
 
     <Button
@@ -212,3 +228,4 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 </android.support.constraint.ConstraintLayout>
+</layout>

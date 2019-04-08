@@ -1,136 +1,166 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#f2f0f1">
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable
+            name="Fragment"
+            type="com.dutch.hdh.dutchpayapp.ui.dutchpay.newdutchpayinfo.DutchpayNewInfoFragment"/>
+        <variable
+            name="Presenter"
+            type="com.dutch.hdh.dutchpayapp.ui.dutchpay.newdutchpayinfo.DutchpayNewInfoPresenter"/>
+    </data>
 
-    <TextView
-        android:id="@+id/textView74"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="17dp"
-        android:layout_marginTop="21dp"
-        android:fontFamily="@font/malgunfont"
-        android:includeFontPadding="false"
-        android:text="더치페이 정보 입력"
-        android:textColor="#2a2a2a"
-        android:textSize="17.1dp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
-        android:id="@+id/editText7"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="17dp"
-        android:layout_marginTop="18dp"
-        android:layout_marginEnd="17dp"
-        android:background="@drawable/box9"
-        android:ems="10"
-        android:hint="더치페이 거래내용을 입력하세요"
-        android:fontFamily="@font/malgunfont"
-        android:includeFontPadding="false"
-        android:inputType="textPersonName"
-        android:paddingStart="17dp"
-        android:paddingTop="40dp"
-        android:paddingEnd="17dp"
-        android:paddingBottom="10dp"
-        android:textColor="#333333"
-        android:textSize="17.1dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView74" />
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#f2f0f1">
 
-    <ImageView
-        android:id="@+id/imageView16"
-        android:layout_width="44.57dp"
-        android:layout_height="18.57dp"
-        android:layout_marginStart="17dp"
-        android:layout_marginTop="15dp"
-        app:layout_constraintStart_toStartOf="@+id/editText7"
-        app:layout_constraintTop_toTopOf="@+id/editText7"
-        app:srcCompat="@drawable/dutchpay4_1" />
+        <Button
+            android:id="@+id/btNext2"
+            android:layout_width="0dp"
+            android:layout_height="47.43dp"
+            android:layout_marginBottom="16dp"
+            android:background="#cfcfcf"
+            android:fontFamily="@font/malgunfont"
+            android:includeFontPadding="false"
+            android:text="다음"
+            android:textColor="#6d6b6c"
+            android:textSize="17dp"
+            android:textStyle="bold"
+            android:visibility="visible"
+            android:onClick="@{()-> Presenter.onNextClick()}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/editText9"
+            app:layout_constraintStart_toStartOf="@+id/editText9" />
 
-    <EditText
-        android:id="@+id/editText8"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/box9"
-        android:ems="10"
-        android:fontFamily="@font/malgunfont"
-        android:hint="더치페이 거래일자를 입력하세요"
-        android:includeFontPadding="false"
-        android:inputType="textPersonName"
-        android:paddingStart="17dp"
-        android:paddingTop="40dp"
-        android:paddingEnd="17dp"
-        android:paddingBottom="10dp"
-        android:textColor="#333333"
-        android:textSize="17.1dp"
-        app:layout_constraintEnd_toEndOf="@+id/editText7"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="@+id/editText7"
-        app:layout_constraintTop_toBottomOf="@+id/editText7" />
+        <TextView
+            android:id="@+id/textView74"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="17dp"
+            android:layout_marginTop="21dp"
+            android:fontFamily="@font/malgunfont"
+            android:includeFontPadding="false"
+            android:text="더치페이 정보 입력"
+            android:textColor="#2a2a2a"
+            android:textSize="17.1dp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
-        android:id="@+id/imageView17"
-        android:layout_width="44.57dp"
-        android:layout_height="18.57dp"
-        android:layout_marginStart="17dp"
-        android:layout_marginTop="15dp"
-        app:layout_constraintStart_toStartOf="@+id/editText8"
-        app:layout_constraintTop_toTopOf="@+id/editText8"
-        app:srcCompat="@drawable/dutchpay4_2" />
+        <EditText
+            android:id="@+id/editText7"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="17dp"
+            android:layout_marginTop="18dp"
+            android:layout_marginEnd="17dp"
+            android:background="@drawable/box9"
+            android:ems="10"
+            android:fontFamily="@font/malgunfont"
+            android:hint="더치페이 거래내용을 입력하세요"
+            android:includeFontPadding="false"
+            android:inputType="textPersonName"
+            android:paddingStart="17dp"
+            android:paddingTop="40dp"
+            android:paddingEnd="17dp"
+            android:paddingBottom="10dp"
+            android:textColor="#333333"
+            android:textSize="17.1dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView74" />
 
-    <EditText
-        android:id="@+id/editText9"
-        android:layout_width="0dp"
-        android:layout_height="141.13dp"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/box9"
-        android:ems="10"
-        android:fontFamily="@font/malgunfont"
-        android:hint="더치페이 요청 메세지를 입력하세요"
-        android:includeFontPadding="false"
-        android:inputType="textPersonName"
-        android:paddingStart="17dp"
-        android:paddingTop="40dp"
-        android:paddingEnd="17dp"
-        android:paddingBottom="10dp"
-        android:textColor="#333333"
-        android:textSize="17.1dp"
-        app:layout_constraintEnd_toEndOf="@+id/editText7"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="@+id/editText7"
-        app:layout_constraintTop_toBottomOf="@+id/editText8" />
+        <ImageView
+            android:id="@+id/imageView16"
+            android:layout_width="44.57dp"
+            android:layout_height="18.57dp"
+            android:layout_marginStart="17dp"
+            android:layout_marginTop="15dp"
+            app:layout_constraintStart_toStartOf="@+id/editText7"
+            app:layout_constraintTop_toTopOf="@+id/editText7"
+            app:srcCompat="@drawable/dutchpay4_1" />
 
-    <ImageView
-        android:id="@+id/imageView26"
-        android:layout_width="55.71dp"
-        android:layout_height="18.57dp"
-        android:layout_marginStart="17dp"
-        android:layout_marginTop="15dp"
-        app:layout_constraintStart_toStartOf="@+id/editText9"
-        app:layout_constraintTop_toTopOf="@+id/editText9"
-        app:srcCompat="@drawable/dutchpay4_3" />
+        <EditText
+            android:id="@+id/editText8"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/box9"
+            android:ems="10"
+            android:fontFamily="@font/malgunfont"
+            android:hint="더치페이 거래일자를 입력하세요"
+            android:includeFontPadding="false"
+            android:inputType="date"
+            android:paddingStart="17dp"
+            android:paddingTop="40dp"
+            android:paddingEnd="17dp"
+            android:paddingBottom="10dp"
+            android:textColor="#333333"
+            android:textSize="17.1dp"
+            app:layout_constraintEnd_toEndOf="@+id/editText7"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="@+id/editText7"
+            app:layout_constraintTop_toBottomOf="@+id/editText7" />
 
-    <TextView
-        android:id="@+id/textView75"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="10dp"
-        android:layout_marginBottom="10dp"
-        android:text="0/80byte"
-        android:textColor="#2a2a2a"
-        android:textSize="9.14dp"
-        android:fontFamily="@font/malgunfont"
-        android:includeFontPadding="false"
-        app:layout_constraintBottom_toBottomOf="@+id/editText9"
-        app:layout_constraintEnd_toEndOf="@+id/editText9" />
+        <ImageView
+            android:id="@+id/imageView17"
+            android:layout_width="44.57dp"
+            android:layout_height="18.57dp"
+            android:layout_marginStart="17dp"
+            android:layout_marginTop="15dp"
+            app:layout_constraintStart_toStartOf="@+id/editText8"
+            app:layout_constraintTop_toTopOf="@+id/editText8"
+            app:srcCompat="@drawable/dutchpay4_2" />
 
-</android.support.constraint.ConstraintLayout>
+        <EditText
+            android:id="@+id/editText9"
+            android:layout_width="0dp"
+            android:layout_height="141.13dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/box9"
+            android:ems="10"
+            android:fontFamily="@font/malgunfont"
+            android:hint="더치페이 요청 메세지를 입력하세요"
+            android:includeFontPadding="false"
+            android:inputType="textMultiLine"
+            android:paddingStart="17dp"
+            android:paddingTop="40dp"
+            android:paddingEnd="17dp"
+            android:paddingBottom="23dp"
+            android:textColor="#333333"
+            android:textSize="17.1dp"
+            app:layout_constraintEnd_toEndOf="@+id/editText7"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="@+id/editText7"
+            app:layout_constraintTop_toBottomOf="@+id/editText8" />
+
+        <ImageView
+            android:id="@+id/imageView26"
+            android:layout_width="55.71dp"
+            android:layout_height="18.57dp"
+            android:layout_marginStart="17dp"
+            android:layout_marginTop="15dp"
+            app:layout_constraintStart_toStartOf="@+id/editText9"
+            app:layout_constraintTop_toTopOf="@+id/editText9"
+            app:srcCompat="@drawable/dutchpay4_3" />
+
+        <TextView
+            android:id="@+id/textView75"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="10dp"
+            android:fontFamily="@font/malgunfont"
+            android:includeFontPadding="false"
+            android:text="0/80byte"
+            android:textColor="#2a2a2a"
+            android:textSize="9.14dp"
+            app:layout_constraintBottom_toBottomOf="@+id/editText9"
+            app:layout_constraintEnd_toEndOf="@+id/editText9" />
+
+    </android.support.constraint.ConstraintLayout>
+</layout>

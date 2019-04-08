@@ -1,4 +1,4 @@
-package com.dutch.hdh.dutchpayapp.ui.dutchpay.detail;
+package com.dutch.hdh.dutchpayapp.ui.dutchpay.photo;
 
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
@@ -11,23 +11,22 @@ import android.view.ViewGroup;
 
 import com.dutch.hdh.dutchpayapp.R;
 import com.dutch.hdh.dutchpayapp.base.BaseFragment;
-import com.dutch.hdh.dutchpayapp.databinding.FragmentDutchpayListDetailBinding;
+import com.dutch.hdh.dutchpayapp.databinding.FragmentDutchpayPhotoBinding;
 import com.dutch.hdh.dutchpayapp.ui.dutchpay.start.ItemDecoration;
 
-public class DutchpayDetailFragment extends BaseFragment implements DutchpayDetailContract.View{
+public class DutchpayPhotoFragment extends BaseFragment implements DutchpayPhotoContract.View {
 
-    FragmentDutchpayListDetailBinding mBinding;
-    DutchpayDetailPresenter mPresenter;
+    FragmentDutchpayPhotoBinding mBinding;
+    DutchpayPhotoPresenter mPresenter;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_dutchpay_list_detail,container,false);
-        mPresenter = new DutchpayDetailPresenter(this);
+        mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_dutchpay_photo,container,false);
         mBinding.setFragment(this);
-        mBinding.setPresenter(mPresenter);
+        mPresenter = new DutchpayPhotoPresenter(this);
 
-        //리스트 초기 생성
+        //리스트 초기
         mPresenter.listInit();
 
         return mBinding.getRoot();
@@ -36,8 +35,9 @@ public class DutchpayDetailFragment extends BaseFragment implements DutchpayDeta
     @Override
     public void adapterInit() {
         //어댑터 셋팅
-        mBinding.setMemberList(mPresenter.getmDetailList());
-        mBinding.recyclerView2.setAdapter(mPresenter.getmAdapter());
-        mBinding.recyclerView2.setLayoutManager(new LinearLayoutManager(getActivity().getApplicationContext()));
+        mBinding.setPhotoList(mPresenter.getmPhotoList());
+        mBinding.rvPhotoList.setAdapter(mPresenter.getmAdapter());
+        mBinding.rvPhotoList.setLayoutManager(new LinearLayoutManager(getActivity().getApplicationContext()));
+        mBinding.rvPhotoList.addItemDecoration(new ItemDecoration(22));
     }
 }

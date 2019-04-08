@@ -14,33 +14,36 @@
     android:background="#ffffff">
 
     <TextView
-        android:id="@+id/textView49"
+        android:id="@+id/tvShop"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="17dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="10dp"
         android:fontFamily="@font/malgunfont"
         android:includeFontPadding="false"
-        android:text="[BAR 홍대점]"
+        android:text="@{item.shop}"
         android:textColor="#2a2a2a"
         android:textScaleX="1.1"
         android:textSize="12.6dp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="[BAR 홍대점]" />
 
     <TextView
         android:id="@+id/textView50"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         android:fontFamily="@font/malgunfont"
         android:includeFontPadding="false"
-        android:text="국민카드"
+        android:text="@{item.card}"
         android:textColor="#2a2a2a"
         android:textScaleX="1.1"
         android:textSize="12.6dp"
-        app:layout_constraintStart_toStartOf="@+id/textView49"
-        app:layout_constraintTop_toBottomOf="@+id/textView52" />
+        app:layout_constraintStart_toStartOf="@+id/tvShop"
+        app:layout_constraintTop_toTopOf="@+id/textView52"
+        tools:text="국민카드" />
 
     <TextView
         android:id="@+id/textView51"
@@ -50,12 +53,13 @@
         android:layout_marginBottom="10dp"
         android:fontFamily="@font/malgunfont"
         android:includeFontPadding="false"
-        android:text="50,000원"
+        android:text="@{item.cost}"
         android:textColor="#ff3737"
         android:textSize="15.4dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="@+id/textView50"
-        app:layout_constraintTop_toBottomOf="@+id/textView50" />
+        app:layout_constraintTop_toBottomOf="@+id/textView50"
+        tools:text="50,000원" />
 
     <TextView
         android:id="@+id/textView52"
@@ -74,14 +78,14 @@
         android:id="@+id/button9"
         android:layout_width="10.29dp"
         android:layout_height="33.71dp"
-        android:layout_marginTop="25dp"
         android:layout_marginEnd="17dp"
         android:background="@drawable/next_arrow"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/imageView4"
+        android:id="@+id/ivDutchpayState"
         android:layout_width="47dp"
         android:layout_height="18dp"
         app:layout_constraintBottom_toBottomOf="@+id/button9"
