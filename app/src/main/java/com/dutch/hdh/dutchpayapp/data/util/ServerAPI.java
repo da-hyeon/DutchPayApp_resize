@@ -26,10 +26,13 @@ public interface ServerAPI {
     Call<UserInfo> getFineUser(@Query("userEmail") String userEmail, @Query("userPassword") String userPassword);
 
     /**
-     * 로그인 요청
-     *
+     * 회원가입 요청
+     * @param userName
      * @param userEmail
      * @param userPassword
+     * @param userEasyPassword
+     * @param userRN
+     * @param userPhone
      * @return
      */
     @FormUrlEncoded

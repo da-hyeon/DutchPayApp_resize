@@ -6,6 +6,8 @@ import android.app.Application;
 import com.dutch.hdh.dutchpayapp.data.db.PersonalPaymentInformation;
 import com.dutch.hdh.dutchpayapp.data.db.UserInfo;
 import com.dutch.hdh.dutchpayapp.data.util.ServerAPI;
+import com.dutch.hdh.dutchpayapp.ui.mygroup.edit.MyGroup_EditFragment;
+import com.dutch.hdh.dutchpayapp.ui.mygroup.main.MyGroup_MainFragment;
 import com.dutch.hdh.dutchpayapp.ui.register.term.Register_TermsConditionsAgreementFragment;
 
 import java.net.CookieManager;
@@ -29,8 +31,13 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class MyApplication extends Application {
     private static MyApplication appInstance;
 
-    private static final String BASE_URL = "http://dutchkor02.cafe24.com/";
+
     public static boolean tutorialCheck ;
+
+    //true = 편집 , false = 신규추가
+    public static boolean entranceGroupPath;
+
+    private static final String BASE_URL = "http://dutchkor02.cafe24.com/";
     //타임아웃
     private static final int CONNECT_TIMEOUT = 15;
     private static final int WRITE_TIMEOUT = 15;
@@ -42,6 +49,8 @@ public class MyApplication extends Application {
     private PersonalPaymentInformation mPersonalPaymentInformation;
 
     private Register_TermsConditionsAgreementFragment mRegister_termsConditionsAgreementFragment;
+    private MyGroup_EditFragment mMyGroup_EditFragment;
+
     private Activity mActivity;
 
     @Override
@@ -96,6 +105,20 @@ public class MyApplication extends Application {
 
         return mRegister_termsConditionsAgreementFragment;
     }
+
+    /**
+     * MyGroup_MainFragment Singleton
+     */
+    public MyGroup_EditFragment getMyGroup_EditFragment() {
+        if (mMyGroup_EditFragment == null)
+            mMyGroup_EditFragment = new MyGroup_EditFragment();
+
+        return mMyGroup_EditFragment;
+    }
+
+
+
+
 
     /**
      * getActivity

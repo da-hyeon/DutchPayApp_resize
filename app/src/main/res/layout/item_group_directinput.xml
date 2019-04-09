@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="74.57dp"
+        android:background="@color/layoutBG">
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+           <EditText
+               android:id="@+id/etName"
+               android:layout_width="0dp"
+               android:layout_height="36.28dp"
+               android:background="#ffffff"
+               android:layout_marginRight="19.71dp"
+               android:maxLength="4"
+               android:hint="이름을 입력하세요."
+               app:layout_constraintLeft_toLeftOf="parent"
+               android:paddingLeft="12dp"
+               android:inputType="text"
+               android:textSize="13.71dp"
+               android:fontFamily="@font/malgunfont"
+               android:includeFontPadding="false"
+               app:layout_constraintRight_toLeftOf="@+id/ibDelete"/>
+
+            <EditText
+                android:id="@+id/etPhoneNumber"
+                android:layout_width="0dp"
+                android:layout_height="36.28dp"
+                android:background="#ffffff"
+                android:paddingLeft="12dp"
+                android:inputType="number"
+                android:textSize="13.71dp"
+                android:maxLength="11"
+                android:hint="연락처를 입력하세요."
+                android:fontFamily="@font/malgunfont"
+                android:includeFontPadding="false"
+                android:layout_marginRight="19.71dp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintRight_toLeftOf="@+id/ibDelete"/>
+
+            <ImageButton
+                android:id="@+id/ibDelete"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginRight="7.14dp"
+                android:background="@color/transparent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:src="@drawable/directinput_delete"/>
+
+
+        </android.support.constraint.ConstraintLayout>
+
+    </android.support.constraint.ConstraintLayout>
+</layout>
