@@ -90,7 +90,7 @@
         android:layout_height="18dp"
         app:layout_constraintBottom_toBottomOf="@+id/button9"
         app:layout_constraintEnd_toEndOf="@+id/textView52"
-        app:srcCompat="@drawable/dutchpay_1" />
+        app:srcCompat="@drawable/dutchpay_4" />
 
 </android.support.constraint.ConstraintLayout>
 </layout>

@@ -7,6 +7,10 @@ import com.dutch.hdh.dutchpayapp.ui.dutchpay.start.TempStartListModel;
 public interface DutchpayNewContract {
     interface View{
 
+        //뷰셋팅
+        void setDutchBtColor(boolean flag);
+        void setTypeBtColor(boolean flag);
+
         //어댑터 셋팅
         void adapterInit();
 

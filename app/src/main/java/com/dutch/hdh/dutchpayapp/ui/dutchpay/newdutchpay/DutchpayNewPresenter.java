@@ -72,4 +72,18 @@ public class DutchpayNewPresenter implements DutchpayNewContract.Presenter {
         fragmentTransaction.addToBackStack(DutchpayNewInfoFragment.class.getName());
         fragmentTransaction.commit();
     }
+
+    public void onDutchClick(){
+        mView.setDutchBtColor(true);
+        mView.setTypeBtColor(false);
+
+        //리스트 내 금액 클릭 금지
+    }
+
+    public void onTypingClick(){
+        mView.setDutchBtColor(false);
+        mView.setTypeBtColor(true);
+
+        //리스트 내 금액 클릭 가능
+    }
 }

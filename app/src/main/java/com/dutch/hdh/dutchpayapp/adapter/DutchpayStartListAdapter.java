@@ -1,5 +1,6 @@
 package com.dutch.hdh.dutchpayapp.adapter;
 
+import android.databinding.BindingConversion;
 import android.databinding.ObservableArrayList;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -31,7 +32,13 @@ public class DutchpayStartListAdapter extends RecyclerView.Adapter<DutchpayStart
             mBinding.setItem(item);
 
             //더치페이 상태 반영
-            switch (item.getState()) {
+            stateToImage(item.getState());
+
+            mBinding.getRoot().setOnClickListener(v -> mDSatrtPresenter.onItemClick(item));
+        }
+
+        private void stateToImage(int state){
+            switch (state) {
                 case Constants.DUTCHPAY_STATE_WAIT:
                     mBinding.ivDutchpayState.setImageResource(R.drawable.dutchpay_4);
                     break;
@@ -45,8 +52,6 @@ public class DutchpayStartListAdapter extends RecyclerView.Adapter<DutchpayStart
                     mBinding.ivDutchpayState.setImageResource(R.drawable.dutchpay_3);
                     break;
             }
-
-            mBinding.getRoot().setOnClickListener(v -> mDSatrtPresenter.onItemClick(item));
         }
     }
 
@@ -79,4 +84,5 @@ public class DutchpayStartListAdapter extends RecyclerView.Adapter<DutchpayStart
     public int getItemCount() {
         return mList.size();
     }
+
 }
