@@ -48,7 +48,7 @@ public class Register_PaymentPasswordFragment extends BaseFragment implements Re
 
         //확인 버튼
         mBinding.viewOk.setOnClickListener(v ->
-                mPresenter.clickOKButton()
+                mPresenter.clickOKButton(getArguments())
         );
 
         return mBinding.getRoot();

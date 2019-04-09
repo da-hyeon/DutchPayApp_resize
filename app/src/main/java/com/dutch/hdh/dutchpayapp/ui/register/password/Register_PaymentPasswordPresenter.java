@@ -104,7 +104,7 @@ public class Register_PaymentPasswordPresenter implements Register_PaymentPasswo
     }
 
     @Override
-    public void clickOKButton() {
+    public void clickOKButton(Bundle bundle) {
 
         if (!isPasswordCheck) {
             if (mPassword.length() == 6) {
@@ -121,30 +121,37 @@ public class Register_PaymentPasswordPresenter implements Register_PaymentPasswo
             if (mPasswordCheck.length() == 6) {
                 if (isSame()) {
 
-                    Call<Void> userRegister = MyApplication
-                            .getRestAdapter()
-                            .setUserRegister("asd",
-                                    "asd",
-                                    "asd",
-                                    "asd" ,
-                                    "asd",
-                                    "asd");
+                    String userName = bundle.getString("userName");
+                    String userEmail = bundle.getString("userEmail");
+                    String userPassword = bundle.getString("userPassword");
+                    String userRN = bundle.getString("userRN");
+                    String userPhone = bundle.getString("userPhone");
 
-                    userRegister.enqueue(new Callback<Void>() {
+                    Call<UserInfo> userRegister = MyApplication
+                            .getRestAdapter()
+                            .setUserRegister(userName,
+                                    userEmail,
+                                    userPassword,
+                                    mPassword ,
+                                    userRN,
+                                    userPhone);
+
+                    userRegister.enqueue(new Callback<UserInfo>() {
                         @Override
-                        public void onResponse(Call<Void> call, Response<Void> response) {
+                        public void onResponse(Call<UserInfo> call, Response<UserInfo> response) {
+                            myApplication.setUserInfo(response.body());
+                            myApplication.getUserInfo().setUserState(true);
+
                             mView.showSuccessDialog("회원가입이 완료 되었습니다.");
                             myApplication.getUserInfo().setUserState(true);
                         }
 
                         @Override
-                        public void onFailure(Call<Void> call, Throwable t) {
+                        public void onFailure(Call<UserInfo> call, Throwable t) {
                             Log.d("fail" , t.getLocalizedMessage());
                             Log.d("fail" , t.getMessage());
                         }
                     });
-
-
                 } else {
                     mView.showFailDialog("비밀번호가 맞지 않습니다.");
                     clickDeleteButton();

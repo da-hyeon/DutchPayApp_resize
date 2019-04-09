@@ -53,6 +53,7 @@ public interface MainActivityContract {
         void clickSolopayStart();
         void clickDutchpayStart();
         void clickEvent();
+        void clickMyPage();
         void clickMyGroup();
         void clickMyWallet();
         void clickNotice();

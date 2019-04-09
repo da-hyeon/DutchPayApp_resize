@@ -20,6 +20,7 @@
             android:imeOptions="actionDone"
             android:lines="1"
             android:singleLine="true"
+            android:inputType="text"
             android:includeFontPadding="false"
             android:paddingLeft="18.85dp"
             android:textSize="15.42dp"
@@ -43,7 +44,7 @@
             android:background="#ffffff"
             android:divider="@color/layoutBG"
             android:dividerHeight="0.5dp"
-            app:layout_constraintBottom_toBottomOf="@+id/llWhiteBackground"
+            app:layout_constraintBottom_toTopOf="@+id/llWhiteBackground"
             app:layout_constraintTop_toBottomOf="@+id/etSearch" />
 
         <View

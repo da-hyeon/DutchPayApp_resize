@@ -18,5 +18,6 @@ public class MyGroup_EditContract {
         void clickTelephoneDirectory();
         void clickDirectInput();
         void clickBackPressed();
+        void clickComplete();
     }
 }

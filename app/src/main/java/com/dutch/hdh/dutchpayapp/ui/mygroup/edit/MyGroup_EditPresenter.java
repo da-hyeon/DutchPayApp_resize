@@ -1,18 +1,24 @@
 package com.dutch.hdh.dutchpayapp.ui.mygroup.edit;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.telephony.PhoneNumberUtils;
+import android.util.Log;
 import android.widget.ListView;
 
 import com.dutch.hdh.dutchpayapp.R;
 import com.dutch.hdh.dutchpayapp.adapter.Listview_GroupParticipantsAdapter;
 import com.dutch.hdh.dutchpayapp.data.db.DirectInputParticipants;
+import com.dutch.hdh.dutchpayapp.data.db.TelephoneDirectory;
 import com.dutch.hdh.dutchpayapp.ui.mygroup.directinput.MyGroup_DirectInputFragment;
 import com.dutch.hdh.dutchpayapp.ui.mygroup.telephonedirectory.MyGroup_TelephoneDirectoryFragment;
+import com.google.gson.Gson;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class MyGroup_EditPresenter implements MyGroup_EditContract.Presenter {
 
@@ -29,12 +35,12 @@ public class MyGroup_EditPresenter implements MyGroup_EditContract.Presenter {
         mListview_GroupParticipantsAdapter = new Listview_GroupParticipantsAdapter(mView , mContext);
     }
 
+    @SuppressLint("NewApi")
     @Override
     public void refreshData(Bundle bundle) {
         if (bundle != null) {
 
             ArrayList<DirectInputParticipants> mDirectInputParticipantsArrayList = bundle.getParcelableArrayList("itemList" );
-
             if(mDirectInputParticipantsArrayList.size() > 0) {
                     mListview_GroupParticipantsAdapter.setList(bundle.getParcelableArrayList("itemList" ));
             }
@@ -42,9 +48,18 @@ public class MyGroup_EditPresenter implements MyGroup_EditContract.Presenter {
             mDirectInputParticipantsArrayList = bundle.getParcelableArrayList("InputMember" );
             if(mDirectInputParticipantsArrayList != null) {
                 for (int i = 0; i < mDirectInputParticipantsArrayList.size(); i++) {
-                    mListview_GroupParticipantsAdapter.addItem(mDirectInputParticipantsArrayList.get(i).getName(), mDirectInputParticipantsArrayList.get(i).getPhoneNumber());
+                    mListview_GroupParticipantsAdapter.addItem(mDirectInputParticipantsArrayList.get(i).getName(), PhoneNumberUtils.formatNumber(mDirectInputParticipantsArrayList.get(i).getPhoneNumber(), Locale.getDefault().getCountry()));
                 }
             }
+
+
+            ArrayList<TelephoneDirectory> mTelephoneDirectoryArrayList = bundle.getParcelableArrayList("telephoneInputMember" );
+            if(mTelephoneDirectoryArrayList != null) {
+                for (int i = 0; i < mTelephoneDirectoryArrayList.size(); i++) {
+                    mListview_GroupParticipantsAdapter.addItem(mTelephoneDirectoryArrayList.get(i).getName(), mTelephoneDirectoryArrayList.get(i).getPhoneNumber());
+                }
+            }
+
             mListview_GroupParticipantsAdapter.notifyDataSetInvalidated();
             mView.changePersonCount(mListview_GroupParticipantsAdapter.getCount());
         }
@@ -97,5 +112,10 @@ public class MyGroup_EditPresenter implements MyGroup_EditContract.Presenter {
     @Override
     public void clickBackPressed() {
         mView.showWarningDialog("경고", "정말로 추가를 그만하시겠습니까?\n입력된 정보는 저장되지 않습니다.");
+    }
+
+    @Override
+    public void clickComplete() {
+        Log.d("data", new Gson().toJson(mListview_GroupParticipantsAdapter.getList()).toString());
     }
 }

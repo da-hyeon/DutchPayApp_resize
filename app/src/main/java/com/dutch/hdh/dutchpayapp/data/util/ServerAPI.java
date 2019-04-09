@@ -37,11 +37,29 @@ public interface ServerAPI {
      */
     @FormUrlEncoded
     @POST(Constants.USER_REGISTER_REQUEST_URL)
-    Call<Void> setUserRegister(
+    Call<UserInfo> setUserRegister(
             @Field("username") String userName,
             @Field("email") String userEmail,
             @Field("password") String userPassword,
             @Field("easypassword") String userEasyPassword,
             @Field("security_number") String userRN,
             @Field("phone") String userPhone);
+
+
+
+    /**
+     * 회원가입 요청
+     * @param userName
+     * @param userEmail
+     * @param userPassword
+     * @param userEasyPassword
+     * @param userRN
+     * @param userPhone
+     * @return
+     */
+    @FormUrlEncoded
+    @POST(Constants.USER_REGISTER_REQUEST_URL)
+    Call<UserInfo> sendUserRegister(
+            @Field("data") String data);
+
 }

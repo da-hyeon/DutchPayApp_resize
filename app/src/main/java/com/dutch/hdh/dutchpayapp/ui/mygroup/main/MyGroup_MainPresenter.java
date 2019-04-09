@@ -3,6 +3,7 @@ package com.dutch.hdh.dutchpayapp.ui.mygroup.main;
 import android.content.Context;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.widget.ListView;
 
 import com.dutch.hdh.dutchpayapp.MyApplication;
@@ -10,13 +11,16 @@ import com.dutch.hdh.dutchpayapp.R;
 import com.dutch.hdh.dutchpayapp.adapter.Listview_MyGroupAdapter;
 import com.dutch.hdh.dutchpayapp.data.db.MyGroup;
 import com.dutch.hdh.dutchpayapp.ui.mygroup.edit.MyGroup_EditFragment;
+import com.google.gson.Gson;
 
 import java.util.ArrayList;
 
 public class MyGroup_MainPresenter implements MyGroup_MainContract.Presenter{
+
     private MyGroup_MainContract.View mView;
     private Context mContext;
     private FragmentManager mFragmentManager;
+
     private Listview_MyGroupAdapter mListview_MyGroupAdapter;
     private ArrayList<MyGroup> mMyGroupArrayList;
 
@@ -48,6 +52,7 @@ public class MyGroup_MainPresenter implements MyGroup_MainContract.Presenter{
         mMyGroupArrayList.add(new MyGroup("4" , "15" , "이이"));
         mMyGroupArrayList.add(new MyGroup("4" , "15" , "이이"));
         mMyGroupArrayList.add(new MyGroup("4" , "15" , "이이"));
+
 
         mListview_MyGroupAdapter = new Listview_MyGroupAdapter(mContext, mMyGroupArrayList , mFragmentManager);
         listView.setAdapter(mListview_MyGroupAdapter);
