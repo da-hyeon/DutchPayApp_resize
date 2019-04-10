@@ -1,13 +1,17 @@
 package com.dutch.hdh.dutchpayapp.adapter;
 
+import android.databinding.BindingConversion;
 import android.databinding.ObservableArrayList;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.AppCompatImageView;
 import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ImageView;
 
 import com.dutch.hdh.dutchpayapp.R;
@@ -31,6 +35,15 @@ public class DutchpayNewListAdapter extends RecyclerView.Adapter<DutchpayNewList
 
         void bind(TempNewListModel item) {
             mBinding.setItem(item);
+
+            //직접입력 반영
+            if(item.isEditableFlag()){
+                Log.e("check //->",item.getCost());
+                mBinding.editText.setFocusableInTouchMode(true);
+                setTextChangedListener(mBinding.editText,item);
+            } else {
+                mBinding.editText.setFocusableInTouchMode(false);
+            }
 
             //뷰 셋팅
             if(!item.isCompleteFlag()) {
@@ -67,6 +80,29 @@ public class DutchpayNewListAdapter extends RecyclerView.Adapter<DutchpayNewList
 
                 if(mList.size() == 1){ //다음 버튼 제거
                     mList.clear();
+                }
+            });
+        }
+
+        private void setTextChangedListener(EditText et, TempNewListModel item){
+            et.addTextChangedListener(new TextWatcher() {
+                @Override
+                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+                    Log.e("check before //->",item.getCost());
+                }
+
+                @Override
+                public void onTextChanged(CharSequence s, int start, int before, int count) {
+                }
+
+                @Override
+                public void afterTextChanged(Editable s) {
+                    item.setCost(s.toString());
+
+                    Log.e("check after//->",item.getCost());
+
+                    mDNewPresenter.reDutchpayLogic(item);
                 }
             });
         }

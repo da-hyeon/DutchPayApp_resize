@@ -53,6 +53,8 @@ public class DutchpayStartListAdapter extends RecyclerView.Adapter<DutchpayStart
                     break;
             }
         }
+
+
     }
 
     public DutchpayStartListAdapter(ObservableArrayList<TempStartListModel> mList,DutchpayStartContract.Presenter presenter) {

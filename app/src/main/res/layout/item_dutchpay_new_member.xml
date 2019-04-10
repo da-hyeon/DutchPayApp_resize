@@ -88,17 +88,18 @@
                 app:layout_constraintTop_toBottomOf="@+id/button18" />
 
             <TextView
-                android:id="@+id/textView72"
+                android:id="@+id/tvMemCost"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/malgunfont"
                 android:includeFontPadding="false"
-                android:text="@{item.cost}"
+                android:nextFocusDown="@+id/editText"
+                android:text="원"
                 android:textColor="#ff6060"
                 android:textSize="13.7dp"
+                android:visibility="visible"
                 app:layout_constraintBottom_toBottomOf="@+id/btPayComplete"
-                app:layout_constraintStart_toStartOf="@+id/textView71"
-                tools:text="10,000원" />
+                app:layout_constraintStart_toEndOf="@+id/editText" />
 
             <TextView
                 android:id="@+id/textView71"
@@ -113,6 +114,22 @@
                 app:layout_constraintBottom_toBottomOf="@+id/textView73"
                 app:layout_constraintStart_toStartOf="parent"
                 tools:text="최윤미" />
+
+            <EditText
+                android:id="@+id/editText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/transparent"
+                android:fontFamily="@font/malgunfont"
+                android:hint="0"
+                android:includeFontPadding="false"
+                android:inputType="number"
+                android:text="@{item.cost}"
+                android:textColor="#ff6060"
+                android:textColorHint="#ff6060"
+                android:textSize="13.7dp"
+                app:layout_constraintBottom_toBottomOf="@+id/btPayComplete"
+                app:layout_constraintStart_toStartOf="@+id/textView71" />
         </android.support.constraint.ConstraintLayout>
 
     </android.support.constraint.ConstraintLayout>

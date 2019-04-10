@@ -117,6 +117,7 @@
         android:layout_width="0dp"
         android:layout_height="40dp"
         android:background="@drawable/add"
+        android:onClick="@{()-> Presenter.makeListClick()}"
         app:layout_constraintEnd_toEndOf="@+id/btType"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/button16"
@@ -159,12 +160,12 @@
             android:textColor="#626262"
             android:textSize="13.7dp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="@+id/textView68"
-            app:layout_constraintEnd_toStartOf="@+id/textView68"
-            app:layout_constraintTop_toTopOf="@+id/textView68" />
+            app:layout_constraintBottom_toBottomOf="@+id/tvMemNum"
+            app:layout_constraintEnd_toStartOf="@+id/tvMemNum"
+            app:layout_constraintTop_toTopOf="@+id/tvMemNum" />
 
         <TextView
-            android:id="@+id/textView68"
+            android:id="@+id/tvMemNum"
             android:layout_width="46.29dp"
             android:layout_height="18.29dp"
             android:layout_marginTop="13dp"
@@ -209,7 +210,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/textView70"
+                android:id="@+id/tvMyCost"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="14dp"

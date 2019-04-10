@@ -6,11 +6,12 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
+import android.widget.Toast;
 
 import com.dutch.hdh.dutchpayapp.R;
 import com.dutch.hdh.dutchpayapp.base.BaseFragment;
@@ -21,9 +22,6 @@ public class DutchpayNewFragment extends BaseFragment implements DutchpayNewCont
 
     FragmentDutchpayNewStartBinding mBinding;
     DutchpayNewPresenter mPresenter;
-
-    String oldCost = "";
-    String newCost = "";
 
     @Nullable
     @Override
@@ -37,31 +35,30 @@ public class DutchpayNewFragment extends BaseFragment implements DutchpayNewCont
         mBinding.etCost.setImeOptions(EditorInfo.IME_ACTION_DONE);
 
         //키보드 변동 체크
+        getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
         mBinding.getRoot().getViewTreeObserver().addOnGlobalLayoutListener(() -> {
             Rect r = new Rect();
             mBinding.getRoot().getWindowVisibleDisplayFrame(r);
 
             int heightDiff = mBinding.getRoot().getRootView().getHeight() - (r.bottom - r.top);
-            if(heightDiff > 150) { //키보드 닫음
-                //프레젠터로... ->
-
-                newCost = mBinding.etCost.getText().toString();
-
-                if( !(oldCost.equals(newCost)) ){
-                    oldCost = newCost;
-                    Log.e("change --> ",newCost+"");
-                    //1/n로직 재실행
-
-                    //-----//
-                }
+            if(heightDiff > 150) {
+                //금액 값 변동 확인
+                mPresenter.checkCost(mBinding.etCost.getText().toString());
             }
         });
 
-
-        //리스트 셋업
-        //mPresenter.listInit();
-
         return mBinding.getRoot();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        //--임시
+        if(!mBinding.etCost.getText().toString().equals("")){
+            mPresenter.setOldCost(mBinding.etCost.getText().toString());
+            mPresenter.listInit();
+        }
     }
 
     @Override
@@ -83,12 +80,30 @@ public class DutchpayNewFragment extends BaseFragment implements DutchpayNewCont
     }
 
     @Override
+    public void setMyCost(String mycost) {
+        mBinding.tvMyCost.setText(mycost);
+    }
+
+    @Override
     public void adapterInit(){
+        if( !(mBinding.etCost.getText().toString().equals("")) ) {
+            //금액 입력
+
+            if( !(mPresenter.dutchpayLogic()) ){ //최소값 오류
+                Toast.makeText(getActivity().getApplicationContext(),"금액을 확인해주세요",Toast.LENGTH_SHORT).show();
+            }
+        }
+
+        mBinding.tvMemNum.setText("총 "+mPresenter.getmNewList().size()+"명");
+        setMyCost(mPresenter.getMyCost()+"");
+
         //어댑터 셋팅
         mBinding.setMemberList(mPresenter.getmNewList());
         mBinding.rvMemberlist.setAdapter(mPresenter.getmAdapter());
         mBinding.rvMemberlist.setLayoutManager(new LinearLayoutManager(getActivity().getApplicationContext()));
         mBinding.rvMemberlist.addItemDecoration(new ItemDecoration(38));
+
+        mPresenter.getmAdapter().notifyDataSetChanged();
     }
 
 }
