@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
+import com.dutch.hdh.dutchpayapp.MyApplication;
 import com.dutch.hdh.dutchpayapp.R;
 import com.dutch.hdh.dutchpayapp.data.db.GroupParticipants;
 import com.dutch.hdh.dutchpayapp.databinding.ItemGroupParticipantsBinding;
@@ -14,18 +15,26 @@ import com.dutch.hdh.dutchpayapp.ui.mygroup.edit.MyGroup_EditContract;
 
 import java.util.ArrayList;
 
-public class Listview_GroupParticipantsAdapter extends BaseAdapter {
+public class Listview_GroupParticipantsAdapter extends BaseAdapter  {
 
     private ItemGroupParticipantsBinding mBinding;
     private MyGroup_EditContract.View mView;
 
     private Context mContext;
     private ArrayList<GroupParticipants> mGroupParticipantsArrayList;
+    private MyApplication myApplication;
 
     public Listview_GroupParticipantsAdapter(MyGroup_EditContract.View mView , Context mContext) {
         this.mContext = mContext;
         this.mView = mView;
         mGroupParticipantsArrayList = new ArrayList<>();
+        myApplication = MyApplication.getInstance();
+
+        //신규추가일 경우
+        if(!myApplication.entranceGroupPath){
+            mGroupParticipantsArrayList.add(new GroupParticipants(myApplication.getUserInfo().getUserName() , myApplication.getUserInfo().getUserPhone()));
+            this.mView.changePersonCount(getCount());
+        }
     }
 
     @Override
@@ -52,6 +61,15 @@ public class Listview_GroupParticipantsAdapter extends BaseAdapter {
         } else {
             mBinding = (ItemGroupParticipantsBinding) v.getTag();
         }
+
+        if(mGroupParticipantsArrayList.get(position).getPhoneNumber().equals(myApplication.getUserInfo().getUserPhone())){
+            mBinding.ibDelete.setVisibility(View.GONE);
+            mBinding.vDelete.setVisibility(View.GONE);
+        } else {
+            mBinding.ibDelete.setVisibility(View.VISIBLE);
+            mBinding.vDelete.setVisibility(View.VISIBLE);
+        }
+
         mBinding.tvName.setSelected(true);
         mBinding.tvName.setText(mGroupParticipantsArrayList.get(position).getName());
         mBinding.tvPhoneNumber.setText(mGroupParticipantsArrayList.get(position).getPhoneNumber());

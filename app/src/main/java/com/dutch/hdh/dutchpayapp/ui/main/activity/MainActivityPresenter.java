@@ -313,6 +313,11 @@ public class MainActivityPresenter implements MainActivityContract.Presenter {
         if (getCurrentFragment() instanceof SoloPayFragment)
             return;
 
+        if(!mMyApplication.getUserInfo().isUserState()){
+            mView.showFailDialog("실패" , "로그인을 해주세요.");
+            return;
+        }
+
         setDefaultMainStack();
 
         //프래그먼트 이동
@@ -360,7 +365,26 @@ public class MainActivityPresenter implements MainActivityContract.Presenter {
      */
     @Override
     public void clickMyPage() {
+        //메뉴 닫기 , 프래그먼트 닫기
+        mView.hideDrawerLayout();
 
+        if (getCurrentFragment() instanceof MyPage_MainFragment)
+            return;
+
+        if(!mMyApplication.getUserInfo().isUserState()){
+            mView.showFailDialog("실패" , "로그인을 해주세요.");
+            return;
+        }
+        setDefaultMainStack();
+
+        //프래그먼트 이동
+        FragmentTransaction fragmentTransaction = mFragmentManager.beginTransaction();
+        fragmentTransaction.setCustomAnimations(R.anim.fade_in, 0, 0, R.anim.fade_out);
+
+        MyPage_MainFragment mMyPage_MainFragment = new MyPage_MainFragment();
+        fragmentTransaction.replace(R.id.flFragmentContainer, mMyPage_MainFragment, MyPage_MainFragment.class.getName());
+        fragmentTransaction.addToBackStack(MyPage_MainFragment.class.getName());
+        fragmentTransaction.commit();
     }
 
     /**
@@ -373,6 +397,12 @@ public class MainActivityPresenter implements MainActivityContract.Presenter {
 
         if (getCurrentFragment() instanceof MyGroup_MainFragment)
             return;
+
+
+        if(!mMyApplication.getUserInfo().isUserState()){
+            mView.showFailDialog("실패" , "로그인을 해주세요.");
+            return;
+        }
 
         setDefaultMainStack();
 

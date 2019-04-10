@@ -1,14 +1,12 @@
 package com.dutch.hdh.dutchpayapp.ui.solopay;
 
-import android.content.Intent;
-import android.support.annotation.NonNull;
 import android.view.SurfaceView;
 
-import com.dutch.hdh.dutchpayapp.base.BaseContract;
+import com.dutch.hdh.dutchpayapp.base.fragment.BaseFragmentContract;
 import com.google.android.gms.vision.barcode.BarcodeDetector;
 
 public interface SoloPayContract {
-    interface View extends BaseContract.View {
+    interface View extends BaseFragmentContract.View {
         //init
         void initData();
 

@@ -85,7 +85,7 @@ public class MyGroup_TelephoneDirectoryPresenter implements MyGroup_TelephoneDir
             c.close();
 
         } catch (SecurityException e) {
-            mView.showErrorDialog("실패", "선택한 연락처가 없습니다.");
+            mView.showErrorDialog("실패", "전화부호부에 연락처가 없습니다.");
         }
     }
 

@@ -7,15 +7,14 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.dutch.hdh.dutchpayapp.R;
-import com.dutch.hdh.dutchpayapp.base.BaseFragment;
+import com.dutch.hdh.dutchpayapp.base.fragment.BaseFragment;
 import com.dutch.hdh.dutchpayapp.databinding.FragmentMyGroupBinding;
+import com.kinda.alert.KAlertDialog;
 
 public class MyGroup_MainFragment extends BaseFragment implements MyGroup_MainContract.View{
 
     private FragmentMyGroupBinding mBinding;
     private MyGroup_MainContract.Presenter mPresenter;
-
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -37,6 +36,17 @@ public class MyGroup_MainFragment extends BaseFragment implements MyGroup_MainCo
      * 객체생성 및 데이터초기화
      */
     private void initData() {
+        //mPresenter.requestGroupList();
         mPresenter.initListViewData(mBinding.lvMyGroup);
+    }
+
+    @Override
+    public MyGroup_MainContract.Presenter getmPresenter() {
+        return mPresenter;
+    }
+
+    @Override
+    public FragmentMyGroupBinding getmBinding() {
+        return mBinding;
     }
 }

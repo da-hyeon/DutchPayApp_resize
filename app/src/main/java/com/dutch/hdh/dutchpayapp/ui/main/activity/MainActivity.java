@@ -11,15 +11,18 @@ import android.widget.Toast;
 
 import com.dutch.hdh.dutchpayapp.MyApplication;
 import com.dutch.hdh.dutchpayapp.R;
+import com.dutch.hdh.dutchpayapp.base.activity.BaseActivity;
 import com.dutch.hdh.dutchpayapp.databinding.ActivityMainBinding;
+import com.kinda.alert.KAlertDialog;
 
-public class MainActivity extends AppCompatActivity implements MainActivityContract.View {
+public class MainActivity extends BaseActivity implements MainActivityContract.View {
 
     private MyApplication myApplication;
 
     private ActivityMainBinding mBinding;
     public MainActivityContract.Presenter mPresenter;
     private ActionBarDrawerToggle toggle;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,6 +33,7 @@ public class MainActivity extends AppCompatActivity implements MainActivityContr
 
         //객체생성 및 데이터 초기화
         initData();
+
 
         //메뉴버튼
         mBinding.Appbar.loMenu.setOnClickListener(v ->
@@ -207,6 +211,16 @@ public class MainActivity extends AppCompatActivity implements MainActivityContr
     @Override
     public void showExit() {
         mBinding.Appbar.imageBack.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void showFailDialog(String title ,String content) {
+        new KAlertDialog(this, KAlertDialog.WARNING_TYPE)
+                .setTitleText(title)
+                .setContentText(content)
+                .setConfirmText("확인")
+                .setConfirmClickListener(sDialog -> sDialog.dismissWithAnimation())
+                .show();
     }
 
     /**

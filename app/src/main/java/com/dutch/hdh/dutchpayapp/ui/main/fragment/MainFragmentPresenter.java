@@ -13,7 +13,9 @@ import com.dutch.hdh.dutchpayapp.MyApplication;
 import com.dutch.hdh.dutchpayapp.R;
 import com.dutch.hdh.dutchpayapp.adapter.EventImageSliderAdapter;
 import com.dutch.hdh.dutchpayapp.ui.login.LoginFragment;
+import com.dutch.hdh.dutchpayapp.ui.main.activity.MainActivity;
 import com.dutch.hdh.dutchpayapp.ui.solopay.SoloPayFragment;
+import com.kinda.alert.KAlertDialog;
 
 import java.util.ArrayList;
 import java.util.List;
