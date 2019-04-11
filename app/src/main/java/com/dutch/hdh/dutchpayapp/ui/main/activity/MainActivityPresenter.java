@@ -13,7 +13,6 @@ import com.dutch.hdh.dutchpayapp.R;
 import com.dutch.hdh.dutchpayapp.ui.dutchpay.startdetail.DutchpayDetailFragment;
 import com.dutch.hdh.dutchpayapp.ui.dutchpay.newdutchpay.DutchpayNewFragment;
 import com.dutch.hdh.dutchpayapp.ui.dutchpay.photo.DutchpayPhotoFragment;
-import com.dutch.hdh.dutchpayapp.ui.dutchpay.start.DutchpayStartFragment;
 import com.dutch.hdh.dutchpayapp.ui.login.LoginFragment;
 import com.dutch.hdh.dutchpayapp.ui.main.fragment.MainFragment;
 import com.dutch.hdh.dutchpayapp.ui.mygroup.main.MyGroup_MainFragment;
@@ -23,7 +22,7 @@ import com.dutch.hdh.dutchpayapp.ui.register.password.Register_PaymentPasswordFr
 import com.dutch.hdh.dutchpayapp.ui.register.success.Register_SuccessFragment;
 import com.dutch.hdh.dutchpayapp.ui.register.term.Register_TermsConditionsAgreementFragment;
 import com.dutch.hdh.dutchpayapp.ui.solopay.SoloPayFragment;
-import com.dutch.hdh.dutchpayapp.ui.wallet.MyWalletFragment;
+import com.dutch.hdh.dutchpayapp.ui.wallet.mywallet.MyWalletFragment;
 
 import java.util.List;
 

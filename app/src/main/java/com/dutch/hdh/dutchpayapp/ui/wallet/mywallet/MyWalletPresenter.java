@@ -1,4 +1,4 @@
-package com.dutch.hdh.dutchpayapp.ui.wallet;
+package com.dutch.hdh.dutchpayapp.ui.wallet.mywallet;
 
 import android.content.Context;
 import android.content.Intent;

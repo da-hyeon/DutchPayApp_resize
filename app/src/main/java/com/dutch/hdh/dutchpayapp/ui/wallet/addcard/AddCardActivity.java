@@ -6,17 +6,18 @@ import android.support.annotation.Nullable;
 
 import com.dutch.hdh.dutchpayapp.R;
 import com.dutch.hdh.dutchpayapp.base.BaseActivity;
-import com.dutch.hdh.dutchpayapp.databinding.ActivityAddCardBinding;
+import com.dutch.hdh.dutchpayapp.databinding.ActivityCardAddBinding;
 
 public class AddCardActivity extends BaseActivity implements AddCardContract.View {
 
-    private ActivityAddCardBinding mBinding;
+    private ActivityCardAddBinding mBinding;
     private AddCardContract.Presenter mPresenter;
+    private String mCardCode;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_add_card);
+        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_card_add);
         mPresenter = new AddCardPresenter(this, this, mBinding);
         initData();
     }
@@ -30,11 +31,11 @@ public class AddCardActivity extends BaseActivity implements AddCardContract.Vie
                 mPresenter.cancelClick()
         );
         mBinding.tvCardSelect.setOnClickListener(v ->
-                mPresenter.cardSelect()
+                mPresenter.getCardSelectList()
         );
 
         mBinding.ivCardAdd.setOnClickListener(v ->
-                mPresenter.cardAddConfirm("asdf", "asdfasdf", "asdfasdf", "asdfasdf", "asdfasdf")
+                mPresenter.cardAddConfirm(mCardCode)
         );
 
         mBinding.etCardNum1.addTextChangedListener(mPresenter.getTextWatcher(mBinding.etCardNum1, 4));
@@ -46,8 +47,9 @@ public class AddCardActivity extends BaseActivity implements AddCardContract.Vie
     }
 
     @Override
-    public void cardData(String cardName, int cardCode) {
+    public void cardData(String cardName, String cardCode) {
         mBinding.tvCardSelect.setText(cardName);
+        mCardCode = cardCode;
     }
 
     @Override

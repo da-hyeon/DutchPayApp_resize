@@ -29,7 +29,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class MyApplication extends Application {
     private static MyApplication appInstance;
 
-    private static final String BASE_URL = "http://dutchkor02.cafe24.com/";
+    private static final String BASE_URL = "https://dutchkor02.cafe24.com/";
     public static boolean tutorialCheck ;
     //타임아웃
     private static final int CONNECT_TIMEOUT = 15;

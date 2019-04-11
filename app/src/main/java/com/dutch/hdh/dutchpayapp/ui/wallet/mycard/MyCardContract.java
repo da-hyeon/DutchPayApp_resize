@@ -16,8 +16,11 @@ public interface MyCardContract {
 
         //click
         void clickCancel();
-        void clickLeft(ViewPager viewPager);
-        void clickRight(ViewPager viewPager);
+        void clickLeft(ViewPager viewPager, TabLayout tabLayout);
+        void clickRight(ViewPager viewPager, TabLayout tabLayout);
+        //카드등록
+        void clickCardAdd();
+        //카드등록관리
         void clickCardManagement();
     }
 }

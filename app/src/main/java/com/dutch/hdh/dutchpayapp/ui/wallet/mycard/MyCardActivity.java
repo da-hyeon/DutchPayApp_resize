@@ -2,20 +2,16 @@ package com.dutch.hdh.dutchpayapp.ui.wallet.mycard;
 
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
-import android.os.Trace;
 import android.support.annotation.Nullable;
-import android.support.v4.view.ViewPager;
-import android.util.Log;
-import android.view.View;
 
 import com.dutch.hdh.dutchpayapp.MyApplication;
 import com.dutch.hdh.dutchpayapp.R;
 import com.dutch.hdh.dutchpayapp.base.BaseActivity;
-import com.dutch.hdh.dutchpayapp.databinding.ActivityMyCardBinding;
+import com.dutch.hdh.dutchpayapp.databinding.ActivityCardInfoBinding;
 
 public class MyCardActivity extends BaseActivity implements MyCardContract.View {
 
-    private ActivityMyCardBinding mBinding;
+    private ActivityCardInfoBinding mBinding;
     private MyCardContract.Presenter mPresenter;
     private MyApplication mMyApplication;
 
@@ -23,7 +19,7 @@ public class MyCardActivity extends BaseActivity implements MyCardContract.View 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_my_card);
+        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_card_info);
         mPresenter = new MyCardPresenter(this, this);
         mMyApplication = MyApplication.getInstance();
         initData();
@@ -35,39 +31,20 @@ public class MyCardActivity extends BaseActivity implements MyCardContract.View 
         );
         //카드등록
         mBinding.llCardAdd.setOnClickListener(v -> {
-                    mPresenter.clickCardManagement();
+                    mPresenter.clickCardAdd();
                 }
         );
-        mBinding.ivCardAdd.setOnClickListener(v -> {
+        mBinding.ivCardRegistrationManagement.setOnClickListener(v -> {
                     mPresenter.clickCardManagement();
                 }
         );
         //카드 목록 버튼
         mBinding.ivLeftArrow.setOnClickListener(v ->
-                mPresenter.clickLeft(mBinding.vpCardList)
+                mPresenter.clickLeft(mBinding.vpCardList, mBinding.tlIndicator)
         );
         mBinding.ivRightArrow.setOnClickListener(v ->
-                mPresenter.clickRight(mBinding.vpCardList)
+                mPresenter.clickRight(mBinding.vpCardList, mBinding.tlIndicator)
         );
-
-
-        mBinding.vpCardList.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-            @Override
-            public void onPageScrolled(int i, float v, int i1) {
-
-            }
-
-            @Override
-            public void onPageSelected(int i) {
-
-
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int i) {
-                
-            }
-        });
     }
 
     @Override
