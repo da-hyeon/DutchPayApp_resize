@@ -7,7 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.dutch.hdh.dutchpayapp.R;
-import com.dutch.hdh.dutchpayapp.base.BaseFragment;
+import com.dutch.hdh.dutchpayapp.base.fragment.BaseFragment;
 import com.dutch.hdh.dutchpayapp.databinding.FragmentMyPageMainBinding;
 
 public class MyPage_MainFragment extends BaseFragment implements MyPage_MainContract.View{
@@ -29,6 +29,21 @@ public class MyPage_MainFragment extends BaseFragment implements MyPage_MainCont
      * 객체생성 및 데이터초기화
      */
     public void initData() {
+        mPresenter.setVIew();
+    }
 
+    @Override
+    public void changeMoneyText(String content) {
+        mBinding.tvUserMoney.setText(content);
+    }
+
+    @Override
+    public void changeEmailText(String content) {
+        mBinding.tvUserEmail.setText(content);
+    }
+
+    @Override
+    public void changePhoneNumberText(String content) {
+        mBinding.tvUserPhone.setText(content);
     }
 }

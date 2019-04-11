@@ -6,7 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.dutch.hdh.dutchpayapp.R;
-import com.dutch.hdh.dutchpayapp.base.BaseFragment;
+import com.dutch.hdh.dutchpayapp.base.fragment.BaseFragment;
 
 public class Event_DetailFragment extends BaseFragment implements Event_DetailContract.View {
 

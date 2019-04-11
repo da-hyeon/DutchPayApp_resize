@@ -2,7 +2,6 @@ package com.dutch.hdh.dutchpayapp.ui.mygroup.telephonedirectory;
 
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
@@ -10,7 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.dutch.hdh.dutchpayapp.R;
-import com.dutch.hdh.dutchpayapp.base.BaseFragment;
+import com.dutch.hdh.dutchpayapp.base.fragment.BaseFragment;
 import com.dutch.hdh.dutchpayapp.databinding.FragmentMyGroupTelephoneDirectoryBinding;
 import com.kinda.alert.KAlertDialog;
 

@@ -9,11 +9,16 @@ import android.widget.ListView;
 import com.dutch.hdh.dutchpayapp.MyApplication;
 import com.dutch.hdh.dutchpayapp.R;
 import com.dutch.hdh.dutchpayapp.adapter.Listview_MyGroupAdapter;
+import com.dutch.hdh.dutchpayapp.data.db.GroupList;
 import com.dutch.hdh.dutchpayapp.data.db.MyGroup;
 import com.dutch.hdh.dutchpayapp.ui.mygroup.edit.MyGroup_EditFragment;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class MyGroup_MainPresenter implements MyGroup_MainContract.Presenter{
 
@@ -36,26 +41,28 @@ public class MyGroup_MainPresenter implements MyGroup_MainContract.Presenter{
 
     @Override
     public void initListViewData(ListView listView) {
-        mMyGroupArrayList.add(new MyGroup("0" , "5" , "더치페이코리아"));
-        mMyGroupArrayList.add(new MyGroup("1" , "3" , "더더"));
-        mMyGroupArrayList.add(new MyGroup("2" , "2" , "치치"));
-        mMyGroupArrayList.add(new MyGroup("3" , "11" , "페페"));
-        mMyGroupArrayList.add(new MyGroup("4" , "15" , "이이"));
-        mMyGroupArrayList.add(new MyGroup("4" , "15" , "이이"));
-        mMyGroupArrayList.add(new MyGroup("4" , "15" , "이이"));
-        mMyGroupArrayList.add(new MyGroup("4" , "15" , "이이"));
-        mMyGroupArrayList.add(new MyGroup("4" , "15" , "이이"));
-        mMyGroupArrayList.add(new MyGroup("4" , "15" , "이이"));
-        mMyGroupArrayList.add(new MyGroup("4" , "15" , "이이"));
-        mMyGroupArrayList.add(new MyGroup("4" , "15" , "이이"));
-        mMyGroupArrayList.add(new MyGroup("4" , "15" , "이이"));
-        mMyGroupArrayList.add(new MyGroup("4" , "15" , "이이"));
-        mMyGroupArrayList.add(new MyGroup("4" , "15" , "이이"));
-        mMyGroupArrayList.add(new MyGroup("4" , "15" , "이이"));
+        //그룹불러오기
 
+        Call<MyGroup> getGroupList = MyApplication
+                .getRestAdapter()
+                .getGroupList(mMyApplication.getUserInfo().getUserCode());
 
-        mListview_MyGroupAdapter = new Listview_MyGroupAdapter(mContext, mMyGroupArrayList , mFragmentManager);
-        listView.setAdapter(mListview_MyGroupAdapter);
+        getGroupList.enqueue(new Callback<MyGroup>() {
+            @Override
+            public void onResponse(Call<MyGroup> call, Response<MyGroup> response) {
+                if(response.body() != null) {
+                    MyGroup myGroup = response.body();
+                    mListview_MyGroupAdapter = new Listview_MyGroupAdapter(mView, mContext, myGroup.getGroupLists(), mFragmentManager);
+                    listView.setAdapter(mListview_MyGroupAdapter);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<MyGroup> call, Throwable t) {
+                Log.d("fail" , t.getLocalizedMessage());
+                Log.d("fail" , t.getMessage());
+            }
+        });
     }
 
     @Override
