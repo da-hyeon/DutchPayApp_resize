@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.ImageView;
 
@@ -41,6 +42,9 @@ public class DutchpayNewListAdapter extends RecyclerView.Adapter<DutchpayNewList
                 Log.e("check //->",item.getCost());
                 mBinding.editText.setFocusableInTouchMode(true);
                 setTextChangedListener(mBinding.editText,item);
+
+                //키보드 닫힘 방지
+                mBinding.editText.setImeOptions(EditorInfo.IME_ACTION_DONE);
             } else {
                 mBinding.editText.setFocusableInTouchMode(false);
             }

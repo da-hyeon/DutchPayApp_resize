@@ -10,15 +10,18 @@ import android.util.Log;
 
 import com.dutch.hdh.dutchpayapp.R;
 import com.dutch.hdh.dutchpayapp.adapter.DutchpayNewListAdapter;
+import com.dutch.hdh.dutchpayapp.databinding.ItemDutchpayNewMemberBinding;
 import com.dutch.hdh.dutchpayapp.ui.dutchpay.newdutchpayinfo.DutchpayNewInfoFragment;
 import com.google.gson.Gson;
+
+import java.util.ArrayList;
 
 public class DutchpayNewPresenter implements DutchpayNewContract.Presenter {
 
     private DutchpayNewContract.View mView;
     private ObservableArrayList<TempNewListModel> mNewList;
     private DutchpayNewListAdapter mAdapter;
-
+    private ItemDutchpayNewMemberBinding mItemDutchpayNewMemberBinding;
     private String oldCost;
     private int myCost;
 
@@ -82,6 +85,18 @@ public class DutchpayNewPresenter implements DutchpayNewContract.Presenter {
 
     @Override
     public void reDutchpayLogic(TempNewListModel item) {
+
+        Log.e("check ->","call dutchpaylogic");
+
+        //변동 안 된 멤버 포지션 리스트 생성
+        ArrayList<Integer> dutchList = new ArrayList<>();
+        for(int i=0; i<mNewList.size(); i++){
+            if( !(mNewList.get(i).isEditedCheck()) ){
+                dutchList.add(i);
+                Log.e("check ->",dutchList.toString());
+            }
+        }
+
         int cost = Integer.parseInt(oldCost);
         int inputcost = 0;
         if( (!item.getCost().equals("")) ){
@@ -90,18 +105,16 @@ public class DutchpayNewPresenter implements DutchpayNewContract.Presenter {
 
         int newcost = cost - inputcost;
 
-        int newmemcount = mNewList.size()-1;
+        int newmemcount = dutchList.size();
 
-        int memCost = newcost/newmemcount;
+        int memCost = newcost/(newmemcount+1);
         myCost = newcost - (memCost*(newmemcount-1));
 
         for(int i = 0; i<newmemcount; i++){
-            mNewList.get(i).setCost(String.valueOf(memCost));
+            mNewList.get(dutchList.get(i)).setCost(String.valueOf(memCost));
         }
-
-        mAdapter.setItem(mNewList);
+        mAdapter.notifyDataSetChanged();
         mView.setMyCost(String.valueOf(myCost));
-
     }
 
     public ObservableArrayList<TempNewListModel> getmNewList() {
@@ -112,7 +125,7 @@ public class DutchpayNewPresenter implements DutchpayNewContract.Presenter {
         return mAdapter;
     }
 
-    @BindingAdapter("bind:item")
+    @BindingAdapter("item")
     public static void bindItem(RecyclerView view, ObservableArrayList<TempNewListModel> list){
         DutchpayNewListAdapter adapter = (DutchpayNewListAdapter) view.getAdapter();
         if(adapter != null) {

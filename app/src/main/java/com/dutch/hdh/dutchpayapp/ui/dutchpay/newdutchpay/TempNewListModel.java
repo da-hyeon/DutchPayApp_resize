@@ -7,6 +7,7 @@ public class TempNewListModel {
     boolean completeFlag;
 
     boolean editableFlag;
+    boolean editedCheck;
 
     public TempNewListModel(String name, String cost, String phone, boolean completeFlag) {
         this.name = name;
@@ -14,6 +15,7 @@ public class TempNewListModel {
         this.phone = phone;
         this.completeFlag = completeFlag;
         this.editableFlag = false;
+        this.editedCheck = false;
     }
 
     public String getName() {
@@ -56,5 +58,11 @@ public class TempNewListModel {
         this.editableFlag = editableFlag;
     }
 
+    public boolean isEditedCheck() {
+        return editedCheck;
+    }
 
+    public void setEditedCheck(boolean editedCheck) {
+        this.editedCheck = editedCheck;
+    }
 }
