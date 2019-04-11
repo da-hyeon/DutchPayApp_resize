@@ -3,9 +3,11 @@ package com.dutch.hdh.dutchpayapp.ui.main.fragment;
 import android.content.Context;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
+import android.support.design.widget.TabLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.dutch.hdh.dutchpayapp.R;
 import com.dutch.hdh.dutchpayapp.base.activity.BaseActivity;
@@ -39,10 +41,12 @@ public class MainFragment extends BaseFragment implements MainFragmentContract.V
 
         //더치페이 시작하기 버튼 클릭
         mBinding.ivDutchPay.setOnClickListener(v->{
-            mPresenter.clickDutchPay();
+
         });
 
-       // ((MainActivity)getActivity()).getPresenter()
+        mBinding.llAllEvent.setOnClickListener(v->
+            mPresenter.clickAllEvent()
+        );
 
         return mBinding.getRoot();
     }
@@ -69,5 +73,10 @@ public class MainFragment extends BaseFragment implements MainFragmentContract.V
             mBinding.layoutSuccessLogin.setVisibility(View.GONE);
              mBinding.layoutNoneLogin.setVisibility(View.VISIBLE);
         }
+    }
+
+    @Override
+    public void changeEventTitle(String title) {
+        mBinding.tvEventTitle.setText(title);
     }
 }

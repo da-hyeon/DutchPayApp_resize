@@ -68,9 +68,6 @@ public class Event_MainPresenter implements Event_MainContract.Presenter {
             }
         });
 
-        mListview_EventAdapter.setOnGoingCheck(true);
-        mListview_EventAdapter.setmEventArrayList(mEventArrayList);
-        mListview_EventAdapter.notifyDataSetChanged();
     }
 
     @Override

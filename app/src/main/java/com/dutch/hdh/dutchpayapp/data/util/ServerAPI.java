@@ -3,8 +3,6 @@ package com.dutch.hdh.dutchpayapp.data.util;
 import com.dutch.hdh.dutchpayapp.Constants;
 import com.dutch.hdh.dutchpayapp.data.db.EventList;
 import com.dutch.hdh.dutchpayapp.data.db.MyGroup;
-import com.dutch.hdh.dutchpayapp.data.db.CardCompanyList;
-import com.dutch.hdh.dutchpayapp.data.db.CardRegisterList;
 import com.dutch.hdh.dutchpayapp.data.db.UserInfo;
 
 import retrofit2.Call;
@@ -21,6 +19,7 @@ public interface ServerAPI {
      *
      * @param userEmail
      * @param userPassword
+     * @return
      */
     @GET(Constants.USER_LOGIN_REQUEST_URL)
     Call<UserInfo> getFineUser(@Query("userEmail") String userEmail, @Query("userPassword") String userPassword);
@@ -82,6 +81,13 @@ public interface ServerAPI {
             @Field("groupacode") String groupacode);
 
 
+    /**
+     * 그룹 업데이트 요청
+     * @param groupacode
+     * @param groupcontent
+     * @param peoplenumber
+     * @return
+     */
     @FormUrlEncoded
     @POST(Constants.UPDATE_GROUP_REQUEST_URL)
     Call<Void> updateGroup(
@@ -89,49 +95,39 @@ public interface ServerAPI {
             @Field("groupcontent") String groupcontent ,
             @Field("peoplenumber") String peoplenumber);
 
+    /**
+     * 진행중 이벤트 요청
+     * @return
+     */
     @GET(Constants.SELECT_EVENT_ONGOING_REQUEST_URL)
     Call<EventList> selectOnGoingEvent();
 
+    /**
+     * 진행종료 이벤트 요청
+     * @return
+     */
     @GET(Constants.SELECT_EVENT_ENDPROGRESS_REQUEST_URL)
     Call<EventList> selectEndProgressEvent();
 
     /**
-     * 등록할 카드목록가져오기
-     */
-    @GET(Constants.DUTCHPAY_CARD_SELECT)
-    Call<CardCompanyList> getCardSelectList();
-
-    /**
-     * 카드등록 요청
-     *
-     * @param cardno
-     * @param cardtypecode
+     * 이메일 변경 요청
+     * @param email
      * @param usercode
+     * @return
      */
     @FormUrlEncoded
-    @POST(Constants.DUTCHPAY_CARD_REGISTER)
-    Call<Void> setCardRegister(
-            @Field("cardno") String cardno,
-            @Field("cardtypecode") String cardtypecode,
-            @Field("usercode") String usercode);
+    @POST(Constants.CHANGE_EMAIL_REQUEST_URL)
+    Call<Void> changeEmail(@Field("email") String email ,
+                              @Field("usercode") String usercode );
 
     /**
-     * 등록한 카드목록 요청
-     *
+     * 비밀번호 변경 요청
+     * @param password
      * @param usercode
+     * @return
      */
-    @GET(Constants.DUTCHPAY_CARD_REGISTER_SELECT)
-    Call<CardRegisterList> getRegisterCardList(
-            @Query("usercode") String usercode);
-
-
-    /**
-     * 카드삭제 요청
-     *
-     * @param cardcode
-     */
-    @GET(Constants.DUTCHPAY_CARD_DELETE)
-    Call<Void> setCardDelete(
-            @Query("cardcode") String cardcode);
-
+    @FormUrlEncoded
+    @POST(Constants.CHANGE_PASSWORD_REQUEST_URL)
+    Call<Void> changePassword(@Field("password") String password ,
+                           @Field("usercode") String usercode );
 }

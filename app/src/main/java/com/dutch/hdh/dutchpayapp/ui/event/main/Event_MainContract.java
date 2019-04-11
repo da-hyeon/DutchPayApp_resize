@@ -3,7 +3,7 @@ package com.dutch.hdh.dutchpayapp.ui.event.main;
 import android.widget.ListView;
 
 public interface Event_MainContract {
-    interface View{
+    interface View  {
 
     }
     interface Presenter{
