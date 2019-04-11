@@ -1,5 +1,6 @@
 package com.dutch.hdh.dutchpayapp.ui.dutchpay.start;
 
+import android.databinding.BindingConversion;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -11,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RadioGroup;
 
+import com.dutch.hdh.dutchpayapp.Constants;
 import com.dutch.hdh.dutchpayapp.R;
 import com.dutch.hdh.dutchpayapp.base.BaseFragment;
 import com.dutch.hdh.dutchpayapp.databinding.FragmentDutchpayStartBinding;

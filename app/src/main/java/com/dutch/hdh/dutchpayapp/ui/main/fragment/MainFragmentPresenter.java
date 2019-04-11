@@ -12,6 +12,7 @@ import android.support.v4.view.ViewPager;
 import com.dutch.hdh.dutchpayapp.MyApplication;
 import com.dutch.hdh.dutchpayapp.R;
 import com.dutch.hdh.dutchpayapp.adapter.EventImageSliderAdapter;
+import com.dutch.hdh.dutchpayapp.ui.dutchpay.start.DutchpayStartFragment;
 import com.dutch.hdh.dutchpayapp.ui.login.LoginFragment;
 import com.dutch.hdh.dutchpayapp.ui.main.activity.MainActivity;
 import com.dutch.hdh.dutchpayapp.ui.solopay.SoloPayFragment;
@@ -82,5 +83,12 @@ public class MainFragmentPresenter implements MainFragmentContract.Presenter {
     @Override
     public void clickDutchPay() {
 
+        //프래그먼트 이동
+        DutchpayStartFragment dutchpayStartFragment = new DutchpayStartFragment();
+        FragmentTransaction fragmentTransaction = mFragmentManager.beginTransaction();
+        fragmentTransaction.setCustomAnimations(R.anim.fade_in, 0, 0, R.anim.fade_out);
+        fragmentTransaction.replace(R.id.flFragmentContainer, dutchpayStartFragment, DutchpayStartFragment.class.getName());
+        fragmentTransaction.addToBackStack(DutchpayStartFragment.class.getName());
+        fragmentTransaction.commit();
     }
 }

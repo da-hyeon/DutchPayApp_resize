@@ -13,31 +13,34 @@
         <variable
             name="Fragment"
             type="com.dutch.hdh.dutchpayapp.ui.dutchpay.newdutchpay.DutchpayNewFragment"/>
-
+        <variable
+            name="Presenter"
+            type="com.dutch.hdh.dutchpayapp.ui.dutchpay.newdutchpay.DutchpayNewPresenter"/>
     </data>
 
 <android.support.constraint.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#ffffff">
+    android:background="#ffffff"
+    android:focusable="true"
+    android:focusableInTouchMode="true">
 
     <EditText
-        android:id="@+id/editText"
+        android:id="@+id/etCost"
         android:layout_width="0dp"
-        android:layout_height="42.86dp"
+        android:layout_height="43dp"
         android:layout_marginLeft="17dp"
         android:layout_marginTop="27dp"
         android:layout_marginRight="17dp"
         android:background="@drawable/box8"
         android:ems="10"
-        android:nextFocusDown="@+id/imageView14"
         android:fontFamily="@font/malgunfont"
+        android:gravity="center_vertical"
         android:hint="더치페이 금액을 입력해 주세요"
         android:includeFontPadding="false"
         android:inputType="number"
         android:paddingStart="10dp"
         android:paddingEnd="10dp"
-        android:selectAllOnFocus="true"
         android:singleLine="true"
         android:textColor="#333333"
         android:textSize="14dp"
@@ -55,11 +58,11 @@
         android:text="더치페이 방식 선택"
         android:textColor="#1e1e1e"
         android:textSize="13.7dp"
-        app:layout_constraintStart_toStartOf="@+id/editText"
-        app:layout_constraintTop_toBottomOf="@+id/editText" />
+        app:layout_constraintStart_toStartOf="@+id/etCost"
+        app:layout_constraintTop_toBottomOf="@+id/etCost" />
 
     <Button
-        android:id="@+id/button12"
+        android:id="@+id/btDutch"
         android:layout_width="0dp"
         android:layout_height="41.71dp"
         android:layout_marginStart="17dp"
@@ -67,12 +70,13 @@
         android:layout_marginTop="6dp"
         android:layout_marginRight="7dp"
         android:background="@drawable/dutchpay3_1_n"
-        app:layout_constraintEnd_toStartOf="@+id/button14"
+        android:onClick="@{()-> Presenter.onDutchClick()}"
+        app:layout_constraintEnd_toStartOf="@+id/btType"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView65" />
 
     <Button
-        android:id="@+id/button14"
+        android:id="@+id/btType"
         android:layout_width="0dp"
         android:layout_height="41.71dp"
         android:layout_marginStart="4dp"
@@ -80,9 +84,10 @@
         android:layout_marginEnd="17dp"
         android:layout_marginRight="17dp"
         android:background="@drawable/dutchpay3_btn"
+        android:onClick="@{()-> Presenter.onTypingClick()}"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/button12"
-        app:layout_constraintTop_toTopOf="@+id/button12" />
+        app:layout_constraintStart_toEndOf="@+id/btDutch"
+        app:layout_constraintTop_toTopOf="@+id/btDutch" />
 
     <Button
         android:id="@+id/button15"
@@ -93,7 +98,7 @@
         android:background="@drawable/contact_info"
         app:layout_constraintEnd_toStartOf="@+id/button16"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="@+id/button12"
+        app:layout_constraintStart_toStartOf="@+id/btDutch"
         app:layout_constraintTop_toBottomOf="@+id/textView66" />
 
     <Button
@@ -112,7 +117,8 @@
         android:layout_width="0dp"
         android:layout_height="40dp"
         android:background="@drawable/add"
-        app:layout_constraintEnd_toEndOf="@+id/button14"
+        android:onClick="@{()-> Presenter.makeListClick()}"
+        app:layout_constraintEnd_toEndOf="@+id/btType"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/button16"
         app:layout_constraintTop_toTopOf="@+id/button16" />
@@ -127,8 +133,8 @@
         android:text="참여자 불러오기"
         android:textColor="#1e1e1e"
         android:textSize="13.7dp"
-        app:layout_constraintStart_toStartOf="@+id/button12"
-        app:layout_constraintTop_toBottomOf="@+id/button12" />
+        app:layout_constraintStart_toStartOf="@+id/btDutch"
+        app:layout_constraintTop_toBottomOf="@+id/btDutch" />
 
     <android.support.constraint.ConstraintLayout
         android:id="@+id/constraintLayout3"
@@ -154,12 +160,12 @@
             android:textColor="#626262"
             android:textSize="13.7dp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="@+id/textView68"
-            app:layout_constraintEnd_toStartOf="@+id/textView68"
-            app:layout_constraintTop_toTopOf="@+id/textView68" />
+            app:layout_constraintBottom_toBottomOf="@+id/tvMemNum"
+            app:layout_constraintEnd_toStartOf="@+id/tvMemNum"
+            app:layout_constraintTop_toTopOf="@+id/tvMemNum" />
 
         <TextView
-            android:id="@+id/textView68"
+            android:id="@+id/tvMemNum"
             android:layout_width="46.29dp"
             android:layout_height="18.29dp"
             android:layout_marginTop="13dp"
@@ -168,7 +174,7 @@
             android:fontFamily="@font/malgunfont"
             android:gravity="center"
             android:includeFontPadding="false"
-            android:text="총 5명"
+            android:text="총 0명"
             android:textColor="#ffffff"
             android:textSize="10dp"
             android:textStyle="bold"
@@ -204,22 +210,22 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/textView70"
+                android:id="@+id/tvMyCost"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="14dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="14dp"
                 android:layout_marginBottom="8dp"
-                android:text="10,000원"
-                android:textColor="#0f69ff"
-                android:textSize="13.7dp"
                 android:fontFamily="@font/malgunfont"
                 android:includeFontPadding="false"
+                android:textColor="#0f69ff"
+                android:textSize="13.7dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/textView69"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="10,000원" />
 
             <ImageView
                 android:id="@+id/imageView14"

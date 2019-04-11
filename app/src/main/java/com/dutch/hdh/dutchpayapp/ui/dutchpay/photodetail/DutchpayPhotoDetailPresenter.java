@@ -30,7 +30,7 @@ public class DutchpayPhotoDetailPresenter implements DutchpayPhotoDetailContract
     public void listInit() {
         //더미 데이터 셋
         mPDetailList.add(new TempDetailListModel("",false,"",0));
-        mPDetailList.add(new TempDetailListModel("",false,"",0));
+        mPDetailList.add(new TempDetailListModel("",true,"",0));
         mPDetailList.add(new TempDetailListModel("",false,"",0));
         mPDetailList.add(new TempDetailListModel("",false,"",0));
 

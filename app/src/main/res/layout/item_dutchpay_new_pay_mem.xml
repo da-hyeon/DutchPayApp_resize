@@ -13,41 +13,43 @@
     android:background="#ffffff">
 
     <TextView
-        android:id="@+id/textView17"
+        android:id="@+id/tvName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="17dp"
         android:layout_marginLeft="17dp"
         android:layout_marginTop="18dp"
         android:layout_marginBottom="18dp"
-        android:text="최윤미"
-        android:textColor="#2a2a2a"
-        android:textSize="11.4dp"
         android:fontFamily="@font/malgunfont"
         android:includeFontPadding="false"
+        android:text="@{item.name}"
+        android:textColor="#2a2a2a"
+        android:textSize="11.4dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="최윤미" />
 
     <TextView
-        android:id="@+id/textView18"
+        android:id="@+id/tvPhone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:layout_marginLeft="10dp"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
-        android:text="010-1234-5678"
-        android:textColor="#acacac"
-        android:textSize="11.4dp"
         android:fontFamily="@font/malgunfont"
         android:includeFontPadding="false"
+        android:text="@{item.phone}"
+        android:textColor="#acacac"
+        android:textSize="11.4dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/textView17"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toEndOf="@+id/tvName"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="010-1234-5678" />
 
     <TextView
-        android:id="@+id/textView19"
+        android:id="@+id/tvCost"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="17dp"
@@ -56,18 +58,19 @@
         android:layout_marginEnd="17dp"
         android:layout_marginRight="17dp"
         android:layout_marginBottom="8dp"
-        android:text="10,000원"
-        android:textColor="#2a2a2a"
-        android:textSize="13.7dp"
         android:fontFamily="@font/malgunfont"
         android:includeFontPadding="false"
+        android:text="@{item.cost}"
+        android:textColor="#2a2a2a"
+        android:textSize="13.7dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/imageView7"
-        app:layout_constraintStart_toEndOf="@+id/textView18"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintEnd_toStartOf="@+id/ivPayComplete"
+        app:layout_constraintStart_toEndOf="@+id/tvPhone"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="10,000원" />
 
     <ImageView
-        android:id="@+id/imageView7"
+        android:id="@+id/ivPayComplete"
         android:layout_width="74.86dp"
         android:layout_height="20.86dp"
         android:layout_marginTop="8dp"

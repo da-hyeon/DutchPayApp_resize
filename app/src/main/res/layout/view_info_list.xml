@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+
+    </data>
+
+<android.support.constraint.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="57.43dp"
+    android:background="#f1f1f1">
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/clView"
+        android:layout_width="match_parent"
+        android:layout_height="47.43dp"
+        android:background="#ffffff"
+        android:elevation="4dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/tvTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="14dp"
+            android:layout_marginLeft="14dp"
+            android:fontFamily="@font/malgunfont"
+            android:includeFontPadding="false"
+            android:text="더치페이 진행방법"
+            android:textColor="#1a1a1a"
+            android:textSize="14.3dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/ivIcon"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/imageView4"
+            android:layout_width="10.29dp"
+            android:layout_height="23.43dp"
+            android:layout_marginEnd="17dp"
+            android:layout_marginRight="17dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/next_arrow" />
+
+        <ImageView
+            android:id="@+id/ivIcon"
+            android:layout_width="29.71dp"
+            android:layout_height="26.29dp"
+            android:layout_marginStart="19dp"
+            android:layout_marginLeft="19dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/info_icon1" />
+    </android.support.constraint.ConstraintLayout>
+
+</android.support.constraint.ConstraintLayout>
+</layout>
