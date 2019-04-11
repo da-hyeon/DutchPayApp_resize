@@ -45,7 +45,7 @@ public class DutchpayNewlPresenter implements DutchpayNewContract.Presenter {
         return mAdapter;
     }
 
-    @BindingAdapter("bind:item")
+    @BindingAdapter("item")
     public static void bindItem(RecyclerView view, ObservableArrayList<TempNewListModel> list){
         DutchpayNewListAdapter adapter = (DutchpayNewListAdapter) view.getAdapter();
         if(adapter != null) {

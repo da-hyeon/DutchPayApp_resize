@@ -46,7 +46,7 @@ public class DutchpayDetailPresenter implements DutchpayDetailContract.Presenter
         return mAdapter;
     }
 
-    @BindingAdapter("bind:item")
+    @BindingAdapter("item")
     public static void bindItem(RecyclerView view, ObservableArrayList<TempDetailListModel> list){
         DutchpayDetailListAdapter adapter = (DutchpayDetailListAdapter) view.getAdapter();
         if(adapter != null) {
