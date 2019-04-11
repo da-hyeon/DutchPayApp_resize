@@ -2,7 +2,6 @@ package com.dutch.hdh.dutchpayapp.adapter;
 
 import android.content.Context;
 import android.databinding.DataBindingUtil;
-import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
 import android.support.v4.view.PagerAdapter;
 import android.view.LayoutInflater;
@@ -10,25 +9,25 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.dutch.hdh.dutchpayapp.R;
+import com.dutch.hdh.dutchpayapp.data.db.CardRegisterList;
 import com.dutch.hdh.dutchpayapp.databinding.CardSliderBinding;
-import com.dutch.hdh.dutchpayapp.databinding.EventSliderBinding;
 
-import java.util.List;
+import java.util.ArrayList;
 
 public class CardImageSliderAdapter extends PagerAdapter {
 
     private Context mContext;
-    private List<Drawable> mImageArray;
+    private ArrayList<CardRegisterList.CardRegisterListResult> mCardRegisterListResultArrayList;
     private String check;
 
-    public CardImageSliderAdapter(Context mContext, List<Drawable> mImageArray) {
+    public CardImageSliderAdapter(Context mContext, ArrayList<CardRegisterList.CardRegisterListResult> mImageArray) {
         this.mContext = mContext;
-        this.mImageArray = mImageArray;
+        this.mCardRegisterListResultArrayList = mImageArray;
     }
 
     @Override
     public int getCount() {
-        return mImageArray.size() + 1;
+        return mCardRegisterListResultArrayList.size() + 1;
     }
 
     @Override
@@ -45,10 +44,15 @@ public class CardImageSliderAdapter extends PagerAdapter {
 
         mCardSliderBinding.getRoot().setTag(position);
 
-        if (position == mImageArray.size()) {
+        if (position == mCardRegisterListResultArrayList.size()) {
             return mCardSliderBinding.getRoot();
         }
-        if (position == 0) {
+        /**
+         * 대표카드 정보가 없어서
+         * 무조건 첫번째가 대표카드로 처리
+         *
+         * */
+        if ("0".equals(mCardRegisterListResultArrayList.get(position).getCard_Choice())) {
             mCardSliderBinding.ivRepresentativeCard.setVisibility(View.GONE);
         } else {
             mCardSliderBinding.ivRepresentativeCard.setVisibility(View.VISIBLE);
@@ -59,7 +63,7 @@ public class CardImageSliderAdapter extends PagerAdapter {
 
             }
         });
-        mCardSliderBinding.ivCardImage.setImageDrawable(mImageArray.get(position));
+//        mCardSliderBinding.ivCardImage.setImageDrawable(mCardRegisterListResultArrayList.get(position));
         container.addView(mCardSliderBinding.getRoot());
         return mCardSliderBinding.getRoot();
     }

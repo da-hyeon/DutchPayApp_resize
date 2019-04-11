@@ -114,9 +114,7 @@ public class DutchpayStartPresenter implements DutchpayStartContract.Presenter{
                 }
             }
         }
-
         mAdapter.setItem(newList);
         mAdapter.notifyDataSetChanged();
     }
-
 }

@@ -34,4 +34,12 @@
 
     <color name="textSelect">#ffffff</color>
     <color name="textDefault">#5f5f5f</color>
+
+    <!--CardListColor-->
+    <color name="hanaCardColor">#288479</color>
+    <color name="kbCardColor">#f7b500</color>
+    <color name="shinhanCardColor">#0f479e</color>
+    <color name="bcCardColor">#ea1d24</color>
+    <color name="hyundaiCardColor">#212021</color>
+    <color name="samsungCardColor">#0062aa</color>
 </resources>

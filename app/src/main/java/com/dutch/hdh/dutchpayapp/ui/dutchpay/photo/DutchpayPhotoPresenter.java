@@ -58,7 +58,7 @@ public class DutchpayPhotoPresenter implements DutchpayPhotoContract.Presenter {
         fragmentTransaction.setCustomAnimations(R.anim.fade_in, 0, 0, R.anim.fade_out);
 
         DutchpayPhotoDetailFragment dutchpayPhotoDetailFragment = new DutchpayPhotoDetailFragment();
-        fragmentTransaction.replace(R.id.flFragmentContainer,dutchpayPhotoDetailFragment, DutchpayPhotoDetailFragment.class.getName());
+        fragmentTransaction.replace(R.id.flFragmentContainer, dutchpayPhotoDetailFragment, DutchpayPhotoDetailFragment.class.getName());
         fragmentTransaction.addToBackStack(DutchpayPhotoDetailFragment.class.getName());
         fragmentTransaction.commit();
     }

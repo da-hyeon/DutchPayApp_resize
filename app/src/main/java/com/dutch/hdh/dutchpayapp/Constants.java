@@ -14,16 +14,28 @@ public class Constants {
     public static final String DELETE_GROUP_REQUEST_URL = "dutchpay_groupdelete.php";               //그룹삭제 요청
     public static final String UPDATE_GROUP_REQUEST_URL = "dutchpay_groupupdate.php";               //그룹삭제 요청
 
+    public static final String SELECT_EVENT_ONGOING_REQUEST_URL = "dutchpay_event.php";               //진행중인 이벤트 목록 요청
+    public static final String SELECT_EVENT_ENDPROGRESS_REQUEST_URL = "dutchpay_endevent.php";               //진행중인 이벤트 목록 요청
+
+    public static final String DUTCHPAY_CARD_SELECT = "dutchpay_cardselect.php";                     //등록할 카드목록 가져오기
+    public static final String DUTCHPAY_CARD_REGISTER = "dutchpay_cardregister.php";                 //카드등록
+    public static final String DUTCHPAY_CARD_REGISTER_SELECT = "dutchpay_registeredcardselect.php";  //등록한 카드목록 가져오기
+    public static final String DUTCHPAY_CARD_DELETE = "dutchpay_carddelete.php";                     //카드 삭제
+
 
     /**
-     *  Dutchpay State
+     * Dutchpay State
      */
     public static final int DUTCHPAY_STATE_WAIT = 0;
     public static final int DUTCHPAY_STATE_REQUEST = 1;
     public static final int DUTCHPAY_STATE_COMPLETE = 2;
     public static final int DUTCHPAY_STATE_CANCEL = 3;
-    public static final String SELECT_EVENT_ONGOING_REQUEST_URL = "dutchpay_event.php";               //진행중인 이벤트 목록 요청
-    public static final String SELECT_EVENT_ENDPROGRESS_REQUEST_URL = "dutchpay_endevent.php";               //진행중인 이벤트 목록 요청
 
+
+
+    /**
+     * Test userCode
+     */
+    public static final String USER_CODE = "5";
 
 }

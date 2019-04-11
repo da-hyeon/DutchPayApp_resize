@@ -8,17 +8,17 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
 import com.dutch.hdh.dutchpayapp.R;
-import com.dutch.hdh.dutchpayapp.data.db.CardList;
-import com.dutch.hdh.dutchpayapp.databinding.ViewListCardselectBinding;
+import com.dutch.hdh.dutchpayapp.data.db.CardCompanyList;
+import com.dutch.hdh.dutchpayapp.databinding.ItemCardSelectBinding;
 
 import java.util.ArrayList;
 
 public class CardSelectListAdapter extends BaseAdapter {
     private CardHolder holder;
-    private ArrayList<CardList.CardListResult> mCardListResultArrayList = new ArrayList<>();
+    private ArrayList<CardCompanyList.CardCompanyListResult> mCardListResultArrayList = new ArrayList<>();
     private Context mContext;
 
-    public CardSelectListAdapter(Context context, ArrayList<CardList.CardListResult> cardListResultArrayList) {
+    public CardSelectListAdapter(Context context, ArrayList<CardCompanyList.CardCompanyListResult> cardListResultArrayList) {
         super();
         this.mContext = context;
         this.mCardListResultArrayList = cardListResultArrayList;
@@ -43,26 +43,26 @@ public class CardSelectListAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
 
         if (convertView == null) {
-            ViewListCardselectBinding mViewListCardSelectBinding = DataBindingUtil.inflate(LayoutInflater.from(mContext), R.layout.view_list_cardselect, parent, false);
-            holder = new CardHolder(mViewListCardSelectBinding);
-            holder.mView = mViewListCardSelectBinding.getRoot();
+            ItemCardSelectBinding itemCardSelectBinding = DataBindingUtil.inflate(LayoutInflater.from(mContext), R.layout.item_card_select, parent, false);
+            holder = new CardHolder(itemCardSelectBinding);
+            holder.mView = itemCardSelectBinding.getRoot();
             holder.mView.setTag(holder);
         } else {
             holder = (CardHolder) convertView.getTag();
         }
-        CardList.CardListResult mCardListResult = mCardListResultArrayList.get(position);
-        holder.mViewListCardSelectBinding.tvCardName.setText(mCardListResult.getCardName());
+        CardCompanyList.CardCompanyListResult mCardListResult = mCardListResultArrayList.get(position);
+        holder.mViewListCardSelectBinding.tvCardName.setText(mCardListResult.getCard_TypeName());
 
         return holder.mView;
     }
 
     class CardHolder {
         View mView;
-        ViewListCardselectBinding mViewListCardSelectBinding;
+        ItemCardSelectBinding mViewListCardSelectBinding;
 
-        CardHolder(ViewListCardselectBinding viewListCardselectBinding) {
-            this.mView = viewListCardselectBinding.getRoot();
-            this.mViewListCardSelectBinding = viewListCardselectBinding;
+        CardHolder(ItemCardSelectBinding itemCardSelectBinding) {
+            this.mView = itemCardSelectBinding.getRoot();
+            this.mViewListCardSelectBinding = itemCardSelectBinding;
         }
     }
 }

@@ -3,6 +3,8 @@ package com.dutch.hdh.dutchpayapp.data.util;
 import com.dutch.hdh.dutchpayapp.Constants;
 import com.dutch.hdh.dutchpayapp.data.db.EventList;
 import com.dutch.hdh.dutchpayapp.data.db.MyGroup;
+import com.dutch.hdh.dutchpayapp.data.db.CardCompanyList;
+import com.dutch.hdh.dutchpayapp.data.db.CardRegisterList;
 import com.dutch.hdh.dutchpayapp.data.db.UserInfo;
 
 import retrofit2.Call;
@@ -19,7 +21,6 @@ public interface ServerAPI {
      *
      * @param userEmail
      * @param userPassword
-     * @return
      */
     @GET(Constants.USER_LOGIN_REQUEST_URL)
     Call<UserInfo> getFineUser(@Query("userEmail") String userEmail, @Query("userPassword") String userPassword);
@@ -29,10 +30,13 @@ public interface ServerAPI {
      * @param userName
      * @param userEmail
      * @param userPassword
+<<<<<<< HEAD
      * @param userEasyPassword
      * @param userRN
      * @param userPhone
      * @return
+=======
+>>>>>>> sungguen
      */
     @FormUrlEncoded
     @POST(Constants.USER_REGISTER_REQUEST_URL)
@@ -46,6 +50,7 @@ public interface ServerAPI {
 
 
     /**
+<<<<<<< HEAD
      * 그룹생성 요청
      * @param groupaname
      * @param usercode
@@ -93,4 +98,44 @@ public interface ServerAPI {
 
     @GET(Constants.SELECT_EVENT_ENDPROGRESS_REQUEST_URL)
     Call<EventList> selectEndProgressEvent();
+
+    /**
+     * 등록할 카드목록가져오기
+     */
+    @GET(Constants.DUTCHPAY_CARD_SELECT)
+    Call<CardCompanyList> getCardSelectList();
+
+    /**
+     * 카드등록 요청
+     *
+     * @param cardno
+     * @param cardtypecode
+     * @param usercode
+     */
+    @FormUrlEncoded
+    @POST(Constants.DUTCHPAY_CARD_REGISTER)
+    Call<Void> setCardRegister(
+            @Field("cardno") String cardno,
+            @Field("cardtypecode") String cardtypecode,
+            @Field("usercode") String usercode);
+
+    /**
+     * 등록한 카드목록 요청
+     *
+     * @param usercode
+     */
+    @GET(Constants.DUTCHPAY_CARD_REGISTER_SELECT)
+    Call<CardRegisterList> getRegisterCardList(
+            @Query("usercode") String usercode);
+
+
+    /**
+     * 카드삭제 요청
+     *
+     * @param cardcode
+     */
+    @GET(Constants.DUTCHPAY_CARD_DELETE)
+    Call<Void> setCardDelete(
+            @Query("cardcode") String cardcode);
+
 }

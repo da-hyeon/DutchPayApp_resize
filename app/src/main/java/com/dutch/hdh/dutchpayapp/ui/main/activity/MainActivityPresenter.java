@@ -27,7 +27,7 @@ import com.dutch.hdh.dutchpayapp.ui.register.term.Register_TermsConditionsAgreem
 import com.dutch.hdh.dutchpayapp.ui.setup.invite.InviteFragment;
 import com.dutch.hdh.dutchpayapp.ui.setup.setting.SetupFragment;
 import com.dutch.hdh.dutchpayapp.ui.solopay.SoloPayFragment;
-import com.dutch.hdh.dutchpayapp.ui.wallet.MyWalletFragment;
+import com.dutch.hdh.dutchpayapp.ui.wallet.mywallet.MyWalletFragment;
 
 import java.util.List;
 

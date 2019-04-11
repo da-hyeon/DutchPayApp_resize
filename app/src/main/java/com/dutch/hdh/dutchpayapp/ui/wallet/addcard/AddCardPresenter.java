@@ -8,28 +8,29 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.Gravity;
-import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.dutch.hdh.dutchpayapp.R;
-import com.dutch.hdh.dutchpayapp.data.db.CardList;
-import com.dutch.hdh.dutchpayapp.databinding.ActivityAddCardBinding;
+import com.dutch.hdh.dutchpayapp.Constants;
+import com.dutch.hdh.dutchpayapp.MyApplication;
+import com.dutch.hdh.dutchpayapp.data.db.CardCompanyList;
+import com.dutch.hdh.dutchpayapp.databinding.ActivityCardAddBinding;
 import com.dutch.hdh.dutchpayapp.ui.view.CardSelectView;
 
-import java.util.ArrayList;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 
 public class AddCardPresenter implements AddCardContract.Presenter {
 
-
     private Context mContext;
     private AddCardContract.View mView;
-    private ActivityAddCardBinding mBinding;
+    private ActivityCardAddBinding mBinding;
 
-    public AddCardPresenter(Context context, AddCardContract.View view, ActivityAddCardBinding activityAddCardBinding) {
+    public AddCardPresenter(Context context, AddCardContract.View view, ActivityCardAddBinding activityAddCardBinding) {
         this.mContext = context;
         this.mView = view;
         this.mBinding = activityAddCardBinding;
@@ -45,40 +46,12 @@ public class AddCardPresenter implements AddCardContract.Presenter {
         }
     }
 
-
-    /**
-     * 카드 선택화면 보여주기
-     */
-    @Override
-    public void cardSelect() {
-        Dialog build = new Dialog(mContext);
-        build.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        build.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        build.setContentView(new CardSelectView(mContext, getCardDummyData(), new CardSelectView.OnReceiveMessageListener() {
-            @Override
-            public void onReceive(String carName, int cardCode) {
-                mView.cardData(carName, cardCode);
-                build.dismiss();
-            }
-        }));
-        WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
-        lp.copyFrom(build.getWindow().getAttributes());
-        lp.width = WindowManager.LayoutParams.MATCH_PARENT;
-        lp.height = WindowManager.LayoutParams.MATCH_PARENT;
-        lp.gravity = Gravity.TOP;
-        build.show();
-        Window window = build.getWindow();
-        window.setAttributes(lp);
-        window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-    }
-
     /**
      * 입력필드 포커싱
      */
 
     @Override
     public TextWatcher getTextWatcher(EditText editText, int maxCount) {
-
 
         TextWatcher textWatcher = new TextWatcher() {
             @Override
@@ -130,17 +103,32 @@ public class AddCardPresenter implements AddCardContract.Presenter {
     /**
      * 서버쪽으로 data 전달
      *
-     * @param cardCompany 카드회사 선택
-     * @param cardNumber  카드번호
-     * @param cardYear    카드년도
-     * @param cardMonth   카드월
-     * @param cardCVC     카드 cvc 번호
+     * @param cardTypeCode 카드회사 코드
      */
     @Override
-    public void cardAddConfirm(String cardCompany, String cardNumber, String cardYear, String cardMonth, String cardCVC) {
+    public void cardAddConfirm(String cardTypeCode) {
         //예외처리 통과후 서버 통신
         if (cardValidate()) {
+            Call<Void> cardRegister = MyApplication.getInstance()
+                    .getRestAdapter()
+                    .setCardRegister(mBinding.etCardNum1.getText().toString() + mBinding.etCardNum2.getText().toString() + mBinding.etCardNum3.getText().toString() + mBinding.etCardNum4.getText().toString(),
+                            cardTypeCode,
+                            Constants.USER_CODE);
 
+            cardRegister.enqueue(new Callback<Void>() {
+                @Override
+                public void onResponse(Call<Void> call, Response<Void> response) {
+                    if (response.body() == null) {
+
+                    } else {
+
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<Void> call, Throwable t) {
+                }
+            });
         }
     }
 
@@ -178,13 +166,44 @@ public class AddCardPresenter implements AddCardContract.Presenter {
     }
 
     @Override
-    public ArrayList<CardList.CardListResult> getCardDummyData() {
+    public void getCardSelectList() {
 
-        ArrayList<CardList.CardListResult> mCardListResults = new ArrayList<>();
+        Call<CardCompanyList> cardList = MyApplication.getInstance()
+                .getRestAdapter()
+                .getCardSelectList();
 
-        for (int i = 0; i < 10; i++) {
-            mCardListResults.add(new CardList.CardListResult("하나카드", i));
-        }
-        return mCardListResults;
+        cardList.enqueue(new Callback<CardCompanyList>() {
+            @Override
+            public void onResponse(Call<CardCompanyList> call, Response<CardCompanyList> response) {
+                if (response.body() == null) {
+
+                } else {
+                    Dialog build = new Dialog(mContext);
+                    build.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                    build.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                    build.setContentView(new CardSelectView(mContext, response.body().getCardtypelist(), new CardSelectView.OnReceiveMessageListener() {
+                        @Override
+                        public void onReceive(String carName, String cardCode) {
+                            mView.cardData(carName, cardCode);
+                            build.dismiss();
+                        }
+                    }));
+                    WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
+                    lp.copyFrom(build.getWindow().getAttributes());
+                    lp.width = WindowManager.LayoutParams.MATCH_PARENT;
+                    lp.height = WindowManager.LayoutParams.MATCH_PARENT;
+                    lp.gravity = Gravity.TOP;
+                    build.show();
+                    Window window = build.getWindow();
+                    window.setAttributes(lp);
+                    window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                }
+            }
+
+            @Override
+            public void onFailure(Call<CardCompanyList> call, Throwable t) {
+
+            }
+        });
     }
 }
