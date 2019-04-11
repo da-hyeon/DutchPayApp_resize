@@ -24,6 +24,7 @@ public class Listview_GroupParticipantsAdapter extends BaseAdapter  {
     private ArrayList<GroupParticipants> mGroupParticipantsArrayList;
     private MyApplication myApplication;
 
+
     public Listview_GroupParticipantsAdapter(MyGroup_EditContract.View mView , Context mContext) {
         this.mContext = mContext;
         this.mView = mView;
@@ -62,12 +63,14 @@ public class Listview_GroupParticipantsAdapter extends BaseAdapter  {
             mBinding = (ItemGroupParticipantsBinding) v.getTag();
         }
 
-        if(mGroupParticipantsArrayList.get(position).getPhoneNumber().equals(myApplication.getUserInfo().getUserPhone())){
-            mBinding.ibDelete.setVisibility(View.GONE);
-            mBinding.vDelete.setVisibility(View.GONE);
-        } else {
-            mBinding.ibDelete.setVisibility(View.VISIBLE);
-            mBinding.vDelete.setVisibility(View.VISIBLE);
+        if(mGroupParticipantsArrayList != null) {
+            if (myApplication.getUserInfo().getUserPhone().equals(mGroupParticipantsArrayList.get(position).getPhoneNumber())) {
+                mBinding.ibDelete.setVisibility(View.GONE);
+                mBinding.vDelete.setVisibility(View.GONE);
+            } else {
+                mBinding.ibDelete.setVisibility(View.VISIBLE);
+                mBinding.vDelete.setVisibility(View.VISIBLE);
+            }
         }
 
         mBinding.tvName.setSelected(true);

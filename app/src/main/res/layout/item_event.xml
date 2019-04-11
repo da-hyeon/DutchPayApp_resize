@@ -4,6 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <android.support.constraint.ConstraintLayout
+        android:id="@+id/clView"
         android:layout_width="match_parent"
         android:layout_height="142.28dp"
         android:background="#ffffff">

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.databinding.DataBindingUtil;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
+import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
@@ -11,27 +12,33 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
+import com.bumptech.glide.Glide;
 import com.dutch.hdh.dutchpayapp.MyApplication;
 import com.dutch.hdh.dutchpayapp.R;
 import com.dutch.hdh.dutchpayapp.data.db.Event;
 import com.dutch.hdh.dutchpayapp.data.db.MyGroup;
 import com.dutch.hdh.dutchpayapp.databinding.ItemEventBinding;
 import com.dutch.hdh.dutchpayapp.databinding.ItemMyGroupBinding;
+import com.dutch.hdh.dutchpayapp.ui.event.detail.Event_DetailFragment;
 import com.dutch.hdh.dutchpayapp.ui.mygroup.edit.MyGroup_EditFragment;
 
 import java.util.ArrayList;
 
 public class Listview_EventAdapter extends BaseAdapter {
 
+    private final String BASE_IMAGE_URL = "http://dutchkor02.cafe24.com/image/";
+
     private ItemEventBinding mBinding;
     private Context mContext;
     private boolean onGoingCheck;
+    private FragmentManager mFragmentManager;
 
     private ArrayList<Event> mEventArrayList;
 
-    public Listview_EventAdapter(Context mContext, ArrayList<Event> mEventArrayList) {
+    public Listview_EventAdapter(Context mContext, ArrayList<Event> mEventArrayList , FragmentManager mFragmentManager) {
         this.mContext = mContext;
         this.mEventArrayList = mEventArrayList;
+        this.mFragmentManager = mFragmentManager;
     }
 
     @Override
@@ -59,14 +66,36 @@ public class Listview_EventAdapter extends BaseAdapter {
             mBinding = (ItemEventBinding) v.getTag();
         }
 
-        mBinding.tvEventTitle.setText(mEventArrayList.get(position).getTitle());
-        mBinding.ivImage.setImageDrawable(mEventArrayList.get(position).getImage());
+        mBinding.tvEventTitle.setText(mEventArrayList.get(position).getEventTitle());
+
+        Glide.with(mContext)
+                .load(BASE_IMAGE_URL + mEventArrayList.get(position).getEventUploadName())
+                .error(R.drawable.intro_dutchpay_korea)
+                .into(mBinding.ivImage);
 
         if(!onGoingCheck) {
             mBinding.ivImage.setColorFilter(Color.parseColor("#BDBDBD"), PorterDuff.Mode.MULTIPLY);
         } else {
             mBinding.ivImage.setColorFilter(Color.parseColor("#00ff0000"), PorterDuff.Mode.DST);
         }
+
+        mBinding.clView.setOnClickListener(v1->{
+            FragmentTransaction fragmentTransaction = mFragmentManager.beginTransaction();
+            fragmentTransaction.setCustomAnimations(R.anim.fade_in, 0, 0, R.anim.fade_out);
+
+            Bundle bundle = new Bundle();
+            bundle.putString("eventTitle" , mEventArrayList.get(position).getEventTitle());
+            bundle.putString("eventUploadName" , mEventArrayList.get(position).getEventUploadName());
+            bundle.putString("eventContent" , mEventArrayList.get(position).getEventContent());
+
+            Event_DetailFragment event_detailFragment = new Event_DetailFragment();
+            event_detailFragment.setArguments(bundle);
+
+            fragmentTransaction.replace(R.id.flFragmentContainer, event_detailFragment, Event_DetailFragment.class.getName());
+            fragmentTransaction.addToBackStack(Event_DetailFragment.class.getName());
+            fragmentTransaction.commit();
+        });
+
 
         v.setTag(mBinding);
         return v;

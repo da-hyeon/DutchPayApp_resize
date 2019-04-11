@@ -1,16 +1,14 @@
 package com.dutch.hdh.dutchpayapp.data.util;
 
 import com.dutch.hdh.dutchpayapp.Constants;
+import com.dutch.hdh.dutchpayapp.data.db.EventList;
 import com.dutch.hdh.dutchpayapp.data.db.MyGroup;
 import com.dutch.hdh.dutchpayapp.data.db.UserInfo;
 
 import retrofit2.Call;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
-import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.Query;
 
@@ -89,4 +87,10 @@ public interface ServerAPI {
             @Field("groupacode") String groupacode ,
             @Field("groupcontent") String groupcontent ,
             @Field("peoplenumber") String peoplenumber);
+
+    @GET(Constants.SELECT_EVENT_ONGOING_REQUEST_URL)
+    Call<EventList> selectOnGoingEvent();
+
+    @GET(Constants.SELECT_EVENT_ENDPROGRESS_REQUEST_URL)
+    Call<EventList> selectEndProgressEvent();
 }
