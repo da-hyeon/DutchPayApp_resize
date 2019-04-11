@@ -6,7 +6,7 @@ import android.support.annotation.Nullable;
 
 import com.dutch.hdh.dutchpayapp.MyApplication;
 import com.dutch.hdh.dutchpayapp.R;
-import com.dutch.hdh.dutchpayapp.base.BaseActivity;
+import com.dutch.hdh.dutchpayapp.base.activity.BaseActivity;
 import com.dutch.hdh.dutchpayapp.databinding.ActivityCardInfoBinding;
 
 public class MyCardActivity extends BaseActivity implements MyCardContract.View {

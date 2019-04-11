@@ -14,7 +14,7 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.Toast;
 
 import com.dutch.hdh.dutchpayapp.R;
-import com.dutch.hdh.dutchpayapp.base.BaseFragment;
+import com.dutch.hdh.dutchpayapp.base.fragment.BaseFragment;
 import com.dutch.hdh.dutchpayapp.databinding.FragmentDutchpayNewStartBinding;
 import com.dutch.hdh.dutchpayapp.ui.dutchpay.start.ItemDecoration;
 

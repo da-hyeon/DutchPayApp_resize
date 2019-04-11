@@ -30,13 +30,10 @@ public interface ServerAPI {
      * @param userName
      * @param userEmail
      * @param userPassword
-<<<<<<< HEAD
      * @param userEasyPassword
      * @param userRN
      * @param userPhone
      * @return
-=======
->>>>>>> sungguen
      */
     @FormUrlEncoded
     @POST(Constants.USER_REGISTER_REQUEST_URL)
@@ -50,7 +47,6 @@ public interface ServerAPI {
 
 
     /**
-<<<<<<< HEAD
      * 그룹생성 요청
      * @param groupaname
      * @param usercode

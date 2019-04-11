@@ -12,7 +12,7 @@ import android.webkit.WebSettings;
 import android.webkit.WebViewClient;
 
 import com.dutch.hdh.dutchpayapp.R;
-import com.dutch.hdh.dutchpayapp.base.BaseFragment;
+import com.dutch.hdh.dutchpayapp.base.fragment.BaseFragment;
 import com.dutch.hdh.dutchpayapp.databinding.FragmentNoticeBinding;
 
 public class NoticeFragment extends BaseFragment {

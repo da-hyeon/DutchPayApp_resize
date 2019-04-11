@@ -37,7 +37,6 @@ public class MyApplication extends Application {
 
     //true = 편집 , false = 신규추가
     public static boolean entranceGroupPath;
-//    private static final String BASE_URL = "http://dutchkor02.cafe24.com/";
 
     //타임아웃
     private static final int CONNECT_TIMEOUT = 15;
