@@ -8,5 +8,9 @@ public interface MyPage_MainContract {
     }
     interface Presenter{
         void setVIew();
+
+        void clickChangeEmail();
+        void clickChangePassword();
+        void clickChangePhoneNumber();
     }
 }

@@ -17,6 +17,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24.75dp"
                 android:fontFamily="@font/malgunfont"
+                android:includeFontPadding="false"
                 android:text="@string/register_titleText"
                 android:textColor="#2a2a2a"
                 android:textSize="18.85dp"
@@ -53,6 +54,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10.25dp"
                 android:fontFamily="@font/malgunfont"
+                android:includeFontPadding="false"
                 android:text="@string/register_agreeTitleText"
                 android:textColor="#1e1e1e"
                 android:textSize="14dp"
@@ -99,7 +101,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10.25dp"
                 android:fontFamily="@font/malgunfont"
+                android:includeFontPadding="false"
                 android:text="@string/register_agree1Text"
+
                 android:textColor="#1e1e1e"
                 android:textSize="13.71dp"
                 android:textStyle="bold"
@@ -122,10 +126,10 @@
                 android:id="@+id/check2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/check_box"
                 android:layout_marginTop="15dp"
-                app:layout_constraintTop_toBottomOf="@+id/check1"
-                app:layout_constraintLeft_toLeftOf="@+id/cbCompleteAgreement"/>
+                android:src="@drawable/check_box"
+                app:layout_constraintLeft_toLeftOf="@+id/cbCompleteAgreement"
+                app:layout_constraintTop_toBottomOf="@+id/check1" />
 
 
             <CheckBox
@@ -163,10 +167,10 @@
                 android:id="@+id/check3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/check_box"
                 android:layout_marginTop="15dp"
-                app:layout_constraintTop_toBottomOf="@+id/check2"
-                app:layout_constraintLeft_toLeftOf="@+id/cbCompleteAgreement"/>
+                android:src="@drawable/check_box"
+                app:layout_constraintLeft_toLeftOf="@+id/cbCompleteAgreement"
+                app:layout_constraintTop_toBottomOf="@+id/check2" />
 
 
             <CheckBox
@@ -205,10 +209,10 @@
                 android:id="@+id/check4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/check_box"
                 android:layout_marginTop="15dp"
-                app:layout_constraintTop_toBottomOf="@+id/check3"
-                app:layout_constraintLeft_toLeftOf="@+id/cbCompleteAgreement"/>
+                android:src="@drawable/check_box"
+                app:layout_constraintLeft_toLeftOf="@+id/cbCompleteAgreement"
+                app:layout_constraintTop_toBottomOf="@+id/check3" />
 
 
             <CheckBox
@@ -310,6 +314,7 @@
                 android:id="@+id/textVie10"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/malgunfont"
                 android:text="@string/register_agree6Text"
                 android:textColor="#1e1e1e"
                 android:textSize="13.71dp"
@@ -337,8 +342,8 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="26dp"
-                android:src="@drawable/join_btn"
                 android:scaleType="fitXY"
+                android:src="@drawable/join_btn"
                 app:layout_constraintLeft_toLeftOf="@+id/linearLayout"
                 app:layout_constraintRight_toRightOf="@+id/linearLayout"
                 app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
@@ -358,10 +363,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="9.50dp"
+                android:fontFamily="@font/malgunfont"
                 android:text="@string/register_agree7Text"
                 android:textSize="9.7dp"
                 android:textStyle="bold"
-                android:fontFamily="@font/malgunfont"
                 app:layout_constraintLeft_toLeftOf="@+id/linearLayout"
                 app:layout_constraintTop_toBottomOf="@+id/imageView_kakaogo" />
 

@@ -74,32 +74,48 @@
                 </LinearLayout>
             </LinearLayout>
 
-            <android.support.constraint.ConstraintLayout
+            <LinearLayout
                 android:id="@+id/clScanView"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8.57dp"
+                android:layout_height="0dp"
+                android:orientation="vertical"
                 android:visibility="visible"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/llButtons">
 
-                <SurfaceView
-                    android:id="@+id/svCamera"
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="343.71dp"
-                    android:layout_centerInParent="true" />
+                    android:layout_height="0dp"
+                    android:layout_weight="8">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="29.14dp"
-                    android:fontFamily="@font/malgunfont"
-                    android:includeFontPadding="false"
-                    android:text="QR코드 및 바코드를 화면에 위치 시켜주세요."
-                    android:textColor="#2a2a2a"
-                    android:textSize="9.14dp"
-                    android:textStyle="bold"
-                    app:layout_constraintTop_toBottomOf="@+id/svCamera" />
-            </android.support.constraint.ConstraintLayout>
+                    <SurfaceView
+                        android:id="@+id/svCamera"
+                        android:layout_width="match_parent"
+                        android:layout_height="600.71dp"
+                        android:layout_centerInParent="true" />
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="2">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="29.14dp"
+                        android:fontFamily="@font/malgunfont"
+                        android:includeFontPadding="false"
+                        android:text="QR코드 및 바코드를 화면에 위치 시켜주세요."
+                        android:textColor="#2a2a2a"
+                        android:textSize="9.14dp"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
 
             <android.support.constraint.ConstraintLayout
                 android:id="@+id/clPaymentNumberView"
@@ -141,9 +157,9 @@
                     android:includeFontPadding="false"
                     android:inputType="number"
                     android:maxLength="1"
+                    android:nextFocusDown="@+id/etPaymentNumber1"
                     android:orientation="horizontal"
                     android:textSize="13.71dp"
-                    android:nextFocusDown="@+id/etPaymentNumber1"
                     app:layout_constraintRight_toLeftOf="@+id/etPaymentNumber1"
                     app:layout_constraintTop_toTopOf="@+id/etPaymentNumber1" />
 

@@ -151,6 +151,7 @@
                             android:orientation="horizontal">
 
                             <TextView
+                                android:id="@+id/tvEventTitle"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/malgunfont"
@@ -160,6 +161,7 @@
                                 android:textStyle="bold" />
 
                             <LinearLayout
+                                android:id="@+id/llAllEvent"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:gravity="right">

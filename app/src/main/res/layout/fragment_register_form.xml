@@ -19,6 +19,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="29.14dp"
                 android:fontFamily="@font/malgunfont"
+                android:includeFontPadding="false"
                 android:text="@string/register_form_titleText"
                 android:textColor="#1e1e1e"
                 android:textSize="13.71dp"
@@ -32,10 +33,11 @@
                 android:background="#ffffff"
                 android:fontFamily="@font/malgunfont"
                 android:hint="@string/register_form_emailHintText"
+                android:includeFontPadding="false"
+                android:inputType="textEmailAddress"
                 android:paddingLeft="10.50dp"
                 android:textColorHint="#afafaf"
                 android:textSize="13.71dp"
-                android:inputType="textEmailAddress"
                 app:layout_constraintTop_toBottomOf="@+id/textView" />
 
             <EditText
@@ -44,7 +46,9 @@
                 android:layout_height="47.42dp"
                 android:layout_marginTop="3.71dp"
                 android:background="#ffffff"
+                android:fontFamily="@font/malgunfont"
                 android:hint="@string/register_form_PWHintText"
+                android:includeFontPadding="false"
                 android:inputType="textPassword"
                 android:paddingLeft="10.50dp"
                 android:textColorHint="#afafaf"
@@ -59,8 +63,9 @@
                 android:background="#ffffff"
                 android:fontFamily="@font/malgunfont"
                 android:hint="@string/register_form_PWCheckHintText"
-                android:paddingLeft="10.50dp"
+                android:includeFontPadding="false"
                 android:inputType="textPassword"
+                android:paddingLeft="10.50dp"
                 android:textColorHint="#afafaf"
                 android:textSize="13.71dp"
                 app:layout_constraintTop_toBottomOf="@+id/etPassword" />
@@ -73,8 +78,9 @@
                 android:background="#ffffff"
                 android:fontFamily="@font/malgunfont"
                 android:hint="@string/register_form_nameHintText"
-                android:maxLength="4"
+                android:includeFontPadding="false"
                 android:inputType="text"
+                android:maxLength="4"
                 android:paddingLeft="10.50dp"
                 android:textColorHint="#afafaf"
                 android:textSize="13.71dp"
@@ -101,9 +107,10 @@
                         android:layout_marginRight="10dp"
                         android:layout_weight="1"
                         android:background="#ffffff"
-                        android:inputType="number"
                         android:fontFamily="@font/malgunfont"
                         android:hint="@string/register_form_RRHintText"
+                        android:includeFontPadding="false"
+                        android:inputType="number"
                         android:maxLength="6"
                         android:paddingLeft="10.50dp"
                         android:textColorHint="#afafaf"
@@ -124,19 +131,19 @@
 
                     <EditText
                         android:id="@+id/etFirstRN"
-                        android:inputType="number"
                         android:layout_width="0dp"
-                        android:background="#ffffff"
                         android:layout_height="match_parent"
                         android:layout_marginLeft="10dp"
                         android:layout_weight="2"
+                        android:background="#ffffff"
                         android:fontFamily="@font/malgunfont"
-                        android:maxLength="1"
                         android:gravity="center"
                         android:hint="@string/register_form_RRbackHintText"
+                        android:includeFontPadding="false"
+                        android:inputType="number"
+                        android:maxLength="1"
                         android:textColorHint="#afafaf"
-                        android:textSize="13.71dp"
-                        />
+                        android:textSize="13.71dp" />
 
                     <TextView
                         android:layout_width="0dp"
@@ -169,10 +176,11 @@
                     android:background="#ffffff"
                     android:fontFamily="@font/malgunfont"
                     android:hint="@string/register_form_phoneHintText"
-                    android:paddingLeft="10.50dp"
-                    android:textColorHint="#afafaf"
+                    android:includeFontPadding="false"
                     android:inputType="number"
                     android:maxLength="11"
+                    android:paddingLeft="10.50dp"
+                    android:textColorHint="#afafaf"
                     android:textSize="13.71dp" />
 
                 <ImageView
@@ -192,6 +200,7 @@
                 android:background="#ffffff"
                 android:fontFamily="@font/malgunfont"
                 android:hint="@string/register_form_CNHintText"
+                android:includeFontPadding="false"
                 android:inputType="number"
                 android:maxLength="6"
                 android:paddingLeft="10.50dp"

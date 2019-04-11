@@ -146,7 +146,7 @@
             android:layout_width="1dp"
             android:layout_height="0dp"
             app:layout_constraintLeft_toRightOf="@+id/image_userRegister"
-            app:layout_constraintRight_toLeftOf="@+id/ivState" />
+            app:layout_constraintRight_toLeftOf="@+id/imageView10" />
         <!--View-->
 
         <ImageView
@@ -157,7 +157,7 @@
             android:layout_marginTop="15dp"
             app:layout_constraintTop_toTopOf="@+id/linearLayout"
             app:layout_constraintLeft_toLeftOf="@+id/linearLayout"
-            app:layout_constraintRight_toLeftOf="@+id/ivState"/>
+            app:layout_constraintRight_toLeftOf="@+id/imageView10"/>
 
         <TextView
             android:id="@+id/textView2"
@@ -173,7 +173,7 @@
             app:layout_constraintRight_toRightOf="@+id/image_userRegister"/>
 
         <ImageView
-            android:id="@+id/ivState"
+            android:id="@+id/imageView10"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/login_search_id"
@@ -191,9 +191,9 @@
             android:textSize="10dp"
             android:fontFamily="@font/malgunfont"
             android:textStyle="bold"
-            app:layout_constraintTop_toBottomOf="@+id/ivState"
-            app:layout_constraintLeft_toLeftOf="@+id/ivState"
-            app:layout_constraintRight_toRightOf="@+id/ivState"/>
+            app:layout_constraintTop_toBottomOf="@+id/imageView10"
+            app:layout_constraintLeft_toLeftOf="@+id/imageView10"
+            app:layout_constraintRight_toRightOf="@+id/imageView10"/>
 
         <ImageView
             android:id="@+id/imageView11"
@@ -202,7 +202,7 @@
             android:src="@drawable/login_search_password"
             android:layout_marginTop="15dp"
             app:layout_constraintTop_toTopOf="@+id/linearLayout"
-            app:layout_constraintLeft_toRightOf="@+id/ivState"
+            app:layout_constraintLeft_toRightOf="@+id/imageView10"
             app:layout_constraintRight_toRightOf="@id/linearLayout"/>
 
         <TextView
@@ -213,7 +213,7 @@
             android:textSize="10dp"
             android:fontFamily="@font/malgunfont"
             android:textStyle="bold"
-            app:layout_constraintTop_toBottomOf="@+id/ivState"
+            app:layout_constraintTop_toBottomOf="@+id/imageView10"
             app:layout_constraintLeft_toLeftOf="@+id/imageView11"
             app:layout_constraintRight_toRightOf="@+id/imageView11"/>
 

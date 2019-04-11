@@ -12,6 +12,9 @@ public interface MainFragmentContract {
 
         //show
         void showUserInfo(String userName , int userDutchMoney , boolean state);
+
+        //change
+        void changeEventTitle(String title);
     }
     interface Presenter{
         //init
@@ -22,6 +25,7 @@ public interface MainFragmentContract {
 
         //click
         void clickSolopay();
-        void clickDutchPay();
+        void clickDutchpay();
+        void clickAllEvent();
     }
 }

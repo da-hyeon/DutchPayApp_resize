@@ -96,7 +96,6 @@ public class Listview_EventAdapter extends BaseAdapter {
             fragmentTransaction.commit();
         });
 
-
         v.setTag(mBinding);
         return v;
     }
