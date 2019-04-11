@@ -18,5 +18,6 @@ public interface MyGroup_DirectInputContract {
         void clickAddMember();
         void clickMemberAdditionConfirmed(Bundle bundle);
         void clickBackPressed();
+        void clickWarningDialogOK(Bundle bundle);
     }
 }

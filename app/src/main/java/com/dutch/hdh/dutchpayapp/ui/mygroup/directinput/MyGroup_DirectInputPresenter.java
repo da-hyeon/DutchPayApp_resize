@@ -59,4 +59,13 @@ public class MyGroup_DirectInputPresenter implements MyGroup_DirectInputContract
     public void clickBackPressed() {
         mView.showWarningDialog("경고", "정말로 추가를 그만하시겠습니까?\n입력된 정보는 저장되지 않습니다.");
     }
+
+    @Override
+    public void clickWarningDialogOK(Bundle bundle) {
+        Bundle bundle1 = new Bundle();
+        bundle1.putParcelableArrayList("itemList" , bundle.getParcelableArrayList("itemList"));
+        bundle1.putParcelableArrayList("InputMember", null);
+        mMyApplication.getMyGroup_EditFragment().setArguments(bundle1);
+        mFragmentManager.popBackStack();
+    }
 }

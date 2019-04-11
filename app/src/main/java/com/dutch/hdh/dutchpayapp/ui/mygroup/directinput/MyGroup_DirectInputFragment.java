@@ -68,7 +68,7 @@ public class MyGroup_DirectInputFragment extends BaseFragment implements MyGroup
                 .setConfirmText("확인")
                 .setConfirmClickListener(sDialog -> {
                     sDialog.dismissWithAnimation();
-                    getFragmentManager().popBackStack();
+                    mPresenter.clickWarningDialogOK(getArguments());
                 })
                 .setCancelText("취소")
                 .setCancelClickListener(sDialog -> sDialog.dismissWithAnimation())

@@ -75,15 +75,20 @@ public class MainActivity extends AppCompatActivity implements MainActivityContr
 
         //이벤트 버튼
         mBinding.navigationView.llEvent.setOnClickListener(v ->
-                {}
+                mPresenter.clickEvent()
         );
 
-        //My그룹 버튼
+        //My 페이지 버튼
+        mBinding.navigationView.llMyPage.setOnClickListener(v ->
+                mPresenter.clickMyPage()
+        );
+
+        //My 그룹 버튼
         mBinding.navigationView.llMyGroup.setOnClickListener(v ->
                mPresenter.clickMyGroup()
         );
 
-        //My지갑 버튼
+        //My 지갑 버튼
         mBinding.navigationView.llMyWallet.setOnClickListener(v ->
                 {}
         );

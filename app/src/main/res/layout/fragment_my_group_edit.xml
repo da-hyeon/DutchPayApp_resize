@@ -19,6 +19,7 @@
             android:background="#ffffff"
             android:fontFamily="@font/malgunfont"
             android:hint="그룹명을 입력해주세요."
+            android:inputType="text"
             android:includeFontPadding="false"
             android:paddingLeft="12dp"
             android:textColorHint="#afafaf"

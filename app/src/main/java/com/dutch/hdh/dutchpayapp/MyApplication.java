@@ -76,9 +76,7 @@ public class MyApplication extends Application {
     public UserInfo getUserInfo() {
         if (mUserInfo == null) {
             mUserInfo = new UserInfo();
-            mUserInfo.setUserMoney(200000);
         }
-
         return mUserInfo;
     }
 

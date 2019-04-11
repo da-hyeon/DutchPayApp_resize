@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#ffffff">
+
+        <LinearLayout
+            android:id="@+id/llButtons"
+            android:layout_width="match_parent"
+            android:layout_height="42.85dp"
+            android:layout_marginLeft="17.14dp"
+            android:layout_marginTop="34.57dp"
+            android:layout_marginRight="17.14dp"
+            android:orientation="horizontal"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <Button
+                android:id="@+id/btOnGoing"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="#ffbc09"
+                android:fontFamily="@font/malgunfont"
+                android:includeFontPadding="false"
+                android:text="진행중"
+                android:textColor="#ffffff"
+                android:textSize="15dp"
+                android:textStyle="bold"/>
+
+            <Button
+                android:id="@+id/btEndProgress"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="#cfcfcf"
+                android:fontFamily="@font/malgunfont"
+                android:includeFontPadding="false"
+                android:text="진행 종료"
+                android:textColor="@color/textDefault"
+                android:textSize="15dp"
+                android:textStyle="bold"/>
+
+        </LinearLayout>
+
+        <ListView
+            android:id="@+id/lvEvent"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginLeft="17.14dp"
+            android:layout_marginTop="17.14dp"
+            android:dividerHeight="17.14dp"
+            android:divider="#ffffff"
+            android:layout_marginRight="17.14dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/llButtons"/>
+
+    </android.support.constraint.ConstraintLayout>
+
+</layout>

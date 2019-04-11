@@ -25,6 +25,7 @@ public class Listview_MyGroupAdapter extends BaseAdapter {
     private FragmentManager mFragmentManager;
     private ArrayList<MyGroup> mMyGroupArrayList;
     private MyApplication mMyApplication;
+
     public Listview_MyGroupAdapter(Context mContext, ArrayList<MyGroup> mMyGroupArrayList, FragmentManager mFragmentManager) {
         this.mContext = mContext;
         this.mMyGroupArrayList = mMyGroupArrayList;
@@ -60,19 +61,18 @@ public class Listview_MyGroupAdapter extends BaseAdapter {
         mBinding.tvPersonCount.setText(mMyGroupArrayList.get(position).getParticipants() + "명");
         mBinding.tvGroupName.setText(mMyGroupArrayList.get(position).getGroupName());
 
-
         //편집 클릭
         mBinding.btEdit.setOnClickListener(v1 -> {
-                    mMyApplication.entranceGroupPath = true;
-                    FragmentTransaction fragmentTransaction = mFragmentManager.beginTransaction();
-                    fragmentTransaction.setCustomAnimations(R.anim.fade_in, 0, 0, R.anim.fade_out);
+            mMyApplication.entranceGroupPath = true;
 
-                    MyGroup_EditFragment mMyGroup_EditFragment = new MyGroup_EditFragment();
-                    fragmentTransaction.replace(R.id.flFragmentContainer, mMyGroup_EditFragment, MyGroup_EditFragment.class.getName());
-                    fragmentTransaction.addToBackStack(MyGroup_EditFragment.class.getName());
-                    fragmentTransaction.commit();
-                }
-        );
+            FragmentTransaction fragmentTransaction = mFragmentManager.beginTransaction();
+            fragmentTransaction.setCustomAnimations(R.anim.fade_in, 0, 0, R.anim.fade_out);
+
+            mMyApplication.getMyGroup_EditFragment().setArguments(null);
+            fragmentTransaction.replace(R.id.flFragmentContainer, mMyApplication.getMyGroup_EditFragment(), MyGroup_EditFragment.class.getName());
+            fragmentTransaction.addToBackStack(MyGroup_EditFragment.class.getName());
+            fragmentTransaction.commit();
+        });
 
         v.setTag(mBinding);
         return v;

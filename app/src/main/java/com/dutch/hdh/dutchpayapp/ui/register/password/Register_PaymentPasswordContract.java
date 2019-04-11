@@ -25,7 +25,7 @@ public interface Register_PaymentPasswordContract {
 
         void clickNumber(String numberText);
         void clickDeleteButton();
-        void clickOKButton();
+        void clickOKButton(Bundle bundle);
         void clickSuccessDialog();
     }
 }

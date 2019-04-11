@@ -52,6 +52,7 @@ public class Listview_GroupParticipantsAdapter extends BaseAdapter {
         } else {
             mBinding = (ItemGroupParticipantsBinding) v.getTag();
         }
+        mBinding.tvName.setSelected(true);
         mBinding.tvName.setText(mGroupParticipantsArrayList.get(position).getName());
         mBinding.tvPhoneNumber.setText(mGroupParticipantsArrayList.get(position).getPhoneNumber());
 

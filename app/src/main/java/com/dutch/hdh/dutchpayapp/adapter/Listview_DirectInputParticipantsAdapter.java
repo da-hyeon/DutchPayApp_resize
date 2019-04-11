@@ -2,8 +2,6 @@ package com.dutch.hdh.dutchpayapp.adapter;
 
 import android.content.Context;
 import android.databinding.DataBindingUtil;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;

@@ -12,6 +12,23 @@ public class GroupParticipants implements Parcelable {
         this.phoneNumber = phoneNumber;
     }
 
+    protected GroupParticipants(Parcel in) {
+        name = in.readString();
+        phoneNumber = in.readString();
+    }
+
+    public static final Creator<GroupParticipants> CREATOR = new Creator<GroupParticipants>() {
+        @Override
+        public GroupParticipants createFromParcel(Parcel in) {
+            return new GroupParticipants(in);
+        }
+
+        @Override
+        public GroupParticipants[] newArray(int size) {
+            return new GroupParticipants[size];
+        }
+    };
+
     public String getName() {
         return name;
     }

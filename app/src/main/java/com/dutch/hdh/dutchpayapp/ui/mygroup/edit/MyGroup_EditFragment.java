@@ -17,6 +17,7 @@ import com.dutch.hdh.dutchpayapp.base.BaseFragment;
 import com.dutch.hdh.dutchpayapp.data.db.GroupParticipants;
 import com.dutch.hdh.dutchpayapp.databinding.FragmentMyGroupBinding;
 import com.dutch.hdh.dutchpayapp.databinding.FragmentMyGroupEditBinding;
+import com.google.gson.Gson;
 import com.kinda.alert.KAlertDialog;
 
 import java.util.ArrayList;
@@ -43,6 +44,10 @@ public class MyGroup_EditFragment extends BaseFragment implements MyGroup_EditCo
         mBinding.btDirectoryInput.setOnClickListener(v -> {
             mPresenter.clickDirectInput();
         });
+
+        mBinding.btComplete.setOnClickListener(v->
+            mPresenter.clickComplete()
+        );
 
         return mBinding.getRoot();
     }
@@ -85,4 +90,5 @@ public class MyGroup_EditFragment extends BaseFragment implements MyGroup_EditCo
         super.onResume();
         mPresenter.refreshData(getArguments());
     }
+
 }
