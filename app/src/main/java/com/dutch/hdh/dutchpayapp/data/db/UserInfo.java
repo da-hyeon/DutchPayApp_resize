@@ -19,12 +19,6 @@ public class UserInfo {
     @SerializedName("phone")
     private String userPhone;
 
-    @SerializedName("join_Type")
-    private String userJoinType;
-
-    @SerializedName("login_Automatic")
-    private String userLoginAutomatic;
-
     @SerializedName("status")
     private String userStatus;
 
@@ -34,19 +28,10 @@ public class UserInfo {
     @SerializedName("user_Pwd")
     private String userPassword;
 
-    @SerializedName("start_Date")
-    private String userStartDate;
-
-    @SerializedName("modify_Date")
-    private String userModifyDate;
-
+    @SerializedName("myPoint")
     private int userMoney;
 
     private boolean userState;
-
-    public UserInfo() {
-
-    }
 
     public String getUserCode() {
         return userCode;
@@ -88,22 +73,6 @@ public class UserInfo {
         this.userPhone = userPhone;
     }
 
-    public String getUserJoinType() {
-        return userJoinType;
-    }
-
-    public void setUserJoinType(String userJoinType) {
-        this.userJoinType = userJoinType;
-    }
-
-    public String getUserLoginAutomatic() {
-        return userLoginAutomatic;
-    }
-
-    public void setUserLoginAutomatic(String userLoginAutomatic) {
-        this.userLoginAutomatic = userLoginAutomatic;
-    }
-
     public String getUserStatus() {
         return userStatus;
     }
@@ -126,22 +95,6 @@ public class UserInfo {
 
     public void setUserPassword(String userPassword) {
         this.userPassword = userPassword;
-    }
-
-    public String getUserStartDate() {
-        return userStartDate;
-    }
-
-    public void setUserStartDate(String userStartDate) {
-        this.userStartDate = userStartDate;
-    }
-
-    public String getUserModifyDate() {
-        return userModifyDate;
-    }
-
-    public void setUserModifyDate(String userModifyDate) {
-        this.userModifyDate = userModifyDate;
     }
 
     public boolean isUserState() {

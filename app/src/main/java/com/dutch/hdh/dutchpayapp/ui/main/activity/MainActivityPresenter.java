@@ -13,9 +13,15 @@ import com.dutch.hdh.dutchpayapp.R;
 import com.dutch.hdh.dutchpayapp.ui.dutchpay.startdetail.DutchpayDetailFragment;
 import com.dutch.hdh.dutchpayapp.ui.dutchpay.newdutchpay.DutchpayNewFragment;
 import com.dutch.hdh.dutchpayapp.ui.dutchpay.photo.DutchpayPhotoFragment;
+import com.dutch.hdh.dutchpayapp.ui.dutchpay.start.DutchpayStartFragment;
+import com.dutch.hdh.dutchpayapp.ui.event.main.Event_MainFragment;
 import com.dutch.hdh.dutchpayapp.ui.login.LoginFragment;
 import com.dutch.hdh.dutchpayapp.ui.main.fragment.MainFragment;
+import com.dutch.hdh.dutchpayapp.ui.mygroup.directinput.MyGroup_DirectInputFragment;
+import com.dutch.hdh.dutchpayapp.ui.mygroup.edit.MyGroup_EditFragment;
 import com.dutch.hdh.dutchpayapp.ui.mygroup.main.MyGroup_MainFragment;
+import com.dutch.hdh.dutchpayapp.ui.mygroup.telephonedirectory.MyGroup_TelephoneDirectoryFragment;
+import com.dutch.hdh.dutchpayapp.ui.mypage.main.MyPage_MainFragment;
 import com.dutch.hdh.dutchpayapp.ui.register.allview.Register_ViewAllTermsConditionsFragment;
 import com.dutch.hdh.dutchpayapp.ui.register.form.Register_FormFragment;
 import com.dutch.hdh.dutchpayapp.ui.register.password.Register_PaymentPasswordFragment;
@@ -31,7 +37,7 @@ public class MainActivityPresenter implements MainActivityContract.Presenter {
     private Context mContext;
     private Activity mActivity;
     private FragmentManager mFragmentManager;
-    private MyApplication myApplication;
+    private MyApplication mMyApplication;
 
     private long mLastTime;
 
@@ -57,7 +63,7 @@ public class MainActivityPresenter implements MainActivityContract.Presenter {
         mMainFragment = new MainFragment();
         mMyWalletFragment = new MyWalletFragment();
 
-        myApplication = MyApplication.getInstance();
+        mMyApplication = MyApplication.getInstance();
         //targetArrayList = new ArrayList<>();
     }
 
@@ -70,53 +76,57 @@ public class MainActivityPresenter implements MainActivityContract.Presenter {
             mView.changeTitle("로그인");
             mView.hideBell();
             mView.showExit();
-        }
-        else if (getCurrentFragment() instanceof Register_TermsConditionsAgreementFragment ||
+        } else if (getCurrentFragment() instanceof Register_TermsConditionsAgreementFragment ||
                 getCurrentFragment() instanceof Register_ViewAllTermsConditionsFragment ||
                 getCurrentFragment() instanceof Register_FormFragment ||
                 getCurrentFragment() instanceof Register_PaymentPasswordFragment) {
             mView.changeTitle("회원가입");
             mView.hideBell();
             mView.showExit();
-        }
-        else if (getCurrentFragment() instanceof Register_SuccessFragment) {
+        } else if (getCurrentFragment() instanceof Register_SuccessFragment) {
             mView.changeTitle("회원가입 완료");
-        }
-
-        else if(getCurrentFragment() instanceof SoloPayFragment){
+        } else if (getCurrentFragment() instanceof SoloPayFragment) {
             mView.changeTitle("결제");
             mView.hideBell();
             mView.showExit();
-        }
-
-        else if(getCurrentFragment() instanceof MyGroup_MainFragment){
+        } else if (getCurrentFragment() instanceof MyGroup_MainFragment) {
             mView.changeTitle("My 그룹");
             mView.hideBell();
             mView.showExit();
-        }
-
-        else if (getCurrentFragment() instanceof MainFragment) {
+        } else if (getCurrentFragment() instanceof MyGroup_EditFragment) {
+            if (mMyApplication.entranceGroupPath) {
+                mView.changeTitle("My 그룹 편집");
+            } else {
+                mView.changeTitle("My 그룹 신규추가");
+            }
+            mView.hideBell();
+            mView.showExit();
+        } else if (getCurrentFragment() instanceof MyGroup_TelephoneDirectoryFragment) {
+            mView.changeTitle("전화부호부");
+            mView.hideBell();
+            mView.showExit();
+        } else if (getCurrentFragment() instanceof Event_MainFragment) {
+            mView.changeTitle("이벤트");
+            mView.hideBell();
+            mView.showExit();
+        } else if (getCurrentFragment() instanceof MyPage_MainFragment) {
+            mView.changeTitle("내정보");
+            mView.hideBell();
+            mView.showExit();
+        } else if (getCurrentFragment() instanceof MainFragment) {
             initLoginState();
             mView.changeTitle("");
             mView.showBell();
             mView.hideExit();
-        }
-
-        else if (getCurrentFragment() instanceof MyWalletFragment) {
+        } else if (getCurrentFragment() instanceof MyWalletFragment) {
             mView.changeTitle("My 지갑");
             mView.hideBell();
             mView.showExit();
-        }
-
-        else if (getCurrentFragment() instanceof DutchpayNewFragment) {
+        } else if (getCurrentFragment() instanceof DutchpayNewFragment) {
             mView.changeTitle("신규 더치페이");
-        }
-
-        else if (getCurrentFragment() instanceof DutchpayDetailFragment) {
+        } else if (getCurrentFragment() instanceof DutchpayDetailFragment) {
             mView.changeTitle("더치페이");
-        }
-
-        else if (getCurrentFragment() instanceof DutchpayPhotoFragment) {
+        } else if (getCurrentFragment() instanceof DutchpayPhotoFragment) {
             mView.changeTitle("더치페이 사진");
         }
     }
@@ -145,7 +155,7 @@ public class MainActivityPresenter implements MainActivityContract.Presenter {
      */
     @Override
     public void initLoginState() {
-        mView.showUserInfo(myApplication.getUserInfo().isUserState());
+        mView.showUserInfo(mMyApplication.getUserInfo().isUserState());
     }
 
 // 튜토리얼
@@ -231,13 +241,24 @@ public class MainActivityPresenter implements MainActivityContract.Presenter {
                 ((Register_ViewAllTermsConditionsFragment) fragmentList.get(i)).onBackPress();
                 return;
             }
+            if (fragmentList.get(i) instanceof MyGroup_DirectInputFragment) {
+                ((MyGroup_DirectInputFragment) fragmentList.get(i)).onBackPressed();
+                return;
+            }
+            if (fragmentList.get(i) instanceof MyGroup_EditFragment) {
+                ((MyGroup_EditFragment) fragmentList.get(i)).onBackPressed();
+                return;
+            }
+            if (fragmentList.get(i) instanceof MyGroup_TelephoneDirectoryFragment) {
+                ((MyGroup_TelephoneDirectoryFragment) fragmentList.get(i)).onBackPressed();
+                return;
+            }
         }
 
         if (mFragmentManager.getBackStackEntryCount() > 1) {
             mFragmentManager.popBackStack();
             return;
         }
-
 
 
         exitApp();
@@ -279,7 +300,7 @@ public class MainActivityPresenter implements MainActivityContract.Presenter {
         //프래그먼트 이동
         FragmentTransaction fragmentTransaction = mFragmentManager.beginTransaction();
         fragmentTransaction.setCustomAnimations(R.anim.fade_in, 0, 0, R.anim.fade_out);
-        fragmentTransaction.replace(R.id.flFragmentContainer, myApplication.getRegister_TermsConditionsAgreementFragment(), Register_TermsConditionsAgreementFragment.class.getName());
+        fragmentTransaction.replace(R.id.flFragmentContainer, mMyApplication.getRegister_TermsConditionsAgreementFragment(), Register_TermsConditionsAgreementFragment.class.getName());
         fragmentTransaction.addToBackStack(Register_TermsConditionsAgreementFragment.class.getName());
         fragmentTransaction.commit();
     }
@@ -294,6 +315,11 @@ public class MainActivityPresenter implements MainActivityContract.Presenter {
 
         if (getCurrentFragment() instanceof SoloPayFragment)
             return;
+
+        if (!mMyApplication.getUserInfo().isUserState()) {
+            mView.showFailDialog("실패", "로그인을 해주세요.");
+            return;
+        }
 
         setDefaultMainStack();
 
@@ -315,15 +341,57 @@ public class MainActivityPresenter implements MainActivityContract.Presenter {
     }
 
     /**
-     *  Event 클릭 이벤트 처리
+     * Event 클릭 이벤트 처리
      */
     @Override
     public void clickEvent() {
+        //메뉴 닫기 , 프래그먼트 닫기
+        mView.hideDrawerLayout();
 
+        if (getCurrentFragment() instanceof Event_MainFragment)
+            return;
+
+        setDefaultMainStack();
+
+        //프래그먼트 이동
+        FragmentTransaction fragmentTransaction = mFragmentManager.beginTransaction();
+        fragmentTransaction.setCustomAnimations(R.anim.fade_in, 0, 0, R.anim.fade_out);
+
+        Event_MainFragment event_MainFragment = new Event_MainFragment();
+        fragmentTransaction.replace(R.id.flFragmentContainer, event_MainFragment, Event_MainFragment.class.getName());
+        fragmentTransaction.addToBackStack(Event_MainFragment.class.getName());
+        fragmentTransaction.commit();
     }
 
     /**
-     * My그룹 클릭 이벤트 처리
+     * My 페이지 클릭 이벤트 처리
+     */
+    @Override
+    public void clickMyPage() {
+        //메뉴 닫기 , 프래그먼트 닫기
+        mView.hideDrawerLayout();
+
+        if (getCurrentFragment() instanceof MyPage_MainFragment)
+            return;
+
+        if (!mMyApplication.getUserInfo().isUserState()) {
+            mView.showFailDialog("실패", "로그인을 해주세요.");
+            return;
+        }
+        setDefaultMainStack();
+
+        //프래그먼트 이동
+        FragmentTransaction fragmentTransaction = mFragmentManager.beginTransaction();
+        fragmentTransaction.setCustomAnimations(R.anim.fade_in, 0, 0, R.anim.fade_out);
+
+        MyPage_MainFragment mMyPage_MainFragment = new MyPage_MainFragment();
+        fragmentTransaction.replace(R.id.flFragmentContainer, mMyPage_MainFragment, MyPage_MainFragment.class.getName());
+        fragmentTransaction.addToBackStack(MyPage_MainFragment.class.getName());
+        fragmentTransaction.commit();
+    }
+
+    /**
+     * My 그룹 클릭 이벤트 처리
      */
     @Override
     public void clickMyGroup() {
@@ -333,19 +401,26 @@ public class MainActivityPresenter implements MainActivityContract.Presenter {
         if (getCurrentFragment() instanceof MyGroup_MainFragment)
             return;
 
+
+        if (!mMyApplication.getUserInfo().isUserState()) {
+            mView.showFailDialog("실패", "로그인을 해주세요.");
+            return;
+        }
+
         setDefaultMainStack();
 
         //프래그먼트 이동
         FragmentTransaction fragmentTransaction = mFragmentManager.beginTransaction();
         fragmentTransaction.setCustomAnimations(R.anim.fade_in, 0, 0, R.anim.fade_out);
-        MyGroup_MainFragment myGroupFragment = new MyGroup_MainFragment();
-        fragmentTransaction.replace(R.id.flFragmentContainer, myGroupFragment, SoloPayFragment.class.getName());
-        fragmentTransaction.addToBackStack(SoloPayFragment.class.getName());
+
+        MyGroup_MainFragment mMyGroup_MainFragment = new MyGroup_MainFragment();
+        fragmentTransaction.replace(R.id.flFragmentContainer, mMyGroup_MainFragment, MyGroup_MainFragment.class.getName());
+        fragmentTransaction.addToBackStack(MyGroup_MainFragment.class.getName());
         fragmentTransaction.commit();
     }
 
     /**
-     * My지갑 클릭 이벤트 처리
+     * My 지갑 클릭 이벤트 처리
      */
     @Override
     public void clickMyWallet() {
@@ -391,10 +466,10 @@ public class MainActivityPresenter implements MainActivityContract.Presenter {
         mView.hideDrawerLayout();
 
         setDefaultMainStack();
-        myApplication.getUserInfo().setUserState(false);
+        mMyApplication.getUserInfo().setUserState(false);
         initLoginState();
 
-        mMainFragment.showUserInfo(null, 0, false) ;
+        mMainFragment.showUserInfo(null, 0, false);
     }
 
     /**
@@ -416,7 +491,7 @@ public class MainActivityPresenter implements MainActivityContract.Presenter {
     /**
      * 메인 프래그먼트 빼고 모두 스택에서 제거
      */
-    private void setDefaultMainStack(){
+    private void setDefaultMainStack() {
         int count = mFragmentManager.getBackStackEntryCount() - 1;
         for (int i = 0; i < count; ++i) {
             mFragmentManager.popBackStack();

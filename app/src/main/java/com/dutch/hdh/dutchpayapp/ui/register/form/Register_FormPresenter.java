@@ -30,21 +30,22 @@ public class Register_FormPresenter implements Register_FormContract.Presenter {
         if(!isEmpty()) {
             if(isPasswordSame()) {
 
+                Register_PaymentPasswordFragment mRegister_paymentPasswordFragment = new Register_PaymentPasswordFragment();
 
                 //2차비밀번호 설정 완료시 DB에 넘겨줄 데이터 Bundle을 SuccessFragment에 전송하기 위함.
-//                Bundle bundle = new Bundle();
-//                bundle.putString("userEmail", mRegisterEditText[0].getText().toString());
-//                bundle.putString("userPassword", mRegisterEditText[1].getText().toString());
-//                bundle.putString("userName", mRegisterEditText[3].getText().toString());
-//                bundle.putString("userRN", mRegisterEditText[4].getText().toString());
-//                bundle.putString("userGender", mRegisterEditText[5].getText().toString());
-//                bundle.putString("userPhone", mRegisterEditText[6].getText().toString());
-//                mRegister_paymentPasswordFragment.setArguments(bundle);
+                Bundle bundle = new Bundle();
+                bundle.putString("userEmail", mRegisterEditText[0].getText().toString());
+                bundle.putString("userPassword", mRegisterEditText[1].getText().toString());
+                bundle.putString("userName", mRegisterEditText[3].getText().toString());
+                bundle.putString("userRN", mRegisterEditText[4].getText().toString());
+                bundle.putString("userGender", mRegisterEditText[5].getText().toString());
+                bundle.putString("userPhone", mRegisterEditText[6].getText().toString());
+                mRegister_paymentPasswordFragment.setArguments(bundle);
 
                 FragmentTransaction fragmentTransaction = mFragmentManager.beginTransaction();
                 fragmentTransaction.setCustomAnimations(R.anim.fade_in, 0, 0, R.anim.fade_out);
 
-                Register_PaymentPasswordFragment mRegister_paymentPasswordFragment = new Register_PaymentPasswordFragment();
+
                 fragmentTransaction.replace(R.id.flFragmentContainer, mRegister_paymentPasswordFragment , Register_PaymentPasswordFragment.class.getName());
                 fragmentTransaction.addToBackStack(Register_PaymentPasswordFragment.class.getName());
                 fragmentTransaction.commit();

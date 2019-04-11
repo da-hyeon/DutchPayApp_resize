@@ -35,6 +35,7 @@
             app:layout_constraintBottom_toBottomOf="parent" />
 
         <Button
+            android:id="@+id/btAddGroup"
             android:layout_width="match_parent"
             android:layout_height="47.42dp"
             android:layout_marginLeft="17.14dp"

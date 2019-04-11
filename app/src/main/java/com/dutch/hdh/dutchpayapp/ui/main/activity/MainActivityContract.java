@@ -19,6 +19,7 @@ public interface MainActivityContract {
         void showUserInfo(boolean state);
         void showBell();
         void showExit();
+        void showFailDialog(String title ,String content);
 
         //change
         void changeTitle(String title);
@@ -53,6 +54,7 @@ public interface MainActivityContract {
         void clickSolopayStart();
         void clickDutchpayStart();
         void clickEvent();
+        void clickMyPage();
         void clickMyGroup();
         void clickMyWallet();
         void clickNotice();

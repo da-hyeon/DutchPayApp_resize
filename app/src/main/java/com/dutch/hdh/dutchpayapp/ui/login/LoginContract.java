@@ -2,7 +2,7 @@ package com.dutch.hdh.dutchpayapp.ui.login;
 
 public interface LoginContract {
 
-    interface View{
+    interface View {
         //show
         void showSuccessDialog(String content);
         void showFailDialog(String content);
