@@ -74,6 +74,7 @@
                 android:fontFamily="@font/malgunfont"
                 android:hint="@string/register_form_nameHintText"
                 android:maxLength="4"
+                android:inputType="text"
                 android:paddingLeft="10.50dp"
                 android:textColorHint="#afafaf"
                 android:textSize="13.71dp"

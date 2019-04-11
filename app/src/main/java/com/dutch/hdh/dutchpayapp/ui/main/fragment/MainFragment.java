@@ -8,8 +8,10 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.dutch.hdh.dutchpayapp.R;
-import com.dutch.hdh.dutchpayapp.base.BaseFragment;
+import com.dutch.hdh.dutchpayapp.base.activity.BaseActivity;
+import com.dutch.hdh.dutchpayapp.base.fragment.BaseFragment;
 import com.dutch.hdh.dutchpayapp.databinding.FragmentMainBinding;
+import com.dutch.hdh.dutchpayapp.ui.main.activity.MainActivity;
 
 public class MainFragment extends BaseFragment implements MainFragmentContract.View{
 
@@ -39,6 +41,8 @@ public class MainFragment extends BaseFragment implements MainFragmentContract.V
         mBinding.ivDutchPay.setOnClickListener(v->{
 
         });
+
+       // ((MainActivity)getActivity()).getPresenter()
 
         return mBinding.getRoot();
     }
