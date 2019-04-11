@@ -76,7 +76,7 @@ public class DutchpayStartPresenter implements DutchpayStartContract.Presenter{
         return mStartList;
     }
 
-    @BindingAdapter("bind:item")
+    @BindingAdapter("item")
     public static void bindItem(RecyclerView view, ObservableArrayList<TempStartListModel> list){
         DutchpayStartListAdapter adapter = (DutchpayStartListAdapter) view.getAdapter();
         if(adapter != null) {

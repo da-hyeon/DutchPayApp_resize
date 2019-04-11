@@ -3,7 +3,7 @@ package com.dutch.hdh.dutchpayapp.ui.wallet.addcard;
 import android.text.TextWatcher;
 import android.widget.EditText;
 
-import com.dutch.hdh.dutchpayapp.base.BaseContract;
+import com.dutch.hdh.dutchpayapp.base.fragment.BaseFragmentContract;
 
 public interface AddCardContract {
 
@@ -12,7 +12,7 @@ public interface AddCardContract {
         void cardData(String cardName, String cardCode);
     }
 
-    interface Presenter extends BaseContract.Presenter {
+    interface Presenter extends BaseFragmentContract.Presenter {
 
         TextWatcher getTextWatcher(EditText editText, int maxLength);
         boolean cardValidate();

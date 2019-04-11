@@ -10,7 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.dutch.hdh.dutchpayapp.R;
-import com.dutch.hdh.dutchpayapp.base.BaseFragment;
+import com.dutch.hdh.dutchpayapp.base.fragment.BaseFragment;
 import com.dutch.hdh.dutchpayapp.databinding.FragmentDutchpayPhotoDetailBinding;
 import com.dutch.hdh.dutchpayapp.ui.dutchpay.photo.DutchpayPhotoContract;
 
@@ -25,6 +25,8 @@ public class DutchpayPhotoDetailFragment extends BaseFragment implements Dutchpa
         mBinding = DataBindingUtil.inflate(LayoutInflater.from(container.getContext()), R.layout.fragment_dutchpay_photo_detail,container,false);
         mBinding.setFragment(this);
         mPresenter = new DutchpayPhotoDetailPresenter(this);
+
+        mPresenter.listInit();
 
         return mBinding.getRoot();
     }

@@ -46,7 +46,7 @@
                 app:layout_constraintRight_toRightOf="parent" />
 
             <ImageView
-                android:id="@+id/ivDutchpayState"
+                android:id="@+id/imageView4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="22.75dp"
@@ -63,9 +63,9 @@
                 android:text="에 오신것을 환영합니다"
                 android:textColor="#afd3ff"
                 android:textSize="14.85dp"
-                app:layout_constraintBottom_toBottomOf="@+id/ivDutchpayState"
-                app:layout_constraintLeft_toRightOf="@+id/ivDutchpayState"
-                app:layout_constraintTop_toTopOf="@+id/ivDutchpayState" />
+                app:layout_constraintBottom_toBottomOf="@+id/imageView4"
+                app:layout_constraintLeft_toRightOf="@+id/imageView4"
+                app:layout_constraintTop_toTopOf="@+id/imageView4" />
 
 
             <LinearLayout
@@ -76,7 +76,7 @@
                 android:background="@drawable/outline_round_custom_layout"
                 android:orientation="horizontal"
                 app:layout_constraintLeft_toLeftOf="@+id/image_exit"
-                app:layout_constraintTop_toBottomOf="@+id/ivDutchpayState" />
+                app:layout_constraintTop_toBottomOf="@+id/imageView4" />
 
             <!-- 레이아웃 -->
             <LinearLayout

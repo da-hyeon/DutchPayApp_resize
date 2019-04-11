@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.dutch.hdh.dutchpayapp.R;
 import com.dutch.hdh.dutchpayapp.databinding.ItemDutchpayNewMemberBinding;
 import com.dutch.hdh.dutchpayapp.databinding.ItemDutchpayNewPayMemBinding;
 import com.dutch.hdh.dutchpayapp.ui.dutchpay.newdutchpay.DutchpayNewContract;
@@ -30,7 +31,11 @@ public class DutchpayConfirmListAdapter extends RecyclerView.Adapter<DutchpayCon
         void bind(TempConfirmListModel item) {
             mBinding.setItem(item);
 
-            //mBinding.getRoot().setOnClickListener(v -> mDSatrtPresenter.onItemClick(item));
+            if(item.isCompleteFlag()){
+                mBinding.ivPayComplete.setImageResource(R.drawable.dutchpay6_2);
+            } else {
+                mBinding.ivPayComplete.setImageResource(R.drawable.dutchpay6_1);
+            }
         }
     }
 

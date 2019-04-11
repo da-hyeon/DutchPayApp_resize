@@ -2,13 +2,13 @@ package com.dutch.hdh.dutchpayapp.ui.dutchpay.newdutchpayconfirm;
 
 public class TempConfirmListModel {
     String name;
-    String phome;
+    String phone;
     String cost;
     boolean completeFlag;
 
-    public TempConfirmListModel(String name, String phome, String cost, boolean completeFlag) {
+    public TempConfirmListModel(String name, String phone, String cost, boolean completeFlag) {
         this.name = name;
-        this.phome = phome;
+        this.phone = phone;
         this.cost = cost;
         this.completeFlag = completeFlag;
     }
@@ -21,12 +21,12 @@ public class TempConfirmListModel {
         this.name = name;
     }
 
-    public String getPhome() {
-        return phome;
+    public String getPhone() {
+        return phone;
     }
 
-    public void setPhome(String phome) {
-        this.phome = phome;
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
     public String getCost() {

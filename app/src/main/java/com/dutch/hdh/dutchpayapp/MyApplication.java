@@ -29,11 +29,12 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MyApplication extends Application {
-
     private static MyApplication appInstance;
+
+
     private static final String BASE_URL = "https://dutchkor02.cafe24.com/";
-    //    private static final String BASE_URL = "http://dutchkor02.cafe24.com/";
     public static boolean tutorialCheck ;
+
     //true = 편집 , false = 신규추가
     public static boolean entranceGroupPath;
 

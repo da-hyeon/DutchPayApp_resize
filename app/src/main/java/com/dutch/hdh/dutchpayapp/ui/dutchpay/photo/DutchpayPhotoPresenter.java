@@ -43,7 +43,7 @@ public class DutchpayPhotoPresenter implements DutchpayPhotoContract.Presenter {
         return mAdapter;
     }
 
-    @BindingAdapter("bind:item")
+    @BindingAdapter("item")
     public static void bindItem(RecyclerView view, ObservableArrayList<TempPhotoListModel> list){
         DutchpayPhotoListAdapter adapter = (DutchpayPhotoListAdapter) view.getAdapter();
         if(adapter != null) {

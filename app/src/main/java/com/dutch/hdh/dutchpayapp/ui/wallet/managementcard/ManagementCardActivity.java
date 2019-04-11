@@ -6,7 +6,7 @@ import android.support.annotation.Nullable;
 
 import com.dutch.hdh.dutchpayapp.R;
 import com.dutch.hdh.dutchpayapp.adapter.CardManagementListAdapter;
-import com.dutch.hdh.dutchpayapp.base.BaseActivity;
+import com.dutch.hdh.dutchpayapp.base.activity.BaseActivity;
 import com.dutch.hdh.dutchpayapp.data.db.CardManagement;
 import com.dutch.hdh.dutchpayapp.databinding.ActivityCardManagementBinding;
 

@@ -15,7 +15,7 @@ import com.dutch.hdh.dutchpayapp.ui.mygroup.edit.MyGroup_EditContract;
 
 import java.util.ArrayList;
 
-public class Listview_GroupParticipantsAdapter extends BaseAdapter  {
+public class Listview_GroupParticipantsAdapter extends BaseAdapter {
 
     private ItemGroupParticipantsBinding mBinding;
     private MyGroup_EditContract.View mView;
@@ -31,7 +31,7 @@ public class Listview_GroupParticipantsAdapter extends BaseAdapter  {
         mGroupParticipantsArrayList = new ArrayList<>();
         myApplication = MyApplication.getInstance();
 
-        //신규추가일 경우
+//신규추가일 경우
         if(!myApplication.entranceGroupPath){
             mGroupParticipantsArrayList.add(new GroupParticipants(myApplication.getUserInfo().getUserName() , myApplication.getUserInfo().getUserPhone()));
             this.mView.changePersonCount(getCount());
@@ -78,7 +78,7 @@ public class Listview_GroupParticipantsAdapter extends BaseAdapter  {
         mBinding.tvPhoneNumber.setText(mGroupParticipantsArrayList.get(position).getPhoneNumber());
 
         mBinding.vDelete.setOnClickListener(v1->
-            deleteItem(position)
+                deleteItem(position)
         );
 
         v.setTag(mBinding);

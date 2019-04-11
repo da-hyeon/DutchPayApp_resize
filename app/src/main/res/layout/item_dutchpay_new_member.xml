@@ -9,6 +9,7 @@
     </data>
 
     <android.support.constraint.ConstraintLayout
+        android:id="@+id/clListItem"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/transparent">
@@ -52,13 +53,13 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <Button
-                android:id="@+id/button19"
+                android:id="@+id/btPayComplete"
                 android:layout_width="88.86dp"
                 android:layout_height="27.71dp"
                 android:layout_marginEnd="5dp"
                 android:background="@drawable/dutchpay3_1"
-                app:layout_constraintBottom_toBottomOf="@+id/button20"
-                app:layout_constraintEnd_toStartOf="@+id/button20" />
+                app:layout_constraintBottom_toBottomOf="@+id/btDelete"
+                app:layout_constraintEnd_toStartOf="@+id/btDelete" />
 
             <TextView
                 android:id="@+id/textView73"
@@ -67,15 +68,16 @@
                 android:layout_marginEnd="12dp"
                 android:fontFamily="@font/malgunfont"
                 android:includeFontPadding="false"
-                android:text="010-1234-5678"
+                android:text="@{item.phone}"
                 android:textColor="#acacac"
                 android:textSize="13.7dp"
                 app:layout_constraintBottom_toBottomOf="@+id/button18"
                 app:layout_constraintEnd_toStartOf="@+id/button18"
-                app:layout_constraintTop_toTopOf="@+id/button18" />
+                app:layout_constraintTop_toTopOf="@+id/button18"
+                tools:text="010-1234-5678" />
 
             <Button
-                android:id="@+id/button20"
+                android:id="@+id/btDelete"
                 android:layout_width="88.86dp"
                 android:layout_height="27.71dp"
                 android:layout_marginTop="8dp"
@@ -86,16 +88,18 @@
                 app:layout_constraintTop_toBottomOf="@+id/button18" />
 
             <TextView
-                android:id="@+id/textView72"
+                android:id="@+id/tvMemCost"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/malgunfont"
                 android:includeFontPadding="false"
-                android:text="10,000원"
+                android:nextFocusDown="@+id/editText"
+                android:text="원"
                 android:textColor="#ff6060"
                 android:textSize="13.7dp"
-                app:layout_constraintBottom_toBottomOf="@+id/button19"
-                app:layout_constraintStart_toStartOf="@+id/textView71" />
+                android:visibility="visible"
+                app:layout_constraintBottom_toBottomOf="@+id/btPayComplete"
+                app:layout_constraintStart_toEndOf="@+id/editText" />
 
             <TextView
                 android:id="@+id/textView71"
@@ -104,11 +108,28 @@
                 android:layout_marginStart="17dp"
                 android:fontFamily="@font/malgunfont"
                 android:includeFontPadding="false"
-                android:text="최윤미"
+                android:text="@{item.name}"
                 android:textColor="#2a2a2a"
                 android:textSize="13.7dp"
                 app:layout_constraintBottom_toBottomOf="@+id/textView73"
-                app:layout_constraintStart_toStartOf="parent" />
+                app:layout_constraintStart_toStartOf="parent"
+                tools:text="최윤미" />
+
+            <EditText
+                android:id="@+id/editText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/transparent"
+                android:fontFamily="@font/malgunfont"
+                android:hint="0"
+                android:includeFontPadding="false"
+                android:inputType="number"
+                android:text="@{item.cost}"
+                android:textColor="#ff6060"
+                android:textColorHint="#ff6060"
+                android:textSize="13.7dp"
+                app:layout_constraintBottom_toBottomOf="@+id/btPayComplete"
+                app:layout_constraintStart_toStartOf="@+id/textView71" />
         </android.support.constraint.ConstraintLayout>
 
     </android.support.constraint.ConstraintLayout>

@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 
 import com.dutch.hdh.dutchpayapp.MyApplication;
 import com.dutch.hdh.dutchpayapp.R;
-import com.dutch.hdh.dutchpayapp.base.BaseFragment;
+import com.dutch.hdh.dutchpayapp.base.fragment.BaseFragment;
 import com.dutch.hdh.dutchpayapp.databinding.FragmentWalletBinding;
 
 public class MyWalletFragment extends BaseFragment implements MyWalletContract.View {

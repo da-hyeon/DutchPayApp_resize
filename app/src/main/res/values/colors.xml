@@ -4,8 +4,8 @@
     <color name="colorPrimaryDark">#000000</color>
     <color name="colorAccent">#D81B60</color>
     <color name="colorSplashBG">#0f69fe</color>
-    <color name="transparent">#00ff0000</color>
-    <color name="layoutBG">#f3f2f2</color>
+    <color name="transparent">#00FF0000</color>
+    <color name="layoutBG">#f3f1f2</color>
     <color name="background1">#D9000000</color>
 
     <color name="buttonDefault">#e0e0e0</color>

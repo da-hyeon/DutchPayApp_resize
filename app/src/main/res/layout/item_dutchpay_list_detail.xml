@@ -41,12 +41,12 @@
         android:textColor="#999999"
         android:textSize="13.71dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/button11"
+        app:layout_constraintEnd_toStartOf="@+id/btReRequest"
         app:layout_constraintStart_toEndOf="@+id/tvUserName"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/imageView10"
+        android:id="@+id/ivState"
         android:layout_width="47.71dp"
         android:layout_height="18.29dp"
         android:layout_marginEnd="14dp"
@@ -56,7 +56,7 @@
         app:srcCompat="@drawable/dutchpay_4" />
 
     <Button
-        android:id="@+id/button11"
+        android:id="@+id/btReRequest"
         android:layout_width="35dp"
         android:layout_height="12dp"
         android:layout_marginEnd="4dp"
@@ -65,12 +65,13 @@
         android:textColor="#ffffff"
         android:textSize="6dp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/button13"
-        app:layout_constraintEnd_toStartOf="@+id/button13"
-        app:layout_constraintTop_toTopOf="@+id/button13" />
+        style="?android:attr/borderlessButtonStyle"
+        app:layout_constraintBottom_toBottomOf="@+id/btCancel"
+        app:layout_constraintEnd_toStartOf="@+id/btCancel"
+        app:layout_constraintTop_toTopOf="@+id/btCancel" />
 
     <Button
-        android:id="@+id/button13"
+        android:id="@+id/btCancel"
         android:layout_width="35dp"
         android:layout_height="12dp"
         android:layout_marginEnd="18dp"
@@ -79,9 +80,10 @@
         android:textColor="#ffffff"
         android:textSize="6dp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView10"
-        app:layout_constraintEnd_toStartOf="@+id/imageView10"
-        app:layout_constraintTop_toTopOf="@+id/imageView10" />
+        style="?android:attr/borderlessButtonStyle"
+        app:layout_constraintBottom_toBottomOf="@+id/ivState"
+        app:layout_constraintEnd_toStartOf="@+id/ivState"
+        app:layout_constraintTop_toTopOf="@+id/ivState" />
 
     <ImageView
         android:id="@+id/ivUserIcon"
