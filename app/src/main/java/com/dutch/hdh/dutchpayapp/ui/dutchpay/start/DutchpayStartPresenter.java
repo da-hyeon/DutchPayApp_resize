@@ -5,16 +5,26 @@ import android.databinding.ObservableArrayList;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 
 import com.dutch.hdh.dutchpayapp.Constants;
+import com.dutch.hdh.dutchpayapp.MyApplication;
 import com.dutch.hdh.dutchpayapp.R;
 import com.dutch.hdh.dutchpayapp.adapter.DutchpayStartListAdapter;
+import com.dutch.hdh.dutchpayapp.data.db.Dutchpayhistory;
 import com.dutch.hdh.dutchpayapp.ui.dutchpay.startdetail.DutchpayDetailFragment;
 import com.dutch.hdh.dutchpayapp.ui.dutchpay.newdutchpay.DutchpayNewFragment;
+import com.google.gson.Gson;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class DutchpayStartPresenter implements DutchpayStartContract.Presenter{
 
     private DutchpayStartContract.View mView;
+
+    private MyApplication mMyApplication;
 
     private ObservableArrayList<TempStartListModel> mStartList;
     private DutchpayStartListAdapter mAdapter;
@@ -23,10 +33,37 @@ public class DutchpayStartPresenter implements DutchpayStartContract.Presenter{
         this.mView = mView;
         this.mStartList = new ObservableArrayList<>();
         this.mAdapter = new DutchpayStartListAdapter(mStartList,this);
+        this.mMyApplication = MyApplication.getInstance();
     }
 
     @Override
     public void listInit() {
+        //리스트 불러오기
+////
+//        Call<Dutchpayhistory> getDutchpayHistoryList = MyApplication
+//                .getRestAdapter()
+//                .getDutchapyHistoryList(mMyApplication.getUserInfo().getUserCode());
+//
+//        getDutchpayHistoryList.enqueue(new Callback<Dutchpayhistory>() {
+//            @Override
+//            public void onResponse(Call<Dutchpayhistory> call, Response<Dutchpayhistory> response) {
+//                if(response.body() != null){
+//                    Dutchpayhistory dutchpayhistory = response.body();
+//
+//                    Gson gson = new Gson();
+//                    String a = gson.toJson(dutchpayhistory);
+//                    Log.e("List? ->",a);
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(Call<Dutchpayhistory> call, Throwable t) {
+//                Log.e("fail",t.getMessage());
+//            }
+//        });
+
+
+
         //더미 데이터 셋
         mStartList.add(new TempStartListModel("[BAR 홍대점]","국민카드","50,000원","2019/04/26    18:36:28",1));
         mStartList.add(new TempStartListModel("[CU 편의점]","신한카드","30,000원","2019/04/20    10:30:06",2));

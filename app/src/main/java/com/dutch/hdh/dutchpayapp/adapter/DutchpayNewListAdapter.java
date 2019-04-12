@@ -41,6 +41,8 @@ public class DutchpayNewListAdapter extends RecyclerView.Adapter<DutchpayNewList
         @SuppressLint("ClickableViewAccessibility")
         void bind(TempNewListModel item) {
             mBinding.setItem(item);
+            //리스너 초기화
+            mBinding.editText.removeTextChangedListener(item.getTw());
 
             //직접입력 반영
             if(item.isEditableFlag()){
@@ -96,23 +98,7 @@ public class DutchpayNewListAdapter extends RecyclerView.Adapter<DutchpayNewList
         }
 
         private void setTextChangedListener(EditText et, TempNewListModel item){
-            et.addTextChangedListener(new TextWatcher() {
-                @Override
-                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                }
-
-                @Override
-                public void onTextChanged(CharSequence s, int start, int before, int count) {
-                }
-
-                @Override
-                public void afterTextChanged(Editable s) {
-                    item.setCost(s.toString());
-                    Log.e("check after//->",item.getCost());
-
-                    mDNewPresenter.reDutchpayLogic(item);
-                }
-            });
+            et.addTextChangedListener(item.getTw());
         }
     }
 

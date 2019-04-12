@@ -31,6 +31,8 @@ public class Constants {
     public static final String CHANGE_EMAIL_REQUEST_URL = "dutchpay_emailchange.php"; //이메일 변경 요청
     public static final String CHANGE_PASSWORD_REQUEST_URL = "dutchpay_pwchange.php"; //비밀번호 변경 요청
 
+    public static final String DUTCHPAY_HISTORY_REQUEST_URL = "dutchpay_payhistory.php"; //더치페이 내역 요청
+
 
     /**
      * Dutchpay State

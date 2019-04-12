@@ -18,6 +18,7 @@ import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Toast;
 
+import com.dutch.hdh.dutchpayapp.MyApplication;
 import com.dutch.hdh.dutchpayapp.R;
 import com.dutch.hdh.dutchpayapp.base.fragment.BaseFragment;
 import com.dutch.hdh.dutchpayapp.databinding.FragmentDutchpayNewStartBinding;
@@ -27,6 +28,8 @@ public class DutchpayNewFragment extends BaseFragment implements DutchpayNewCont
 
     FragmentDutchpayNewStartBinding mBinding;
     DutchpayNewPresenter mPresenter;
+
+    TextWatcher tw;
 
     private boolean viewFlag = false;
 
@@ -40,6 +43,26 @@ public class DutchpayNewFragment extends BaseFragment implements DutchpayNewCont
 
         //입력 완료_버그 수정
         mBinding.etCost.setImeOptions(EditorInfo.IME_ACTION_DONE);
+        mBinding.etMycost.setFocusableInTouchMode(false);
+
+        tw = new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                //리스트 마지막_더치 대표자 데이터 셋팅
+                mPresenter.getmNewList().get(mPresenter.getmAdapter().getItemCount()-1).setEditedCheck(true);
+                mPresenter.getmNewList().get(mPresenter.getmAdapter().getItemCount()-1).setCost(s.toString());
+            }
+        };
 
         //키보드 변동 체크
         getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
@@ -61,7 +84,10 @@ public class DutchpayNewFragment extends BaseFragment implements DutchpayNewCont
 
                 if(viewFlag) {
                     if (mPresenter.getmNewList().size() != 0) {
+
+                        mPresenter.reDutchpayLogic();
                         mPresenter.getmAdapter().notifyDataSetChanged();
+                        mBinding.etMycost.removeTextChangedListener(tw);
                     }
                     viewFlag = false; //키보드 닫음
                 }
@@ -111,22 +137,7 @@ public class DutchpayNewFragment extends BaseFragment implements DutchpayNewCont
         mBinding.etMycost.setFocusableInTouchMode(flag);
         if(flag){
             mBinding.etMycost.setOnTouchListener((v, event) -> {
-                mBinding.etMycost.addTextChangedListener(new TextWatcher() {
-                    @Override
-                    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-                    }
-
-                    @Override
-                    public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-                    }
-
-                    @Override
-                    public void afterTextChanged(Editable s) {
-                        mPresenter.changeMyCost(s.toString());
-                    }
-                });
+                mBinding.etMycost.addTextChangedListener(tw);
                 return false;
             });
         }
@@ -152,6 +163,11 @@ public class DutchpayNewFragment extends BaseFragment implements DutchpayNewCont
         mBinding.rvMemberlist.addItemDecoration(new ItemDecoration(38));
 
         mPresenter.getmAdapter().notifyDataSetChanged();
+    }
+
+    @Override
+    public void removeTW() {
+        mBinding.etMycost.removeTextChangedListener(tw);
     }
 
 }

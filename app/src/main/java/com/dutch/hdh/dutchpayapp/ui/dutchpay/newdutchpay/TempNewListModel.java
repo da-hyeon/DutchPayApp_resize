@@ -1,5 +1,8 @@
 package com.dutch.hdh.dutchpayapp.ui.dutchpay.newdutchpay;
 
+import android.text.Editable;
+import android.text.TextWatcher;
+
 public class TempNewListModel {
     String name;
     String cost;
@@ -9,13 +12,31 @@ public class TempNewListModel {
     boolean editableFlag;
     boolean editedCheck;
 
-    public TempNewListModel(String name, String cost, String phone, boolean completeFlag) {
+    TextWatcher tw;
+
+    public TempNewListModel(String name, String Cost, String phone, boolean completeFlag) {
         this.name = name;
-        this.cost = cost;
+        this.cost = Cost;
         this.phone = phone;
         this.completeFlag = completeFlag;
         this.editableFlag = false;
         this.editedCheck = false;
+        this.tw = new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                cost = s.toString();
+                editedCheck = true;
+            }
+        };
     }
 
     public String getName() {
@@ -64,5 +85,9 @@ public class TempNewListModel {
 
     public void setEditedCheck(boolean editedCheck) {
         this.editedCheck = editedCheck;
+    }
+
+    public TextWatcher getTw() {
+        return tw;
     }
 }

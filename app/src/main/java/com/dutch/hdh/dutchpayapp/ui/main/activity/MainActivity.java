@@ -1,12 +1,17 @@
 package com.dutch.hdh.dutchpayapp.ui.main.activity;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.databinding.DataBindingUtil;
+import android.graphics.Rect;
 import android.os.Bundle;
 import android.support.v4.view.GravityCompat;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.dutch.hdh.dutchpayapp.MyApplication;
@@ -69,9 +74,9 @@ public class MainActivity extends BaseActivity implements MainActivityContract.V
         );
 
         //더치페이 시작하기 버튼
-        mBinding.navigationView.llDutchpayStart.setOnClickListener(v ->
-                {}
-        );
+        mBinding.navigationView.llDutchpayStart.setOnClickListener(v ->{
+            mPresenter.clickDutchpayStart();
+        });
 
         //이벤트 버튼
         mBinding.navigationView.llEvent.setOnClickListener(v ->
@@ -99,14 +104,20 @@ public class MainActivity extends BaseActivity implements MainActivityContract.V
         );
 
         //이용안내 버튼
-        mBinding.navigationView.llService.setOnClickListener(v ->
-                {}
-        );
+        mBinding.navigationView.llService.setOnClickListener(v -> {
+            mPresenter.clickService();
+        });
 
         //고객센터(로그아웃) 버튼
-        mBinding.navigationView.llCustomerCenter.setOnClickListener(v ->
-                mPresenter.clickLogout()
-        );
+        mBinding.navigationView.llCustomerCenter.setOnClickListener(v -> {
+            //mPresenter.clickLogout()
+            mPresenter.clickCustomerCenter();
+        });
+
+        //설정 버튼
+        mBinding.navigationView.imageSetting.setOnClickListener(v -> {
+            mPresenter.clickSetup();
+        });
     }
 
     /**
@@ -268,5 +279,25 @@ public class MainActivity extends BaseActivity implements MainActivityContract.V
     @Override
     public void removeActivity() {
         finish();
+    }
+
+    /**
+     * 키보드 닫기
+     */
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent ev) {
+        if (ev.getAction() == MotionEvent.ACTION_DOWN) {
+            View v = getCurrentFocus();
+            if (v instanceof EditText) {
+                Rect outRect = new Rect();
+                v.getGlobalVisibleRect(outRect);
+                if (!outRect.contains((int)ev.getRawX(), (int)ev.getRawY())) {
+                    v.clearFocus();
+                    InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                    imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
+                }
+            }
+        }
+        return super.dispatchTouchEvent(ev);
     }
 }

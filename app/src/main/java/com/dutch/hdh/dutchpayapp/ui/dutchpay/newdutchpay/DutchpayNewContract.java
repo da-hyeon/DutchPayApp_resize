@@ -22,6 +22,8 @@ public interface DutchpayNewContract {
 
         FragmentManager getFragmentManager();
         Activity getActivity();
+
+        void removeTW();
     }
 
     interface Presenter{
@@ -32,7 +34,7 @@ public interface DutchpayNewContract {
         //기능
         void checkCost(String newcost);
         boolean dutchpayLogic();
-        void reDutchpayLogic(TempNewListModel item);
+        void reDutchpayLogic();
         void changeMyCost(String cost);
 
         //Click

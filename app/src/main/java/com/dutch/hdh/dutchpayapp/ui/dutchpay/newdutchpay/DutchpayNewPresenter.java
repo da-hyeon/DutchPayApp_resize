@@ -12,21 +12,33 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 
+import com.dutch.hdh.dutchpayapp.MyApplication;
 import com.dutch.hdh.dutchpayapp.R;
 import com.dutch.hdh.dutchpayapp.adapter.DutchpayNewListAdapter;
+import com.dutch.hdh.dutchpayapp.adapter.Listview_MyGroupAdapter;
+import com.dutch.hdh.dutchpayapp.data.db.Dutchpayhistory;
+import com.dutch.hdh.dutchpayapp.data.db.MyGroup;
 import com.dutch.hdh.dutchpayapp.databinding.ItemDutchpayNewMemberBinding;
 import com.dutch.hdh.dutchpayapp.ui.dutchpay.newdutchpayinfo.DutchpayNewInfoFragment;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class DutchpayNewPresenter implements DutchpayNewContract.Presenter {
 
     private DutchpayNewContract.View mView;
+
     private ObservableArrayList<TempNewListModel> mNewList;
     private DutchpayNewListAdapter mAdapter;
+
     private String oldCost;
     private int myCost;
+    private int lastCost;
+    private int lastMem;
 
     public DutchpayNewPresenter(DutchpayNewContract.View mView) {
         this.mView = mView;
@@ -34,10 +46,13 @@ public class DutchpayNewPresenter implements DutchpayNewContract.Presenter {
         this.mAdapter = new DutchpayNewListAdapter(mNewList,this);
         this.oldCost = "";
         this.myCost = 0;
+        this.lastCost = -1;
+        this.lastMem = -1;
     }
 
     @Override
     public void listInit() {
+
         //더미 데이터 셋
         mNewList.add(new TempNewListModel("박소영","0","010-1111-2222",false));
         mNewList.add(new TempNewListModel("최윤미","0","010-3333-4444",false));
@@ -84,45 +99,81 @@ public class DutchpayNewPresenter implements DutchpayNewContract.Presenter {
             }
 
             mAdapter.setItem(mNewList);
-            mView.setMyCost(String.valueOf(myCost));
 
+            mNewList.get(mNewList.size()-1).setCost(String.valueOf(myCost));
+            mView.setMyCost(String.valueOf(myCost));
             return true;
         }
     }
 
     @Override
-    public void reDutchpayLogic(TempNewListModel item) {
+    public void reDutchpayLogic() {
+        int payedcost = 0;
+        int cost = Integer.parseInt(oldCost);
 
-        int position = mNewList.indexOf(item);
-        mNewList.get(position).setEditedCheck(true);
+        Log.e("Logic ->","start");
 
-        //변동 유무_포지션 리스트 생성
+        //더치할 멤버_포지션 리스트 생성
         ArrayList<Integer> dutchList = new ArrayList<>();
-        for(int i=0; i<mNewList.size()-1; i++){
+        for(int i=0; i<mNewList.size(); i++){
+            if(Integer.parseInt(mNewList.get(i).getCost()) == cost){
+                mNewList.get(i).setCost("0");
+                dutchList.add(i);
+            }
+
             if( !(mNewList.get(i).isEditedCheck()) ){
                 dutchList.add(i);
-                Log.e("check ->",dutchList.toString());
+
+                Log.e("dutch ->",dutchList.toString());
+            } else {
+                int inputcost = 0;
+                if( (!mNewList.get(i).getCost().equals("")) ){
+                    inputcost = Integer.parseInt(mNewList.get(i).getCost());
+                    if(inputcost >= cost){
+                        inputcost = cost;
+
+                        for(int j=0; j< mNewList.size();j++){
+                            Log.e("setEditedCheck",j+"");
+                            mNewList.get(j).setCost("0");
+                            mNewList.get(j).setEditedCheck(false);
+                        }
+                        mNewList.get(i).setCost(String.valueOf(cost));
+                    }
+                }
+               payedcost = payedcost + inputcost;
             }
         }
 
-        int cost = Integer.parseInt(oldCost);
-        int inputcost = 0;
-        if( (!item.getCost().equals("")) ){
-            inputcost = Integer.parseInt(item.getCost());
+        if(dutchList.size() == 1){
+            lastCost = Integer.parseInt( mNewList.get(dutchList.get(0)).getCost());
+            lastMem = mNewList.indexOf(mNewList.get(dutchList.get(0)));
         }
 
-        int newcost = cost - inputcost;
+        int newcost = cost - payedcost;
+        if(newcost < 0){
+            newcost = 0;
+        }
 
-        int newmemcount = dutchList.size()+1;
+        int newmemcount = dutchList.size();
         if(newmemcount != 0){
             int memCost = newcost / (newmemcount);
-            myCost = newcost - (memCost * (newmemcount-1));
+            myCost = newcost - (memCost * (newmemcount - 1));
 
-            for (int i = 0; i < dutchList.size(); i++) {
-                mNewList.get(dutchList.get(i)).setCost(String.valueOf(memCost));
+            if(dutchList.contains(mNewList.size()-1)){ //방장에게 남은 돈 몰아주기
+
+                for (int i = 0; i < dutchList.size(); i++) {
+                    mNewList.get(dutchList.get(i)).setCost(String.valueOf(memCost));
+                }
+                mNewList.get(mNewList.size()-1).setCost(String.valueOf(myCost));
+            } else { //더치 멤버중 마지막 사람에게 남은 돈 몰아주기
+                for (int i = 0; i < dutchList.size()-1; i++) {
+                    mNewList.get(dutchList.get(i)).setCost(String.valueOf(memCost));
+                }
+                mNewList.get(dutchList.get(dutchList.size()-1)).setCost(String.valueOf(myCost));
             }
-
-            mView.setMyCost(String.valueOf(myCost));
+            mView.setMyCost(String.valueOf(mNewList.get(mNewList.size()-1).getCost()));
+        } else {
+            mNewList.get(lastMem).setCost(String.valueOf(lastCost));
         }
     }
 
