@@ -1,6 +1,7 @@
 package com.dutch.hdh.dutchpayapp.ui.event.main;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentManager;
 import android.util.Log;
 import android.widget.ListView;
@@ -25,7 +26,10 @@ public class Event_MainPresenter implements Event_MainContract.Presenter {
     private Listview_EventAdapter mListview_EventAdapter;
     private ArrayList<Event> mEventArrayList;
 
-    public Event_MainPresenter(Event_MainContract.View mView, Context mContext, FragmentManager mFragmentManager) {
+    /**
+     * 생성자
+     */
+    Event_MainPresenter(Event_MainContract.View mView, Context mContext, FragmentManager mFragmentManager) {
         this.mView = mView;
         this.mContext = mContext;
         this.mFragmentManager = mFragmentManager;
@@ -33,12 +37,18 @@ public class Event_MainPresenter implements Event_MainContract.Presenter {
         mListview_EventAdapter = new Listview_EventAdapter(mContext, mEventArrayList , mFragmentManager);
     }
 
+    /**
+     * Adapter 세팅
+     */
     @Override
     public void initListViewData(ListView listView) {
         listView.setAdapter(mListview_EventAdapter);
         clickOnGoingEvent();
     }
 
+    /**
+     * 진행중인 이벤트 버튼 클릭 이벤트 처리
+     */
     @Override
     public void clickOnGoingEvent() {
         mEventArrayList.clear();
@@ -49,20 +59,21 @@ public class Event_MainPresenter implements Event_MainContract.Presenter {
 
         eventOnGoingList.enqueue(new Callback<EventList>() {
             @Override
-            public void onResponse(Call<EventList> call, Response<EventList> response) {
-                if (response.body() != null) {
+            public void onResponse(@NonNull Call<EventList> call, @NonNull Response<EventList> response) {
+                if (response.isSuccessful()) {
                     EventList eventList = response.body();
-                    mListview_EventAdapter.setOnGoingCheck(true);
-                    mListview_EventAdapter.setmEventArrayList(eventList.getEventList());
+                    if (eventList != null) {
+                        mListview_EventAdapter.setmEventArrayList(eventList.getEventList());
+                    }
                     mListview_EventAdapter.notifyDataSetChanged();
 
                 } else {
-
+                    mView.showFailDialog("실패" , "데이터 로딩 실패");
                 }
             }
 
             @Override
-            public void onFailure(Call<EventList> call, Throwable t) {
+            public void onFailure(@NonNull Call<EventList> call, @NonNull Throwable t) {
                 Log.d("error" , t.getMessage());
                 Log.d("error" , t.getLocalizedMessage());
             }
@@ -70,6 +81,9 @@ public class Event_MainPresenter implements Event_MainContract.Presenter {
 
     }
 
+    /**
+     * 종료된 이벤트 버튼 클릭 이벤트 처리
+     */
     @Override
     public void clickEndProgressEvent() {
         mEventArrayList.clear();
@@ -80,20 +94,19 @@ public class Event_MainPresenter implements Event_MainContract.Presenter {
 
         eventEndProgressList.enqueue(new Callback<EventList>() {
             @Override
-            public void onResponse(Call<EventList> call, Response<EventList> response) {
+            public void onResponse(@NonNull Call<EventList> call, @NonNull Response<EventList> response) {
                 if (response.body() != null) {
                     EventList eventList = response.body();
-                    mListview_EventAdapter.setOnGoingCheck(false);
                     mListview_EventAdapter.setmEventArrayList(eventList.getEventList());
                     mListview_EventAdapter.notifyDataSetChanged();
 
                 } else {
-
+                    mView.showFailDialog("실패" , "데이터 로딩 실패");
                 }
             }
 
             @Override
-            public void onFailure(Call<EventList> call, Throwable t) {
+            public void onFailure(@NonNull Call<EventList> call, @NonNull Throwable t) {
                 Log.d("error" , t.getMessage());
                 Log.d("error" , t.getLocalizedMessage());
             }

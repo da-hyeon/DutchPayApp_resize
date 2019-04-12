@@ -1,5 +1,6 @@
 package com.dutch.hdh.dutchpayapp.ui.dutchpay.newdutchpay;
 
+import android.content.Context;
 import android.databinding.BindingAdapter;
 import android.databinding.ObservableArrayList;
 import android.os.Bundle;
@@ -7,6 +8,9 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.View;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.EditText;
 
 import com.dutch.hdh.dutchpayapp.R;
 import com.dutch.hdh.dutchpayapp.adapter.DutchpayNewListAdapter;
@@ -21,7 +25,6 @@ public class DutchpayNewPresenter implements DutchpayNewContract.Presenter {
     private DutchpayNewContract.View mView;
     private ObservableArrayList<TempNewListModel> mNewList;
     private DutchpayNewListAdapter mAdapter;
-    private ItemDutchpayNewMemberBinding mItemDutchpayNewMemberBinding;
     private String oldCost;
     private int myCost;
 
@@ -47,7 +50,9 @@ public class DutchpayNewPresenter implements DutchpayNewContract.Presenter {
 
     @Override
     public void checkCost(String newcost) {
-        if( !(oldCost.equals(newcost)) ){ //금액 변동 확인
+        if(oldCost.equals("")){ //금액 미입력 확인
+            oldCost = "0";
+        } else if( !(oldCost.equals(newcost)) ){ //금액 변동 확인
             oldCost = newcost;
             Log.e("change --> ",newcost+"");
 
@@ -63,6 +68,8 @@ public class DutchpayNewPresenter implements DutchpayNewContract.Presenter {
 
     @Override
     public boolean dutchpayLogic() {
+        checkCost(oldCost); //금액 미입력 방지
+
         int cost = Integer.parseInt(oldCost);
         int memcount = mNewList.size();
 
@@ -86,11 +93,12 @@ public class DutchpayNewPresenter implements DutchpayNewContract.Presenter {
     @Override
     public void reDutchpayLogic(TempNewListModel item) {
 
-        Log.e("check ->","call dutchpaylogic");
+        int position = mNewList.indexOf(item);
+        mNewList.get(position).setEditedCheck(true);
 
-        //변동 안 된 멤버 포지션 리스트 생성
+        //변동 유무_포지션 리스트 생성
         ArrayList<Integer> dutchList = new ArrayList<>();
-        for(int i=0; i<mNewList.size(); i++){
+        for(int i=0; i<mNewList.size()-1; i++){
             if( !(mNewList.get(i).isEditedCheck()) ){
                 dutchList.add(i);
                 Log.e("check ->",dutchList.toString());
@@ -105,16 +113,23 @@ public class DutchpayNewPresenter implements DutchpayNewContract.Presenter {
 
         int newcost = cost - inputcost;
 
-        int newmemcount = dutchList.size();
+        int newmemcount = dutchList.size()+1;
+        if(newmemcount != 0){
+            int memCost = newcost / (newmemcount);
+            myCost = newcost - (memCost * (newmemcount-1));
 
-        int memCost = newcost/(newmemcount+1);
-        myCost = newcost - (memCost*(newmemcount-1));
+            for (int i = 0; i < dutchList.size(); i++) {
+                mNewList.get(dutchList.get(i)).setCost(String.valueOf(memCost));
+            }
 
-        for(int i = 0; i<newmemcount; i++){
-            mNewList.get(dutchList.get(i)).setCost(String.valueOf(memCost));
+            mView.setMyCost(String.valueOf(myCost));
         }
-        mAdapter.notifyDataSetChanged();
-        mView.setMyCost(String.valueOf(myCost));
+    }
+
+    @Override
+    public void changeMyCost(String cost) {
+        //값 변동 확인
+
     }
 
     public ObservableArrayList<TempNewListModel> getmNewList() {
@@ -155,11 +170,13 @@ public class DutchpayNewPresenter implements DutchpayNewContract.Presenter {
     public void onDutchClick(){
         mView.setDutchBtColor(true);
         mView.setTypeBtColor(false);
+
         //1/n값으로 초기화
         dutchpayLogic();
 
         //리스트 내 금액 클릭 금지
         memCostEditable(false);
+        mView.setMyCostEditable(false);
     }
 
     public void onTypingClick(){
@@ -168,6 +185,7 @@ public class DutchpayNewPresenter implements DutchpayNewContract.Presenter {
 
         //리스트 내 금액 클릭 가능
         memCostEditable(true);
+        mView.setMyCostEditable(true);
     }
 
     public void phoneListCallClick(){

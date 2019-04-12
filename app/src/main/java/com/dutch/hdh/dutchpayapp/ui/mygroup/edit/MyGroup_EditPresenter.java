@@ -38,80 +38,134 @@ public class MyGroup_EditPresenter implements MyGroup_EditContract.Presenter {
     private FragmentManager mFragmentManager;
     private MyApplication mMyApplication;
     private String groupCode;
+    private Bundle mBundle;
 
     private Listview_GroupParticipantsAdapter mListview_GroupParticipantsAdapter;
 
-    public MyGroup_EditPresenter(MyGroup_EditContract.View mView, Context mContext, FragmentManager mFragmentManager) {
+    /**
+     * 생성자
+     */
+    public MyGroup_EditPresenter(MyGroup_EditContract.View mView, Context mContext, FragmentManager mFragmentManager, Bundle mBundle) {
         this.mView = mView;
         this.mContext = mContext;
         this.mFragmentManager = mFragmentManager;
+        this.mBundle = mBundle;
         mMyApplication = MyApplication.getInstance();
         mListview_GroupParticipantsAdapter = new Listview_GroupParticipantsAdapter(mView, mContext);
     }
 
+    /**
+     * 입장경로가 편집일때
+     * 해당 그룹에 참여중인 구성원들을 리스트 데이터에 추가
+     */
+    @Override
+    public void receiveGroupMemberWhenEditing() {
+        if (mMyApplication.entranceGroupPath) {
+            if (mBundle != null) {
+                String jsonString = mBundle.getString("jsonString");
+                String groupName = mBundle.getString("groupName");
+                groupCode = mBundle.getString("groupCode");
+
+                if (jsonString != null && !jsonString.equals("")) {
+                    try {
+                        JSONArray ja = new JSONArray(jsonString);
+                        for (int i = 0; i < ja.length(); i++) {
+                            JSONObject order = ja.getJSONObject(i);
+                            mListview_GroupParticipantsAdapter.addItem(order.getString("name"), order.getString("phoneNumber"));
+                        }
+                        if (groupName != null && !groupName.equals("")) {
+                            //그룹입력란에 해당그룹이름을 표시.
+                            mView.changeGroupName(groupName);
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        } else {
+            //입장경로가 신규추가이므로 그룹입력란을 비워줌.
+            mView.changeGroupName("");
+        }
+    }
+
+    /**
+     * 프래그먼트 이동시 전달했던 구성원 리스트 되돌려받기
+     */
+    @Override
+    public void returningMembers() {
+        if (mBundle != null) {
+            ArrayList<DirectInputParticipants> directInputParticipantsArrayList = mBundle.getParcelableArrayList("itemList");
+
+            if (directInputParticipantsArrayList != null && directInputParticipantsArrayList.size() > 0) {
+                mListview_GroupParticipantsAdapter.setList(mBundle.getParcelableArrayList("itemList"));
+            }
+        }
+    }
+
+    /**
+     * 직접입력한 구성원 리스트 받기.
+     */
     @SuppressLint("NewApi")
     @Override
-    public void refreshData(Bundle bundle) {
-        if (bundle != null) {
-
-            String jsonString = bundle.getString("jsonString");
-            String groupName = bundle.getString("groupName");
-            groupCode = bundle.getString("groupCode");
-
-            if (jsonString != null && !jsonString.equals("")) {
-                try {
-                    JSONArray ja = new JSONArray(jsonString);
-                    for (int i = 0; i < ja.length(); i++) {
-                        JSONObject order = ja.getJSONObject(i);
-                        mListview_GroupParticipantsAdapter.addItem(order.getString("name"), order.getString("phoneNumber"));
-                    }
-                    if (groupName != null && !groupName.equals("")) {
-                        mView.changeGroupName(groupName);
-                    }
-                } catch (JSONException e) {
-                    e.printStackTrace();
+    public void receiveDirectlyEnteredMembers() {
+        if (mBundle != null) {
+            ArrayList<DirectInputParticipants> directInputParticipantsArrayList = mBundle.getParcelableArrayList("InputMember");
+            if (directInputParticipantsArrayList != null && directInputParticipantsArrayList.size() > 0) {
+                for (int i = 0; i < directInputParticipantsArrayList.size(); i++) {
+                    mListview_GroupParticipantsAdapter.addItem(directInputParticipantsArrayList.get(i).getName(), PhoneNumberUtils.formatNumber(directInputParticipantsArrayList.get(i).getPhoneNumber(), Locale.getDefault().getCountry()));
                 }
             }
+        }
+    }
 
-
-            ArrayList<DirectInputParticipants> mDirectInputParticipantsArrayList = bundle.getParcelableArrayList("itemList");
-            if (mDirectInputParticipantsArrayList != null && mDirectInputParticipantsArrayList.size() > 0) {
-                mListview_GroupParticipantsAdapter.setList(bundle.getParcelableArrayList("itemList"));
-            }
-
-            mDirectInputParticipantsArrayList = bundle.getParcelableArrayList("InputMember");
-            if (mDirectInputParticipantsArrayList != null && mDirectInputParticipantsArrayList.size() > 0) {
-                for (int i = 0; i < mDirectInputParticipantsArrayList.size(); i++) {
-                    mListview_GroupParticipantsAdapter.addItem(mDirectInputParticipantsArrayList.get(i).getName(), PhoneNumberUtils.formatNumber(mDirectInputParticipantsArrayList.get(i).getPhoneNumber(), Locale.getDefault().getCountry()));
-                }
-            }
-
-            ArrayList<TelephoneDirectory> mTelephoneDirectoryArrayList = bundle.getParcelableArrayList("telephoneInputMember");
+    /**
+     * 전화부호부에서 선택한 구성원 리스트 받기.
+     */
+    @Override
+    public void receiveTelephoneDirectoryMembers() {
+        if (mBundle != null) {
+            ArrayList<TelephoneDirectory> mTelephoneDirectoryArrayList = mBundle.getParcelableArrayList("telephoneInputMember");
             if (mTelephoneDirectoryArrayList != null && mTelephoneDirectoryArrayList.size() > 0) {
                 for (int i = 0; i < mTelephoneDirectoryArrayList.size(); i++) {
                     mListview_GroupParticipantsAdapter.addItem(mTelephoneDirectoryArrayList.get(i).getName(), mTelephoneDirectoryArrayList.get(i).getPhoneNumber());
                 }
             }
-
-            mListview_GroupParticipantsAdapter.notifyDataSetInvalidated();
-            mView.changePersonCount(mListview_GroupParticipantsAdapter.getCount());
-        } else {
-            mView.changeGroupName("");
         }
     }
 
+    /**
+     * 구성원 리스트 데이터를 갱신
+     */
     @Override
-    public void onResume() {
-
+    public void refreshData() {
+            mListview_GroupParticipantsAdapter.notifyDataSetInvalidated();
+            mView.changePersonCount(mListview_GroupParticipantsAdapter.getCount());
     }
 
+    /**
+     * 프래그먼트 진입 시 전달받은 데이터 갱신 데이터를 갱신
+     */
+    @Override
+    public void onResume(Bundle bundle) {
+        mBundle = bundle;
+    }
+
+    /**
+     * ListView 초기화
+     */
     @Override
     public void initListViewData(ListView listView) {
         listView.setAdapter(mListview_GroupParticipantsAdapter);
     }
 
+    /**
+     * 전화부호부 버튼 클릭 이벤트 처리
+     */
     @Override
     public void clickTelephoneDirectory() {
+
+        //현재 프래그먼트로 다시 되돌아 왔을때 리스트가 초기화되는 현상 발생.
+        //현재 저장된 구성원 리스트를 전달하여 되돌아 왔을때 해당 리스트를 다시 돌려받음.
         Bundle bundle = new Bundle();
         bundle.putParcelableArrayList("itemList", mListview_GroupParticipantsAdapter.getList());
 
@@ -127,9 +181,14 @@ public class MyGroup_EditPresenter implements MyGroup_EditContract.Presenter {
 
     }
 
+    /**
+     * 직접입력 버튼 클릭 이벤트 처리
+     */
     @Override
     public void clickDirectInput() {
 
+        //현재 프래그먼트로 다시 되돌아 왔을때 리스트가 초기화되는 현상 발생.
+        //현재 저장된 구성원 리스트를 전달하여 되돌아 왔을때 해당 리스트를 다시 돌려받음.
         Bundle bundle = new Bundle();
         bundle.putParcelableArrayList("itemList", mListview_GroupParticipantsAdapter.getList());
 
@@ -144,6 +203,9 @@ public class MyGroup_EditPresenter implements MyGroup_EditContract.Presenter {
         fragmentTransaction.commit();
     }
 
+    /**
+     * 뒤로가기 이벤트 처리
+     */
     @Override
     public void clickBackPressed() {
         if (mMyApplication.entranceGroupPath) {
@@ -153,15 +215,25 @@ public class MyGroup_EditPresenter implements MyGroup_EditContract.Presenter {
         }
     }
 
+    /**
+     * 완료 버튼 이벤트 처리
+     */
     @Override
     public void clickComplete(String groupName) {
+        if(groupName.equals("")){
+            mView.showFailDialog("실패" , "그룹명을 입력해주세요.");
+            return;
+        }
 
+        //그룹 구성원이 2명 이상이어야 완료가 가능.
         if (mListview_GroupParticipantsAdapter.getCount() > 1) {
 
+            //입장경로가 편집일때 데이터 업데이트.
             if (mMyApplication.entranceGroupPath) {
                 Call<Void> updateGroup = MyApplication
                         .getRestAdapter()
                         .updateGroup(groupCode,
+                                groupName,
                                 new Gson().toJson(mListview_GroupParticipantsAdapter.getList()),
                                 mListview_GroupParticipantsAdapter.getCount() + "");
 
@@ -178,6 +250,7 @@ public class MyGroup_EditPresenter implements MyGroup_EditContract.Presenter {
                     }
                 });
 
+                //입장경로가 신규추가일때 데이터 생성.
             } else {
                 Call<Void> createGroup = MyApplication
                         .getRestAdapter()
@@ -200,7 +273,7 @@ public class MyGroup_EditPresenter implements MyGroup_EditContract.Presenter {
                 });
             }
         } else {
-            mView.showFailDialog("실패" , "그룹은 최소 2인 이상입니다.");
+            mView.showFailDialog("실패", "그룹은 최소 2인 이상입니다.");
         }
     }
 }

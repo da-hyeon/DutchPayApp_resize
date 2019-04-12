@@ -17,13 +17,12 @@ public class BaseActivity extends AppCompatActivity implements BaseActivityContr
         mPresenter = new BaseActivityPresenter(this , this , getSupportFragmentManager());
     }
 
-
-
     @Override
     public void finish() {
         super.finish();
         this.overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
     }
+
     /**
      * 성공 다이얼로그 보이기
      */

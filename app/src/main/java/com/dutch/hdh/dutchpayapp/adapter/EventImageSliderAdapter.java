@@ -15,6 +15,8 @@ import android.widget.Toast;
 
 
 import com.bumptech.glide.Glide;
+import com.dutch.hdh.dutchpayapp.Constants;
+import com.dutch.hdh.dutchpayapp.MyApplication;
 import com.dutch.hdh.dutchpayapp.R;
 import com.dutch.hdh.dutchpayapp.data.db.Event;
 import com.dutch.hdh.dutchpayapp.databinding.EventSliderBinding;
@@ -25,8 +27,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class EventImageSliderAdapter extends PagerAdapter {
-
-    private final String BASE_IMAGE_URL = "http://dutchkor02.cafe24.com/image/";
 
     private Context mContext;
     private ArrayList<Event> mEventArrayList;
@@ -58,7 +58,7 @@ public class EventImageSliderAdapter extends PagerAdapter {
 
         if (mEventArrayList.size() > 0) {
             Glide.with(mContext)
-                    .load(BASE_IMAGE_URL + mEventArrayList.get(position).getEventUploadName())
+                    .load(MyApplication.getBaseUrl() + Constants.IMAGE_URL + mEventArrayList.get(position).getEventUploadName())
                     .error(R.drawable.intro_dutchpay_korea)
                     .into(mBinding.ivEventImage);
 

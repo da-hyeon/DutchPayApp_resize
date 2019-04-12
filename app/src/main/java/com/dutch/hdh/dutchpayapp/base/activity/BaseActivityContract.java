@@ -5,6 +5,8 @@ public interface BaseActivityContract {
         void showSuccessDialog(String title, String content);
         void showWarningDialog(String title, String content);
         void showFailDialog(String title, String content);
+
+        void finish();
     }
     interface Presenter{
     }

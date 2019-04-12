@@ -92,6 +92,7 @@ public interface ServerAPI {
     @POST(Constants.UPDATE_GROUP_REQUEST_URL)
     Call<Void> updateGroup(
             @Field("groupacode") String groupacode ,
+            @Field("groupaname") String groupaname ,
             @Field("groupcontent") String groupcontent ,
             @Field("peoplenumber") String peoplenumber);
 
@@ -130,4 +131,15 @@ public interface ServerAPI {
     @POST(Constants.CHANGE_PASSWORD_REQUEST_URL)
     Call<Void> changePassword(@Field("password") String password ,
                            @Field("usercode") String usercode );
+
+    /**
+     * 전화번호 변경 요청
+     * @param phone
+     * @param usercode
+     * @return
+     */
+    @FormUrlEncoded
+    @POST(Constants.CHANGE_PHONENUMBER_REQUEST_URL)
+    Call<Void> changePhoneNumber(@Field("phone") String phone ,
+                              @Field("usercode") String usercode );
 }

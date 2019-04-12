@@ -2,7 +2,6 @@ package com.dutch.hdh.dutchpayapp.ui.dialog.payment_info;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 
 import com.dutch.hdh.dutchpayapp.MyApplication;
 
@@ -16,7 +15,7 @@ public class Payment_InfomationDialogPresenter implements Payment_InfomationDial
 
     private int mAmount;
 
-    public Payment_InfomationDialogPresenter(Payment_InfomationDialogContract.View mView, Context mContext) {
+    Payment_InfomationDialogPresenter(Payment_InfomationDialogContract.View mView, Context mContext) {
         this.mView = mView;
         this.mContext = mContext;
 

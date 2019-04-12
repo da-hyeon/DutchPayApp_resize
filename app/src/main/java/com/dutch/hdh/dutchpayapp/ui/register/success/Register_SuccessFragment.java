@@ -23,6 +23,7 @@ public class Register_SuccessFragment extends BaseFragment implements Register_S
 
         mPresenter = new Register_SuccessPresenter( this , getContext() , getActivity() , getFragmentManager());
 
+        mBinding.tvTitle.setSelected(true);
         //앱시작 버튼 클릭
         mBinding.btnAppStart.setOnClickListener(v ->
             mPresenter.clickAppStart()

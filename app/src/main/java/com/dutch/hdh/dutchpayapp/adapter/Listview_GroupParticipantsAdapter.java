@@ -97,7 +97,7 @@ public class Listview_GroupParticipantsAdapter extends BaseAdapter  {
         mGroupParticipantsArrayList.add(new GroupParticipants(name , phoneNumber));
     }
 
-    public void deleteItem(int position){
+    private void deleteItem(int position){
         if(mGroupParticipantsArrayList.get(position) != null) {
             mGroupParticipantsArrayList.remove(position);
             mView.changePersonCount(getCount());

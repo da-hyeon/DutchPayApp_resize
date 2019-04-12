@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
@@ -11,7 +12,155 @@
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/layoutBG">
+
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/clAppBar"
+            android:layout_width="match_parent"
+            android:layout_height="62.67dp"
+            android:layout_marginLeft="17.14dp"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/malgunfont"
+                android:includeFontPadding="false"
+                android:text="전화번호 변경"
+                android:textColor="#2a2a2a"
+                android:textSize="18.85dp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tvCancel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="17.14dp"
+                android:fontFamily="@font/malgunfont"
+                android:includeFontPadding="false"
+                android:text="취소"
+                android:textColor="#2a2a2a"
+                android:textSize="18.85dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <View
+                android:id="@+id/vCancel"
+                android:layout_width="70dp"
+                android:layout_height="match_parent"
+                app:layout_constraintRight_toRightOf="parent" />
+
+
+        </android.support.constraint.ConstraintLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="#dbd9da"
+            app:layout_constraintTop_toBottomOf="@+id/clAppBar" />
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginLeft="17.14dp"
+            android:layout_marginTop="28.85dp"
+            android:layout_marginRight="17.14dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/clAppBar">
+
+            <TextView
+                android:id="@+id/tvMyPassword"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="28.85dp"
+                android:fontFamily="@font/malgunfont"
+                android:includeFontPadding="false"
+                android:text="신규 핸드폰 번호"
+                android:textColor="#1e1e1e"
+                android:textSize="13.71dp"
+                android:textStyle="bold"
+                app:layout_constraintLeft_toLeftOf="parent" />
+
+            <LinearLayout
+                android:id="@+id/llTop"
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                android:layout_marginTop="6.85dp"
+                android:orientation="horizontal"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvMyPassword">
+
+                <EditText
+                    android:id="@+id/etMyPhoneNumber"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="7"
+                    android:background="#ffffff"
+                    android:fontFamily="@font/malgunfont"
+                    android:hint="핸드폰 번호"
+                    android:includeFontPadding="false"
+                    android:layout_marginRight="2dp"
+                    android:paddingLeft="12.28dp"
+                    android:textSize="13.71dp"/>
+
+                <Button
+                    android:id="@+id/btRequestingAuthNumber"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="3"
+                    android:background="@color/buttonSelect"
+                    android:text="인증번호 요청"
+                    android:textColor="#ffffff"
+                    android:layout_marginLeft="2dp"
+                    android:textSize="13.71dp"
+                    android:textStyle="bold"
+                    android:fontFamily="@font/malgunfont"
+                    android:includeFontPadding="false"/>
+
+            </LinearLayout>
+
+
+            <EditText
+                android:id="@+id/etAuthNumber"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:background="#ffffff"
+                android:fontFamily="@font/malgunfont"
+                android:hint="인증번호를 입력해주세요."
+                android:includeFontPadding="false"
+                android:layout_marginRight="2dp"
+                android:paddingLeft="12.28dp"
+                android:textSize="13.71dp"
+                android:inputType="number"
+                android:layout_marginTop="3.14dp"
+                app:layout_constraintTop_toBottomOf="@+id/llTop"
+                />
+
+            <Button
+                android:id="@+id/btChange"
+                android:layout_width="match_parent"
+                android:layout_height="47.42dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:background="@color/buttonSelect"
+                android:text="변경하기"
+                android:layout_marginBottom="17.14dp"
+                android:textColor="#ffffff"
+                android:textSize="18dp"
+                android:inputType="number"
+                android:textStyle="bold"
+                android:fontFamily="@font/malgunfont"
+                android:includeFontPadding="false"/>
+
+        </android.support.constraint.ConstraintLayout>
 
     </android.support.constraint.ConstraintLayout>
 </layout>

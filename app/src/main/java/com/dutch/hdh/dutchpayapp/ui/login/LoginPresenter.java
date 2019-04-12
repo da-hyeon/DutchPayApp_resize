@@ -2,6 +2,7 @@ package com.dutch.hdh.dutchpayapp.ui.login;
 
 import android.app.Activity;
 import android.content.Context;
+import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 
@@ -24,7 +25,10 @@ public class LoginPresenter implements LoginContract.Presenter {
 
     private MyApplication mMyApplication;
 
-    public LoginPresenter(LoginContract.View mView, Context mContext, FragmentManager mFragmentManager, Activity mActivity) {
+    /**
+     * 생성자
+     */
+    LoginPresenter(LoginContract.View mView, Context mContext, FragmentManager mFragmentManager, Activity mActivity) {
         this.mView = mView;
         this.mContext = mContext;
         this.mFragmentManager = mFragmentManager;
@@ -47,7 +51,7 @@ public class LoginPresenter implements LoginContract.Presenter {
 
             userInfo.enqueue(new Callback<UserInfo>() {
                 @Override
-                public void onResponse(Call<UserInfo> call, Response<UserInfo> response) {
+                public void onResponse(@NonNull Call<UserInfo> call, @NonNull Response<UserInfo> response) {
                     if (response.body() != null) {
                         mMyApplication.setUserInfo(response.body());
                         mMyApplication.getUserInfo().setUserState(true);
@@ -58,7 +62,7 @@ public class LoginPresenter implements LoginContract.Presenter {
                 }
 
                 @Override
-                public void onFailure(Call<UserInfo> call, Throwable t) {
+                public void onFailure(@NonNull Call<UserInfo> call, @NonNull Throwable t) {
                     mView.showFailDialog(t.getMessage());
                 }
             });

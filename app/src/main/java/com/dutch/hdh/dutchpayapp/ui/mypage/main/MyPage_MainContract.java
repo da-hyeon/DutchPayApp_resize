@@ -12,5 +12,7 @@ public interface MyPage_MainContract {
         void clickChangeEmail();
         void clickChangePassword();
         void clickChangePhoneNumber();
+        void clickWithdrawal();
     }
+
 }

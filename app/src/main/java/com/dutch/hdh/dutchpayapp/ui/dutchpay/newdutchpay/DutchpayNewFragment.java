@@ -1,12 +1,17 @@
 package com.dutch.hdh.dutchpayapp.ui.dutchpay.newdutchpay;
 
+import android.annotation.SuppressLint;
 import android.databinding.DataBindingUtil;
 import android.graphics.Rect;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
@@ -22,6 +27,8 @@ public class DutchpayNewFragment extends BaseFragment implements DutchpayNewCont
 
     FragmentDutchpayNewStartBinding mBinding;
     DutchpayNewPresenter mPresenter;
+
+    private boolean viewFlag = false;
 
     @Nullable
     @Override
@@ -41,9 +48,23 @@ public class DutchpayNewFragment extends BaseFragment implements DutchpayNewCont
             mBinding.getRoot().getWindowVisibleDisplayFrame(r);
 
             int heightDiff = mBinding.getRoot().getRootView().getHeight() - (r.bottom - r.top);
-            if(heightDiff > 150) {
+            if(heightDiff > 600){
+                Log.e("heightDiff//",heightDiff+"");
+
+                if(!viewFlag){
+                    viewFlag = true; //키보드 열림
+                }
+            } else if(heightDiff > 150) {
+                Log.e("heightDiff",heightDiff+"");
                 //금액 값 변동 확인
                 mPresenter.checkCost(mBinding.etCost.getText().toString());
+
+                if(viewFlag) {
+                    if (mPresenter.getmNewList().size() != 0) {
+                        mPresenter.getmAdapter().notifyDataSetChanged();
+                    }
+                    viewFlag = false; //키보드 닫음
+                }
             }
         });
 
@@ -81,7 +102,34 @@ public class DutchpayNewFragment extends BaseFragment implements DutchpayNewCont
 
     @Override
     public void setMyCost(String mycost) {
-        mBinding.tvMyCost.setText(mycost);
+        mBinding.etMycost.setText(mycost);
+    }
+
+    @SuppressLint("ClickableViewAccessibility")
+    @Override
+    public void setMyCostEditable(boolean flag) {
+        mBinding.etMycost.setFocusableInTouchMode(flag);
+        if(flag){
+            mBinding.etMycost.setOnTouchListener((v, event) -> {
+                mBinding.etMycost.addTextChangedListener(new TextWatcher() {
+                    @Override
+                    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+                    }
+
+                    @Override
+                    public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                    }
+
+                    @Override
+                    public void afterTextChanged(Editable s) {
+                        mPresenter.changeMyCost(s.toString());
+                    }
+                });
+                return false;
+            });
+        }
     }
 
     @Override

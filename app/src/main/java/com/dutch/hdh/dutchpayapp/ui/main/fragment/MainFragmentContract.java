@@ -27,5 +27,8 @@ public interface MainFragmentContract {
         void clickSolopay();
         void clickDutchpay();
         void clickAllEvent();
+
+        //slide
+        void slideViewPagerAction(int position);
     }
 }

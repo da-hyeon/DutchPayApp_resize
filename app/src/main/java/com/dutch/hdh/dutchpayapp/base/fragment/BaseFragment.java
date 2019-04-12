@@ -48,6 +48,7 @@ public class BaseFragment extends Fragment implements BaseFragmentContract.View{
 
     /**
      * 성공 다이얼로그 보이기
+     * OK = 되돌아가기
      */
     @Override
     public void showSuccessDialog(String title, String content) {
@@ -64,6 +65,8 @@ public class BaseFragment extends Fragment implements BaseFragmentContract.View{
 
     /**
      * 경고 다이얼로그 보이기
+     * OK = 되돌아가기
+     * Cancel = 다이얼로그 감추기
      */
     @Override
     public void showWarningDialog(String title, String content) {
@@ -82,6 +85,7 @@ public class BaseFragment extends Fragment implements BaseFragmentContract.View{
 
     /**
      * 실패 다이얼로그 보이기
+     * OK = 다이얼로그 감추기
      */
     @Override
     public void showFailDialog(String title, String content) {

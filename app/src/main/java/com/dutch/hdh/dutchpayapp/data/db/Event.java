@@ -19,6 +19,9 @@ public class Event {
     @SerializedName("writer_Date")
     private String eventWriteDate;
 
+    @SerializedName("status")
+    private String eventStatus;
+
     @SerializedName("upload_Name")
     private String eventUploadName;
 
@@ -60,6 +63,14 @@ public class Event {
 
     public void setEventWriteDate(String eventWriteDate) {
         this.eventWriteDate = eventWriteDate;
+    }
+
+    public String getEventStatus() {
+        return eventStatus;
+    }
+
+    public void setEventStatus(String eventStatus) {
+        this.eventStatus = eventStatus;
     }
 
     public String getEventUploadName() {
