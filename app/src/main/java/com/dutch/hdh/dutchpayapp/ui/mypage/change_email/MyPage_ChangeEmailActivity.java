@@ -2,14 +2,10 @@ package com.dutch.hdh.dutchpayapp.ui.mypage.change_email;
 
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 import android.widget.EditText;
 
 import com.dutch.hdh.dutchpayapp.R;
 import com.dutch.hdh.dutchpayapp.base.activity.BaseActivity;
-import com.dutch.hdh.dutchpayapp.base.fragment.BaseFragment;
 import com.dutch.hdh.dutchpayapp.databinding.ActivityMyPageChangeEmailBinding;
 
 
@@ -24,7 +20,7 @@ public class MyPage_ChangeEmailActivity extends BaseActivity implements MyPage_C
         super.onCreate(savedInstanceState);
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_my_page_change_email);
         mBinding.setEmailActivity(this);
-        mPresenter = new MyPage_ChangeEmailPresenter(this, this, getSupportFragmentManager());
+        mPresenter = new MyPage_ChangeEmailPresenter(this, this);
 
         initData();
 
@@ -33,6 +29,7 @@ public class MyPage_ChangeEmailActivity extends BaseActivity implements MyPage_C
                 mPresenter.clickCancel()
         );
 
+        //변경하기 클릭
         mBinding.btChange.setOnClickListener(v ->
                 mPresenter.clickChange(mEditTextArray)
         );
@@ -51,11 +48,17 @@ public class MyPage_ChangeEmailActivity extends BaseActivity implements MyPage_C
         };
     }
 
+    /**
+     * 이메일 TextView 변경하기.
+     */
     @Override
     public void changeEmailText(String email) {
         mBinding.tvMyEmail.setText(email);
     }
 
+    /**
+     * 뒤로가기 처리
+     */
     @Override
     public void onBackPressed() {
         mPresenter.clickCancel();

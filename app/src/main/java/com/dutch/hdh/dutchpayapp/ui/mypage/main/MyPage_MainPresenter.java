@@ -10,6 +10,7 @@ import com.dutch.hdh.dutchpayapp.R;
 import com.dutch.hdh.dutchpayapp.ui.mypage.change_email.MyPage_ChangeEmailActivity;
 import com.dutch.hdh.dutchpayapp.ui.mypage.change_password.MyPage_ChangePasswordActivity;
 import com.dutch.hdh.dutchpayapp.ui.mypage.change_phone.MyPage_ChangePhoneActivity;
+import com.dutch.hdh.dutchpayapp.ui.mypage.withdrawal.MyPage_WithdrawalActivity;
 
 public class MyPage_MainPresenter implements MyPage_MainContract.Presenter{
 
@@ -56,5 +57,12 @@ public class MyPage_MainPresenter implements MyPage_MainContract.Presenter{
         mContext.startActivity(intent);
         mActivity.overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
 
+    }
+
+    @Override
+    public void clickWithdrawal() {
+        Intent intent = new Intent(mContext, MyPage_WithdrawalActivity.class);
+        mContext.startActivity(intent);
+        mActivity.overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
     }
 }

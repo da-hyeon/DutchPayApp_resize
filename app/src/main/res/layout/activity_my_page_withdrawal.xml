@@ -1,14 +1,211 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.mypage.withdrawal.MyPage_WithdrawalFragment">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <data>
+        <variable
+            name="withdrawalActivity"
+            type="com.dutch.hdh.dutchpayapp.ui.mypage.withdrawal.MyPage_WithdrawalActivity" />
+    </data>
+
+    <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:background="@color/layoutBG">
 
-</FrameLayout>
+
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/clAppBar"
+            android:layout_width="match_parent"
+            android:layout_height="62.67dp"
+            android:layout_marginLeft="17.14dp"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/malgunfont"
+                android:includeFontPadding="false"
+                android:text="회원탈퇴"
+                android:textColor="#2a2a2a"
+                android:textSize="18.85dp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tvCancel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="17.14dp"
+                android:fontFamily="@font/malgunfont"
+                android:includeFontPadding="false"
+                android:text="취소"
+                android:textColor="#2a2a2a"
+                android:textSize="18.85dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <View
+                android:id="@+id/vCancel"
+                android:layout_width="70dp"
+                android:layout_height="match_parent"
+                app:layout_constraintRight_toRightOf="parent" />
+
+
+        </android.support.constraint.ConstraintLayout>
+
+        <View
+            android:id="@+id/vView"
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="#dbd9da"
+            app:layout_constraintTop_toBottomOf="@+id/clAppBar" />
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintTop_toBottomOf="@+id/clAppBar"
+            app:layout_constraintBottom_toTopOf="@+id/btWihdrawal"
+            android:layout_marginBottom="17.14dp"
+            android:layout_marginTop="28.85dp">
+
+            <android.support.constraint.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginLeft="17.14dp"
+                android:layout_marginRight="17.14dp">
+
+                <View
+                    android:id="@+id/vTop"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:background="#ffffff" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10.28dp"
+                    android:fontFamily="@font/malgunfont"
+                    android:includeFontPadding="false"
+                    android:text="환불예상금액"
+                    android:textColor="#1b1b1b"
+                    android:textSize="17.14dp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="@+id/vTop"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/vTop" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10.28dp"
+                    android:fontFamily="@font/malgunfont"
+                    android:includeFontPadding="false"
+                    android:text="1,500,000,000원"
+                    android:textColor="#0f69ff"
+                    android:textSize="18.85dp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="@+id/vTop"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/vTop" />
+
+                <View
+                    android:id="@+id/vMiddle"
+                    android:layout_width="match_parent"
+                    android:layout_height="276dp"
+                    android:layout_marginTop="12.85dp"
+                    android:background="#ffffff"
+                    app:layout_constraintTop_toBottomOf="@+id/vTop" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_marginLeft="10.28dp"
+                    android:layout_marginTop="12.28dp"
+                    android:layout_marginRight="10.28dp"
+                    android:layout_marginBottom="12.28dp"
+                    android:fontFamily="@font/malgunfont"
+                    android:includeFontPadding="false"
+                    android:text="회원탈퇴 안내"
+                    android:textColor="#121212"
+                    android:textSize="10.28dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/vMiddle"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/vMiddle" />
+
+                <View
+                    android:id="@+id/vBottom"
+                    android:layout_width="match_parent"
+                    android:layout_height="110.57dp"
+                    android:background="#23bab3"
+                    app:layout_constraintTop_toBottomOf="@+id/vMiddle"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:layout_marginBottom="17.14dp"
+                    android:layout_marginTop="11.42dp" />
+
+                <ImageView
+                    android:id="@+id/ivHanaBank"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/hana_bank"
+                    app:layout_constraintTop_toTopOf="@+id/vBottom"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    android:layout_marginLeft="17.14dp"
+                    android:layout_marginTop="29.42dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="110-1234-567890"
+                    android:textColor="#121212"
+                    android:textSize="14.28dp"
+                    android:fontFamily="@font/malgunfont"
+                    android:includeFontPadding="false"
+                    app:layout_constraintTop_toBottomOf="@+id/ivHanaBank"
+                    android:layout_marginLeft="54.20dp"
+                    android:layout_marginTop="7.85dp"
+                    app:layout_constraintLeft_toLeftOf="parent"/>
+
+                <Button
+                    android:layout_width="65dp"
+                    android:layout_height="19.42dp"
+                    android:background="#000000"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/ivHanaBank"
+                    android:text="환불계좌변경"
+                    android:textStyle="bold"
+                    android:textColor="#ffffff"
+                    android:textSize="10dp"
+                    android:layout_marginRight="16.85dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/ivHanaBank"/>
+
+            </android.support.constraint.ConstraintLayout>
+
+        </ScrollView>
+
+
+
+        <Button
+            android:id="@+id/btWihdrawal"
+            android:layout_width="match_parent"
+            android:layout_height="47.42dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:background="@color/buttonDefault"
+            android:text="탈퇴하기"
+            android:layout_marginBottom="17.14dp"
+            android:layout_marginLeft="17.14dp"
+            android:layout_marginRight="17.14dp"
+            android:textColor="@color/textDefault"
+            android:textSize="18dp"
+            android:inputType="number"
+            android:textStyle="bold"
+            android:fontFamily="@font/malgunfont"
+            android:includeFontPadding="false"/>
+
+    </android.support.constraint.ConstraintLayout>
+</layout>

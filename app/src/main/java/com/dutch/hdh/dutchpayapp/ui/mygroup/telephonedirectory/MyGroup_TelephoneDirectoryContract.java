@@ -1,25 +1,25 @@
 package com.dutch.hdh.dutchpayapp.ui.mygroup.telephonedirectory;
 
 import android.content.ContentResolver;
-import android.os.Bundle;
 import android.widget.ListView;
 
+import com.dutch.hdh.dutchpayapp.base.fragment.BaseFragmentContract;
+
 public interface MyGroup_TelephoneDirectoryContract {
-    interface View{
-        void showFailDialog(String title, String content);
+    interface View extends BaseFragmentContract.View {
         void showWarningDialog(String title, String content);
         void showErrorDialog(String title, String content);
 
         void changeAddMember(int count);
     }
     interface Presenter{
-        void callingTelephoneDirectory(ContentResolver getContentResolver , Bundle bundle);
+        void callingTelephoneDirectory(ContentResolver getContentResolver);
         void initListViewData(ListView listView);
         void setCheckState(int position , boolean state);
         void searchTelephoneDirectories(String search);
 
-        void clickAdd(Bundle bundle);
+        void clickAdd();
         void clickBackPressed();
-        void clickWarningDialogOK(Bundle bundle);
+        void clickWarningDialogOK();
     }
 }

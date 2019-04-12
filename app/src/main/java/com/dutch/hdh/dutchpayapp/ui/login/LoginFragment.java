@@ -2,6 +2,7 @@ package com.dutch.hdh.dutchpayapp.ui.login;
 
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +12,8 @@ import com.dutch.hdh.dutchpayapp.R;
 import com.dutch.hdh.dutchpayapp.base.fragment.BaseFragment;
 import com.dutch.hdh.dutchpayapp.databinding.FragmentLoginBinding;
 import com.kinda.alert.KAlertDialog;
+
+import java.util.Objects;
 
 public class LoginFragment extends BaseFragment implements LoginContract.View{
 
@@ -24,16 +27,15 @@ public class LoginFragment extends BaseFragment implements LoginContract.View{
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         mBinding = DataBindingUtil.inflate(inflater , R.layout.fragment_login, container, false);
         mPresenter = new LoginPresenter(this , getContext() ,getFragmentManager() , getActivity());
 
         //로그인버튼 클릭
-        mBinding.btnLogin.setOnClickListener(v-> {
-                    mPresenter.clickLogin(mBinding.editUserID.getText().toString(), mBinding.editUserPW.getText().toString());
-                }
+        mBinding.btnLogin.setOnClickListener(v->
+                    mPresenter.clickLogin(mBinding.editUserID.getText().toString(), mBinding.editUserPW.getText().toString())
         );
 
         //회원가입 버튼 클릭
@@ -49,7 +51,7 @@ public class LoginFragment extends BaseFragment implements LoginContract.View{
      */
     @Override
     public void showSuccessDialog(String content) {
-        new KAlertDialog(getContext(), KAlertDialog.SUCCESS_TYPE)
+        new KAlertDialog(Objects.requireNonNull(getContext()), KAlertDialog.SUCCESS_TYPE)
                 .setTitleText("로그인 성공")
                 .setContentText(content)
                 .setConfirmText("확인")
@@ -65,11 +67,11 @@ public class LoginFragment extends BaseFragment implements LoginContract.View{
      */
     @Override
     public void showFailDialog(String content) {
-        new KAlertDialog(getContext(), KAlertDialog.WARNING_TYPE)
+        new KAlertDialog(Objects.requireNonNull(getContext()), KAlertDialog.WARNING_TYPE)
                 .setTitleText("실패")
                 .setContentText(content)
                 .setConfirmText("확인")
-                .setConfirmClickListener(sDialog -> {sDialog.dismissWithAnimation();})
+                .setConfirmClickListener(KAlertDialog::dismissWithAnimation)
                 .show();
     }
 

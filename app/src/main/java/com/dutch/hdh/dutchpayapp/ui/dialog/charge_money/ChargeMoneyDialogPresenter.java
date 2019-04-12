@@ -9,7 +9,7 @@ public class ChargeMoneyDialogPresenter implements ChargeMoneyDialogContract.Pre
     private ChargeMoneyDialogContract.View mView;
     private Context mContext;
 
-    public ChargeMoneyDialogPresenter(ChargeMoneyDialogContract.View mView, Context mContext) {
+    ChargeMoneyDialogPresenter(ChargeMoneyDialogContract.View mView, Context mContext) {
         this.mView = mView;
         this.mContext = mContext;
     }
@@ -38,7 +38,7 @@ public class ChargeMoneyDialogPresenter implements ChargeMoneyDialogContract.Pre
         mView.removeDialog();
     }
 
-    public String converter(String amount) {
+    private String converter(String amount) {
         if (!amount.equals("")) {
             //0보다 커야하고
             if (amount.length() > 0) {
@@ -52,7 +52,7 @@ public class ChargeMoneyDialogPresenter implements ChargeMoneyDialogContract.Pre
                 String[] han2 = {"", "십", "백", "천"};
                 String[] han3 = {"", "만", "억", "조", "경"};
 
-                StringBuffer result = new StringBuffer();
+                StringBuilder result = new StringBuilder();
                 int len = amount.length();
 
                 for (int i = len - 1; i >= 0; i--) {

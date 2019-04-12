@@ -33,6 +33,10 @@ public class MyPage_MainFragment extends BaseFragment implements MyPage_MainCont
         mBinding.vPhone.setOnClickListener(v->
                 mPresenter.clickChangePhoneNumber()
         );
+
+        mBinding.vWithdrawal.setOnClickListener(v->
+                mPresenter.clickWithdrawal()
+        );
         return mBinding.getRoot();
     }
 

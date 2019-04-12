@@ -36,6 +36,7 @@ public class MainFragmentPresenter implements MainFragmentContract.Presenter {
     private Activity mActivity;
     private MyApplication myApplication;
     private EventImageSliderAdapter mEventImageSliderAdapter;
+    private EventList eventList;
 
     public MainFragmentPresenter(MainFragmentContract.View mView, Context mContext, FragmentManager mFragmentManager, Activity mActivity) {
         this.mView = mView;
@@ -69,8 +70,9 @@ public class MainFragmentPresenter implements MainFragmentContract.Presenter {
             @Override
             public void onResponse(Call<EventList> call, Response<EventList> response) {
                 if (response.isSuccessful()) {
-                    EventList eventList = response.body();
+                    eventList = response.body();
                     mEventImageSliderAdapter.setmEventArrayList(eventList.getEventList());
+                    mView.changeEventTitle(eventList.getEventList().get(0).getEventTitle());
                     viewPager.setAdapter(mEventImageSliderAdapter);
                     tabLayout.setupWithViewPager(viewPager, true);
 
@@ -85,6 +87,8 @@ public class MainFragmentPresenter implements MainFragmentContract.Presenter {
                 Log.d("error", t.getLocalizedMessage());
             }
         });
+
+
     }
 
     /**
@@ -122,5 +126,8 @@ public class MainFragmentPresenter implements MainFragmentContract.Presenter {
         fragmentTransaction.commit();
     }
 
-
+    @Override
+    public void slideViewPagerAction(int position) {
+        mView.changeEventTitle(eventList.getEventList().get(position).getEventTitle());
+    }
 }

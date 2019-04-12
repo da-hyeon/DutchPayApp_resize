@@ -4,30 +4,42 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 
+import com.dutch.hdh.dutchpayapp.Constants;
+import com.dutch.hdh.dutchpayapp.MyApplication;
+
 public class Event_DetailPresenter implements Event_DetailContract.Presenter {
 
     private Event_DetailContract.View mView;
     private Context mContext;
     private FragmentManager mFragmentManager;
-    private final String BASE_IMAGE_URL = "http://dutchkor02.cafe24.com/image/";
 
-    public Event_DetailPresenter(Event_DetailContract.View mView, Context mContext, FragmentManager mFragmentManager) {
+    /**
+     * 생성자
+     */
+    Event_DetailPresenter(Event_DetailContract.View mView, Context mContext, FragmentManager mFragmentManager) {
         this.mView = mView;
         this.mContext = mContext;
         this.mFragmentManager = mFragmentManager;
     }
 
+    /**
+     * 뷰 세팅
+     */
     @Override
     public void initView(Bundle bundle) {
-        String eventTitle = bundle.getString("eventTitle");
-        String eventUploadName = bundle.getString("eventUploadName");
-        String eventContent = bundle.getString("eventContent");
-
-        mView.changeTitle(eventTitle);
-        mView.changeImage(BASE_IMAGE_URL + eventUploadName);
-        mView.changeContent(eventContent);
+        if(bundle != null) {
+            mView.changeTitle(bundle.getString("eventTitle"));
+            mView.changeImage(MyApplication.getBaseUrl() + Constants.IMAGE_URL + bundle.getString("eventUploadName"));
+            mView.hideButton(bundle.getBoolean("onGoing"));
+            mView.changeContent(bundle.getString("eventContent"));
+        } else {
+            mView.showFailDialog("실패" , "데이터 수신에 실패했습니다.");
+        }
     }
 
+    /**
+     * 이벤트 참여하기 버튼 클릭 이벤트 처리
+     */
     @Override
     public void clickEventJoin() {
         mView.showSuccessDialog("성공" , "이벤트에 참여했습니다.");

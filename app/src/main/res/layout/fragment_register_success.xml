@@ -8,8 +8,8 @@
         android:background="#ffffff">
 
         <TextView
-            android:id="@+id/textView"
-            android:layout_width="wrap_content"
+            android:id="@+id/tvTitle"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="@string/register_success_titleText"
             android:textColor="#292929"
@@ -17,6 +17,13 @@
             android:layout_marginBottom="12.57dp"
             android:fontFamily="@font/malgunfont"
             android:textStyle="bold"
+            android:layout_marginLeft="36.57dp"
+            android:layout_marginRight="36.57dp"
+            android:singleLine="true"
+            android:marqueeRepeatLimit="marquee_forever"
+            android:ellipsize="marquee"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintBottom_toTopOf="@+id/imageView" />

@@ -3,9 +3,11 @@ package com.dutch.hdh.dutchpayapp.ui.mygroup.directinput;
 import android.os.Bundle;
 import android.widget.ListView;
 
+import com.dutch.hdh.dutchpayapp.base.fragment.BaseFragmentContract;
+
 public interface MyGroup_DirectInputContract {
 
-    interface View{
+    interface View extends BaseFragmentContract.View {
         void showFailDialog(String title, String content);
         void showWarningDialog(String title, String content);
 

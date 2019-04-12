@@ -40,6 +40,8 @@ public class MainActivity extends BaseActivity implements MainActivityContract.V
         initData();
 
 
+        mBinding.navigationView.tvNameTitle.setSelected(true);
+
         //메뉴버튼
         mBinding.Appbar.loMenu.setOnClickListener(v ->
                 mPresenter.clickMenu()
@@ -196,6 +198,8 @@ public class MainActivity extends BaseActivity implements MainActivityContract.V
             mBinding.navigationView.imageRegister.setVisibility(View.GONE);
             mBinding.navigationView.tvLogin.setVisibility(View.GONE);
             mBinding.navigationView.tvRegister.setVisibility(View.GONE);
+
+            mBinding.navigationView.tvNameTitle.setText(myApplication.getUserInfo().getUserName() + "님, 안녕하세요!");
         } else {
             //레이아웃 보이기
             mBinding.navigationView.layoutLogin.setVisibility(View.VISIBLE);
@@ -205,6 +209,8 @@ public class MainActivity extends BaseActivity implements MainActivityContract.V
             mBinding.navigationView.imageRegister.setVisibility(View.VISIBLE);
             mBinding.navigationView.tvLogin.setVisibility(View.VISIBLE);
             mBinding.navigationView.tvRegister.setVisibility(View.VISIBLE);
+
+            mBinding.navigationView.tvNameTitle.setText("에 오신것을 환영합니다.");
         }
     }
 
