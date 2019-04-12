@@ -1,6 +1,8 @@
 package com.dutch.hdh.dutchpayapp.data.util;
 
 import com.dutch.hdh.dutchpayapp.Constants;
+import com.dutch.hdh.dutchpayapp.data.db.CardCompanyList;
+import com.dutch.hdh.dutchpayapp.data.db.CardRegisterList;
 import com.dutch.hdh.dutchpayapp.data.db.EventList;
 import com.dutch.hdh.dutchpayapp.data.db.MyGroup;
 import com.dutch.hdh.dutchpayapp.data.db.UserInfo;
@@ -79,6 +81,47 @@ public interface ServerAPI {
     @POST(Constants.DELETE_GROUP_REQUEST_URL)
     Call<Void> deleteGroup(
             @Field("groupacode") String groupacode);
+
+
+
+    /**
+     * 등록할 카드목록가져오기
+     */
+    @GET(Constants.DUTCHPAY_CARD_COMPANY_SELECT)
+    Call<CardCompanyList> getCardSelectList();
+
+    /**
+     * 카드등록 요청
+     *
+     * @param cardno
+     * @param cardtypecode
+     * @param usercode
+     */
+    @FormUrlEncoded
+    @POST(Constants.DUTCHPAY_CARD_REGISTER)
+    Call<Void> setCardRegister(
+            @Field("cardno") String cardno,
+            @Field("cardtypecode") String cardtypecode,
+            @Field("usercode") String usercode);
+
+    /**
+     * 등록한 카드목록 요청
+     *
+     * @param usercode
+     */
+    @GET(Constants.DUTCHPAY_CARD_REGISTER_SELECT)
+    Call<CardRegisterList> getRegisterCardList(
+            @Query("usercode") String usercode);
+
+
+    /**
+     * 카드삭제 요청
+     *
+     * @param cardcode
+     */
+    @GET(Constants.DUTCHPAY_CARD_DELETE)
+    Call<Void> setCardDelete(
+            @Query("cardcode") String cardcode);
 
 
     /**
