@@ -40,14 +40,14 @@ public class MainFragment extends BaseFragment implements MainFragmentContract.V
         mBinding.tvTitle.setSelected(true);
 
         //개인결제 시작하기 버튼 클릭
-        mBinding.ivSoloPay.setOnClickListener(v->{
-            mPresenter.clickSolopay();
-        });
+        mBinding.ivSoloPay.setOnClickListener(v->
+            mPresenter.clickSolopay()
+        );
 
         //더치페이 시작하기 버튼 클릭
-        mBinding.ivDutchPay.setOnClickListener(v->{
-
-        });
+        mBinding.ivDutchPay.setOnClickListener(v->
+            mPresenter.clickDutchpay()
+        );
 
         //모든 이벤트 보기 버튼 클릭
         mBinding.llAllEvent.setOnClickListener(v->

@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.databinding.DataBindingUtil;
 import android.graphics.Rect;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
@@ -11,25 +12,44 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Toast;
 
-import com.dutch.hdh.dutchpayapp.MyApplication;
 import com.dutch.hdh.dutchpayapp.R;
 import com.dutch.hdh.dutchpayapp.base.fragment.BaseFragment;
+import com.dutch.hdh.dutchpayapp.data.db.DirectInputParticipants;
 import com.dutch.hdh.dutchpayapp.databinding.FragmentDutchpayNewStartBinding;
 import com.dutch.hdh.dutchpayapp.ui.dutchpay.start.ItemDecoration;
+import com.google.gson.Gson;
+
+import java.util.ArrayList;
 
 public class DutchpayNewFragment extends BaseFragment implements DutchpayNewContract.View {
 
     FragmentDutchpayNewStartBinding mBinding;
     DutchpayNewPresenter mPresenter;
 
-    TextWatcher tw;
+    TextWatcher tw = new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+        }
+
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+        }
+
+        @Override
+        public void afterTextChanged(Editable s) {
+            //리스트 마지막_더치 대표자 데이터 셋팅
+
+            mPresenter.getmNewList().get(mPresenter.getmNewList().size()-1).setEditedCheck(true);
+            mPresenter.getmNewList().get(mPresenter.getmNewList().size()-1).setCost(s.toString());
+        }
+    };
 
     private boolean viewFlag = false;
 
@@ -43,26 +63,9 @@ public class DutchpayNewFragment extends BaseFragment implements DutchpayNewCont
 
         //입력 완료_버그 수정
         mBinding.etCost.setImeOptions(EditorInfo.IME_ACTION_DONE);
-        mBinding.etMycost.setFocusableInTouchMode(false);
+        mBinding.etMycost.setImeOptions(EditorInfo.IME_ACTION_DONE);
 
-        tw = new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                //리스트 마지막_더치 대표자 데이터 셋팅
-                mPresenter.getmNewList().get(mPresenter.getmAdapter().getItemCount()-1).setEditedCheck(true);
-                mPresenter.getmNewList().get(mPresenter.getmAdapter().getItemCount()-1).setCost(s.toString());
-            }
-        };
+        setMyCostEditable(false);
 
         //키보드 변동 체크
         getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
@@ -101,11 +104,27 @@ public class DutchpayNewFragment extends BaseFragment implements DutchpayNewCont
     public void onResume() {
         super.onResume();
 
+        Log.e("resume","");
+
         //--임시
-        if(!mBinding.etCost.getText().toString().equals("")){
-            mPresenter.setOldCost(mBinding.etCost.getText().toString());
-            mPresenter.listInit();
+//        if(!mBinding.etCost.getText().toString().equals("")){
+//            mPresenter.setOldCost(mBinding.etCost.getText().toString());
+//            mPresenter.listInit();
+//        }
+
+        if(mPresenter.getmMyApplication().isDutchpayGroup()){
+            getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
+
+            if(getArguments() != null){
+                ArrayList<DirectInputParticipants> directInputParticipantsArrayList = getArguments().getParcelableArrayList("InputMember");
+
+                Gson gson = new Gson();
+                String jMemList = gson.toJson(directInputParticipantsArrayList);
+
+                mPresenter.listInit(jMemList);
+            }
         }
+
     }
 
     @Override
@@ -144,6 +163,11 @@ public class DutchpayNewFragment extends BaseFragment implements DutchpayNewCont
     }
 
     @Override
+    public void setMemCount(int count) {
+        mBinding.tvMemNum.setText("총 "+count+"명");
+    }
+
+    @Override
     public void adapterInit(){
         if( !(mBinding.etCost.getText().toString().equals("")) ) {
             //금액 입력
@@ -165,9 +189,5 @@ public class DutchpayNewFragment extends BaseFragment implements DutchpayNewCont
         mPresenter.getmAdapter().notifyDataSetChanged();
     }
 
-    @Override
-    public void removeTW() {
-        mBinding.etMycost.removeTextChangedListener(tw);
-    }
 
 }

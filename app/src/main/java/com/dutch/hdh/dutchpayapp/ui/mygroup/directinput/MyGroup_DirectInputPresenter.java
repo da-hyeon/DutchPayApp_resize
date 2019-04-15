@@ -3,10 +3,15 @@ package com.dutch.hdh.dutchpayapp.ui.mygroup.directinput;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.widget.ListView;
 
 import com.dutch.hdh.dutchpayapp.MyApplication;
+import com.dutch.hdh.dutchpayapp.R;
 import com.dutch.hdh.dutchpayapp.adapter.Listview_DirectInputParticipantsAdapter;
+import com.dutch.hdh.dutchpayapp.ui.dutchpay.newdutchpay.DutchpayNewFragment;
+import com.dutch.hdh.dutchpayapp.ui.dutchpay.start.DutchpayStartFragment;
 
 public class MyGroup_DirectInputPresenter implements MyGroup_DirectInputContract.Presenter {
 
@@ -59,14 +64,19 @@ public class MyGroup_DirectInputPresenter implements MyGroup_DirectInputContract
             mView.showFailDialog("실패", "빈칸을 채워주세요.");
         } else {
             Bundle bundle1 = new Bundle();
-            //전달받은 기존 구성원 리스트 되돌려주기
-            bundle1.putParcelableArrayList("itemList" , bundle.getParcelableArrayList("itemList"));
+            if(!(mMyApplication.isDutchpayGroup()) ){
+                //전달받은 기존 구성원 리스트 되돌려주기
+                bundle1.putParcelableArrayList("itemList", bundle.getParcelableArrayList("itemList"));
+            }
 
             //추가한 구성원 리스트 전달하기.
             bundle1.putParcelableArrayList("InputMember", mListview_DirectInputParticipantsAdapter.getList());
             bundle1.putParcelableArrayList("telephoneInputMember", null);
-            mMyApplication.getMyGroup_EditFragment().setArguments(bundle1);
-
+            if(mMyApplication.isDutchpayGroup()){ //접근 경로_더치페이에서
+                mMyApplication.getDutchpayNewFragment().setArguments(bundle1);
+            } else { //접근 경로_그룹에서
+                mMyApplication.getMyGroup_EditFragment().setArguments(bundle1);
+            }
             //현재 프래그먼트 제거
             mFragmentManager.popBackStack();
         }

@@ -90,6 +90,7 @@ public class DutchpayNewListAdapter extends RecyclerView.Adapter<DutchpayNewList
 
                 mList.remove(item);
                 notifyDataSetChanged();
+                mDNewPresenter.notifyListRemoved();
 
                 if(mList.size() == 1){ //다음 버튼 제거
                     mList.clear();

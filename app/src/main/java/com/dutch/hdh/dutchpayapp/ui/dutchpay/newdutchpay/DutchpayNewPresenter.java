@@ -16,13 +16,18 @@ import com.dutch.hdh.dutchpayapp.MyApplication;
 import com.dutch.hdh.dutchpayapp.R;
 import com.dutch.hdh.dutchpayapp.adapter.DutchpayNewListAdapter;
 import com.dutch.hdh.dutchpayapp.adapter.Listview_MyGroupAdapter;
+import com.dutch.hdh.dutchpayapp.data.db.DirectInputParticipants;
 import com.dutch.hdh.dutchpayapp.data.db.Dutchpayhistory;
 import com.dutch.hdh.dutchpayapp.data.db.MyGroup;
 import com.dutch.hdh.dutchpayapp.databinding.ItemDutchpayNewMemberBinding;
 import com.dutch.hdh.dutchpayapp.ui.dutchpay.newdutchpayinfo.DutchpayNewInfoFragment;
+import com.dutch.hdh.dutchpayapp.ui.mygroup.directinput.MyGroup_DirectInputFragment;
+import com.dutch.hdh.dutchpayapp.ui.mygroup.main.MyGroup_MainFragment;
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -34,30 +39,43 @@ public class DutchpayNewPresenter implements DutchpayNewContract.Presenter {
 
     private ObservableArrayList<TempNewListModel> mNewList;
     private DutchpayNewListAdapter mAdapter;
+    private MyApplication mMyApplication;
 
     private String oldCost;
     private int myCost;
     private int lastCost;
     private int lastMem;
+    private boolean dutchFlag;
 
     public DutchpayNewPresenter(DutchpayNewContract.View mView) {
         this.mView = mView;
         this.mNewList = new ObservableArrayList<>();
         this.mAdapter = new DutchpayNewListAdapter(mNewList,this);
+        this.mMyApplication = MyApplication.getInstance();
         this.oldCost = "";
         this.myCost = 0;
         this.lastCost = -1;
         this.lastMem = -1;
+        this.dutchFlag = true;
     }
 
     @Override
-    public void listInit() {
+    public void listInit(String JsonList) {
 
-        //더미 데이터 셋
-        mNewList.add(new TempNewListModel("박소영","0","010-1111-2222",false));
-        mNewList.add(new TempNewListModel("최윤미","0","010-3333-4444",false));
-        mNewList.add(new TempNewListModel("박현주","0","010-5555-6666",false));
-        mNewList.add(new TempNewListModel("","","",false));
+        Gson gson = new Gson();
+        List<TempNewListModel> list = gson.fromJson(JsonList,new TypeToken<List<TempNewListModel>>(){}.getType());
+        for(TempNewListModel model : list){
+            mNewList.add(model);
+            String json = gson.toJson(mNewList);
+            Log.e("List ->", json);
+        }
+        mNewList.add(new TempNewListModel("",""));
+
+//        //더미 데이터 셋
+//        mNewList.add(new TempNewListModel("박소영","0","010-1111-2222",false));
+//        mNewList.add(new TempNewListModel("최윤미","0","010-3333-4444",false));
+//        mNewList.add(new TempNewListModel("박현주","0","010-5555-6666",false));
+//        mNewList.add(new TempNewListModel("","","",false));
 
         //binding
         mView.adapterInit();
@@ -86,24 +104,26 @@ public class DutchpayNewPresenter implements DutchpayNewContract.Presenter {
         checkCost(oldCost); //금액 미입력 방지
 
         int cost = Integer.parseInt(oldCost);
-        int memcount = mNewList.size();
 
-        if(cost < memcount){ //최소값 체크
-            return false;
-        } else {
-            int memCost = cost/memcount;
-            myCost = cost - (memCost*(memcount-1));
+        if(mNewList.size() != 0) { //리스트 여부 확인
+            int memcount = mNewList.size();
+            if (cost < memcount) { //최소값 체크
+                return false;
+            } else {
+                int memCost = cost / memcount;
+                myCost = cost - (memCost * (memcount - 1));
 
-            for(int i = 0; i<memcount; i++){
-                mNewList.get(i).setCost(String.valueOf(memCost));
+                for (int i = 0; i < memcount; i++) {
+                    mNewList.get(i).setCost(String.valueOf(memCost));
+                }
+
+                mNewList.get(mNewList.size() - 1).setCost(String.valueOf(myCost));
+                mView.setMyCost(String.valueOf(myCost));
+                mView.setMyCostEditable(false);
+                return true;
             }
-
-            mAdapter.setItem(mNewList);
-
-            mNewList.get(mNewList.size()-1).setCost(String.valueOf(myCost));
-            mView.setMyCost(String.valueOf(myCost));
-            return true;
         }
+        return false;
     }
 
     @Override
@@ -111,20 +131,25 @@ public class DutchpayNewPresenter implements DutchpayNewContract.Presenter {
         int payedcost = 0;
         int cost = Integer.parseInt(oldCost);
 
-        Log.e("Logic ->","start");
-
         //더치할 멤버_포지션 리스트 생성
         ArrayList<Integer> dutchList = new ArrayList<>();
         for(int i=0; i<mNewList.size(); i++){
-            if(Integer.parseInt(mNewList.get(i).getCost()) == cost){
-                mNewList.get(i).setCost("0");
-                dutchList.add(i);
+            if( !(mNewList.get(i).getCost().equals(""))) { //오류 보정_멤버 중 더치페이 금액 달성자가 있을시 변동 유무 플래그 초기화
+                if (Integer.parseInt(mNewList.get(i).getCost()) == cost) {
+                    mNewList.get(i).setCost("0");
+                    dutchList.add(i);
+                }
+            }
+            if(i == mNewList.size()-1){ //오류 보정_1/n버튼 클릭시 변동 유무 플래그 초기화
+                if(dutchFlag){ dutchList.add(i); }
             }
 
+            //더치페이 계산
             if( !(mNewList.get(i).isEditedCheck()) ){
-                dutchList.add(i);
-
-                Log.e("dutch ->",dutchList.toString());
+                if(!(dutchList.contains(i))) { //오류 보정_삭제시에 리스트업 중복 방지
+                    dutchList.add(i);
+                }
+                Log.e("dutchList ->",dutchList.toString());
             } else {
                 int inputcost = 0;
                 if( (!mNewList.get(i).getCost().equals("")) ){
@@ -133,7 +158,6 @@ public class DutchpayNewPresenter implements DutchpayNewContract.Presenter {
                         inputcost = cost;
 
                         for(int j=0; j< mNewList.size();j++){
-                            Log.e("setEditedCheck",j+"");
                             mNewList.get(j).setCost("0");
                             mNewList.get(j).setEditedCheck(false);
                         }
@@ -144,15 +168,8 @@ public class DutchpayNewPresenter implements DutchpayNewContract.Presenter {
             }
         }
 
-        if(dutchList.size() == 1){
-            lastCost = Integer.parseInt( mNewList.get(dutchList.get(0)).getCost());
-            lastMem = mNewList.indexOf(mNewList.get(dutchList.get(0)));
-        }
-
         int newcost = cost - payedcost;
-        if(newcost < 0){
-            newcost = 0;
-        }
+        if(newcost < 0){ newcost = 0; }
 
         int newmemcount = dutchList.size();
         if(newmemcount != 0){
@@ -172,14 +189,45 @@ public class DutchpayNewPresenter implements DutchpayNewContract.Presenter {
                 mNewList.get(dutchList.get(dutchList.size()-1)).setCost(String.valueOf(myCost));
             }
             mView.setMyCost(String.valueOf(mNewList.get(mNewList.size()-1).getCost()));
-        } else {
-            mNewList.get(lastMem).setCost(String.valueOf(lastCost));
+
+            if(dutchList.size() == 1){ //더치페이 마지막 멤버의 변화값 저장
+                lastCost = Integer.parseInt( mNewList.get(dutchList.get(0)).getCost());
+                lastMem = mNewList.indexOf(mNewList.get(dutchList.get(0)));
+            }
+        } else { //금액 변동 가능한 더치페이 멤버가 없음_값 변동 금지
+            if(mNewList.size() == 1){ //완전 삭제 보정
+                lastCost = Integer.parseInt(oldCost);
+            }
+
+            if (lastMem == mNewList.size() - 1) {
+                mView.setMyCost(String.valueOf(lastCost));
+            } else {
+                mNewList.get(lastMem).setCost(String.valueOf(lastCost));
+            }
+
         }
+
     }
 
     @Override
-    public void changeMyCost(String cost) {
-        //값 변동 확인
+    public void notifyListRemoved() {
+        for(int i=0; i<mNewList.size(); i++){
+            if(mNewList.get(i).isEditedCheck()){
+                if(i == mNewList.size()-1){ //변동 가능 멤버가 없을시, 내 금액 변동
+                    mNewList.get(i).setEditedCheck(false);
+                }
+            } else {
+                break;
+            }
+        }
+
+        reDutchpayLogic();
+        mAdapter.notifyDataSetChanged();
+        mView.setMemCount(mNewList.size());
+
+        if(mNewList.size() == 1){ //모든 더치멤버 삭제시, 내 금액 변동 금지
+            mView.setMyCostEditable(false);
+        }
 
     }
 
@@ -226,8 +274,7 @@ public class DutchpayNewPresenter implements DutchpayNewContract.Presenter {
         dutchpayLogic();
 
         //리스트 내 금액 클릭 금지
-        memCostEditable(false);
-        mView.setMyCostEditable(false);
+        listEditableSet(true);
     }
 
     public void onTypingClick(){
@@ -235,8 +282,9 @@ public class DutchpayNewPresenter implements DutchpayNewContract.Presenter {
         mView.setTypeBtColor(true);
 
         //리스트 내 금액 클릭 가능
-        memCostEditable(true);
-        mView.setMyCostEditable(true);
+        listEditableSet(false);
+        //예외처리
+        solopayCheck();
     }
 
     public void phoneListCallClick(){
@@ -248,7 +296,19 @@ public class DutchpayNewPresenter implements DutchpayNewContract.Presenter {
     }
 
     public void makeListClick(){
-        listInit();
+        mMyApplication.setDutchpayGroup(true);
+
+        FragmentManager fm = mView.getFragmentManager();
+        FragmentTransaction fragmentTransaction = fm.beginTransaction();
+        fragmentTransaction.setCustomAnimations(R.anim.fade_in, 0, 0, R.anim.fade_out);
+
+        MyGroup_DirectInputFragment myGroup_directInputFragment = new MyGroup_DirectInputFragment();
+        fragmentTransaction.replace(R.id.flFragmentContainer,myGroup_directInputFragment, MyGroup_DirectInputFragment.class.getName());
+        fragmentTransaction.addToBackStack(MyGroup_DirectInputFragment.class.getName());
+        fragmentTransaction.commit();
+
+//        listInit();
+//        listEditableSet(dutchFlag);
     }
 
     public void setOldCost(String oldCost) {
@@ -261,5 +321,28 @@ public class DutchpayNewPresenter implements DutchpayNewContract.Presenter {
             mNewList.get(i).setEditableFlag(flag);
         }
         mAdapter.setItem(mNewList);
+    }
+
+    private void listEditableSet(boolean dutchflag){
+
+        if(dutchflag){ //리스트 내 금액 클릭 금지
+            memCostEditable(false);
+            mView.setMyCostEditable(false);
+            dutchFlag = true;
+        } else { //리스트 내 금액 클릭 가능
+            memCostEditable(true);
+            mView.setMyCostEditable(true);
+            dutchFlag = false;
+        }
+    }
+
+    private void solopayCheck(){
+        if(mNewList.size() <= 1){
+            mView.setMyCostEditable(false);
+        }
+    }
+
+    public MyApplication getmMyApplication() {
+        return mMyApplication;
     }
 }

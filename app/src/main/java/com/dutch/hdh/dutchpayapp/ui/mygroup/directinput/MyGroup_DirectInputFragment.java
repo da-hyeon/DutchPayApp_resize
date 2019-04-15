@@ -7,6 +7,7 @@ import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 
 import com.dutch.hdh.dutchpayapp.R;
 import com.dutch.hdh.dutchpayapp.base.fragment.BaseFragment;
@@ -39,6 +40,8 @@ public class MyGroup_DirectInputFragment extends BaseFragment implements MyGroup
             mPresenter.clickMemberAdditionConfirmed(getArguments())
         );
 
+        getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_NOTHING);
+
         return mBinding.getRoot();
     }
 
@@ -48,7 +51,6 @@ public class MyGroup_DirectInputFragment extends BaseFragment implements MyGroup
     private void initData(){
         mPresenter = new MyGroup_DirectInputPresenter(this, getContext(), getFragmentManager());
         mPresenter.initListViewData(mBinding.lvDirectInputMember);
-
     }
 
     /**

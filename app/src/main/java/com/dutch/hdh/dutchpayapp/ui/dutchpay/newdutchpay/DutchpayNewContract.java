@@ -16,26 +16,25 @@ public interface DutchpayNewContract {
         void setTypeBtColor(boolean flag);
         void setMyCost(String mycost);
         void setMyCostEditable(boolean flag);
+        void setMemCount(int count);
 
         //어댑터 셋팅
         void adapterInit();
 
         FragmentManager getFragmentManager();
         Activity getActivity();
-
-        void removeTW();
     }
 
     interface Presenter{
 
         //리스트 셋업
-        void listInit();
+        void listInit(String jsonList);
 
         //기능
         void checkCost(String newcost);
         boolean dutchpayLogic();
         void reDutchpayLogic();
-        void changeMyCost(String cost);
+        void notifyListRemoved();
 
         //Click
         void onNextClick();

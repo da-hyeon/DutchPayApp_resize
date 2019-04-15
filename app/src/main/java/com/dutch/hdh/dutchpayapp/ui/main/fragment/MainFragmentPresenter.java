@@ -15,6 +15,7 @@ import com.dutch.hdh.dutchpayapp.MyApplication;
 import com.dutch.hdh.dutchpayapp.R;
 import com.dutch.hdh.dutchpayapp.adapter.EventImageSliderAdapter;
 import com.dutch.hdh.dutchpayapp.data.db.EventList;
+import com.dutch.hdh.dutchpayapp.ui.dutchpay.start.DutchpayStartFragment;
 import com.dutch.hdh.dutchpayapp.ui.event.main.Event_MainFragment;
 import com.dutch.hdh.dutchpayapp.ui.login.LoginFragment;
 import com.dutch.hdh.dutchpayapp.ui.main.activity.MainActivity;
@@ -111,7 +112,20 @@ public class MainFragmentPresenter implements MainFragmentContract.Presenter {
      */
     @Override
     public void clickDutchpay() {
+        //로그인 체크
+        if(!myApplication.getUserInfo().isUserState()){
+            mView.showFailDialog("실패" , "로그인을 해주세요.");
+            return;
+        }
 
+        //프래그먼트 이동
+        FragmentTransaction fragmentTransaction = mFragmentManager.beginTransaction();
+        fragmentTransaction.setCustomAnimations(R.anim.fade_in, 0, 0, R.anim.fade_out);
+
+        DutchpayStartFragment dutchpayStartFragment = new DutchpayStartFragment();
+        fragmentTransaction.replace(R.id.flFragmentContainer, dutchpayStartFragment, DutchpayStartFragment.class.getName());
+        fragmentTransaction.addToBackStack(DutchpayStartFragment.class.getName());
+        fragmentTransaction.commit();
     }
 
     @Override

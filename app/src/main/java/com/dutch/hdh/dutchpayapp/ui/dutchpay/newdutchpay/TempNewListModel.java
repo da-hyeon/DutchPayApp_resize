@@ -3,10 +3,15 @@ package com.dutch.hdh.dutchpayapp.ui.dutchpay.newdutchpay;
 import android.text.Editable;
 import android.text.TextWatcher;
 
+import com.google.gson.annotations.SerializedName;
+
 public class TempNewListModel {
     String name;
     String cost;
+
+    @SerializedName("phoneNumber")
     String phone;
+
     boolean completeFlag;
 
     boolean editableFlag;
@@ -14,11 +19,11 @@ public class TempNewListModel {
 
     TextWatcher tw;
 
-    public TempNewListModel(String name, String Cost, String phone, boolean completeFlag) {
+    public TempNewListModel(String name, String phone) {
         this.name = name;
-        this.cost = Cost;
+        this.cost = "0";
         this.phone = phone;
-        this.completeFlag = completeFlag;
+        this.completeFlag = false;
         this.editableFlag = false;
         this.editedCheck = false;
         this.tw = new TextWatcher() {

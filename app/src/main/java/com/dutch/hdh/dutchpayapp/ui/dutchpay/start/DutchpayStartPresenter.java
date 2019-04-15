@@ -39,29 +39,28 @@ public class DutchpayStartPresenter implements DutchpayStartContract.Presenter{
     @Override
     public void listInit() {
         //리스트 불러오기
-////
-//        Call<Dutchpayhistory> getDutchpayHistoryList = MyApplication
-//                .getRestAdapter()
-//                .getDutchapyHistoryList(mMyApplication.getUserInfo().getUserCode());
-//
-//        getDutchpayHistoryList.enqueue(new Callback<Dutchpayhistory>() {
-//            @Override
-//            public void onResponse(Call<Dutchpayhistory> call, Response<Dutchpayhistory> response) {
-//                if(response.body() != null){
-//                    Dutchpayhistory dutchpayhistory = response.body();
-//
-//                    Gson gson = new Gson();
-//                    String a = gson.toJson(dutchpayhistory);
-//                    Log.e("List? ->",a);
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(Call<Dutchpayhistory> call, Throwable t) {
-//                Log.e("fail",t.getMessage());
-//            }
-//        });
 
+        Call<Dutchpayhistory> getDutchpayHistoryList = MyApplication
+                .getRestAdapter()
+                .getDutchapyHistoryList(mMyApplication.getUserInfo().getUserCode());
+
+        getDutchpayHistoryList.enqueue(new Callback<Dutchpayhistory>() {
+            @Override
+            public void onResponse(Call<Dutchpayhistory> call, Response<Dutchpayhistory> response) {
+                if(response.body() != null){
+                    Dutchpayhistory dutchpayhistory = response.body();
+
+                    Gson gson = new Gson();
+                    String a = gson.toJson(dutchpayhistory);
+                    Log.e("List? ->",a);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Dutchpayhistory> call, Throwable t) {
+                Log.e("fail",t.getMessage());
+            }
+        });
 
 
         //더미 데이터 셋
@@ -99,7 +98,7 @@ public class DutchpayStartPresenter implements DutchpayStartContract.Presenter{
         FragmentTransaction fragmentTransaction = fm.beginTransaction();
         fragmentTransaction.setCustomAnimations(R.anim.fade_in, 0, 0, R.anim.fade_out);
 
-        DutchpayNewFragment dutchpayNewFragment = new DutchpayNewFragment();
+        DutchpayNewFragment dutchpayNewFragment = mMyApplication.getDutchpayNewFragment();
         fragmentTransaction.replace(R.id.flFragmentContainer,dutchpayNewFragment, DutchpayNewFragment.class.getName());
         fragmentTransaction.addToBackStack(DutchpayNewFragment.class.getName());
         fragmentTransaction.commit();
