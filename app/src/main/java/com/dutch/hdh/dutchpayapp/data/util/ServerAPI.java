@@ -1,11 +1,17 @@
 package com.dutch.hdh.dutchpayapp.data.util;
 
 import com.dutch.hdh.dutchpayapp.Constants;
+<<<<<<< HEAD
 import com.dutch.hdh.dutchpayapp.data.db.CardCompanyList;
 import com.dutch.hdh.dutchpayapp.data.db.CardRegisterList;
 import com.dutch.hdh.dutchpayapp.data.db.Dutchpayhistory;
+=======
+import com.dutch.hdh.dutchpayapp.data.db.AccountList;
+>>>>>>> dahyun
 import com.dutch.hdh.dutchpayapp.data.db.EventList;
 import com.dutch.hdh.dutchpayapp.data.db.MyGroup;
+import com.dutch.hdh.dutchpayapp.data.db.SearchEmail;
+import com.dutch.hdh.dutchpayapp.data.db.SearchPassword;
 import com.dutch.hdh.dutchpayapp.data.db.UserInfo;
 
 import retrofit2.Call;
@@ -29,6 +35,7 @@ public interface ServerAPI {
 
     /**
      * 회원가입 요청
+     *
      * @param userName
      * @param userEmail
      * @param userPassword
@@ -50,6 +57,7 @@ public interface ServerAPI {
 
     /**
      * 그룹생성 요청
+     *
      * @param groupaname
      * @param usercode
      * @param groupcontent
@@ -59,14 +67,15 @@ public interface ServerAPI {
     @FormUrlEncoded
     @POST(Constants.CREATE_GROUP_REQUEST_URL)
     Call<Void> createGroup(
-            @Field("groupaname") String groupaname ,
-            @Field("usercode") String usercode ,
-            @Field("groupcontent") String groupcontent ,
+            @Field("groupaname") String groupaname,
+            @Field("usercode") String usercode,
+            @Field("groupcontent") String groupcontent,
             @Field("peoplenumber") String peoplenumber);
 
 
     /**
      * 그룹목록 요청
+     *
      * @param usercode
      * @return
      */
@@ -75,6 +84,7 @@ public interface ServerAPI {
 
     /**
      * 그룹삭제 요청
+     *
      * @param groupacode
      * @return
      */
@@ -127,6 +137,7 @@ public interface ServerAPI {
 
     /**
      * 그룹 업데이트 요청
+     *
      * @param groupacode
      * @param groupcontent
      * @param peoplenumber
@@ -135,13 +146,14 @@ public interface ServerAPI {
     @FormUrlEncoded
     @POST(Constants.UPDATE_GROUP_REQUEST_URL)
     Call<Void> updateGroup(
-            @Field("groupacode") String groupacode ,
-            @Field("groupaname") String groupaname ,
-            @Field("groupcontent") String groupcontent ,
+            @Field("groupacode") String groupacode,
+            @Field("groupaname") String groupaname,
+            @Field("groupcontent") String groupcontent,
             @Field("peoplenumber") String peoplenumber);
 
     /**
      * 진행중 이벤트 요청
+     *
      * @return
      */
     @GET(Constants.SELECT_EVENT_ONGOING_REQUEST_URL)
@@ -149,6 +161,7 @@ public interface ServerAPI {
 
     /**
      * 진행종료 이벤트 요청
+     *
      * @return
      */
     @GET(Constants.SELECT_EVENT_ENDPROGRESS_REQUEST_URL)
@@ -156,25 +169,27 @@ public interface ServerAPI {
 
     /**
      * 이메일 변경 요청
+     *
      * @param email
      * @param usercode
      * @return
      */
     @FormUrlEncoded
     @POST(Constants.CHANGE_EMAIL_REQUEST_URL)
-    Call<Void> changeEmail(@Field("email") String email ,
-                              @Field("usercode") String usercode );
+    Call<Void> changeEmail(@Field("email") String email,
+                           @Field("usercode") String usercode);
 
     /**
      * 비밀번호 변경 요청
+     *
      * @param password
      * @param usercode
      * @return
      */
     @FormUrlEncoded
     @POST(Constants.CHANGE_PASSWORD_REQUEST_URL)
-    Call<Void> changePassword(@Field("password") String password ,
-                           @Field("usercode") String usercode );
+    Call<Void> changePassword(@Field("password") String password,
+                              @Field("usercode") String usercode);
 
     /**
     * 더치페이 내역 요청
@@ -186,12 +201,49 @@ public interface ServerAPI {
 
      /**
      * 전화번호 변경 요청
+     *
      * @param phone
      * @param usercode
      * @return
      */
     @FormUrlEncoded
     @POST(Constants.CHANGE_PHONENUMBER_REQUEST_URL)
-    Call<Void> changePhoneNumber(@Field("phone") String phone ,
-                              @Field("usercode") String usercode );
+    Call<Void> changePhoneNumber(@Field("phone") String phone,
+                                 @Field("usercode") String usercode);
+
+    /**
+     * 이메일 찾기 요청
+     *
+     * @param name
+     * @param phone
+     * @return
+     */
+    @FormUrlEncoded
+    @POST(Constants.SEARCH_EMAIL_REQUEST_URL)
+    Call<SearchEmail> findEmail(@Field("name") String name,
+                                @Field("phone") String phone);
+
+    /**
+     * 비밀번호 찾기 요청
+     *
+     * @param email
+     * @param name
+     * @param phone
+     * @return
+     */
+    @FormUrlEncoded
+    @POST(Constants.SEARCH_PHONENUMBER_REQUEST_URL)
+    Call<SearchPassword> findPhoneNumber(@Field("email") String email,
+                                         @Field("name") String name,
+                                         @Field("phone") String phone);
+
+    /**
+     * 등록된 계좌 요청
+     *
+     * @param usercode
+     * @return
+     */
+    @GET(Constants.SELECT_ACCOUNT_REQUEST_URL)
+    Call<AccountList> selectAccount(@Query("usercode") String usercode);
+
 }

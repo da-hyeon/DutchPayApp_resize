@@ -132,7 +132,7 @@
                 android:orientation="horizontal"
                 app:layout_constraintTop_toBottomOf="@+id/textView1" />
             <!--Layout-->
-            <LinearLayout
+            <View
                 android:id="@+id/layoutRegister"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
@@ -141,6 +141,24 @@
                 app:layout_constraintLeft_toLeftOf="@+id/view"
                 app:layout_constraintRight_toRightOf="@+id/view1"
                 app:layout_constraintTop_toTopOf="@+id/linearLayout" />
+
+            <View
+                android:id="@+id/vFindEmail"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toBottomOf="@+id/linearLayout"
+                app:layout_constraintTop_toTopOf="@+id/linearLayout"
+                app:layout_constraintLeft_toLeftOf="@+id/view1"
+                app:layout_constraintRight_toRightOf="@+id/view2"/>
+
+            <View
+                android:id="@+id/vFindPassword"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toBottomOf="@+id/linearLayout"
+                app:layout_constraintTop_toTopOf="@+id/linearLayout"
+                app:layout_constraintLeft_toLeftOf="@+id/view2"
+                app:layout_constraintRight_toRightOf="@+id/view3"/>
             <!--Layout-->
 
             <!--View-->
@@ -157,6 +175,21 @@
                 android:layout_height="0dp"
                 app:layout_constraintLeft_toRightOf="@+id/image_userRegister"
                 app:layout_constraintRight_toLeftOf="@+id/imageView10" />
+
+            <View
+                android:id="@+id/view2"
+                android:layout_width="1dp"
+                android:layout_height="0dp"
+                app:layout_constraintLeft_toRightOf="@+id/imageView10"
+                app:layout_constraintRight_toLeftOf="@+id/imageView11" />
+
+            <View
+                android:id="@+id/view3"
+                android:layout_width="1dp"
+                android:layout_height="0dp"
+                app:layout_constraintLeft_toRightOf="@+id/imageView11"
+                app:layout_constraintRight_toRightOf="@+id/linearLayout" />
+
             <!--View-->
 
             <ImageView

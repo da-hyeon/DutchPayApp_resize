@@ -7,6 +7,8 @@ public interface BaseActivityContract {
         void showFailDialog(String title, String content);
 
         void finish();
+
+        void hideKeyboard();
     }
     interface Presenter{
     }

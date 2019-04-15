@@ -43,6 +43,14 @@ public class LoginFragment extends BaseFragment implements LoginContract.View{
             mPresenter.clickRegister()
         );
 
+        mBinding.vFindEmail.setOnClickListener(v->
+            mPresenter.clickFindEmail()
+        );
+
+        mBinding.vFindPassword.setOnClickListener(v->
+            mPresenter.clickFindPassword()
+        );
+
         return mBinding.getRoot();
     }
 

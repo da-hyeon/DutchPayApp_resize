@@ -2,6 +2,7 @@ package com.dutch.hdh.dutchpayapp.ui.login;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -9,6 +10,9 @@ import android.support.v4.app.FragmentTransaction;
 import com.dutch.hdh.dutchpayapp.MyApplication;
 import com.dutch.hdh.dutchpayapp.R;
 import com.dutch.hdh.dutchpayapp.data.db.UserInfo;
+import com.dutch.hdh.dutchpayapp.ui.find.email.FindEmailActivity;
+import com.dutch.hdh.dutchpayapp.ui.find.password.FindPasswordActivity;
+import com.dutch.hdh.dutchpayapp.ui.mypage.change_email.MyPage_ChangeEmailActivity;
 import com.dutch.hdh.dutchpayapp.ui.register.term.Register_TermsConditionsAgreementFragment;
 
 import retrofit2.Call;
@@ -81,6 +85,26 @@ public class LoginPresenter implements LoginContract.Presenter {
         fragmentTransaction.replace(R.id.flFragmentContainer, mMyApplication.getRegister_TermsConditionsAgreementFragment() , Register_TermsConditionsAgreementFragment.class.getName());
         fragmentTransaction.addToBackStack(Register_TermsConditionsAgreementFragment.class.getName());
         fragmentTransaction.commit();
+    }
+
+    /**
+     * 아이디 찾기 클릭 이벤트 처리
+     */
+    @Override
+    public void clickFindEmail() {
+        Intent intent = new Intent(mContext, FindEmailActivity.class);
+        mContext.startActivity(intent);
+        mActivity.overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+    }
+
+    /**
+     * 비밀번호 찾기 클릭 이벤트 처리
+     */
+    @Override
+    public void clickFindPassword() {
+        Intent intent = new Intent(mContext, FindPasswordActivity.class);
+        mContext.startActivity(intent);
+        mActivity.overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
     }
 
     /**

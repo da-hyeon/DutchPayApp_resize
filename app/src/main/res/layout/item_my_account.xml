@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/clView"
+        android:layout_width="match_parent"
+        android:layout_height="76dp"
+        android:background="@color/hanaBank">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="19.14dp"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/tvBank"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/malgunfont"
+                android:includeFontPadding="false"
+                android:text="하나은행"
+                android:textColor="#ffffff"
+                android:textSize="13.71dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tvAccountNumber"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12.57dp"
+                android:fontFamily="@font/malgunfont"
+                android:includeFontPadding="false"
+                android:text="111-54484-15112"
+                android:textColor="#ffffff"
+                android:textSize="11.42dp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+    </android.support.constraint.ConstraintLayout>
+
+</layout>
