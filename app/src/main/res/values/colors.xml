@@ -10,7 +10,16 @@
 
     <color name="buttonDefault">#e0e0e0</color>
     <color name="buttonSelect">#0f69fe</color>
+    <color name="solopay_buttonSelect">#ffd336</color>
 
+    <color name="solopay_textSelect">#4d320a</color>
     <color name="textSelect">#ffffff</color>
     <color name="textDefault">#5f5f5f</color>
+
+    <color name="hanaBank">#23bab3</color>
+    <color name="nhBank">#0165b3</color>
+    <color name="kbBank">#f7b500</color>
+    <color name="shBank">#0f479e</color>
+    <color name="ibkBank">#1899d3</color>
+
 </resources>

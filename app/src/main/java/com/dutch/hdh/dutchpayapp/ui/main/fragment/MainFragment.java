@@ -35,7 +35,6 @@ public class MainFragment extends BaseFragment implements MainFragmentContract.V
 
         initData();
 
-
         //흐르게 설정
         mBinding.tvTitle.setSelected(true);
 

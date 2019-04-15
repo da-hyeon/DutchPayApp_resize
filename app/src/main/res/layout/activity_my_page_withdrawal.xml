@@ -139,7 +139,7 @@
                     app:layout_constraintTop_toTopOf="@+id/vMiddle" />
 
                 <View
-                    android:id="@+id/vBottom"
+                    android:id="@+id/vBankBackground"
                     android:layout_width="match_parent"
                     android:layout_height="110.57dp"
                     android:background="#23bab3"
@@ -149,16 +149,17 @@
                     android:layout_marginTop="11.42dp" />
 
                 <ImageView
-                    android:id="@+id/ivHanaBank"
+                    android:id="@+id/ivBank"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@drawable/hana_bank"
-                    app:layout_constraintTop_toTopOf="@+id/vBottom"
+                    app:layout_constraintTop_toTopOf="@+id/vBankBackground"
                     app:layout_constraintLeft_toLeftOf="parent"
                     android:layout_marginLeft="17.14dp"
                     android:layout_marginTop="29.42dp"/>
 
                 <TextView
+                    android:id="@+id/tvAccountNumber"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="110-1234-567890"
@@ -166,28 +167,28 @@
                     android:textSize="14.28dp"
                     android:fontFamily="@font/malgunfont"
                     android:includeFontPadding="false"
-                    app:layout_constraintTop_toBottomOf="@+id/ivHanaBank"
+                    app:layout_constraintTop_toBottomOf="@+id/ivBank"
                     android:layout_marginLeft="54.20dp"
                     android:layout_marginTop="7.85dp"
                     app:layout_constraintLeft_toLeftOf="parent"/>
 
                 <Button
+                    android:id="@+id/btChangeRefundAccount"
                     android:layout_width="65dp"
                     android:layout_height="19.42dp"
                     android:background="#000000"
                     app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/ivHanaBank"
+                    app:layout_constraintTop_toTopOf="@+id/ivBank"
                     android:text="환불계좌변경"
                     android:textStyle="bold"
                     android:textColor="#ffffff"
                     android:textSize="10dp"
                     android:layout_marginRight="16.85dp"
-                    app:layout_constraintBottom_toBottomOf="@+id/ivHanaBank"/>
+                    app:layout_constraintBottom_toBottomOf="@+id/ivBank"/>
 
             </android.support.constraint.ConstraintLayout>
 
         </ScrollView>
-
 
 
         <Button

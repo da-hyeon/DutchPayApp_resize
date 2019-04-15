@@ -6,6 +6,8 @@ public interface BaseFragmentContract {
         void showWarningDialog(String title, String content);
         void showFailDialog(String title, String content);
 
+        void hideKeyboard();
+
     }
     interface Presenter {
 
