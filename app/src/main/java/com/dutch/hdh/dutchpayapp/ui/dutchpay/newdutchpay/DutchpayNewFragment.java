@@ -112,16 +112,7 @@ public class DutchpayNewFragment extends BaseFragment implements DutchpayNewCont
 
         if(mPresenter.getmMyApplication().isDutchpayGroup()){
             if(getArguments() != null){
-                String jMemList = "";
-                if(getArguments().getParcelableArrayList("InputMember") != null) {
-                    ArrayList<DirectInputParticipants> directInputParticipantsArrayList = getArguments().getParcelableArrayList("InputMember");
-                    Gson gson = new Gson();
-                    jMemList = gson.toJson(directInputParticipantsArrayList);
-                }
-
-                String oldList = getArguments().getString("dutchpayListData");
-                Log.e("list->",oldList);
-                mPresenter.listInit(jMemList,oldList);
+                mPresenter.listInit(getArguments());
             }
         }
 

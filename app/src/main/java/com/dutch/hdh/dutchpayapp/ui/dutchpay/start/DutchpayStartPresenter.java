@@ -78,16 +78,6 @@ public class DutchpayStartPresenter implements DutchpayStartContract.Presenter{
             }
         });
 
-
-
-
-        //더미 데이터 셋
-//        mStartList.add(new TempStartListModel("[BAR 홍대점]","국민카드","50,000원","2019/04/26    18:36:28",1));
-//        mStartList.add(new TempStartListModel("[CU 편의점]","신한카드","30,000원","2019/04/20    10:30:06",2));
-//        mStartList.add(new TempStartListModel("[우도 음식점]","하나카드","120,000원","2019/04/15    05:12:00",3));
-//        mStartList.add(new TempStartListModel("[신사 호프]","하나카드","360,000원","2019/03/31    19:02:07",0));
-//        mStartList.add(new TempStartListModel("[북경오리]","하나카드","540.000","2019/03/28    12:06:45",0));
-
         mAdapter.notifyDataSetChanged();
 
         //binding

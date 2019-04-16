@@ -20,6 +20,7 @@ import com.dutch.hdh.dutchpayapp.data.db.DirectInputParticipants;
 import com.dutch.hdh.dutchpayapp.data.db.Dutchpayhistory;
 import com.dutch.hdh.dutchpayapp.data.db.MyGroup;
 import com.dutch.hdh.dutchpayapp.databinding.ItemDutchpayNewMemberBinding;
+import com.dutch.hdh.dutchpayapp.ui.dutchpay.newdutchaddgroup.DutchpayNewAddGroupFragment;
 import com.dutch.hdh.dutchpayapp.ui.dutchpay.newdutchpayinfo.DutchpayNewInfoFragment;
 import com.dutch.hdh.dutchpayapp.ui.mygroup.directinput.MyGroup_DirectInputFragment;
 import com.dutch.hdh.dutchpayapp.ui.mygroup.main.MyGroup_MainFragment;
@@ -62,10 +63,12 @@ public class DutchpayNewPresenter implements DutchpayNewContract.Presenter {
     }
 
     @Override
-    public void listInit(String JsonList,String oldList) {
+    public void listInit(Bundle bundle) {
 
-        if( !(oldList.equals("")) ) { //이전 리스트 유무 체크
+        if( !(bundle.getString("dutchpayListData").equals("")) ) { //이전 리스트 유무 체크
             mNewList.clear();
+            String oldList = bundle.getString("dutchpayListData");
+
             List<TempNewListModel> oldlist = gson.fromJson(oldList, new TypeToken<List<TempNewListModel>>(){}.getType());
             for(TempNewListModel model : oldlist){
                 if( !(model.getName().equals("")) ) {
@@ -74,15 +77,19 @@ public class DutchpayNewPresenter implements DutchpayNewContract.Presenter {
             }
         }
 
-        if( !(JsonList.equals("")) ) { //추가 리스트 유무 체크
-            List<DirectInputParticipants> list = gson.fromJson(JsonList, new TypeToken<List<DirectInputParticipants>>() {
+        if(bundle.getParcelableArrayList("InputMember") != null) { //추가 리스트 유무 체크
+            ArrayList<DirectInputParticipants> directInputParticipantsArrayList = bundle.getParcelableArrayList("InputMember");
+            String tmpJson = gson.toJson(directInputParticipantsArrayList);
+
+            List<DirectInputParticipants> list = gson.fromJson(tmpJson, new TypeToken<List<DirectInputParticipants>>() {
             }.getType());
             for (DirectInputParticipants model : list) {
                 mNewList.add(new TempNewListModel(model.getName(), model.getPhoneNumber()));
-
             }
-            String json = gson.toJson(mNewList);
-            Log.e("List -->", json);
+
+        }
+
+        if(mNewList.size() != 0){ //다음 버튼 생성용
             mNewList.add(new TempNewListModel("", ""));
         }
 
@@ -303,20 +310,16 @@ public class DutchpayNewPresenter implements DutchpayNewContract.Presenter {
     }
 
     public void groupListCallClick(){
+        Bundle bundle = makeListBundle();
 
+        //그룹 입력페이지로 이동
+        moveGroupAddFragment(bundle);
     }
 
     public void makeListClick(){
         mMyApplication.setDutchpayGroup(true);
-        Bundle bundle = new Bundle(1);
+        Bundle bundle = makeListBundle();
 
-        if(mNewList.size() != 0) {
-            String oldList = gson.toJson(mNewList);
-            bundle.putString("dutchpayListData",oldList);
-            Log.e("oldList ->",oldList);
-        } else {
-            bundle.putString("dutchpayListData",""); //저장할 리스트 없음
-        }
         //직접 입력페이지로 이동
         moveDirectInputFramgent(bundle);
     }
@@ -378,5 +381,30 @@ public class DutchpayNewPresenter implements DutchpayNewContract.Presenter {
         fragmentTransaction.replace(R.id.flFragmentContainer,myGroup_directInputFragment, MyGroup_DirectInputFragment.class.getName());
         fragmentTransaction.addToBackStack(MyGroup_DirectInputFragment.class.getName());
         fragmentTransaction.commit();
+    }
+
+    private void moveGroupAddFragment(Bundle bundle){
+        FragmentManager fm = mView.getFragmentManager();
+        FragmentTransaction fragmentTransaction = fm.beginTransaction();
+        fragmentTransaction.setCustomAnimations(R.anim.fade_in, 0, 0, R.anim.fade_out);
+
+        DutchpayNewAddGroupFragment dutchpayNewAddGroupFragment = new DutchpayNewAddGroupFragment();
+        dutchpayNewAddGroupFragment.setArguments(bundle);
+        fragmentTransaction.replace(R.id.flFragmentContainer,dutchpayNewAddGroupFragment, MyGroup_DirectInputFragment.class.getName());
+        fragmentTransaction.addToBackStack(MyGroup_DirectInputFragment.class.getName());
+        fragmentTransaction.commit();
+    }
+
+    private Bundle makeListBundle(){
+        Bundle bundle = new Bundle(1);
+
+        if(mNewList.size() != 0) {
+            String oldList = gson.toJson(mNewList);
+            bundle.putString("dutchpayListData",oldList); //이전 리스트 저장
+        } else {
+            bundle.putString("dutchpayListData",""); //저장할 리스트 없음
+        }
+
+        return bundle;
     }
 }

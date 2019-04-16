@@ -80,6 +80,15 @@ public interface ServerAPI {
     Call<MyGroup> getGroupList(@Query("usercode") String usercode);
 
     /**
+     * 그룹목록 요청2
+     *
+     * @param usercode
+     * @return
+     */
+    @GET(Constants.SELECT_GROUP_REQUEST_URL)
+    Call<MyGroup> getGroupList2(@Query("usercode") String usercode);
+
+    /**
      * 그룹삭제 요청
      *
      * @param groupacode

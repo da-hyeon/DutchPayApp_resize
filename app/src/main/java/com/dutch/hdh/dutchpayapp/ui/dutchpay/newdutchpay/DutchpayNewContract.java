@@ -1,6 +1,7 @@
 package com.dutch.hdh.dutchpayapp.ui.dutchpay.newdutchpay;
 
 import android.app.Activity;
+import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.view.View;
 import android.widget.EditText;
@@ -28,7 +29,7 @@ public interface DutchpayNewContract {
     interface Presenter{
 
         //리스트 셋업
-        void listInit(String jsonList,String oldList);
+        void listInit(Bundle bundle);
 
         //기능
         void checkCost(String newcost);

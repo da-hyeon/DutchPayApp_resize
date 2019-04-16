@@ -99,11 +99,6 @@ public class DutchpayNewListAdapter extends RecyclerView.Adapter<DutchpayNewList
         }
 
         private void setTextChangedListener(EditText et, TempNewListModel item){
-            if(item.getTw() != null){
-                Log.e("tw get!!","0");
-            } else {
-                Log.e("tw null!!","5");
-            }
             et.addTextChangedListener(item.getTw());
         }
     }
