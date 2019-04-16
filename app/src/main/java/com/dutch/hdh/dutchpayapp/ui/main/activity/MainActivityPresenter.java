@@ -298,6 +298,10 @@ public class MainActivityPresenter implements MainActivityContract.Presenter {
                 ((MyGroup_TelephoneDirectoryFragment) fragmentList.get(i)).onBackPressed();
                 return;
             }
+            if (fragmentList.get(i) instanceof DutchpayNewFragment) {
+                ((DutchpayNewFragment) fragmentList.get(i)).onBackPressed();
+                return;
+            }
         }
 
         if (mFragmentManager.getBackStackEntryCount() > 1) {

@@ -12,9 +12,15 @@ import com.dutch.hdh.dutchpayapp.MyApplication;
 import com.dutch.hdh.dutchpayapp.R;
 import com.dutch.hdh.dutchpayapp.adapter.DutchpayStartListAdapter;
 import com.dutch.hdh.dutchpayapp.data.db.Dutchpayhistory;
+import com.dutch.hdh.dutchpayapp.data.db.DutchpayhistoryList;
+import com.dutch.hdh.dutchpayapp.ui.dutchpay.newdutchpayconfirm.TempConfirmListModel;
 import com.dutch.hdh.dutchpayapp.ui.dutchpay.startdetail.DutchpayDetailFragment;
 import com.dutch.hdh.dutchpayapp.ui.dutchpay.newdutchpay.DutchpayNewFragment;
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -39,7 +45,6 @@ public class DutchpayStartPresenter implements DutchpayStartContract.Presenter{
     @Override
     public void listInit() {
         //리스트 불러오기
-
         Call<Dutchpayhistory> getDutchpayHistoryList = MyApplication
                 .getRestAdapter()
                 .getDutchapyHistoryList(mMyApplication.getUserInfo().getUserCode());
@@ -49,7 +54,18 @@ public class DutchpayStartPresenter implements DutchpayStartContract.Presenter{
             public void onResponse(Call<Dutchpayhistory> call, Response<Dutchpayhistory> response) {
                 if(response.body() != null){
                     Dutchpayhistory dutchpayhistory = response.body();
+                    ArrayList<DutchpayhistoryList> list = dutchpayhistory.getDutchpayHistoryList();
 
+                    for(int i=0; i<list.size(); i++){
+                        DutchpayhistoryList item = list.get(i);
+
+                        if(item.getPaytype().equals("DutchPay")) { //더치페이 내역 필터링
+                            //더치페이 스테이터스 확인
+                            int status = dutchpayStatusCheck(item);
+
+                            mStartList.add(new TempStartListModel(item.getDutchpayname(), item.getCardname(), String.valueOf(item.getCost()), item.getDate(), status));
+                        }
+                    }
                     Gson gson = new Gson();
                     String a = gson.toJson(dutchpayhistory);
                     Log.e("List? ->",a);
@@ -63,12 +79,14 @@ public class DutchpayStartPresenter implements DutchpayStartContract.Presenter{
         });
 
 
+
+
         //더미 데이터 셋
-        mStartList.add(new TempStartListModel("[BAR 홍대점]","국민카드","50,000원","2019/04/26    18:36:28",1));
-        mStartList.add(new TempStartListModel("[CU 편의점]","신한카드","30,000원","2019/04/20    10:30:06",2));
-        mStartList.add(new TempStartListModel("[우도 음식점]","하나카드","120,000원","2019/04/15    05:12:00",3));
-        mStartList.add(new TempStartListModel("[신사 호프]","하나카드","360,000원","2019/03/31    19:02:07",0));
-        mStartList.add(new TempStartListModel("[북경오리]","하나카드","540.000","2019/03/28    12:06:45",0));
+//        mStartList.add(new TempStartListModel("[BAR 홍대점]","국민카드","50,000원","2019/04/26    18:36:28",1));
+//        mStartList.add(new TempStartListModel("[CU 편의점]","신한카드","30,000원","2019/04/20    10:30:06",2));
+//        mStartList.add(new TempStartListModel("[우도 음식점]","하나카드","120,000원","2019/04/15    05:12:00",3));
+//        mStartList.add(new TempStartListModel("[신사 호프]","하나카드","360,000원","2019/03/31    19:02:07",0));
+//        mStartList.add(new TempStartListModel("[북경오리]","하나카드","540.000","2019/03/28    12:06:45",0));
 
         mAdapter.notifyDataSetChanged();
 
@@ -153,4 +171,22 @@ public class DutchpayStartPresenter implements DutchpayStartContract.Presenter{
         mAdapter.setItem(newList);
         mAdapter.notifyDataSetChanged();
     }
+
+    private int dutchpayStatusCheck(DutchpayhistoryList item){
+
+        if(item.isCancelcomplete()){ //환불 처리됨
+            return Constants.DUTCHPAY_STATE_CANCEL;
+        } else {
+            if(item.isDutchcomplete()){ //더치페이 완료됨
+                return Constants.DUTCHPAY_STATE_COMPLETE;
+            } else {
+                if(item.isCostcomplete()){ //개인 결제 진행 중
+                    return Constants.DUTCHPAY_STATE_REQUEST;
+                } else { //개인 결제 요청 중
+                    return Constants.DUTCHPAY_STATE_WAIT;
+                }
+            }
+        }
+    }
+
 }

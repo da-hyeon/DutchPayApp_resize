@@ -4,26 +4,11 @@ import com.google.gson.annotations.SerializedName;
 
 public class DutchpayhistoryList {
 
-    @SerializedName("결제리스트테이블번호")
-    int tablenum;
-
     @SerializedName("결제가격")
     int cost;
 
-    @SerializedName("카드코드")
-    String cardcode;
-
-    @SerializedName("계좌코드")
-    String accountcode;
-
     @SerializedName("결제타입")
     String paytype;
-
-    @SerializedName("이메일")
-    String email;
-
-    @SerializedName("유저번호")
-    int usernum;
 
     @SerializedName("결제일시")
     String date;
@@ -37,13 +22,11 @@ public class DutchpayhistoryList {
     @SerializedName("더치페이방결제완료여부")
     boolean dutchcomplete;
 
-    public int getTablenum() {
-        return tablenum;
-    }
+    @SerializedName("더치페이상품명")
+    String dutchpayname;
 
-    public void setTablenum(int tablenum) {
-        this.tablenum = tablenum;
-    }
+    @SerializedName("카드이름")
+    String cardname;
 
     public int getCost() {
         return cost;
@@ -53,44 +36,12 @@ public class DutchpayhistoryList {
         this.cost = cost;
     }
 
-    public String getCardcode() {
-        return cardcode;
-    }
-
-    public void setCardcode(String cardcode) {
-        this.cardcode = cardcode;
-    }
-
-    public String getAccountcode() {
-        return accountcode;
-    }
-
-    public void setAccountcode(String accountcode) {
-        this.accountcode = accountcode;
-    }
-
     public String getPaytype() {
         return paytype;
     }
 
     public void setPaytype(String paytype) {
         this.paytype = paytype;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public int getUsernum() {
-        return usernum;
-    }
-
-    public void setUsernum(int usernum) {
-        this.usernum = usernum;
     }
 
     public String getDate() {
@@ -123,5 +74,21 @@ public class DutchpayhistoryList {
 
     public void setDutchcomplete(boolean dutchcomplete) {
         this.dutchcomplete = dutchcomplete;
+    }
+
+    public String getDutchpayname() {
+        return dutchpayname;
+    }
+
+    public void setDutchpayname(String dutchpayname) {
+        this.dutchpayname = dutchpayname;
+    }
+
+    public String getCardname() {
+        return cardname;
+    }
+
+    public void setCardname(String cardname) {
+        this.cardname = cardname;
     }
 }

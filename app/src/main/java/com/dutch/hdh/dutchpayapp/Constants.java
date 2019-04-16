@@ -4,8 +4,6 @@ import android.widget.ImageView;
 
 public class Constants {
 
-<<<<<<< HEAD
-
     /**
      * IMAGE BASE URL
      * */
@@ -21,27 +19,20 @@ public class Constants {
     public static final String SELECT_GROUP_REQUEST_URL = "dutchpay_groupselect.php"; //그룹리스트 요청
     public static final String DELETE_GROUP_REQUEST_URL = "dutchpay_groupdelete.php"; //그룹삭제 요청
     public static final String UPDATE_GROUP_REQUEST_URL = "dutchpay_groupupdate.php"; //그룹삭제 요청
-    public static final String IMAGE_URL = "image/";
-=======
     public static final String LOG_TAG = "DUTCHPAY_LOG";
     public static final boolean LOG_PRINT = true;
     /**
      * API URL
      */
     public static final String IMAGE_URL = "image/";                                                //이미지 경로 URl
->>>>>>> dahyun
 
     public static final String USER_LOGIN_REQUEST_URL = "dutchpay_login.php";                       //로그인 요청
-
-    public static final String SELECT_EVENT_ONGOING_REQUEST_URL = "dutchpay_event.php"; //진행중인 이벤트 목록 요청
-    public static final String SELECT_EVENT_ENDPROGRESS_REQUEST_URL = "dutchpay_endevent.php"; //진행중인 이벤트 목록 요청
 
     public static final String DUTCHPAY_CARD_COMPANY_SELECT = "dutchpay_cardselect.php"; //등록할 카드회사 목록 가져오기
     public static final String DUTCHPAY_CARD_REGISTER = "dutchpay_cardregister.php"; //카드등록
     public static final String DUTCHPAY_CARD_REGISTER_SELECT = "dutchpay_registeredcardselect.php"; //등록한 카드목록 가져오기
     public static final String DUTCHPAY_CARD_DELETE = "dutchpay_carddelete.php"; //카드 삭제
 
-<<<<<<< HEAD
     public static final String DUTCHPAY_HISTORY_REQUEST_URL = "dutchpay_payhistory.php"; //더치페이 내역 요청
 
 
@@ -58,10 +49,8 @@ public class Constants {
      * Test userCode
      */
     public static final String USER_CODE = "5";
-=======
     public static final String SELECT_EVENT_ONGOING_REQUEST_URL = "dutchpay_event.php";             //진행중인 이벤트 목록 요청
     public static final String SELECT_EVENT_ENDPROGRESS_REQUEST_URL = "dutchpay_endevent.php";      //진행중인 이벤트 목록 요청
->>>>>>> dahyun
 
     public static final String CHANGE_EMAIL_REQUEST_URL = "dutchpay_emailchange.php";               //이메일 변경 요청
     public static final String CHANGE_PASSWORD_REQUEST_URL = "dutchpay_pwchange.php";               //비밀번호 변경 요청

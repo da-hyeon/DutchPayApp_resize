@@ -12,8 +12,6 @@
     <color name="buttonSelect">#0f69fe</color>
     <color name="solopay_buttonSelect">#ffd336</color>
 
-<<<<<<< HEAD
-
     <!--Top Bar Color-->
     <color name="topBarFontColor">#2a2a2a</color>
     <color name="topBarLineColor">#cecdcd</color>
@@ -34,10 +32,6 @@
     <color name="cardSelectFontColor">#1e1e1e</color>
     <color name="cardSelectLineColor">#0f69ff</color>
 
-    <color name="textSelect">#ffffff</color>
-    <color name="textDefault">#5f5f5f</color>
-
-
     <!--Dialog Common Color-->
     <color name="dialogCommonTitleFontColor">#101010</color>
     <color name="dialogCommonContentFontColor">#101010</color>
@@ -49,8 +43,6 @@
     <color name="bcCardColor">#ea1d24</color>
     <color name="hyundaiCardColor">#212021</color>
     <color name="samsungCardColor">#0062aa</color>
-</resources>
-=======
     <color name="solopay_textSelect">#4d320a</color>
     <color name="textSelect">#ffffff</color>
     <color name="textDefault">#5f5f5f</color>
@@ -62,4 +54,3 @@
     <color name="ibkBank">#1899d3</color>
 
 </resources>
->>>>>>> dahyun

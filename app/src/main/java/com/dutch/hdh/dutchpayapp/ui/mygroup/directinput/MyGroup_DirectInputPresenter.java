@@ -72,11 +72,14 @@ public class MyGroup_DirectInputPresenter implements MyGroup_DirectInputContract
             //추가한 구성원 리스트 전달하기.
             bundle1.putParcelableArrayList("InputMember", mListview_DirectInputParticipantsAdapter.getList());
             bundle1.putParcelableArrayList("telephoneInputMember", null);
+
             if(mMyApplication.isDutchpayGroup()){ //접근 경로_더치페이에서
+                bundle1.putString("dutchpayListData",bundle.getString("dutchpayListData"));
                 mMyApplication.getDutchpayNewFragment().setArguments(bundle1);
             } else { //접근 경로_그룹에서
                 mMyApplication.getMyGroup_EditFragment().setArguments(bundle1);
             }
+
             //현재 프래그먼트 제거
             mFragmentManager.popBackStack();
         }
@@ -98,13 +101,21 @@ public class MyGroup_DirectInputPresenter implements MyGroup_DirectInputContract
 
         Bundle bundle1 = new Bundle();
 
-        //전달받은 기존 구성원 리스트 되돌려주기
-        bundle1.putParcelableArrayList("itemList" , bundle.getParcelableArrayList("itemList"));
+        if( !(mMyApplication.isDutchpayGroup()) ) { //접근 경로_그룹에서
+            //전달받은 기존 구성원 리스트 되돌려주기
+            bundle1.putParcelableArrayList("itemList", bundle.getParcelableArrayList("itemList"));
+        }
 
         //아무것도 전달하지 않는다.
         bundle1.putParcelableArrayList("InputMember", null);
         bundle1.putParcelableArrayList("telephoneInputMember", null);
-        mMyApplication.getMyGroup_EditFragment().setArguments(bundle1);
+
+        if(mMyApplication.isDutchpayGroup()){ //접근 경로_더치페이에서
+            bundle1.putString("dutchpayListData",bundle.getString("dutchpayListData"));
+            mMyApplication.getDutchpayNewFragment().setArguments(bundle1);
+        } else { //접근 경로_그룹에서
+            mMyApplication.getMyGroup_EditFragment().setArguments(bundle1);
+        }
 
         //현재 프래그먼트 제거
         mFragmentManager.popBackStack();

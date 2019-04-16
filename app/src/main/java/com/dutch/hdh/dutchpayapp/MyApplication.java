@@ -135,6 +135,10 @@ public class MyApplication extends Application {
         return mDutchpayNewFragment;
     }
 
+    public void setDutchpayNewFragment(DutchpayNewFragment mDutchpayNewFragment) {
+        this.mDutchpayNewFragment = mDutchpayNewFragment;
+    }
+
     /**
      * getActivity
      */

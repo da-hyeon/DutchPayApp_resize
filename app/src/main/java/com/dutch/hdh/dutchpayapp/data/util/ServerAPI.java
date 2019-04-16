@@ -1,13 +1,10 @@
 package com.dutch.hdh.dutchpayapp.data.util;
 
 import com.dutch.hdh.dutchpayapp.Constants;
-<<<<<<< HEAD
 import com.dutch.hdh.dutchpayapp.data.db.CardCompanyList;
 import com.dutch.hdh.dutchpayapp.data.db.CardRegisterList;
 import com.dutch.hdh.dutchpayapp.data.db.Dutchpayhistory;
-=======
 import com.dutch.hdh.dutchpayapp.data.db.AccountList;
->>>>>>> dahyun
 import com.dutch.hdh.dutchpayapp.data.db.EventList;
 import com.dutch.hdh.dutchpayapp.data.db.MyGroup;
 import com.dutch.hdh.dutchpayapp.data.db.SearchEmail;
@@ -192,14 +189,14 @@ public interface ServerAPI {
                               @Field("usercode") String usercode);
 
     /**
-    * 더치페이 내역 요청
+     * 더치페이 내역 요청
      * @param usercode
      */
     @FormUrlEncoded
     @POST(Constants.DUTCHPAY_HISTORY_REQUEST_URL)
     Call<Dutchpayhistory> getDutchapyHistoryList(@Field("usercode") String usercode);
 
-     /**
+    /**
      * 전화번호 변경 요청
      *
      * @param phone

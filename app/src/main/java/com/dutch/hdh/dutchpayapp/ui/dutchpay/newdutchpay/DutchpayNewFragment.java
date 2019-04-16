@@ -103,25 +103,25 @@ public class DutchpayNewFragment extends BaseFragment implements DutchpayNewCont
     @Override
     public void onResume() {
         super.onResume();
+        //키보드 설정 변경
+        getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
 
-        Log.e("resume","");
-
-        //--임시
-//        if(!mBinding.etCost.getText().toString().equals("")){
-//            mPresenter.setOldCost(mBinding.etCost.getText().toString());
-//            mPresenter.listInit();
-//        }
+        if(!mBinding.etCost.getText().toString().equals("")){
+            mPresenter.setOldCost(mBinding.etCost.getText().toString());
+        }
 
         if(mPresenter.getmMyApplication().isDutchpayGroup()){
-            getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
-
             if(getArguments() != null){
-                ArrayList<DirectInputParticipants> directInputParticipantsArrayList = getArguments().getParcelableArrayList("InputMember");
+                String jMemList = "";
+                if(getArguments().getParcelableArrayList("InputMember") != null) {
+                    ArrayList<DirectInputParticipants> directInputParticipantsArrayList = getArguments().getParcelableArrayList("InputMember");
+                    Gson gson = new Gson();
+                    jMemList = gson.toJson(directInputParticipantsArrayList);
+                }
 
-                Gson gson = new Gson();
-                String jMemList = gson.toJson(directInputParticipantsArrayList);
-
-                mPresenter.listInit(jMemList);
+                String oldList = getArguments().getString("dutchpayListData");
+                Log.e("list->",oldList);
+                mPresenter.listInit(jMemList,oldList);
             }
         }
 
@@ -189,5 +189,11 @@ public class DutchpayNewFragment extends BaseFragment implements DutchpayNewCont
         mPresenter.getmAdapter().notifyDataSetChanged();
     }
 
+    /**
+     * 뒤로가기 처리
+     */
+    public void onBackPressed(){
+        mPresenter.clickBackPressed();
+    }
 
 }

@@ -2,14 +2,13 @@ package com.dutch.hdh.dutchpayapp.ui.dutchpay.newdutchpay;
 
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 
 import com.google.gson.annotations.SerializedName;
 
 public class TempNewListModel {
     String name;
     String cost;
-
-    @SerializedName("phoneNumber")
     String phone;
 
     boolean completeFlag;
@@ -17,7 +16,22 @@ public class TempNewListModel {
     boolean editableFlag;
     boolean editedCheck;
 
-    TextWatcher tw;
+    TextWatcher tw = new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+        }
+
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+        }
+
+        @Override
+        public void afterTextChanged(Editable s) {
+            cost = s.toString();
+            editedCheck = true;
+        }
+    };
 
     public TempNewListModel(String name, String phone) {
         this.name = name;
@@ -26,7 +40,7 @@ public class TempNewListModel {
         this.completeFlag = false;
         this.editableFlag = false;
         this.editedCheck = false;
-        this.tw = new TextWatcher() {
+        this.tw =  new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
             }
@@ -42,6 +56,15 @@ public class TempNewListModel {
                 editedCheck = true;
             }
         };
+    }
+
+    public TempNewListModel(String name, String phone, String cost, boolean completeFlag, boolean editableFlag, boolean editedCheck) {
+        this.name = name;
+        this.cost = cost;
+        this.phone = phone;
+        this.completeFlag = completeFlag;
+        this.editableFlag = editableFlag;
+        this.editedCheck = editedCheck;
     }
 
     public String getName() {

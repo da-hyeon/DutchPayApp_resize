@@ -28,13 +28,14 @@ public interface DutchpayNewContract {
     interface Presenter{
 
         //리스트 셋업
-        void listInit(String jsonList);
+        void listInit(String jsonList,String oldList);
 
         //기능
         void checkCost(String newcost);
         boolean dutchpayLogic();
         void reDutchpayLogic();
         void notifyListRemoved();
+        void clickBackPressed();
 
         //Click
         void onNextClick();
