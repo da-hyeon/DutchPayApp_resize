@@ -1,6 +1,7 @@
 package com.dutch.hdh.dutchpayapp.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
@@ -20,9 +21,12 @@ import com.dutch.hdh.dutchpayapp.databinding.ItemMyAccountBinding;
 import com.dutch.hdh.dutchpayapp.databinding.ItemMyGroupBinding;
 import com.dutch.hdh.dutchpayapp.ui.mygroup.edit.MyGroup_EditFragment;
 import com.dutch.hdh.dutchpayapp.ui.mygroup.main.MyGroup_MainContract;
+import com.dutch.hdh.dutchpayapp.ui.mypage.refund.MyPage_SelectRefundAccountContract;
+import com.dutch.hdh.dutchpayapp.ui.mypage.withdrawal.MyPage_WithdrawalActivity;
 import com.kinda.alert.KAlertDialog;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -32,12 +36,13 @@ public class Listview_AccountAdapter extends BaseAdapter {
 
 
     private ItemMyAccountBinding mBinding;
+    private MyPage_SelectRefundAccountContract.View mView;
     private Context mContext;
-
     private ArrayList<Account> mAccountArrayList;
     private MyApplication mMyApplication;
 
-    public Listview_AccountAdapter( Context mContext, ArrayList<Account> mAccountArrayList) {
+    public Listview_AccountAdapter(MyPage_SelectRefundAccountContract.View mView, Context mContext, ArrayList<Account> mAccountArrayList) {
+        this.mView = mView;
         this.mContext = mContext;
         this.mAccountArrayList = mAccountArrayList;
         mMyApplication = MyApplication.getInstance();
@@ -68,15 +73,30 @@ public class Listview_AccountAdapter extends BaseAdapter {
             mBinding = (ItemMyAccountBinding) v.getTag();
         }
 
-        //대표계좌가 아닌것만 리스트에 보이게 하기.
-        if(!mAccountArrayList.get(position).getAccountChoice().equals("0")) {
-            mBinding.clView.setVisibility(View.VISIBLE);
-            mBinding.clView.setBackgroundResource(Constants.backColorID(Integer.parseInt(mAccountArrayList.get(position).getAccountTypeCode())));
-            mBinding.tvBank.setText(mAccountArrayList.get(position).getAccountTypeName());
-            mBinding.tvAccountNumber.setText(mAccountArrayList.get(position).getAccountNumber());
-        } else {
-            mBinding.clView.setVisibility(View.GONE);
-        }
+        //배경색 변경
+        mBinding.clView.setBackgroundResource(Constants.backColorID(Integer.parseInt(mAccountArrayList.get(position).getAccountTypeCode())));
+        //은행명 변경
+        mBinding.tvBank.setText(mAccountArrayList.get(position).getAccountTypeName());
+        //계좌번호 번경
+        mBinding.tvAccountNumber.setText(mAccountArrayList.get(position).getAccountNumber());
+
+        mBinding.clView.setOnClickListener(v1 ->
+                new KAlertDialog(Objects.requireNonNull(mContext), KAlertDialog.WARNING_TYPE)
+                        .setTitleText("주의")
+                        .setContentText(mAccountArrayList.get(position).getAccountTypeName() + " " + mAccountArrayList.get(position).getAccountNumber() + "\n환불계좌를 위의 계좌로 변경하시겠습니까?")
+                        .setConfirmText("확인")
+                        .setConfirmClickListener(sDialog -> {
+                            sDialog.dismissWithAnimation();
+                            Intent intent = new Intent(mContext, MyPage_WithdrawalActivity.class);
+                            intent.putExtra(Constants.ACCOUNT_TYPE_CODE, Integer.parseInt(mAccountArrayList.get(position).getAccountTypeCode()));
+                            intent.putExtra(Constants.ACCOUNT_NUMBER, mAccountArrayList.get(position).getAccountNumber());
+                            mContext.startActivity(intent);
+                            mView.finish();
+                        })
+                        .setCancelText("취소")
+                        .setCancelClickListener(KAlertDialog::dismissWithAnimation)
+                        .show()
+        );
 
         v.setTag(mBinding);
         return v;

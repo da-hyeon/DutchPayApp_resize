@@ -1,8 +1,6 @@
 package com.dutch.hdh.dutchpayapp.ui.register.allview;
 
 import android.os.Bundle;
-import android.support.annotation.DrawableRes;
-import android.widget.ImageView;
 
 public interface Register_ViewAllTermsConditionsContract {
 

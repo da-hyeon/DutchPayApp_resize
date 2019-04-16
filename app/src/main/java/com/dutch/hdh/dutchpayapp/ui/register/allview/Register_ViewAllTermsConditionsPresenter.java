@@ -5,9 +5,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 
-
 import com.dutch.hdh.dutchpayapp.MyApplication;
-import com.dutch.hdh.dutchpayapp.ui.register.term.Register_TermsConditionsAgreementFragment;
 
 public class Register_ViewAllTermsConditionsPresenter implements Register_ViewAllTermsConditionsContract.Presenter {
 
@@ -23,7 +21,10 @@ public class Register_ViewAllTermsConditionsPresenter implements Register_ViewAl
     private int mTermsConditionsNumber;
     private boolean mTermsConditionsChecked[];
 
-    public Register_ViewAllTermsConditionsPresenter(Register_ViewAllTermsConditionsContract.View mView, Context mContext, FragmentManager mFragmentManager , Activity mActivity) {
+    /**
+     * 생성자
+     */
+    Register_ViewAllTermsConditionsPresenter(Register_ViewAllTermsConditionsContract.View mView, Context mContext, FragmentManager mFragmentManager , Activity mActivity) {
         this.mView = mView;
         this.mContext = mContext;
         this.mFragmentManager = mFragmentManager;
@@ -56,7 +57,9 @@ public class Register_ViewAllTermsConditionsPresenter implements Register_ViewAl
             mTermsConditionsNumber = bundle.getInt("num");
             mTermsConditionsChecked = bundle.getBooleanArray("checkArray");
 
-            mView.changeTOS(mTermsConditionsChecked[mTermsConditionsNumber]);
+            if (mTermsConditionsChecked != null) {
+                mView.changeTOS(mTermsConditionsChecked[mTermsConditionsNumber]);
+            }
 
             mView.changeTitle(mTermsConditionsTitles[mTermsConditionsNumber]);
             mView.changeContent(mTermsConditionsContents[mTermsConditionsNumber]);

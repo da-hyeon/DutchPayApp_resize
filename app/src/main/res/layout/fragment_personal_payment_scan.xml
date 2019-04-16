@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#666666">
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="34.28dp"
+            android:layout_marginTop="34.85dp"
+            android:layout_marginRight="34.28dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+
+            <SurfaceView
+                android:id="@+id/svCamera"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="34.28dp"
+                android:src="@drawable/qr_guide_left_top"
+                app:layout_constraintLeft_toLeftOf="@+id/svCamera"
+                app:layout_constraintTop_toTopOf="@+id/svCamera" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="34.28dp"
+                android:src="@drawable/qr_guide_right_top"
+                app:layout_constraintRight_toRightOf="@+id/svCamera"
+                app:layout_constraintTop_toTopOf="@+id/svCamera" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="34.28dp"
+                android:src="@drawable/qr_guide_left_bottom"
+                app:layout_constraintBottom_toBottomOf="@+id/svCamera"
+                app:layout_constraintLeft_toLeftOf="@+id/svCamera" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="34.28dp"
+                android:src="@drawable/qr_guide_right_bottom"
+                app:layout_constraintBottom_toBottomOf="@+id/svCamera"
+                app:layout_constraintRight_toRightOf="@+id/svCamera" />
+
+            <TextView
+                android:id="@+id/tvTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="21.74dp"
+                android:ellipsize="marquee"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:fontFamily="@font/malgunfont"
+                android:gravity="center"
+                android:includeFontPadding="false"
+                android:marqueeRepeatLimit="marquee_forever"
+                android:singleLine="true"
+                android:text="QR코드 및 바코드를 화면의 중앙에 위치시켜주세요"
+                android:textColor="#ffffff"
+                android:textStyle="bold"
+                app:layout_constraintTop_toBottomOf="@+id/svCamera" />
+        </android.support.constraint.ConstraintLayout>
+    </android.support.constraint.ConstraintLayout>
+</layout>

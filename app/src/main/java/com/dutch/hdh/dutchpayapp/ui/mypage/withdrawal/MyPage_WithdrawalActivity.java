@@ -2,12 +2,7 @@ package com.dutch.hdh.dutchpayapp.ui.mypage.withdrawal;
 
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.support.annotation.DrawableRes;
-import android.support.v4.app.Fragment;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 
 import com.dutch.hdh.dutchpayapp.R;
 import com.dutch.hdh.dutchpayapp.base.activity.BaseActivity;
@@ -27,20 +22,27 @@ public class MyPage_WithdrawalActivity extends BaseActivity implements MyPage_Wi
 
         initData();
 
+        //취소 버튼 클릭
         mBinding.vCancel.setOnClickListener(v->
                 mPresenter.clickCancel()
         );
 
-        mBinding.vBankBackground.setOnClickListener(v->{
-            mPresenter.clickChangeRefundAccount();
-        });
+        //환불계좌변경 View 클릭
+        mBinding.vBankBackground.setOnClickListener(v->
+            mPresenter.clickChangeRefundAccount()
+        );
+
+        //환불계좌변경 버튼 클릭
+        mBinding.btChangeRefundAccount.setOnClickListener(v->
+                mPresenter.clickChangeRefundAccount()
+        );
     }
 
     /**
      * 객체생성 및 데이터초기화
      */
     public void initData() {
-        mPresenter.initView();
+            mPresenter.initView(getIntent());
     }
 
     /**

@@ -4,12 +4,10 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.widget.Toast;
 
 import com.dutch.hdh.dutchpayapp.R;
 import com.dutch.hdh.dutchpayapp.ui.register.allview.Register_ViewAllTermsConditionsFragment;
 import com.dutch.hdh.dutchpayapp.ui.register.form.Register_FormFragment;
-import com.kinda.alert.KAlertDialog;
 
 public class Register_TermsConditionsAgreementPresenter implements Register_TermsConditionsAgreementContract.Presenter {
 
@@ -36,10 +34,12 @@ public class Register_TermsConditionsAgreementPresenter implements Register_Term
             boolean allCheck = true;
             mTOSCheckArray = bundle.getBooleanArray("checkArray");
 
-            for (int i = 0; i < mTOSCheckArray.length; i++) {
-                mView.changeTOS(i, mTOSCheckArray[i]);
-                if ( !mTOSCheckArray[i] ){
-                    allCheck = false;
+            if (mTOSCheckArray != null) {
+                for (int i = 0; i < mTOSCheckArray.length; i++) {
+                    mView.changeTOS(i, mTOSCheckArray[i]);
+                    if ( !mTOSCheckArray[i] ){
+                        allCheck = false;
+                    }
                 }
             }
             mAllTOS = allCheck;
@@ -94,8 +94,8 @@ public class Register_TermsConditionsAgreementPresenter implements Register_Term
             mView.changeAllView(index, R.drawable.view_all_off);
         }
 
-        for (int i = 0; i < mTOSCheckArray.length; i++) {
-            if (!mTOSCheckArray[i]) {
+        for (boolean aMTOSCheckArray : mTOSCheckArray) {
+            if (!aMTOSCheckArray) {
                 mView.changeAllTOS(false);
                 return;
             }

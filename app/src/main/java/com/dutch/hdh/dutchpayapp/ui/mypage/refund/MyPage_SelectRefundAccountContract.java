@@ -12,7 +12,7 @@ public interface MyPage_SelectRefundAccountContract {
     }
     interface Presenter{
         void initView(ListView listView);
+        void clickRepresentativeAccount();
         void clickCancel();
-
     }
 }

@@ -19,7 +19,17 @@ public class MyPage_SelectRefundAccountActivity extends BaseActivity implements 
         mBinding.setRefundActivity(this);
         mPresenter = new MyPage_SelectRefundAccountPresenter(this , this);
         initData();
+
+        //대표계좌 클릭
+        mBinding.vRepresentativeAccount.setOnClickListener(v->
+            mPresenter.clickRepresentativeAccount()
+        );
+        //뒤로가기 클릭
+        mBinding.vCancel.setOnClickListener(v->
+            mPresenter.clickCancel()
+        );
     }
+
     /**
      * 객체생성 및 데이터초기화
      */
@@ -32,7 +42,7 @@ public class MyPage_SelectRefundAccountActivity extends BaseActivity implements 
      */
     @Override
     public void changeBankBackground(@DrawableRes int id) {
-        mBinding.vBankBackground.setBackgroundResource(id);
+        mBinding.vRepresentativeAccount.setBackgroundResource(id);
     }
 
     /**
@@ -50,4 +60,6 @@ public class MyPage_SelectRefundAccountActivity extends BaseActivity implements 
     public void changeAccountNumber(String accountNumber) {
         mBinding.tvAccountNumber.setText(accountNumber);
     }
+
+
 }
