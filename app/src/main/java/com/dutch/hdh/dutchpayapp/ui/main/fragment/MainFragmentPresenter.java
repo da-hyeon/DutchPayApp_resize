@@ -2,27 +2,18 @@ package com.dutch.hdh.dutchpayapp.ui.main.fragment;
 
 import android.app.Activity;
 import android.content.Context;
-import android.graphics.drawable.Drawable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.dutch.hdh.dutchpayapp.MyApplication;
 import com.dutch.hdh.dutchpayapp.R;
 import com.dutch.hdh.dutchpayapp.adapter.EventImageSliderAdapter;
 import com.dutch.hdh.dutchpayapp.data.db.EventList;
 import com.dutch.hdh.dutchpayapp.ui.event.main.Event_MainFragment;
-import com.dutch.hdh.dutchpayapp.ui.login.LoginFragment;
-import com.dutch.hdh.dutchpayapp.ui.main.activity.MainActivity;
-import com.dutch.hdh.dutchpayapp.ui.solopay.SoloPayFragment;
-import com.kinda.alert.KAlertDialog;
-
-import java.util.ArrayList;
-import java.util.List;
+import com.dutch.hdh.dutchpayapp.ui.personal_payment.main.PersonalPayment_MainFragment;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -100,9 +91,9 @@ public class MainFragmentPresenter implements MainFragmentContract.Presenter {
         //프래그먼트 이동
         FragmentTransaction fragmentTransaction = mFragmentManager.beginTransaction();
         fragmentTransaction.setCustomAnimations(R.anim.fade_in, 0, 0, R.anim.fade_out);
-        SoloPayFragment soloPayFragment = new SoloPayFragment();
-        fragmentTransaction.replace(R.id.flFragmentContainer, soloPayFragment, SoloPayFragment.class.getName());
-        fragmentTransaction.addToBackStack(SoloPayFragment.class.getName());
+        PersonalPayment_MainFragment soloPayFragment = new PersonalPayment_MainFragment();
+        fragmentTransaction.replace(R.id.flFragmentContainer, soloPayFragment, PersonalPayment_MainFragment.class.getName());
+        fragmentTransaction.addToBackStack(PersonalPayment_MainFragment.class.getName());
         fragmentTransaction.commit();
     }
 

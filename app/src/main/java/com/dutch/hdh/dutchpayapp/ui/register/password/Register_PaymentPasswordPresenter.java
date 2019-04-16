@@ -2,10 +2,10 @@ package com.dutch.hdh.dutchpayapp.ui.register.password;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.dutch.hdh.dutchpayapp.MyApplication;
 import com.dutch.hdh.dutchpayapp.R;
@@ -138,7 +138,7 @@ public class Register_PaymentPasswordPresenter implements Register_PaymentPasswo
 
                     userRegister.enqueue(new Callback<UserInfo>() {
                         @Override
-                        public void onResponse(Call<UserInfo> call, Response<UserInfo> response) {
+                        public void onResponse(@NonNull Call<UserInfo> call, @NonNull Response<UserInfo> response) {
                             myApplication.setUserInfo(response.body());
                             myApplication.getUserInfo().setUserState(true);
 
@@ -147,7 +147,7 @@ public class Register_PaymentPasswordPresenter implements Register_PaymentPasswo
                         }
 
                         @Override
-                        public void onFailure(Call<UserInfo> call, Throwable t) {
+                        public void onFailure(@NonNull Call<UserInfo> call, @NonNull Throwable t) {
                             Log.d("fail" , t.getLocalizedMessage());
                             Log.d("fail" , t.getMessage());
                         }
@@ -183,9 +183,6 @@ public class Register_PaymentPasswordPresenter implements Register_PaymentPasswo
      * 비밀번호가 서로 같은지 조회
      */
     private boolean isSame() {
-        if (mPassword.equals(mPasswordCheck)) {
-            return true;
-        }
-        return false;
+        return mPassword.equals(mPasswordCheck);
     }
 }

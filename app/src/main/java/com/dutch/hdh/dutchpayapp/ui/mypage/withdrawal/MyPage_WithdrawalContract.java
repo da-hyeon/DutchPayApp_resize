@@ -1,6 +1,6 @@
 package com.dutch.hdh.dutchpayapp.ui.mypage.withdrawal;
 
-import android.widget.ListView;
+import android.content.Intent;
 
 import com.dutch.hdh.dutchpayapp.base.activity.BaseActivityContract;
 
@@ -12,7 +12,7 @@ public interface MyPage_WithdrawalContract {
         void changeAccountNumber(String accountNumber);
     }
     interface Presenter {
-        void initView();
+        void initView(Intent intent);
         void clickCancel();
         void clickChangeRefundAccount();
     }

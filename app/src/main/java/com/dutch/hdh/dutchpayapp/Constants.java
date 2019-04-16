@@ -6,6 +6,19 @@ public class Constants {
 
     public static final String LOG_TAG = "DUTCHPAY_LOG";
     public static final boolean LOG_PRINT = true;
+
+
+    /**
+     * Bundle ID
+     */
+
+    /**
+     * Extra ID
+     */
+    //SelectRefundAcountActivity -> WithdrawalActivity
+    public static final String ACCOUNT_TYPE_CODE = "accountTypeCode";
+    public static final String ACCOUNT_NUMBER = "accountNumber";
+
     /**
      * API URL
      */

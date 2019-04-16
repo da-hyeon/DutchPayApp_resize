@@ -19,12 +19,13 @@ import com.dutch.hdh.dutchpayapp.ui.mygroup.edit.MyGroup_EditFragment;
 import com.dutch.hdh.dutchpayapp.ui.mygroup.main.MyGroup_MainFragment;
 import com.dutch.hdh.dutchpayapp.ui.mygroup.telephonedirectory.MyGroup_TelephoneDirectoryFragment;
 import com.dutch.hdh.dutchpayapp.ui.mypage.main.MyPage_MainFragment;
+import com.dutch.hdh.dutchpayapp.ui.personal_payment.scan.PersonalPayment_ScanFragment;
 import com.dutch.hdh.dutchpayapp.ui.register.allview.Register_ViewAllTermsConditionsFragment;
 import com.dutch.hdh.dutchpayapp.ui.register.form.Register_FormFragment;
 import com.dutch.hdh.dutchpayapp.ui.register.password.Register_PaymentPasswordFragment;
 import com.dutch.hdh.dutchpayapp.ui.register.success.Register_SuccessFragment;
 import com.dutch.hdh.dutchpayapp.ui.register.term.Register_TermsConditionsAgreementFragment;
-import com.dutch.hdh.dutchpayapp.ui.solopay.SoloPayFragment;
+import com.dutch.hdh.dutchpayapp.ui.personal_payment.main.PersonalPayment_MainFragment;
 
 import java.util.List;
 
@@ -83,8 +84,14 @@ public class MainActivityPresenter implements MainActivityContract.Presenter {
             mView.changeTitle("회원가입 완료");
         }
 
-        else if(getCurrentFragment() instanceof SoloPayFragment){
+        else if(getCurrentFragment() instanceof PersonalPayment_MainFragment){
             mView.changeTitle("결제");
+            mView.hideBell();
+            mView.showExit();
+        }
+
+        else if(getCurrentFragment() instanceof PersonalPayment_ScanFragment){
+            mView.changeTitle("스캔하기");
             mView.hideBell();
             mView.showExit();
         }
@@ -123,6 +130,8 @@ public class MainActivityPresenter implements MainActivityContract.Presenter {
             mView.hideBell();
             mView.showExit();
         }
+
+
 
         else if (getCurrentFragment() instanceof MainFragment) {
             initLoginState();
@@ -312,7 +321,7 @@ public class MainActivityPresenter implements MainActivityContract.Presenter {
         //메뉴 닫기 , 프래그먼트 닫기
         mView.hideDrawerLayout();
 
-        if (getCurrentFragment() instanceof SoloPayFragment)
+        if (getCurrentFragment() instanceof PersonalPayment_MainFragment)
             return;
 
         if(!mMyApplication.getUserInfo().isUserState()){
@@ -325,9 +334,9 @@ public class MainActivityPresenter implements MainActivityContract.Presenter {
         //프래그먼트 이동
         FragmentTransaction fragmentTransaction = mFragmentManager.beginTransaction();
         fragmentTransaction.setCustomAnimations(R.anim.fade_in, 0, 0, R.anim.fade_out);
-        SoloPayFragment soloPayFragment = new SoloPayFragment();
-        fragmentTransaction.replace(R.id.flFragmentContainer, soloPayFragment, SoloPayFragment.class.getName());
-        fragmentTransaction.addToBackStack(SoloPayFragment.class.getName());
+        PersonalPayment_MainFragment soloPayFragment = new PersonalPayment_MainFragment();
+        fragmentTransaction.replace(R.id.flFragmentContainer, soloPayFragment, PersonalPayment_MainFragment.class.getName());
+        fragmentTransaction.addToBackStack(PersonalPayment_MainFragment.class.getName());
         fragmentTransaction.commit();
     }
 

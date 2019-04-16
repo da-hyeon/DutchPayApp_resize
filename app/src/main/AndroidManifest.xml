@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.dutch.hdh.dutchpayapp">
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -10,6 +11,7 @@
 
     <application
         android:allowBackup="true"
+        android:hardwareAccelerated="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:largeHeap="true"
@@ -21,8 +23,10 @@
             android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"
             android:exported="true"
             android:launchMode="singleTop"
+            android:screenOrientation="fullSensor"
             android:theme="@style/AppTheme.FullScreen.Transparent"
-            android:windowSoftInputMode="adjustNothing">
+            android:windowSoftInputMode="adjustNothing"
+            tools:replace="screenOrientation">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -64,8 +68,20 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.FullScreen.Transparent"
             android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
-        <activity android:name=".ui.find.email.FindEmailActivity" />
-        <activity android:name=".ui.find.password.FindPasswordActivity"></activity>
+
+        <activity
+            android:name=".ui.find.email.FindEmailActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.FullScreen.Transparent"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
+
+        <activity
+            android:name=".ui.find.password.FindPasswordActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.FullScreen.Transparent"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
     </application>
 
 </manifest>

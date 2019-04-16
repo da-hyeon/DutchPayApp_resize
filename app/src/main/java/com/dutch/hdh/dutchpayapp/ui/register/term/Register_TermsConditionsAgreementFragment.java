@@ -14,6 +14,8 @@ import com.dutch.hdh.dutchpayapp.base.fragment.BaseFragment;
 import com.dutch.hdh.dutchpayapp.databinding.FragmentRegisterTermsConditionsAgreementBinding;
 import com.kinda.alert.KAlertDialog;
 
+import java.util.Objects;
+
 public class Register_TermsConditionsAgreementFragment extends BaseFragment implements Register_TermsConditionsAgreementContract.View{
 
     private FragmentRegisterTermsConditionsAgreementBinding mBinding;
@@ -88,11 +90,11 @@ public class Register_TermsConditionsAgreementFragment extends BaseFragment impl
 
     @Override
     public void showDialog(String content) {
-        new KAlertDialog(getContext(), KAlertDialog.WARNING_TYPE)
+        new KAlertDialog(Objects.requireNonNull(getContext()), KAlertDialog.WARNING_TYPE)
                 .setTitleText("실패")
                 .setContentText(content)
                 .setConfirmText("확인")
-                .setConfirmClickListener(sDialog -> sDialog.dismissWithAnimation())
+                .setConfirmClickListener(KAlertDialog::dismissWithAnimation)
                 .show();
     }
 

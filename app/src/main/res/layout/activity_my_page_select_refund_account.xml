@@ -92,7 +92,7 @@
                 app:layout_constraintTop_toTopOf="parent"/>
 
             <View
-                android:id="@+id/vBankBackground"
+                android:id="@+id/vRepresentativeAccount"
                 android:layout_width="match_parent"
                 android:layout_height="110.57dp"
                 android:background="#23bab3"
@@ -104,7 +104,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/hana_bank"
-                app:layout_constraintTop_toTopOf="@+id/vBankBackground"
+                app:layout_constraintTop_toTopOf="@+id/vRepresentativeAccount"
                 app:layout_constraintLeft_toLeftOf="parent"
                 android:layout_marginLeft="17.14dp"
                 android:layout_marginTop="29.42dp"/>
@@ -140,7 +140,7 @@
                 android:id="@+id/lvListView"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                app:layout_constraintTop_toBottomOf="@+id/vBankBackground"
+                app:layout_constraintTop_toBottomOf="@+id/vRepresentativeAccount"
                 android:layout_marginTop="26.28dp"
                 android:dividerHeight="10dp"
                 android:divider="@color/layoutBG"/>
