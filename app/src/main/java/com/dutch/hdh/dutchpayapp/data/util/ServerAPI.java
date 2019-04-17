@@ -2,8 +2,10 @@ package com.dutch.hdh.dutchpayapp.data.util;
 
 import com.dutch.hdh.dutchpayapp.Constants;
 import com.dutch.hdh.dutchpayapp.data.db.AccountList;
+import com.dutch.hdh.dutchpayapp.data.db.ErrorCode;
 import com.dutch.hdh.dutchpayapp.data.db.EventList;
 import com.dutch.hdh.dutchpayapp.data.db.MyGroup;
+import com.dutch.hdh.dutchpayapp.data.db.Product;
 import com.dutch.hdh.dutchpayapp.data.db.SearchEmail;
 import com.dutch.hdh.dutchpayapp.data.db.SearchPassword;
 import com.dutch.hdh.dutchpayapp.data.db.UserInfo;
@@ -191,4 +193,34 @@ public interface ServerAPI {
     @GET(Constants.SELECT_ACCOUNT_REQUEST_URL)
     Call<AccountList> selectAccount(@Query("usercode") String usercode);
 
+
+    /**
+     * QR코드 상품정보 요청
+     * @param qrcode
+     * @return
+     */
+    @FormUrlEncoded
+    @POST(Constants.SELECT_PRODUCT_QRCODE_REQUEST_URL)
+    Call<Product> selectQRCodeProduct(@Field("qrcode") String qrcode);
+
+
+    /**
+     * 결제번호 상품정보 요청
+     * @param payproduct_code
+     * @return
+     */
+    @FormUrlEncoded
+    @POST(Constants.SELECT_PRODUCT_PAYMENT_NUMBER_REQUEST_URL)
+    Call<Product> selectPaymentNumberProduct(@Field("payproduct_code") String payproduct_code);
+
+    /**
+     * 개인결제 결제 요청
+     * @param qrcode
+     * @param usercode
+     * @return
+     */
+    @FormUrlEncoded
+    @POST(Constants.UPDATE_PAYMENT_QRCODE_REQUEST_URL)
+    Call<String> updateQRCodePayment(@Field("qrcode") String qrcode ,
+                                        @Field("usercode") String usercode);
 }

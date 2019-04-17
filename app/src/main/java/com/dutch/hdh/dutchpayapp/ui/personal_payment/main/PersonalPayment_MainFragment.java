@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -49,7 +48,7 @@ public class PersonalPayment_MainFragment extends BaseFragment implements Person
 
         //결제정보 확인하기 클릭
         mBinding.btPaymentInfoCheck.setOnClickListener(v ->
-                mPresenter.clickPaymentInfo()
+                mPresenter.clickPaymentInfo(mEditText)
         );
 
         //스캔하기 버튼 클릭
@@ -202,6 +201,7 @@ public class PersonalPayment_MainFragment extends BaseFragment implements Person
 
         Animation scaleUP = AnimationUtils.loadAnimation(getContext(), R.anim.scale_up);
         Animation moveDown = AnimationUtils.loadAnimation(getContext(), R.anim.translater_qrcode_down);
+
         AnimationSet animation = new AnimationSet(false);
         animation.setFillAfter(true);
         animation.addAnimation(scaleUP);

@@ -2,6 +2,7 @@ package com.dutch.hdh.dutchpayapp.ui.main.fragment;
 
 import android.app.Activity;
 import android.content.Context;
+import android.support.annotation.NonNull;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -29,7 +30,7 @@ public class MainFragmentPresenter implements MainFragmentContract.Presenter {
     private EventImageSliderAdapter mEventImageSliderAdapter;
     private EventList eventList;
 
-    public MainFragmentPresenter(MainFragmentContract.View mView, Context mContext, FragmentManager mFragmentManager, Activity mActivity) {
+    MainFragmentPresenter(MainFragmentContract.View mView, Context mContext, FragmentManager mFragmentManager, Activity mActivity) {
         this.mView = mView;
         this.mContext = mContext;
         this.mFragmentManager = mFragmentManager;
@@ -47,6 +48,14 @@ public class MainFragmentPresenter implements MainFragmentContract.Presenter {
     }
 
     /**
+     * Fragment 재진입
+     */
+    @Override
+    public void onResume() {
+        mView.changeUserMoney(myApplication.getUserInfo().getUserMoney());
+    }
+
+    /**
      * 이미지슬라이드 어댑터 연결
      */
     @Override
@@ -59,21 +68,22 @@ public class MainFragmentPresenter implements MainFragmentContract.Presenter {
 
         eventOnGoingList.enqueue(new Callback<EventList>() {
             @Override
-            public void onResponse(Call<EventList> call, Response<EventList> response) {
+            public void onResponse(@NonNull Call<EventList> call, @NonNull Response<EventList> response) {
                 if (response.isSuccessful()) {
-                    eventList = response.body();
-                    mEventImageSliderAdapter.setmEventArrayList(eventList.getEventList());
-                    mView.changeEventTitle(eventList.getEventList().get(0).getEventTitle());
-                    viewPager.setAdapter(mEventImageSliderAdapter);
-                    tabLayout.setupWithViewPager(viewPager, true);
-
+                    if (response.body() != null) {
+                        eventList = response.body();
+                        mEventImageSliderAdapter.setmEventArrayList(eventList.getEventList());
+                        mView.changeEventTitle(eventList.getEventList().get(0).getEventTitle());
+                        viewPager.setAdapter(mEventImageSliderAdapter);
+                        tabLayout.setupWithViewPager(viewPager, true);
+                    }
                 } else {
                     Log.d("실패", "이미지 수신 실패");
                 }
             }
 
             @Override
-            public void onFailure(Call<EventList> call, Throwable t) {
+            public void onFailure(@NonNull Call<EventList> call, @NonNull Throwable t) {
                 Log.d("error", t.getMessage());
                 Log.d("error", t.getLocalizedMessage());
             }
@@ -105,6 +115,9 @@ public class MainFragmentPresenter implements MainFragmentContract.Presenter {
 
     }
 
+    /**
+     * 모든 이벤트 보기 버튼 클릭 이벤트 처리
+     */
     @Override
     public void clickAllEvent() {
         //프래그먼트 이동
@@ -117,6 +130,9 @@ public class MainFragmentPresenter implements MainFragmentContract.Presenter {
         fragmentTransaction.commit();
     }
 
+    /**
+     * 이벤트뷰 슬라이드 이벤트 처리
+     */
     @Override
     public void slideViewPagerAction(int position) {
         mView.changeEventTitle(eventList.getEventList().get(position).getEventTitle());

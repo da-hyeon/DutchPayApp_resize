@@ -2,10 +2,12 @@ package com.dutch.hdh.dutchpayapp;
 
 import android.app.Activity;
 import android.app.Application;
+import android.content.Context;
 
 import com.dutch.hdh.dutchpayapp.data.db.PersonalPaymentInformation;
 import com.dutch.hdh.dutchpayapp.data.db.UserInfo;
 import com.dutch.hdh.dutchpayapp.data.util.ServerAPI;
+import com.dutch.hdh.dutchpayapp.ui.dialog.payment_info.Payment_InfomationDialog;
 import com.dutch.hdh.dutchpayapp.ui.mygroup.edit.MyGroup_EditFragment;
 import com.dutch.hdh.dutchpayapp.ui.register.term.Register_TermsConditionsAgreementFragment;
 
@@ -54,6 +56,7 @@ public class MyApplication extends Application {
 
     private Register_TermsConditionsAgreementFragment mRegister_termsConditionsAgreementFragment;
     private MyGroup_EditFragment mMyGroup_EditFragment;
+    private Payment_InfomationDialog mPayment_InfomationDialog;
 
     private Activity mActivity;
 
@@ -118,6 +121,15 @@ public class MyApplication extends Application {
         return mMyGroup_EditFragment;
     }
 
+    /**
+     * Payment_InfomationDialog Singleton
+     */
+    public Payment_InfomationDialog getPaymentDialog(Context context) {
+        if (mPayment_InfomationDialog == null)
+            mPayment_InfomationDialog = new Payment_InfomationDialog(context);
+
+        return mPayment_InfomationDialog;
+    }
 
 
 

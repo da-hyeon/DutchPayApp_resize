@@ -5,20 +5,21 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.Point;
+import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.Display;
-import android.view.View;
 import android.view.WindowManager;
+import android.widget.EditText;
 import android.widget.ImageView;
 
 import com.dutch.hdh.dutchpayapp.MyApplication;
 import com.dutch.hdh.dutchpayapp.R;
+import com.dutch.hdh.dutchpayapp.data.db.Product;
 import com.dutch.hdh.dutchpayapp.ui.dialog.charge_money.ChargeMoneyDialog;
 import com.dutch.hdh.dutchpayapp.ui.dialog.payment_info.Payment_InfomationDialog;
 import com.dutch.hdh.dutchpayapp.ui.personal_payment.scan.PersonalPayment_ScanFragment;
-import com.google.android.gms.fitness.data.MapValue;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.MultiFormatWriter;
 import com.google.zxing.WriterException;
@@ -26,6 +27,9 @@ import com.google.zxing.common.BitMatrix;
 
 import androidmads.library.qrgenearator.QRGContents;
 import androidmads.library.qrgenearator.QRGEncoder;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 import static android.content.Context.WINDOW_SERVICE;
 
@@ -37,11 +41,12 @@ public class PersonalPayment_MainPresenter implements PersonalPayment_MainContra
     private Context mContext;
     private FragmentManager mFragmentManager;
     private Activity mActivity;
-    private Payment_InfomationDialog mPayment_InfomationDialog;
-    private ChargeMoneyDialog mChargeMoneyDialog;
     private MyApplication mMyApplication;
+    private String mPaymentNumber;
+
     private boolean qrcodeState;
     private boolean barcodeState;
+
     /**
      * 생성자
      */
@@ -50,8 +55,6 @@ public class PersonalPayment_MainPresenter implements PersonalPayment_MainContra
         this.mContext = mContext;
         this.mFragmentManager = mFragmentManager;
         this.mActivity = mActivity;
-        mPayment_InfomationDialog = new Payment_InfomationDialog(this.mContext);
-        mChargeMoneyDialog = new ChargeMoneyDialog(this.mContext);
         mMyApplication = MyApplication.getInstance();
         qrcodeState = true;
         barcodeState = true;
@@ -61,7 +64,7 @@ public class PersonalPayment_MainPresenter implements PersonalPayment_MainContra
      * View 세팅
      */
     @Override
-    public void initView(ImageView qrCodeImage , ImageView barcodeImage) {
+    public void initView(ImageView qrCodeImage, ImageView barcodeImage) {
         WindowManager manager = (WindowManager) mContext.getSystemService(WINDOW_SERVICE);
         Display display = manager.getDefaultDisplay();
         Point point = new Point();
@@ -73,7 +76,7 @@ public class PersonalPayment_MainPresenter implements PersonalPayment_MainContra
 
         //QR코드 생성
         QRGEncoder qrgEncoder = new QRGEncoder(
-                1+"", null,
+                1 + "", null,
                 QRGContents.Type.TEXT,
                 smallerDimension);
         try {
@@ -88,7 +91,6 @@ public class PersonalPayment_MainPresenter implements PersonalPayment_MainContra
         barcodeImage.setImageBitmap(barcode);
         barcodeImage.invalidate();
     }
-
 
 
     /**
@@ -117,25 +119,44 @@ public class PersonalPayment_MainPresenter implements PersonalPayment_MainContra
      * 결제정보 버튼 클릭 이벤트 처리
      */
     @Override
-    public void clickPaymentInfo() {
-        //if(mMyApplication.getPersonalPaymentInformation().getAmount() < mMyApplication.getUserInfo().getUserMoney()) {
-            mPayment_InfomationDialog.show();
-       // } else {
-       //     mChargeMoneyDialog.show();
-        //}
-    }
+    public void clickPaymentInfo(EditText[] mEditText) {
+        if (!isEmpty(mEditText)) {
 
-    /**
-     * 임시 버튼 클릭 이벤트 처리
-     */
-    @Override
-    public void clickTemporaryButton() {
-        if(mMyApplication.getPersonalPaymentInformation().getAmount() < mMyApplication.getUserInfo().getUserMoney()) {
-            mPayment_InfomationDialog.show();
+            //서버통신 후 데이터가 있다면 Dialog 띄우기
+            Call<Product> productInfo = MyApplication
+                    .getRestAdapter()
+                    .selectPaymentNumberProduct(mPaymentNumber);
+
+            productInfo.enqueue(new Callback<Product>() {
+                @Override
+                public void onResponse(@NonNull Call<Product> call, @NonNull Response<Product> response) {
+                    if (response.isSuccessful()) {
+                        if (response.body() != null) {
+                            Product product = response.body();
+                            if (!mMyApplication.getPaymentDialog(mContext).isShowing()) {
+                                mMyApplication.getPaymentDialog(mContext).setDialog(null, mFragmentManager, product.getProductCode(), product.getProductPrice());
+                                mMyApplication.getPaymentDialog(mContext).show();
+                            }
+                        } else {
+                            mView.showFailDialog("실패", "해당 상품을 찾을 수 없습니다.");
+                        }
+                    } else {
+                        //DB 접근 오류 (해당 상품을 찾지 못함)
+                        mView.showFailDialog("실패", "해당 상품을 찾을 수 없습니다.");
+                    }
+                }
+
+                @Override
+                public void onFailure(@NonNull Call<Product> call, @NonNull Throwable t) {
+                    //서버통신 오류
+                    mView.showFailDialog("실패", "서버와 통신할 수 없습니다.");
+                }
+            });
         } else {
-            mChargeMoneyDialog.show();
+            mView.showFailDialog("실패", "빈칸을 채워주세요.");
         }
     }
+
 
     /**
      * 스캔하기 버튼 이벤트 처리
@@ -146,7 +167,7 @@ public class PersonalPayment_MainPresenter implements PersonalPayment_MainContra
         fragmentTransaction.setCustomAnimations(R.anim.fade_in, 0, 0, R.anim.fade_out);
 
         PersonalPayment_ScanFragment personalPayment_scanFragment = new PersonalPayment_ScanFragment();
-        fragmentTransaction.replace(R.id.flFragmentContainer, personalPayment_scanFragment , PersonalPayment_ScanFragment.class.getName());
+        fragmentTransaction.replace(R.id.flFragmentContainer, personalPayment_scanFragment, PersonalPayment_ScanFragment.class.getName());
         fragmentTransaction.addToBackStack(PersonalPayment_ScanFragment.class.getName());
         fragmentTransaction.commit();
     }
@@ -158,7 +179,7 @@ public class PersonalPayment_MainPresenter implements PersonalPayment_MainContra
     public void clickQRCode() {
 
         //바코드 이미지가 떠있으면
-        if(qrcodeState){
+        if (qrcodeState) {
             qrcodeState = false;
             mView.hideBarCodeView();
             mView.showQRCodeViewScaleUp();
@@ -179,7 +200,7 @@ public class PersonalPayment_MainPresenter implements PersonalPayment_MainContra
     public void clickBarCode() {
 
         //QRCode 이미지가 떠있으면
-        if(barcodeState){
+        if (barcodeState) {
             barcodeState = false;
             mView.hideQRCodeView();
             mView.showBarCodeViewScaleUp();
@@ -208,24 +229,39 @@ public class PersonalPayment_MainPresenter implements PersonalPayment_MainContra
     /**
      * barcode 생성
      */
-    private Bitmap createBarcode(String code){
+    private Bitmap createBarcode(String code) {
         Bitmap bitmap = null;
 
         MultiFormatWriter gen = new MultiFormatWriter();
         try {
-            final int WIDTH  = 840;
+            final int WIDTH = 840;
             final int HEIGHT = 160;
-            BitMatrix bytemp = gen.encode(code , BarcodeFormat.CODE_128 , WIDTH , HEIGHT);
-            bitmap = Bitmap.createBitmap(WIDTH , HEIGHT , Bitmap.Config.ARGB_8888);
-            for(int i = 0; i < WIDTH; i++){
-                for(int j = 0; j < HEIGHT; j++){
-                    bitmap.setPixel(i , j , bytemp.get(i , j) ? Color.BLACK : Color.WHITE);
+            BitMatrix bytemp = gen.encode(code, BarcodeFormat.CODE_128, WIDTH, HEIGHT);
+            bitmap = Bitmap.createBitmap(WIDTH, HEIGHT, Bitmap.Config.ARGB_8888);
+            for (int i = 0; i < WIDTH; i++) {
+                for (int j = 0; j < HEIGHT; j++) {
+                    bitmap.setPixel(i, j, bytemp.get(i, j) ? Color.BLACK : Color.WHITE);
                 }
             }
-        } catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
         return bitmap;
+    }
+
+    /**
+     * EditText 값이 비어있는지 확인
+     */
+    private boolean isEmpty(EditText[] editTexts) {
+        mPaymentNumber = "";
+        for (EditText editText : editTexts) {
+            if (editText.getText().toString().equals("")) {
+                return true;
+            } else {
+                mPaymentNumber += editText.getText().toString();
+            }
+        }
+        return false;
     }
 }

@@ -12,6 +12,7 @@ public interface PersonalPayment_ScanContract {
         void showCamera(int RequestCameraPermissionID);
 
         void hideCamera();
+        void hideFragment();
     }
     interface Presenter{
         //Override

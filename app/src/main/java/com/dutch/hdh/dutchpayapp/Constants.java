@@ -45,6 +45,10 @@ public class Constants {
 
     public static final String SELECT_ACCOUNT_REQUEST_URL = "dutchpay_accountselect.php";         //등록된 계좌 요청
 
+    public static final String SELECT_PRODUCT_QRCODE_REQUEST_URL = "dutchpay_singlepayproductselect.php";         //상품정보 요청(QR코드 전용)
+    public static final String SELECT_PRODUCT_PAYMENT_NUMBER_REQUEST_URL = "dutchpay_singlepayproductcode.php";         //상품정보 요청(결제번호 전용)
+
+    public static final String UPDATE_PAYMENT_QRCODE_REQUEST_URL = "dutchpay_singlepay.php";         //상품 결제 요청 (포인트 차감)
 
     /**
      * 은행 이미지 경로

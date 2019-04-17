@@ -15,10 +15,12 @@ public interface MainFragmentContract {
 
         //change
         void changeEventTitle(String title);
+        void changeUserMoney(int money);
     }
     interface Presenter{
         //init
         void initLoginState();
+        void onResume();
 
         //set
         void setAdapter(ViewPager viewPager , TabLayout tabLayout);
