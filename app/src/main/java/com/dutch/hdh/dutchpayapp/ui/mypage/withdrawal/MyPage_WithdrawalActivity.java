@@ -45,6 +45,11 @@ public class MyPage_WithdrawalActivity extends BaseActivity implements MyPage_Wi
             mPresenter.initView(getIntent());
     }
 
+    @Override
+    public void changeRefundAmount(int amount) {
+        mBinding.tvRefundAmount.setText(String.format("%,d" , amount) + "원");
+    }
+
     /**
      * 대표계좌 배경컬러 변경하기
      */

@@ -38,7 +38,119 @@
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView1" />
+            <!--clickLayout-->
+            <View
+                android:id="@+id/vAgreeAllTerm"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintLeft_toLeftOf="@+id/linearLayout"
+                app:layout_constraintRight_toRightOf="@+id/linearLayout"
+                app:layout_constraintTop_toTopOf="@+id/linearLayout"
+                app:layout_constraintBottom_toBottomOf="@+id/view"/>
 
+
+            <View
+                android:id="@+id/vAgreeTerm1"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintLeft_toLeftOf="@+id/linearLayout"
+                app:layout_constraintRight_toRightOf="@+id/linearLayout"
+                app:layout_constraintTop_toBottomOf="@+id/view"
+                app:layout_constraintBottom_toTopOf="@+id/vView1"/>
+
+            <View
+                android:id="@+id/vAgreeTerm2"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintLeft_toLeftOf="@+id/linearLayout"
+                app:layout_constraintRight_toRightOf="@+id/linearLayout"
+                app:layout_constraintTop_toBottomOf="@+id/vView1"
+                app:layout_constraintBottom_toTopOf="@+id/vView2"/>
+
+            <View
+                android:id="@+id/vAgreeTerm3"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintLeft_toLeftOf="@+id/linearLayout"
+                app:layout_constraintRight_toRightOf="@+id/linearLayout"
+                app:layout_constraintTop_toBottomOf="@+id/vView2"
+                app:layout_constraintBottom_toTopOf="@+id/vView3"/>
+
+            <View
+                android:id="@+id/vAgreeTerm4"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintLeft_toLeftOf="@+id/linearLayout"
+                app:layout_constraintRight_toRightOf="@+id/linearLayout"
+                app:layout_constraintTop_toBottomOf="@+id/vView3"
+                app:layout_constraintBottom_toTopOf="@+id/vView4"/>
+
+            <View
+                android:id="@+id/vAgreeTerm5"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintLeft_toLeftOf="@+id/linearLayout"
+                app:layout_constraintRight_toRightOf="@+id/linearLayout"
+                app:layout_constraintTop_toBottomOf="@+id/vView4"
+                app:layout_constraintBottom_toTopOf="@+id/vView5"/>
+
+            <View
+                android:id="@+id/vAgreeTerm6"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintLeft_toLeftOf="@+id/linearLayout"
+                app:layout_constraintRight_toRightOf="@+id/linearLayout"
+                app:layout_constraintTop_toBottomOf="@+id/vView5"
+                app:layout_constraintBottom_toBottomOf="@+id/linearLayout"/>
+            <!---->
+
+            <!--구분선-->
+            <View
+                android:id="@+id/vView1"
+                android:layout_width="match_parent"
+                android:layout_height="0.1dp"
+                app:layout_constraintLeft_toLeftOf="@+id/linearLayout"
+                app:layout_constraintRight_toRightOf="@+id/linearLayout"
+                app:layout_constraintTop_toBottomOf="@+id/cbTermsConditions1"
+                app:layout_constraintBottom_toTopOf="@+id/cbTermsConditions2"/>
+
+            <View
+                android:id="@+id/vView2"
+                android:layout_width="match_parent"
+                android:layout_height="0.1dp"
+                app:layout_constraintLeft_toLeftOf="@+id/linearLayout"
+                app:layout_constraintRight_toRightOf="@+id/linearLayout"
+                app:layout_constraintTop_toBottomOf="@+id/cbTermsConditions2"
+                app:layout_constraintBottom_toTopOf="@+id/cbTermsConditions3"/>
+
+            <View
+                android:id="@+id/vView3"
+                android:layout_width="match_parent"
+                android:layout_height="0.1dp"
+                app:layout_constraintLeft_toLeftOf="@+id/linearLayout"
+                app:layout_constraintRight_toRightOf="@+id/linearLayout"
+                app:layout_constraintTop_toBottomOf="@+id/cbTermsConditions3"
+                app:layout_constraintBottom_toTopOf="@+id/cbTermsConditions4"/>
+
+            <View
+                android:id="@+id/vView4"
+                android:layout_width="match_parent"
+                android:layout_height="0.1dp"
+                app:layout_constraintLeft_toLeftOf="@+id/linearLayout"
+                app:layout_constraintRight_toRightOf="@+id/linearLayout"
+                app:layout_constraintTop_toBottomOf="@+id/cbTermsConditions4"
+                app:layout_constraintBottom_toTopOf="@+id/cbTermsConditions5"/>
+
+            <View
+                android:id="@+id/vView5"
+                android:layout_width="match_parent"
+                android:layout_height="0.1dp"
+                app:layout_constraintLeft_toLeftOf="@+id/linearLayout"
+                app:layout_constraintRight_toRightOf="@+id/linearLayout"
+                app:layout_constraintTop_toBottomOf="@+id/cbTermsConditions5"
+                app:layout_constraintBottom_toTopOf="@+id/cbTermsConditions6"/>
+
+            <!---->
             <CheckBox
                 android:id="@+id/cbCompleteAgreement"
                 android:layout_width="wrap_content"

@@ -7,6 +7,7 @@ import com.dutch.hdh.dutchpayapp.base.activity.BaseActivityContract;
 public interface MyPage_WithdrawalContract {
     interface View extends BaseActivityContract.View {
 
+        void changeRefundAmount(int amount);
         void changeBankBackground(int id);
         void changeBankImage(int id);
         void changeAccountNumber(String accountNumber);

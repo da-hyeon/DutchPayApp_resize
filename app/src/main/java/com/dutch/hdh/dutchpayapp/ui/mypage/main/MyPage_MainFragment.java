@@ -48,6 +48,11 @@ public class MyPage_MainFragment extends BaseFragment implements MyPage_MainCont
     }
 
     @Override
+    public void changeUserNameText(String name) {
+        mBinding.tvUserName.setText(name);
+    }
+
+    @Override
     public void changeMoneyText(String content) {
         mBinding.tvUserMoney.setText(content);
     }

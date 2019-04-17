@@ -36,6 +36,7 @@ public class MyPage_WithdrawalPresenter implements MyPage_WithdrawalContract.Pre
      */
     @Override
     public void initView(Intent intent) {
+        mView.changeRefundAmount(mMyApplication.getUserInfo().getUserMoney());
         int accountTypeCode = intent.getIntExtra(Constants.ACCOUNT_TYPE_CODE , 100);
         String accountNumber = intent.getStringExtra(Constants.ACCOUNT_NUMBER);
 

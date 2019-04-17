@@ -4,5 +4,5 @@
     android:duration="1000"
     android:fillAfter="true"
     android:fromYDelta="0"
-    android:toYDelta="-35%">
+    android:toYDelta="-50%">
 </translate>

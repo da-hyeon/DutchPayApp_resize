@@ -1,6 +1,7 @@
 package com.dutch.hdh.dutchpayapp.ui.personal_payment.main;
 
 import android.view.SurfaceView;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -42,8 +43,7 @@ public interface PersonalPayment_MainContract {
         //click
         void clickPaymentCode();
         void clickPaymentNumber();
-        void clickPaymentInfo();
-        void clickTemporaryButton();
+        void clickPaymentInfo(EditText mEditText[]);
         void clickScan();
         void clickQRCode();
         void clickBarCode();

@@ -21,7 +21,10 @@ public class MyPage_MainPresenter implements MyPage_MainContract.Presenter{
 
     private MyApplication mMyApplication;
 
-    public MyPage_MainPresenter(MyPage_MainContract.View mView, Context mContext, Activity mActivity ,FragmentManager mFragmentManager) {
+    /**
+     * 생성자
+     */
+    MyPage_MainPresenter(MyPage_MainContract.View mView, Context mContext, Activity mActivity ,FragmentManager mFragmentManager) {
         this.mView = mView;
         this.mContext = mContext;
         this.mActivity = mActivity;
@@ -30,13 +33,27 @@ public class MyPage_MainPresenter implements MyPage_MainContract.Presenter{
     }
 
 
+    /**
+     * 뷰 세팅
+     */
     @Override
     public void setVIew() {
-        mView.changeMoneyText(mMyApplication.getUserInfo().getUserMoney()+"");
+        //유저 이름
+        mView.changeUserNameText(mMyApplication.getUserInfo().getUserName());
+
+        //유저 더치머니
+        mView.changeMoneyText(String.format("%,d" , mMyApplication.getUserInfo().getUserMoney()));
+
+        //유저 이메일
         mView.changeEmailText(mMyApplication.getUserInfo().getUserEmail());
+
+        //유저 전화번호
         mView.changePhoneNumberText(mMyApplication.getUserInfo().getUserPhone());
     }
 
+    /**
+     * 이메일 변경하기 클릭 이벤트 처리
+     */
     @Override
     public void clickChangeEmail() {
         Intent intent = new Intent(mContext, MyPage_ChangeEmailActivity.class);
@@ -44,6 +61,9 @@ public class MyPage_MainPresenter implements MyPage_MainContract.Presenter{
         mActivity.overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
     }
 
+    /**
+     * 비밀번호 변경하기 클릭 이벤트 처리
+     */
     @Override
     public void clickChangePassword() {
         Intent intent = new Intent(mContext, MyPage_ChangePasswordActivity.class);
@@ -51,6 +71,9 @@ public class MyPage_MainPresenter implements MyPage_MainContract.Presenter{
         mActivity.overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
     }
 
+    /**
+     * 전화번호 변경하기 클릭 이벤트 처리
+     */
     @Override
     public void clickChangePhoneNumber() {
         Intent intent = new Intent(mContext, MyPage_ChangePhoneActivity.class);
@@ -59,6 +82,9 @@ public class MyPage_MainPresenter implements MyPage_MainContract.Presenter{
 
     }
 
+    /**
+     * 회원탈퇴하기 클릭 이벤트 처리
+     */
     @Override
     public void clickWithdrawal() {
         Intent intent = new Intent(mContext, MyPage_WithdrawalActivity.class);

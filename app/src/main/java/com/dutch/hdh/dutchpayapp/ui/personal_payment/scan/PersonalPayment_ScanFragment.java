@@ -13,12 +13,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
+import com.dutch.hdh.dutchpayapp.MyApplication;
 import com.dutch.hdh.dutchpayapp.R;
 import com.dutch.hdh.dutchpayapp.base.fragment.BaseFragment;
 import com.dutch.hdh.dutchpayapp.databinding.FragmentPersonalPaymentScanBinding;
 import com.google.android.gms.vision.CameraSource;
 import com.google.android.gms.vision.barcode.Barcode;
 import com.google.android.gms.vision.barcode.BarcodeDetector;
+import com.kinda.alert.KAlertDialog;
 
 import java.io.IOException;
 import java.util.Objects;
@@ -30,6 +32,8 @@ public class PersonalPayment_ScanFragment extends BaseFragment implements Person
 
     private CameraSource mCameraSource;
     private BarcodeDetector mBarcodeDetector;
+
+    private KAlertDialog dialog;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
@@ -44,6 +48,12 @@ public class PersonalPayment_ScanFragment extends BaseFragment implements Person
         lp.height = (int) (lp.width * 0.8f);
 
         initData();
+
+        mBinding.svCamera.setOnClickListener(v->{
+            MyApplication myApplication = MyApplication.getInstance();
+            myApplication.getPaymentDialog(getContext()).setDialog(null, getFragmentManager(), "10", 10000);
+            myApplication.getPaymentDialog(getContext()).show();
+        });
 
         return mBinding.getRoot();
     }
@@ -66,6 +76,25 @@ public class PersonalPayment_ScanFragment extends BaseFragment implements Person
 
         mPresenter.setProcessor(mBarcodeDetector , mBinding.tvTitle);
         mPresenter.surfaceViewCallback(mBinding.svCamera);
+    }
+
+    /**
+     * 실패 다이얼로그 보이기
+     * OK = 다이얼로그 감추기 , 카메라 시작
+     */
+    @Override
+    public void showFailDialog(String title, String content) {
+        dialog = new KAlertDialog(Objects.requireNonNull(getContext()), KAlertDialog.WARNING_TYPE);
+        dialog.setTitleText(title);
+        dialog.setContentText(content);
+        dialog.setConfirmText("확인");
+        dialog.setConfirmClickListener(sDialog -> {
+            sDialog.dismissWithAnimation();
+            showCamera(1001);
+        });
+        if(!dialog.isShowing()){
+            dialog.show();
+        }
     }
 
     /**
@@ -94,8 +123,17 @@ public class PersonalPayment_ScanFragment extends BaseFragment implements Person
     }
 
     /**
+     * 뒤로가기
+     */
+    @Override
+    public void hideFragment() {
+        getFragmentManager().popBackStack();
+    }
+
+    /**
      * Presenter 에게 onPause 역할 위임.
      */
+
     @Override
     public void onPause() {
         super.onPause();
@@ -105,5 +143,6 @@ public class PersonalPayment_ScanFragment extends BaseFragment implements Person
     @Override
     public void onResume() {
         super.onResume();
+        mPresenter.onResume();
     }
 }
