@@ -1,6 +1,9 @@
 package com.dutch.hdh.dutchpayapp.ui.dutchpay.newdutchpayconfirm;
 
+import com.google.gson.annotations.SerializedName;
+
 public class TempConfirmListModel {
+
     String name;
     String phone;
     String cost;

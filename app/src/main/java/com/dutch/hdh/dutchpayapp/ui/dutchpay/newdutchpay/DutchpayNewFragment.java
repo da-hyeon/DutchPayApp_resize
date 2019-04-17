@@ -75,13 +75,12 @@ public class DutchpayNewFragment extends BaseFragment implements DutchpayNewCont
 
             int heightDiff = mBinding.getRoot().getRootView().getHeight() - (r.bottom - r.top);
             if(heightDiff > 600){
-                Log.e("heightDiff//",heightDiff+"");
 
                 if(!viewFlag){
                     viewFlag = true; //키보드 열림
                 }
             } else if(heightDiff > 150) {
-                Log.e("heightDiff",heightDiff+"");
+                //Log.e("heightDiff",heightDiff+"");
                 //금액 값 변동 확인
                 mPresenter.checkCost(mBinding.etCost.getText().toString());
 
@@ -115,7 +114,6 @@ public class DutchpayNewFragment extends BaseFragment implements DutchpayNewCont
                 mPresenter.listInit(getArguments());
             }
         }
-
     }
 
     @Override

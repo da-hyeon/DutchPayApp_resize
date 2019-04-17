@@ -1,14 +1,12 @@
 package com.dutch.hdh.dutchpayapp.adapter;
 
-import android.databinding.DataBindingUtil;
 import android.databinding.ObservableArrayList;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 
-import com.dutch.hdh.dutchpayapp.data.db.GroupList;
+import com.dutch.hdh.dutchpayapp.Constants;
 import com.dutch.hdh.dutchpayapp.databinding.ItemDutchpayGroupListBinding;
 import com.dutch.hdh.dutchpayapp.ui.dutchpay.newdutchaddgroup.DutchpayNewAddGroupContract;
 import com.dutch.hdh.dutchpayapp.ui.dutchpay.newdutchaddgroup.DutchpayNewAddGroupModel;
@@ -30,22 +28,21 @@ public class DutchpayNewGroupListAdapter extends  RecyclerView.Adapter<DutchpayN
         void bind(DutchpayNewAddGroupModel item) {
             mBinding.setItem(item);
 
-            //아이콘 적용
-
-            mBinding.cbCheckBox2.setOnClickListener(v -> {
-                boolean now = item.isGcheck();
-                item.setGcheck( !now );
-            });
+            //아이콘 변동
+            mBinding.ivGroupIcon.setImageResource(Constants.groupIconID(item.getGicon()));
 
             mBinding.clListItem.setOnClickListener(v->{
                 if(item.isGcheck()){
                     item.setGcheck( !(item.isGcheck()) );
-                    //카운트 적립
+                    //카운트 차감
+                    mAGPresenter.addMemCount( -(item.getMemNum()) );
                     notifyDataSetChanged();
                 } else {
                     item.setGcheck( !(item.isGcheck()) );
-                    //카운트 차감
+                    //카운트 적립
+                    mAGPresenter.addMemCount( item.getMemNum() );
                     notifyDataSetChanged();
+                    mAGPresenter.onPlusClick();
                 }
             });
         }

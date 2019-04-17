@@ -22,6 +22,7 @@ public class DutchpayNewInfoPresenter implements DutchpayNewInfoContract.Present
 
     public void onNextClick(){
         ArrayList<String> info = mView.getText();
+        info.add(mData.getString("total"));
         String jList = mData.getString("JList");
         Bundle bundle = new Bundle(2);
         bundle.putStringArrayList("Info",info);

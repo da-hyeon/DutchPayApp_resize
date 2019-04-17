@@ -10,6 +10,7 @@ import com.dutch.hdh.dutchpayapp.data.db.MyGroup;
 import com.dutch.hdh.dutchpayapp.data.db.SearchEmail;
 import com.dutch.hdh.dutchpayapp.data.db.SearchPassword;
 import com.dutch.hdh.dutchpayapp.data.db.UserInfo;
+import com.dutch.hdh.dutchpayapp.data.db.UserList;
 
 import retrofit2.Call;
 import retrofit2.http.Field;
@@ -85,7 +86,7 @@ public interface ServerAPI {
      * @param usercode
      * @return
      */
-    @GET(Constants.SELECT_GROUP_REQUEST_URL)
+    @GET(Constants.SELECT_GROUP_REQUEST_URL_2)
     Call<MyGroup> getGroupList2(@Query("usercode") String usercode);
 
     /**
@@ -204,6 +205,27 @@ public interface ServerAPI {
     @FormUrlEncoded
     @POST(Constants.DUTCHPAY_HISTORY_REQUEST_URL)
     Call<Dutchpayhistory> getDutchapyHistoryList(@Field("usercode") String usercode);
+
+    /**
+     * 더치페이 시작 요청
+     *
+     * @param usercode
+     * @param dutchpay_title
+     * @param total_price
+     * @param dutchpay_content
+     * @param dutchpay_message
+     * @param user_list1
+     * @return
+     */
+    @FormUrlEncoded
+    @POST(Constants.DUTCHPAY_NEW_REQUEST_URL)
+    Call<Void> setNewDutchpay(
+            @Field("usercode") int usercode,
+            @Field("dutchpay_title") String dutchpay_title,
+            @Field("total_price") int total_price,
+            @Field("dutchpay_content") String dutchpay_content,
+            @Field("dutchpay_message") String dutchpay_message,
+            @Field("user_list1") String user_list1);
 
     /**
      * 전화번호 변경 요청

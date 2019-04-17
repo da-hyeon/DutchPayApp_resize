@@ -29,8 +29,6 @@ public class DutchpayDetailPresenter implements DutchpayDetailContract.Presenter
         mDetailList.add(new TempDetailListModel("",true,"",2));
         mDetailList.add(new TempDetailListModel("",false,"",3));
         mDetailList.add(new TempDetailListModel("",false,"",0));
-        mDetailList.add(new TempDetailListModel("",true,"",0));
-        mDetailList.add(new TempDetailListModel("",false,"",2));
 
         mAdapter.notifyDataSetChanged();
 

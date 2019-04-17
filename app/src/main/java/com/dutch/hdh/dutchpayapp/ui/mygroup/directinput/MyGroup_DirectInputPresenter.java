@@ -74,9 +74,11 @@ public class MyGroup_DirectInputPresenter implements MyGroup_DirectInputContract
             bundle1.putParcelableArrayList("telephoneInputMember", null);
 
             if(mMyApplication.isDutchpayGroup()){ //접근 경로_더치페이에서
+
                 bundle1.putString("dutchpayListData",bundle.getString("dutchpayListData"));
                 mMyApplication.getDutchpayNewFragment().setArguments(bundle1);
             } else { //접근 경로_그룹에서
+
                 mMyApplication.getMyGroup_EditFragment().setArguments(bundle1);
             }
 

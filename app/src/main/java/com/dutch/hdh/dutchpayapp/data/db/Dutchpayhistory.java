@@ -5,14 +5,14 @@ import com.google.gson.annotations.SerializedName;
 import java.util.ArrayList;
 
 public class Dutchpayhistory {
-    @SerializedName("payhistory")
-    private ArrayList<DutchpayhistoryList> DutchpayHistory;
+    @SerializedName("dutchpaytotallist")
+    private ArrayList<DutchpaytotalList> DutchpayHistory;
 
-    public ArrayList<DutchpayhistoryList> getDutchpayHistoryList() {
+    public ArrayList<DutchpaytotalList> getDutchpayHistoryList() {
         return DutchpayHistory;
     }
 
-    public void setDutchpayHistoryList(ArrayList<DutchpayhistoryList> dutchpayHistory) {
+    public void setDutchpayHistoryList(ArrayList<DutchpaytotalList> dutchpayHistory) {
         DutchpayHistory = dutchpayHistory;
     }
 }

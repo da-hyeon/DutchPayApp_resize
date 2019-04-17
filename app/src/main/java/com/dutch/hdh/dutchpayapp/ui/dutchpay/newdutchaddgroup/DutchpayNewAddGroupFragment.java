@@ -1,6 +1,7 @@
 package com.dutch.hdh.dutchpayapp.ui.dutchpay.newdutchaddgroup;
 
 import android.databinding.BindingAdapter;
+import android.databinding.BindingConversion;
 import android.databinding.DataBindingUtil;
 import android.databinding.ObservableArrayList;
 import android.os.Bundle;
@@ -16,6 +17,9 @@ import com.dutch.hdh.dutchpayapp.R;
 import com.dutch.hdh.dutchpayapp.adapter.DutchpayNewGroupListAdapter;
 import com.dutch.hdh.dutchpayapp.base.fragment.BaseFragment;
 import com.dutch.hdh.dutchpayapp.databinding.FragmentDutchpayAddGroupBinding;
+import com.kinda.alert.KAlertDialog;
+
+import java.util.Objects;
 
 public class DutchpayNewAddGroupFragment extends BaseFragment implements DutchpayNewAddGroupContract.View{
 
@@ -27,7 +31,8 @@ public class DutchpayNewAddGroupFragment extends BaseFragment implements Dutchpa
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         mBinding = DataBindingUtil.inflate(LayoutInflater.from(container.getContext()), R.layout.fragment_dutchpay_add_group,container,false);
         mBinding.setFragment(this);
-        mPresenter = new DutchpayNewAddGroupPresenter(this);
+        mPresenter = new DutchpayNewAddGroupPresenter(this,getArguments());
+        mBinding.setPresenter(mPresenter);
 
         //리스트 초기 생성
         mPresenter.listInit();
@@ -49,5 +54,31 @@ public class DutchpayNewAddGroupFragment extends BaseFragment implements Dutchpa
         mBinding.setGroupList(mPresenter.getGList());
         mBinding.rvGroupList.setAdapter(mPresenter.getAdapter());
         mBinding.rvGroupList.setLayoutManager(new LinearLayoutManager(getActivity().getApplicationContext()));
+    }
+
+    /**
+     * 경고 다이얼로그 보여주기
+     */
+    @Override
+    public void showWarningDialog(String title, String content) {
+        new KAlertDialog(Objects.requireNonNull(getContext()), KAlertDialog.WARNING_TYPE)
+                .setTitleText(title)
+                .setContentText(content)
+                .setConfirmText("확인")
+                .setConfirmClickListener(sDialog -> {
+                    sDialog.dismissWithAnimation();
+                    mPresenter.onPlusClick();
+                })
+                .setCancelText("취소")
+                .setCancelClickListener(KAlertDialog::dismissWithAnimation)
+                .show();
+    }
+
+
+    /**
+     * 뒤로가기 처리
+     */
+    public void onBackPressed(){
+        showWarningDialog("경고", "취소하시겠습니까?\n확인을 누르시면 추가되지 않습니다.");
     }
 }

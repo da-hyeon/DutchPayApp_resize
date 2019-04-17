@@ -41,6 +41,7 @@
         android:textColor="#2a2a2a"
         android:textScaleX="1.1"
         android:textSize="12.6dp"
+        android:visibility="invisible"
         app:layout_constraintStart_toStartOf="@+id/tvShop"
         app:layout_constraintTop_toTopOf="@+id/textView52"
         tools:text="국민카드" />

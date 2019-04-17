@@ -12,15 +12,12 @@ import com.dutch.hdh.dutchpayapp.MyApplication;
 import com.dutch.hdh.dutchpayapp.R;
 import com.dutch.hdh.dutchpayapp.adapter.DutchpayStartListAdapter;
 import com.dutch.hdh.dutchpayapp.data.db.Dutchpayhistory;
-import com.dutch.hdh.dutchpayapp.data.db.DutchpayhistoryList;
-import com.dutch.hdh.dutchpayapp.ui.dutchpay.newdutchpayconfirm.TempConfirmListModel;
+import com.dutch.hdh.dutchpayapp.data.db.DutchpaytotalList;
 import com.dutch.hdh.dutchpayapp.ui.dutchpay.startdetail.DutchpayDetailFragment;
 import com.dutch.hdh.dutchpayapp.ui.dutchpay.newdutchpay.DutchpayNewFragment;
 import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -53,22 +50,17 @@ public class DutchpayStartPresenter implements DutchpayStartContract.Presenter{
             @Override
             public void onResponse(Call<Dutchpayhistory> call, Response<Dutchpayhistory> response) {
                 if(response.body() != null){
-                    Dutchpayhistory dutchpayhistory = response.body();
-                    ArrayList<DutchpayhistoryList> list = dutchpayhistory.getDutchpayHistoryList();
+                    ArrayList<DutchpaytotalList> list = response.body().getDutchpayHistoryList();
+                    Gson gson = new Gson();
+                    String a = gson.toJson(response.body());
+                    Log.e("List? ->",a);
 
                     for(int i=0; i<list.size(); i++){
-                        DutchpayhistoryList item = list.get(i);
+                        DutchpaytotalList item = list.get(i);
+                        int status = dutchpayStatusCheck(item);
 
-                        if(item.getPaytype().equals("DutchPay")) { //더치페이 내역 필터링
-                            //더치페이 스테이터스 확인
-                            int status = dutchpayStatusCheck(item);
-
-                            mStartList.add(new TempStartListModel(item.getDutchpayname(), item.getCardname(), String.valueOf(item.getCost()), item.getDate(), status));
-                        }
+                        mStartList.add(new TempStartListModel(item.getShop(), String.valueOf(item.getCost()), item.getDate(),status));
                     }
-                    Gson gson = new Gson();
-                    String a = gson.toJson(dutchpayhistory);
-                    Log.e("List? ->",a);
                 }
             }
 
@@ -162,20 +154,12 @@ public class DutchpayStartPresenter implements DutchpayStartContract.Presenter{
         mAdapter.notifyDataSetChanged();
     }
 
-    private int dutchpayStatusCheck(DutchpayhistoryList item){
+    private int dutchpayStatusCheck(DutchpaytotalList item){
 
-        if(item.isCancelcomplete()){ //환불 처리됨
-            return Constants.DUTCHPAY_STATE_CANCEL;
-        } else {
-            if(item.isDutchcomplete()){ //더치페이 완료됨
-                return Constants.DUTCHPAY_STATE_COMPLETE;
-            } else {
-                if(item.isCostcomplete()){ //개인 결제 진행 중
-                    return Constants.DUTCHPAY_STATE_REQUEST;
-                } else { //개인 결제 요청 중
-                    return Constants.DUTCHPAY_STATE_WAIT;
-                }
-            }
+        if(item.isCostcomplete()){ //거래완료
+            return Constants.DUTCHPAY_STATE_COMPLETE;
+        } else { //입금대기
+            return Constants.DUTCHPAY_STATE_WAIT;
         }
     }
 

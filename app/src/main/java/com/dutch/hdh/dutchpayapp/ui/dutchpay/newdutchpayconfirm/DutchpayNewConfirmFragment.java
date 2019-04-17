@@ -42,10 +42,18 @@ public class DutchpayNewConfirmFragment extends BaseFragment implements Dutchpay
 
     @Override
     public void adapterInit() {
+        //더치페이 정보 갱신
+        mBinding.tvMemCount.setText("총 "+mPresenter.getmConfirmList().size()+"명");
+        mBinding.tvMyCost.setText(mPresenter.getmConfirmList().get(mPresenter.getmConfirmList().size()-1).getCost()+"원");
+        //본인 리스트업 방지
+        mPresenter.getmConfirmList().remove(mPresenter.getmConfirmList().size()-1);
+
         //어댑터 셋팅
         mBinding.setMemberList(mPresenter.getmConfirmList());
         mBinding.rvMemberlist.setAdapter(mPresenter.getmAdapter());
         mBinding.rvMemberlist.setLayoutManager(new LinearLayoutManager(getActivity().getApplicationContext()));
+
+        mPresenter.getmAdapter().notifyDataSetChanged();
     }
 }
 

@@ -11,6 +11,7 @@ import android.support.v4.widget.DrawerLayout;
 import com.dutch.hdh.dutchpayapp.MyApplication;
 import com.dutch.hdh.dutchpayapp.R;
 import com.dutch.hdh.dutchpayapp.ui.customer.CustomerFragment;
+import com.dutch.hdh.dutchpayapp.ui.dutchpay.newdutchaddgroup.DutchpayNewAddGroupFragment;
 import com.dutch.hdh.dutchpayapp.ui.dutchpay.newdutchpay.DutchpayNewFragment;
 import com.dutch.hdh.dutchpayapp.ui.dutchpay.photo.DutchpayPhotoFragment;
 import com.dutch.hdh.dutchpayapp.ui.dutchpay.start.DutchpayStartFragment;
@@ -149,6 +150,10 @@ public class MainActivityPresenter implements MainActivityContract.Presenter {
         else if (getCurrentFragment() instanceof DutchpayNewFragment) {
             mView.changeTitle("신규 더치페이");
         }
+
+        else if (getCurrentFragment() instanceof DutchpayNewAddGroupFragment) {
+            mView.changeTitle("그룹");
+       }
 
         else if (getCurrentFragment() instanceof DutchpayDetailFragment) {
             mView.changeTitle("더치페이");
@@ -308,6 +313,10 @@ public class MainActivityPresenter implements MainActivityContract.Presenter {
             }
             if (fragmentList.get(i) instanceof DutchpayNewFragment) {
                 ((DutchpayNewFragment) fragmentList.get(i)).onBackPressed();
+                return;
+            }
+            if (fragmentList.get(i) instanceof DutchpayNewAddGroupFragment) {
+                ((DutchpayNewAddGroupFragment) fragmentList.get(i)).onBackPressed();
                 return;
             }
         }

@@ -47,7 +47,8 @@ public class Constants {
     public static final String DUTCHPAY_CARD_REGISTER_SELECT = "dutchpay_registeredcardselect.php"; //등록한 카드목록 가져오기
     public static final String DUTCHPAY_CARD_DELETE = "dutchpay_carddelete.php"; //카드 삭제
 
-    public static final String DUTCHPAY_HISTORY_REQUEST_URL = "dutchpay_payhistory.php"; //더치페이 내역 요청
+    public static final String DUTCHPAY_HISTORY_REQUEST_URL = "dutchpay_dutchpaytotallist.php"; //더치페이 내역 요청
+    public static final String DUTCHPAY_NEW_REQUEST_URL = "dutchpay_dutchpay.php"; //더치페이 신설 요청
 
 
     /**
@@ -201,6 +202,28 @@ public class Constants {
 
             default:
                 return 100;
+        }
+    }
+
+    /**
+     * 더치페이 그룹 아이콘 경로
+     */
+    public static int groupIconID(int num){
+        switch (num) {
+            case 0:
+                return R.drawable.group_icon01;
+            case 1:
+                return R.drawable.group_icon02;
+            case 2:
+                return R.drawable.group_icon03;
+            case 3:
+                return R.drawable.group_icon04;
+            case 4:
+                return R.drawable.group_icon05;
+            case 5:
+                return R.drawable.group_icon06;
+            default:
+                return  R.drawable.group_icon01;
         }
     }
 }

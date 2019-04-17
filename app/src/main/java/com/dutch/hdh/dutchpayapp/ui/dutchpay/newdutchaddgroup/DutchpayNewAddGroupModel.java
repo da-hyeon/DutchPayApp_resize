@@ -5,14 +5,16 @@ public class DutchpayNewAddGroupModel {
     String Gname;
     int Gicon;
     boolean Gcheck;
+    String Gmember;
 
     int memNum;
 
-    public DutchpayNewAddGroupModel(String gname, int gicon, int memNum) {
+    public DutchpayNewAddGroupModel(String gname, int gicon, int memNum, String gmember) {
         this.Gname = gname;
         this.Gicon = gicon;
         this.Gcheck = false;
         this.memNum = memNum;
+        this.Gmember = gmember;
     }
 
     public String getGname() {
@@ -45,5 +47,13 @@ public class DutchpayNewAddGroupModel {
 
     public void setMemNum(int memNum) {
         this.memNum = memNum;
+    }
+
+    public String getGmember() {
+        return Gmember;
+    }
+
+    public void setGmember(String gmember) {
+        Gmember = gmember;
     }
 }
