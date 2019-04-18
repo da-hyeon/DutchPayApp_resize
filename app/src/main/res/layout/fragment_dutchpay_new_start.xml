@@ -99,6 +99,7 @@
             android:layout_height="40dp"
             android:layout_marginTop="6dp"
             android:layout_marginRight="7dp"
+            android:onClick="@{()-> Presenter. phoneListCallClick()}"
             android:background="@drawable/contact_info"
             app:layout_constraintEnd_toStartOf="@+id/button16"
             app:layout_constraintHorizontal_bias="0.5"
@@ -111,6 +112,7 @@
             android:layout_height="40dp"
             android:layout_marginRight="7dp"
             android:background="@drawable/group"
+            android:onClick="@{()-> Presenter.groupListCallClick()}"
             app:layout_constraintEnd_toStartOf="@+id/button17"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/button15"
@@ -197,6 +199,23 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
+                <EditText
+                    android:id="@+id/etMycost"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="14dp"
+                    android:layout_marginLeft="14dp"
+                    android:background="@color/transparent"
+                    android:hint="0"
+                    android:includeFontPadding="false"
+                    android:inputType="number"
+                    android:singleLine="false"
+                    android:textColor="#0f69ff"
+                    android:textColorHint="#0f69ff"
+                    android:textSize="13.7dp"
+                    app:layout_constraintBaseline_toBaselineOf="@+id/tvcost"
+                    app:layout_constraintStart_toEndOf="@+id/textView69" />
+
                 <TextView
                     android:id="@+id/textView69"
                     android:layout_width="wrap_content"
@@ -214,22 +233,19 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:id="@+id/tvMyCost"
-                    android:layout_width="0dp"
+                    android:id="@+id/tvcost"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="14dp"
                     android:layout_marginTop="8dp"
-                    android:layout_marginEnd="14dp"
                     android:layout_marginBottom="8dp"
                     android:fontFamily="@font/malgunfont"
                     android:includeFontPadding="false"
+                    android:text="원"
                     android:textColor="#0f69ff"
                     android:textSize="13.7dp"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/textView69"
-                    app:layout_constraintTop_toTopOf="parent"
-                    tools:text="10,000원" />
+                    app:layout_constraintStart_toEndOf="@+id/etMycost"
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <ImageView
                     android:id="@+id/imageView14"
@@ -242,11 +258,12 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:srcCompat="@drawable/photo_icon" />
+
             </android.support.constraint.ConstraintLayout>
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/rvMemberlist"
-                bind:item="@{memberList}"
+                app:item="@{memberList}"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:layout_marginTop="8dp"

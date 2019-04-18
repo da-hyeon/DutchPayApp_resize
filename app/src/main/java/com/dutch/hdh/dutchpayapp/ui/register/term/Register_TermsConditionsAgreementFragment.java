@@ -14,6 +14,8 @@ import com.dutch.hdh.dutchpayapp.base.fragment.BaseFragment;
 import com.dutch.hdh.dutchpayapp.databinding.FragmentRegisterTermsConditionsAgreementBinding;
 import com.kinda.alert.KAlertDialog;
 
+import java.util.Objects;
+
 public class Register_TermsConditionsAgreementFragment extends BaseFragment implements Register_TermsConditionsAgreementContract.View{
 
     private FragmentRegisterTermsConditionsAgreementBinding mBinding;
@@ -21,6 +23,7 @@ public class Register_TermsConditionsAgreementFragment extends BaseFragment impl
 
     private CheckBox mTermsConditions[];
     private ImageView mAllView[];
+    private View mView[];
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
@@ -34,12 +37,29 @@ public class Register_TermsConditionsAgreementFragment extends BaseFragment impl
                 mPresenter.clickAllTOS(mBinding.cbCompleteAgreement.isChecked())
         );
 
+        //전체동의 클릭
+        mBinding.vAgreeAllTerm.setOnClickListener(v->{
+            //클릭처리
+            mBinding.cbCompleteAgreement.setChecked(!mBinding.cbCompleteAgreement.isChecked());
+            mPresenter.clickAllTOS(mBinding.cbCompleteAgreement.isChecked());
+        });
+
         //약관 동의 클릭
         for(int i  = 0 ; i < mTermsConditions.length; i++){
             int finalI = i;
             mTermsConditions[i].setOnClickListener(v->
                 mPresenter.clickTOS(finalI, mTermsConditions[finalI].isChecked())
             );
+        }
+
+        //약관 동의 클릭
+        for(int i  = 0 ; i < mView.length; i++){
+            int finalI = i;
+            mView[i].setOnClickListener(v->{
+                    //클릭처리
+                mTermsConditions[finalI].setChecked(!mTermsConditions[finalI].isChecked());
+                mPresenter.clickTOS(finalI, mTermsConditions[finalI].isChecked());
+            });
         }
 
         for(int i = 0; i < mAllView.length; i++){
@@ -83,16 +103,25 @@ public class Register_TermsConditionsAgreementFragment extends BaseFragment impl
                 mBinding.viewAll6,
         };
 
+        mView = new View[]{
+                mBinding.vAgreeTerm1,
+                mBinding.vAgreeTerm2,
+                mBinding.vAgreeTerm3,
+                mBinding.vAgreeTerm4,
+                mBinding.vAgreeTerm5,
+                mBinding.vAgreeTerm6,
+        };
+
         mPresenter.refreshData(getArguments());
     }
 
     @Override
     public void showDialog(String content) {
-        new KAlertDialog(getContext(), KAlertDialog.WARNING_TYPE)
+        new KAlertDialog(Objects.requireNonNull(getContext()), KAlertDialog.WARNING_TYPE)
                 .setTitleText("실패")
                 .setContentText(content)
                 .setConfirmText("확인")
-                .setConfirmClickListener(sDialog -> sDialog.dismissWithAnimation())
+                .setConfirmClickListener(KAlertDialog::dismissWithAnimation)
                 .show();
     }
 

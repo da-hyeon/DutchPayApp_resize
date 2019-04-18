@@ -1,6 +1,7 @@
 package com.dutch.hdh.dutchpayapp.ui.solopay;
 
 import android.view.SurfaceView;
+import android.widget.TextView;
 
 import com.dutch.hdh.dutchpayapp.base.fragment.BaseFragmentContract;
 import com.google.android.gms.vision.barcode.BarcodeDetector;
@@ -33,7 +34,7 @@ public interface SoloPayContract {
         void onResume();
 
         //set
-        void setProcessor(BarcodeDetector barcodeDetector);
+        void setProcessor(BarcodeDetector barcodeDetector , TextView textView);
         void surfaceViewCallback(SurfaceView surfaceView);
 
         //click

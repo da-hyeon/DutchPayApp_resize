@@ -14,6 +14,8 @@ import com.dutch.hdh.dutchpayapp.base.fragment.BaseFragment;
 import com.dutch.hdh.dutchpayapp.databinding.FragmentRegisterPaymentPasswordBinding;
 import com.kinda.alert.KAlertDialog;
 
+import java.util.Objects;
+
 public class Register_PaymentPasswordFragment extends BaseFragment implements Register_PaymentPasswordContract.View {
 
     private FragmentRegisterPaymentPasswordBinding mBinding;
@@ -101,7 +103,7 @@ public class Register_PaymentPasswordFragment extends BaseFragment implements Re
 
     @Override
     public void showSuccessDialog(String content) {
-        new KAlertDialog(getContext(), KAlertDialog.SUCCESS_TYPE)
+        new KAlertDialog(Objects.requireNonNull(getContext()), KAlertDialog.SUCCESS_TYPE)
                 .setTitleText("환영합니다.")
                 .setContentText(content)
                 .setConfirmText("확인")
@@ -114,11 +116,11 @@ public class Register_PaymentPasswordFragment extends BaseFragment implements Re
 
     @Override
     public void showFailDialog(String content) {
-        new KAlertDialog(getContext(), KAlertDialog.WARNING_TYPE)
+        new KAlertDialog(Objects.requireNonNull(getContext()), KAlertDialog.WARNING_TYPE)
                 .setTitleText("실패")
                 .setContentText(content)
                 .setConfirmText("확인")
-                .setConfirmClickListener(sDialog -> {sDialog.dismissWithAnimation();})
+                .setConfirmClickListener(KAlertDialog::dismissWithAnimation)
                 .show();
     }
 

@@ -1,5 +1,6 @@
 package com.dutch.hdh.dutchpayapp.adapter;
 
+import android.annotation.SuppressLint;
 import android.databinding.BindingConversion;
 import android.databinding.ObservableArrayList;
 import android.support.annotation.NonNull;
@@ -8,10 +9,13 @@ import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 
@@ -34,16 +38,21 @@ public class DutchpayNewListAdapter extends RecyclerView.Adapter<DutchpayNewList
             this.mBinding = binding;
         }
 
+        @SuppressLint("ClickableViewAccessibility")
         void bind(TempNewListModel item) {
             mBinding.setItem(item);
+            //리스너 초기화
+            mBinding.editText.removeTextChangedListener(item.getTw());
 
             //직접입력 반영
             if(item.isEditableFlag()){
-                Log.e("check //->",item.getCost());
                 mBinding.editText.setFocusableInTouchMode(true);
-                setTextChangedListener(mBinding.editText,item);
+                mBinding.editText.setOnTouchListener((v, event) -> {
+                    setTextChangedListener(mBinding.editText,item);
+                    return false;
+                });
 
-                //키보드 닫힘 방지
+                //입력 완료_버그 고침
                 mBinding.editText.setImeOptions(EditorInfo.IME_ACTION_DONE);
             } else {
                 mBinding.editText.setFocusableInTouchMode(false);
@@ -81,6 +90,7 @@ public class DutchpayNewListAdapter extends RecyclerView.Adapter<DutchpayNewList
 
                 mList.remove(item);
                 notifyDataSetChanged();
+                mDNewPresenter.notifyListRemoved();
 
                 if(mList.size() == 1){ //다음 버튼 제거
                     mList.clear();
@@ -89,26 +99,7 @@ public class DutchpayNewListAdapter extends RecyclerView.Adapter<DutchpayNewList
         }
 
         private void setTextChangedListener(EditText et, TempNewListModel item){
-            et.addTextChangedListener(new TextWatcher() {
-                @Override
-                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-                    Log.e("check before //->",item.getCost());
-                }
-
-                @Override
-                public void onTextChanged(CharSequence s, int start, int before, int count) {
-                }
-
-                @Override
-                public void afterTextChanged(Editable s) {
-                    item.setCost(s.toString());
-
-                    Log.e("check after//->",item.getCost());
-
-                    mDNewPresenter.reDutchpayLogic(item);
-                }
-            });
+            et.addTextChangedListener(item.getTw());
         }
     }
 

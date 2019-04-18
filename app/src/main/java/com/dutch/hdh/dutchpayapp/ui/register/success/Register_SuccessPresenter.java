@@ -4,8 +4,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.support.v4.app.FragmentManager;
 
-import com.dutch.hdh.dutchpayapp.ui.main.activity.MainActivity;
-
 public class Register_SuccessPresenter implements Register_SuccessContract.Presenter {
 
     private Register_SuccessContract.View mView;

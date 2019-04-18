@@ -12,8 +12,13 @@ public class MyGroup_EditContract {
         void changeGroupName(String groupName);
     }
     interface Presenter {
-        void refreshData(Bundle bundle);
-        void onResume();
+        void receiveGroupMemberWhenEditing();
+        void receiveDirectlyEnteredMembers();
+        void receiveTelephoneDirectoryMembers();
+        void returningMembers();
+
+        void refreshData();
+        void onResume(Bundle bundle);
 
         void initListViewData(ListView listView);
 

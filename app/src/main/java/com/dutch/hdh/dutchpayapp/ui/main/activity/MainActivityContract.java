@@ -62,6 +62,5 @@ public interface MainActivityContract {
         void clickCustomerCenter();
         void clickLogout();
         void clickSetup();
-
     }
 }

@@ -4,6 +4,7 @@ import android.Manifest;
 import android.content.pm.PackageManager;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -21,6 +22,7 @@ import com.google.android.gms.vision.barcode.Barcode;
 import com.google.android.gms.vision.barcode.BarcodeDetector;
 
 import java.io.IOException;
+import java.util.Objects;
 
 public class SoloPayFragment extends BaseFragment implements SoloPayContract.View {
 
@@ -37,7 +39,7 @@ public class SoloPayFragment extends BaseFragment implements SoloPayContract.Vie
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_solo_pay, container, false);
@@ -104,13 +106,12 @@ public class SoloPayFragment extends BaseFragment implements SoloPayContract.Vie
                 .build();
 
         mCameraSource = new CameraSource
-                .Builder(getContext(), mBarcodeDetector)
+                .Builder(Objects.requireNonNull(getContext()), mBarcodeDetector)
                 .setRequestedPreviewSize(640, 480)
                 .build();
 
-       // mPresenter.surfaceViewCallback(mBinding.svCamera);
-       // mPresenter.setProcessor(mBarcodeDetector);
-
+        mPresenter.surfaceViewCallback(mBinding.svCamera);
+        mPresenter.setProcessor(mBarcodeDetector , mBinding.tvTitle);
     }
 
     /**
@@ -134,9 +135,9 @@ public class SoloPayFragment extends BaseFragment implements SoloPayContract.Vie
      */
     @Override
     public void showCamera(int RequestCameraPermissionID) {
-        if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+        if (ActivityCompat.checkSelfPermission(Objects.requireNonNull(getContext()), Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
             //Request permission
-            ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.CAMERA}, RequestCameraPermissionID);
+            ActivityCompat.requestPermissions(Objects.requireNonNull(getActivity()), new String[]{Manifest.permission.CAMERA}, RequestCameraPermissionID);
             return;
         }
         try {
@@ -176,8 +177,8 @@ public class SoloPayFragment extends BaseFragment implements SoloPayContract.Vie
     @Override
     public void changeScanButtonBackgroundAndTextColor(boolean state) {
         if (state) {
-            mBinding.llScan.setBackgroundResource(R.color.buttonSelect);
-            mBinding.tvScan.setTextColor(getResources().getColor(R.color.textSelect));
+            mBinding.llScan.setBackgroundResource(R.color.solopay_buttonSelect);
+            mBinding.tvScan.setTextColor(getResources().getColor(R.color.solopay_textSelect));
 
         } else {
             mBinding.llScan.setBackgroundResource(R.color.buttonDefault);
@@ -192,8 +193,8 @@ public class SoloPayFragment extends BaseFragment implements SoloPayContract.Vie
     @Override
     public void changePaymentNumberButtonBackgroundAndTextColor(boolean state) {
         if (state) {
-            mBinding.llPaymentNumber.setBackgroundResource(R.color.buttonSelect);
-            mBinding.tvPaymentNumber.setTextColor(getResources().getColor(R.color.textSelect));
+            mBinding.llPaymentNumber.setBackgroundResource(R.color.solopay_buttonSelect);
+            mBinding.tvPaymentNumber.setTextColor(getResources().getColor(R.color.solopay_textSelect));
 
         } else {
             mBinding.llPaymentNumber.setBackgroundResource(R.color.buttonDefault);
@@ -238,7 +239,7 @@ public class SoloPayFragment extends BaseFragment implements SoloPayContract.Vie
         Log.d("onResumeCheck" , "in");
         if(!onceLifetimeEntry) {
             mPresenter.surfaceViewCallback(mBinding.svCamera);
-            mPresenter.setProcessor(mBarcodeDetector);
+            mPresenter.setProcessor(mBarcodeDetector , mBinding.tvTitle);
             onceLifetimeEntry = true;
          } else {
             mPresenter.onResume();

@@ -1,5 +1,6 @@
 package com.dutch.hdh.dutchpayapp.ui.main.activity;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.databinding.DataBindingUtil;
 import android.graphics.Rect;
@@ -39,6 +40,8 @@ public class MainActivity extends BaseActivity implements MainActivityContract.V
         initData();
 
 
+        mBinding.navigationView.tvNameTitle.setSelected(true);
+
         //메뉴버튼
         mBinding.Appbar.loMenu.setOnClickListener(v ->
                 mPresenter.clickMenu()
@@ -73,8 +76,8 @@ public class MainActivity extends BaseActivity implements MainActivityContract.V
         );
 
         //더치페이 시작하기 버튼
-        mBinding.navigationView.llDutchpayStart.setOnClickListener(v -> {
-                mPresenter.clickDutchpayStart();
+        mBinding.navigationView.llDutchpayStart.setOnClickListener(v ->{
+            mPresenter.clickDutchpayStart();
         });
 
         //이벤트 버튼
@@ -94,7 +97,7 @@ public class MainActivity extends BaseActivity implements MainActivityContract.V
 
         //My 지갑 버튼
         mBinding.navigationView.llMyWallet.setOnClickListener(v ->
-                mPresenter.clickMyWallet()
+                {}
         );
 
         //공지사항 버튼
@@ -195,6 +198,8 @@ public class MainActivity extends BaseActivity implements MainActivityContract.V
             mBinding.navigationView.imageRegister.setVisibility(View.GONE);
             mBinding.navigationView.tvLogin.setVisibility(View.GONE);
             mBinding.navigationView.tvRegister.setVisibility(View.GONE);
+
+            mBinding.navigationView.tvNameTitle.setText(myApplication.getUserInfo().getUserName() + "님, 안녕하세요!");
         } else {
             //레이아웃 보이기
             mBinding.navigationView.layoutLogin.setVisibility(View.VISIBLE);
@@ -204,6 +209,8 @@ public class MainActivity extends BaseActivity implements MainActivityContract.V
             mBinding.navigationView.imageRegister.setVisibility(View.VISIBLE);
             mBinding.navigationView.tvLogin.setVisibility(View.VISIBLE);
             mBinding.navigationView.tvRegister.setVisibility(View.VISIBLE);
+
+            mBinding.navigationView.tvNameTitle.setText("에 오신것을 환영합니다.");
         }
     }
 

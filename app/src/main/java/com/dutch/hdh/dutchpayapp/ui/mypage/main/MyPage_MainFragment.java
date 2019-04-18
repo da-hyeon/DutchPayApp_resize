@@ -19,9 +19,24 @@ public class MyPage_MainFragment extends BaseFragment implements MyPage_MainCont
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_my_page_main, container, false);
-        mPresenter = new MyPage_MainPresenter(this , getContext() ,getFragmentManager());
+        mPresenter = new MyPage_MainPresenter(this , getContext() , getActivity() ,getFragmentManager());
         initData();
 
+        mBinding.vEmail.setOnClickListener(v->
+            mPresenter.clickChangeEmail()
+        );
+
+        mBinding.vPassword.setOnClickListener(v->
+                mPresenter.clickChangePassword()
+        );
+
+        mBinding.vPhone.setOnClickListener(v->
+                mPresenter.clickChangePhoneNumber()
+        );
+
+        mBinding.vWithdrawal.setOnClickListener(v->
+                mPresenter.clickWithdrawal()
+        );
         return mBinding.getRoot();
     }
 
@@ -30,6 +45,11 @@ public class MyPage_MainFragment extends BaseFragment implements MyPage_MainCont
      */
     public void initData() {
         mPresenter.setVIew();
+    }
+
+    @Override
+    public void changeUserNameText(String name) {
+        mBinding.tvUserName.setText(name);
     }
 
     @Override

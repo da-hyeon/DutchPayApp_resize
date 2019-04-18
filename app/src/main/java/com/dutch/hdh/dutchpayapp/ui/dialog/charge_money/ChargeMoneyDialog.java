@@ -102,4 +102,5 @@ public class ChargeMoneyDialog extends Dialog implements ChargeMoneyDialogContra
     public void removeDialog() {
         dismiss();
     }
+
 }

@@ -135,11 +135,11 @@
             android:fontFamily="@font/malgunfont"
             android:includeFontPadding="false"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/textView14"
+            app:layout_constraintEnd_toStartOf="@+id/tvMyCost"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/textView14"
+            android:id="@+id/tvMyCost"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
@@ -156,7 +156,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/textView15"
+            android:id="@+id/tvMemCount"
             android:layout_width="46.29dp"
             android:layout_height="18.29dp"
             android:layout_marginStart="8dp"
@@ -164,13 +164,13 @@
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
             android:background="#0f69ff"
+            android:fontFamily="@font/malgunfont"
             android:gravity="center"
+            android:includeFontPadding="false"
             android:text="총 5명"
             android:textColor="#ffffff"
             android:textSize="10dp"
             android:textStyle="bold"
-            android:fontFamily="@font/malgunfont"
-            android:includeFontPadding="false"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/textView16"
             app:layout_constraintTop_toTopOf="parent" />
@@ -225,6 +225,7 @@
         android:textColor="#ffffff"
         android:textSize="17dp"
         android:textStyle="bold"
+        android:onClick="@{()-> Presenter.onPayClick()}"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

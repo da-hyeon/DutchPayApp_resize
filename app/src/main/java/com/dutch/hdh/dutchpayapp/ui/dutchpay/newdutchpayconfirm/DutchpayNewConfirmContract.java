@@ -17,6 +17,7 @@ public interface DutchpayNewConfirmContract {
         void listInit();
 
         //Click
+        void onPayClick();
 
     }
 }

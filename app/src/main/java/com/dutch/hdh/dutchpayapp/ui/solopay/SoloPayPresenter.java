@@ -2,11 +2,12 @@ package com.dutch.hdh.dutchpayapp.ui.solopay;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.support.v4.app.FragmentManager;
+import android.util.Log;
 import android.util.SparseArray;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
+import android.widget.TextView;
 
 import com.dutch.hdh.dutchpayapp.MyApplication;
 import com.dutch.hdh.dutchpayapp.ui.dialog.charge_money.ChargeMoneyDialog;
@@ -27,12 +28,10 @@ public class SoloPayPresenter implements SoloPayContract.Presenter {
     private Payment_InfomationDialog mPayment_InfomationDialog;
     private ChargeMoneyDialog mChargeMoneyDialog;
     private MyApplication mMyApplication;
-
-    private int mAmount;
     /**
      * 생성자
      */
-    public SoloPayPresenter(SoloPayContract.View mView, Context mContext, FragmentManager mFragmentManager, Activity mActivity) {
+    SoloPayPresenter(SoloPayContract.View mView, Context mContext, FragmentManager mFragmentManager, Activity mActivity) {
         this.mView = mView;
         this.mContext = mContext;
         this.mFragmentManager = mFragmentManager;
@@ -63,7 +62,7 @@ public class SoloPayPresenter implements SoloPayContract.Presenter {
      * barcodeDetector Processor 등록
      */
     @Override
-    public void setProcessor(BarcodeDetector barcodeDetector) {
+    public void setProcessor(BarcodeDetector barcodeDetector , TextView textView) {
         barcodeDetector.setProcessor(new Detector.Processor<Barcode>() {
             @Override
             public void release() {
@@ -72,9 +71,14 @@ public class SoloPayPresenter implements SoloPayContract.Presenter {
 
             @Override
             public void receiveDetections(Detector.Detections<Barcode> detections) {
-                final SparseArray<Barcode> qrcodes = detections.getDetectedItems();
-                if (qrcodes.size() != 0) {
-                    //qr코드 인식시 처리
+                final SparseArray<Barcode> qrCodes = detections.getDetectedItems();
+                if (qrCodes.size() != 0) {
+
+                    mActivity.runOnUiThread(() -> {
+                        mView.hideCamera();
+                        Log.d("ㅇㅇ" , "인식함");
+                        mView.showSuccessDialog("QR코드 인식 성공", "QR CODE : " + qrCodes.valueAt(0).displayValue);
+                    });
                 }
             }
         });
@@ -98,7 +102,7 @@ public class SoloPayPresenter implements SoloPayContract.Presenter {
 
             @Override
             public void surfaceDestroyed(SurfaceHolder holder) {
-
+                mView.hideCamera();
             }
         });
     }

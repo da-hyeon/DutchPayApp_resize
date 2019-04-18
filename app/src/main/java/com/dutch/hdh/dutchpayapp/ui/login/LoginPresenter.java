@@ -2,12 +2,17 @@ package com.dutch.hdh.dutchpayapp.ui.login;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
+import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 
 import com.dutch.hdh.dutchpayapp.MyApplication;
 import com.dutch.hdh.dutchpayapp.R;
 import com.dutch.hdh.dutchpayapp.data.db.UserInfo;
+import com.dutch.hdh.dutchpayapp.ui.find.email.FindEmailActivity;
+import com.dutch.hdh.dutchpayapp.ui.find.password.FindPasswordActivity;
+import com.dutch.hdh.dutchpayapp.ui.mypage.change_email.MyPage_ChangeEmailActivity;
 import com.dutch.hdh.dutchpayapp.ui.register.term.Register_TermsConditionsAgreementFragment;
 
 import retrofit2.Call;
@@ -24,7 +29,10 @@ public class LoginPresenter implements LoginContract.Presenter {
 
     private MyApplication mMyApplication;
 
-    public LoginPresenter(LoginContract.View mView, Context mContext, FragmentManager mFragmentManager, Activity mActivity) {
+    /**
+     * 생성자
+     */
+    LoginPresenter(LoginContract.View mView, Context mContext, FragmentManager mFragmentManager, Activity mActivity) {
         this.mView = mView;
         this.mContext = mContext;
         this.mFragmentManager = mFragmentManager;
@@ -47,7 +55,7 @@ public class LoginPresenter implements LoginContract.Presenter {
 
             userInfo.enqueue(new Callback<UserInfo>() {
                 @Override
-                public void onResponse(Call<UserInfo> call, Response<UserInfo> response) {
+                public void onResponse(@NonNull Call<UserInfo> call, @NonNull Response<UserInfo> response) {
                     if (response.body() != null) {
                         mMyApplication.setUserInfo(response.body());
                         mMyApplication.getUserInfo().setUserState(true);
@@ -58,7 +66,7 @@ public class LoginPresenter implements LoginContract.Presenter {
                 }
 
                 @Override
-                public void onFailure(Call<UserInfo> call, Throwable t) {
+                public void onFailure(@NonNull Call<UserInfo> call, @NonNull Throwable t) {
                     mView.showFailDialog(t.getMessage());
                 }
             });
@@ -77,6 +85,26 @@ public class LoginPresenter implements LoginContract.Presenter {
         fragmentTransaction.replace(R.id.flFragmentContainer, mMyApplication.getRegister_TermsConditionsAgreementFragment() , Register_TermsConditionsAgreementFragment.class.getName());
         fragmentTransaction.addToBackStack(Register_TermsConditionsAgreementFragment.class.getName());
         fragmentTransaction.commit();
+    }
+
+    /**
+     * 아이디 찾기 클릭 이벤트 처리
+     */
+    @Override
+    public void clickFindEmail() {
+        Intent intent = new Intent(mContext, FindEmailActivity.class);
+        mContext.startActivity(intent);
+        mActivity.overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+    }
+
+    /**
+     * 비밀번호 찾기 클릭 이벤트 처리
+     */
+    @Override
+    public void clickFindPassword() {
+        Intent intent = new Intent(mContext, FindPasswordActivity.class);
+        mContext.startActivity(intent);
+        mActivity.overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
     }
 
     /**

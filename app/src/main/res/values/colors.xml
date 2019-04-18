@@ -12,6 +12,7 @@
     <color name="buttonSelect">#0f69fe</color>
     <color name="buttonUnSelect">#5f5f5f</color>
 
+    <color name="solopay_buttonSelect">#ffd336</color>
 
     <!--Top Bar Color-->
     <color name="topBarFontColor">#2a2a2a</color>
@@ -32,10 +33,6 @@
     <!--CardSelectView Color-->
     <color name="cardSelectFontColor">#1e1e1e</color>
     <color name="cardSelectLineColor">#0f69ff</color>
-
-    <color name="textSelect">#ffffff</color>
-    <color name="textDefault">#5f5f5f</color>
-
 
     <!--Dialog Common Color-->
     <color name="dialogCommonTitleFontColor">#101010</color>
@@ -60,4 +57,15 @@
     <color name="samsungCardColor">#0062aa</color>
     <color name="nhCardColor">#0165b3</color>
     <color name="ibkCardColor">#1899d3</color>
+    <color name="solopay_textSelect">#4d320a</color>
+    <color name="textSelect">#ffffff</color>
+    <color name="textDefault">#5f5f5f</color>
+
+    <color name="hanaBank">#23bab3</color>
+    <color name="nhBank">#0165b3</color>
+    <color name="kbBank">#f7b500</color>
+    <color name="shBank">#0f479e</color>
+    <color name="ibkBank">#1899d3</color>
+
+>>>>>>> dahyun
 </resources>

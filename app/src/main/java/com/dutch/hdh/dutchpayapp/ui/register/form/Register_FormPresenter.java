@@ -8,7 +8,6 @@ import android.widget.EditText;
 
 import com.dutch.hdh.dutchpayapp.R;
 import com.dutch.hdh.dutchpayapp.ui.register.password.Register_PaymentPasswordFragment;
-import com.kinda.alert.KAlertDialog;
 
 public class Register_FormPresenter implements Register_FormContract.Presenter {
 
@@ -71,9 +70,6 @@ public class Register_FormPresenter implements Register_FormContract.Presenter {
 
     //비밀번호가 같은지 확인
     private boolean isPasswordSame(){
-        if(mRegisterEditText[1].getText().toString().equals(mRegisterEditText[2].getText().toString())){
-            return true;
-        }
-        return false;
+        return mRegisterEditText[1].getText().toString().equals(mRegisterEditText[2].getText().toString());
     }
 }

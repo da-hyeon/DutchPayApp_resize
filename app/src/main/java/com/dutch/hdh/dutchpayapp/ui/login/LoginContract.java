@@ -15,6 +15,8 @@ public interface LoginContract {
         //click
         void clickLogin(String userID , String userPassword);
         void clickRegister();
+        void clickFindEmail();
+        void clickFindPassword();
         void clickSuccessDialog();
     }
 }

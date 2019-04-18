@@ -51,6 +51,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <View
+                android:id="@+id/vCancel"
                 android:layout_width="70dp"
                 android:layout_height="match_parent"
                 app:layout_constraintRight_toRightOf="parent" />
@@ -90,15 +91,15 @@
                 app:layout_constraintLeft_toLeftOf="parent" />
 
 
-            <EditText
-                android:id="@+id/etMyEmail"
+            <TextView
+                android:id="@+id/tvMyEmail"
                 android:layout_width="0dp"
                 android:layout_height="48dp"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 android:layout_marginTop="6.85dp"
                 app:layout_constraintTop_toBottomOf="@+id/tvEmailText"
-                android:hint="기존 이메일 주소를 입력하세요."
+                android:gravity="center_vertical"
                 android:paddingLeft="12.28dp"
                 android:textSize="13.71dp"
                 android:fontFamily="@font/malgunfont"
@@ -116,7 +117,7 @@
                 android:textColor="#1e1e1e"
                 android:textSize="13.71dp"
                 android:textStyle="bold"
-                app:layout_constraintTop_toBottomOf="@+id/etMyEmail"
+                app:layout_constraintTop_toBottomOf="@+id/tvMyEmail"
                 app:layout_constraintLeft_toLeftOf="parent" />
 
             <EditText
@@ -125,6 +126,7 @@
                 android:layout_height="48dp"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
+                android:inputType="textEmailAddress"
                 android:layout_marginTop="6.85dp"
                 app:layout_constraintTop_toBottomOf="@+id/tvNewEmailText"
                 android:hint="신규 이메일 주소를 입력하세요."
@@ -158,6 +160,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/tvNewEmailCheckText"
                 android:hint="신규 이메일 주소를 다시한번 입력하세요."
                 android:paddingLeft="12.28dp"
+                android:inputType="textEmailAddress"
                 android:textSize="13.71dp"
                 android:fontFamily="@font/malgunfont"
                 android:includeFontPadding="false"
@@ -185,7 +188,8 @@
                 app:layout_constraintRight_toRightOf="parent"
                 android:layout_marginTop="6.85dp"
                 app:layout_constraintTop_toBottomOf="@+id/tvPassword"
-                android:hint="신규 이메일 주소를 다시한번 입력하세요."
+                android:hint="비밀번호를 입력하세요."
+                android:inputType="textPassword"
                 android:paddingLeft="12.28dp"
                 android:textSize="13.71dp"
                 android:fontFamily="@font/malgunfont"
@@ -193,9 +197,11 @@
                 android:background="#ffffff"/>
 
             <Button
+                android:id="@+id/btChange"
                 android:layout_width="match_parent"
                 android:layout_height="47.42dp"
                 app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginBottom="17.14dp"
                 android:background="@color/buttonSelect"
                 android:text="변경하기"
                 android:textColor="#ffffff"

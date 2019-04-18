@@ -12,16 +12,25 @@ public interface MainFragmentContract {
 
         //show
         void showUserInfo(String userName , int userDutchMoney , boolean state);
+
+        //change
+        void changeEventTitle(String title);
+        void changeUserMoney(int money);
     }
     interface Presenter{
         //init
         void initLoginState();
+        void onResume();
 
         //set
         void setAdapter(ViewPager viewPager , TabLayout tabLayout);
 
         //click
         void clickSolopay();
-        void clickDutchPay();
+        void clickDutchpay();
+        void clickAllEvent();
+
+        //slide
+        void slideViewPagerAction(int position);
     }
 }

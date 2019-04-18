@@ -2,6 +2,7 @@ package com.dutch.hdh.dutchpayapp.ui.mygroup.main;
 
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,7 +10,6 @@ import android.view.ViewGroup;
 import com.dutch.hdh.dutchpayapp.R;
 import com.dutch.hdh.dutchpayapp.base.fragment.BaseFragment;
 import com.dutch.hdh.dutchpayapp.databinding.FragmentMyGroupBinding;
-import com.kinda.alert.KAlertDialog;
 
 public class MyGroup_MainFragment extends BaseFragment implements MyGroup_MainContract.View{
 
@@ -17,7 +17,7 @@ public class MyGroup_MainFragment extends BaseFragment implements MyGroup_MainCo
     private MyGroup_MainContract.Presenter mPresenter;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_my_group, container, false);
@@ -40,11 +40,17 @@ public class MyGroup_MainFragment extends BaseFragment implements MyGroup_MainCo
         mPresenter.initListViewData(mBinding.lvMyGroup);
     }
 
+    /**
+     * Presenter 넘겨주기
+     */
     @Override
     public MyGroup_MainContract.Presenter getmPresenter() {
         return mPresenter;
     }
 
+    /**
+     * Binding 넘겨주기
+     */
     @Override
     public FragmentMyGroupBinding getmBinding() {
         return mBinding;

@@ -1,21 +1,70 @@
 package com.dutch.hdh.dutchpayapp.ui.dutchpay.newdutchpay;
 
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.util.Log;
+
+import com.google.gson.annotations.SerializedName;
+
 public class TempNewListModel {
     String name;
     String cost;
     String phone;
+
     boolean completeFlag;
 
     boolean editableFlag;
     boolean editedCheck;
 
-    public TempNewListModel(String name, String cost, String phone, boolean completeFlag) {
+    TextWatcher tw = new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+        }
+
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+        }
+
+        @Override
+        public void afterTextChanged(Editable s) {
+            cost = s.toString();
+            editedCheck = true;
+        }
+    };
+
+    public TempNewListModel(String name, String phone) {
+        this.name = name;
+        this.cost = "0";
+        this.phone = phone;
+        this.completeFlag = false;
+        this.editableFlag = false;
+        this.editedCheck = false;
+        this.tw =  new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                cost = s.toString();
+                editedCheck = true;
+            }
+        };
+    }
+
+    public TempNewListModel(String name, String phone, String cost, boolean completeFlag, boolean editableFlag, boolean editedCheck) {
         this.name = name;
         this.cost = cost;
         this.phone = phone;
         this.completeFlag = completeFlag;
-        this.editableFlag = false;
-        this.editedCheck = false;
+        this.editableFlag = editableFlag;
+        this.editedCheck = editedCheck;
     }
 
     public String getName() {
@@ -64,5 +113,9 @@ public class TempNewListModel {
 
     public void setEditedCheck(boolean editedCheck) {
         this.editedCheck = editedCheck;
+    }
+
+    public TextWatcher getTw() {
+        return tw;
     }
 }

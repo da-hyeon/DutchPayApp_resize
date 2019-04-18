@@ -8,7 +8,18 @@ import com.dutch.hdh.dutchpayapp.data.db.MyGroup;
 import com.dutch.hdh.dutchpayapp.data.db.CardCompanyList;
 import com.dutch.hdh.dutchpayapp.data.db.CardRegisterList;
 import com.dutch.hdh.dutchpayapp.data.db.PayHistoryList;
+import com.dutch.hdh.dutchpayapp.data.db.CardCompanyList;
+import com.dutch.hdh.dutchpayapp.data.db.CardRegisterList;
+import com.dutch.hdh.dutchpayapp.data.db.Dutchpayhistory;
+import com.dutch.hdh.dutchpayapp.data.db.AccountList;
+import com.dutch.hdh.dutchpayapp.data.db.ErrorCode;
+import com.dutch.hdh.dutchpayapp.data.db.EventList;
+import com.dutch.hdh.dutchpayapp.data.db.MyGroup;
+import com.dutch.hdh.dutchpayapp.data.db.Product;
+import com.dutch.hdh.dutchpayapp.data.db.SearchEmail;
+import com.dutch.hdh.dutchpayapp.data.db.SearchPassword;
 import com.dutch.hdh.dutchpayapp.data.db.UserInfo;
+import com.dutch.hdh.dutchpayapp.data.db.UserList;
 
 import retrofit2.Call;
 import retrofit2.http.Field;
@@ -24,6 +35,7 @@ public interface ServerAPI {
      *
      * @param userEmail
      * @param userPassword
+     * @return
      */
     @GET(Constants.USER_LOGIN_REQUEST_URL)
     Call<UserInfo> getFineUser(@Query("userEmail") String userEmail, @Query("userPassword") String userPassword);
@@ -78,6 +90,15 @@ public interface ServerAPI {
     Call<MyGroup> getGroupList(@Query("usercode") String usercode);
 
     /**
+     * 그룹목록 요청2
+     *
+     * @param usercode
+     * @return
+     */
+    @GET(Constants.SELECT_GROUP_REQUEST_URL_2)
+    Call<MyGroup> getGroupList2(@Query("usercode") String usercode);
+
+    /**
      * 그룹삭제 요청
      *
      * @param groupacode
@@ -89,24 +110,20 @@ public interface ServerAPI {
             @Field("groupacode") String groupacode);
 
 
+
     @FormUrlEncoded
     @POST(Constants.UPDATE_GROUP_REQUEST_URL)
-    Call<Void> updateGroup(
+            Call<Void> updateGroup(
             @Field("groupacode") String groupacode,
             @Field("groupcontent") String groupcontent,
             @Field("peoplenumber") String peoplenumber);
-
-    @GET(Constants.SELECT_EVENT_ONGOING_REQUEST_URL)
-    Call<EventList> selectOnGoingEvent();
-
-    @GET(Constants.SELECT_EVENT_ENDPROGRESS_REQUEST_URL)
-    Call<EventList> selectEndProgressEvent();
 
 
     /**
      * 등록할 카드목록가져오기
      */
     @GET(Constants.DUTCHPAY_CARD_COMPANY_SELECT)
+
     Call<CardCompanyList> getCardSelectList();
 
     /**
@@ -158,6 +175,7 @@ public interface ServerAPI {
 
 
     /**
+     *
      * 은행 목록가져오기
      */
     @GET(Constants.DUTCHPAY_ACCOUNT_BANK_SELECT)
@@ -287,4 +305,170 @@ public interface ServerAPI {
             @Field("usercode") String usercode
     );
 
+    /**
+     * 그룹 업데이트 요청
+     *
+     * @param groupacode
+     * @param groupcontent
+     * @param peoplenumber
+     * @return
+     */
+    @FormUrlEncoded
+    @POST(Constants.UPDATE_GROUP_REQUEST_URL)
+    Call<Void> updateGroup(
+            @Field("groupacode") String groupacode,
+            @Field("groupaname") String groupaname,
+            @Field("groupcontent") String groupcontent,
+            @Field("peoplenumber") String peoplenumber);
+
+    /**
+     * 진행중 이벤트 요청
+     *
+     * @return
+     */
+    @GET(Constants.SELECT_EVENT_ONGOING_REQUEST_URL)
+    Call<EventList> selectOnGoingEvent();
+
+    /**
+     * 진행종료 이벤트 요청
+     *
+     * @return
+     */
+    @GET(Constants.SELECT_EVENT_ENDPROGRESS_REQUEST_URL)
+    Call<EventList> selectEndProgressEvent();
+
+    /**
+     * 이메일 변경 요청
+     *
+     * @param email
+     * @param usercode
+     * @return
+     */
+    @FormUrlEncoded
+    @POST(Constants.CHANGE_EMAIL_REQUEST_URL)
+    Call<Void> changeEmail(@Field("email") String email,
+                           @Field("usercode") String usercode);
+
+    /**
+     * 비밀번호 변경 요청
+     *
+     * @param password
+     * @param usercode
+     * @return
+     */
+    @FormUrlEncoded
+    @POST(Constants.CHANGE_PASSWORD_REQUEST_URL)
+    Call<Void> changePassword(@Field("password") String password,
+                              @Field("usercode") String usercode);
+
+    /**
+     * 더치페이 내역 요청
+     *
+     * @param usercode
+     */
+    @FormUrlEncoded
+    @POST(Constants.DUTCHPAY_HISTORY_REQUEST_URL)
+    Call<Dutchpayhistory> getDutchapyHistoryList(@Field("usercode") String usercode);
+
+    /**
+     * 더치페이 시작 요청
+     *
+     * @param usercode
+     * @param dutchpay_title
+     * @param total_price
+     * @param dutchpay_content
+     * @param dutchpay_message
+     * @param user_list1
+     * @return
+     */
+    @FormUrlEncoded
+    @POST(Constants.DUTCHPAY_NEW_REQUEST_URL)
+    Call<Void> setNewDutchpay(
+            @Field("usercode") int usercode,
+            @Field("dutchpay_title") String dutchpay_title,
+            @Field("total_price") int total_price,
+            @Field("dutchpay_content") String dutchpay_content,
+            @Field("dutchpay_message") String dutchpay_message,
+            @Field("user_list1") String user_list1);
+
+    /**
+     * 전화번호 변경 요청
+     *
+     * @param phone
+     * @param usercode
+     * @return
+     */
+    @FormUrlEncoded
+    @POST(Constants.CHANGE_PHONENUMBER_REQUEST_URL)
+    Call<Void> changePhoneNumber(@Field("phone") String phone,
+                                 @Field("usercode") String usercode);
+
+    /**
+     * 이메일 찾기 요청
+     *
+     * @param name
+     * @param phone
+     * @return
+     */
+    @FormUrlEncoded
+    @POST(Constants.SEARCH_EMAIL_REQUEST_URL)
+    Call<SearchEmail> findEmail(@Field("name") String name,
+                                @Field("phone") String phone);
+
+    /**
+     * 비밀번호 찾기 요청
+     *
+     * @param email
+     * @param name
+     * @param phone
+     * @return
+     */
+    @FormUrlEncoded
+    @POST(Constants.SEARCH_PHONENUMBER_REQUEST_URL)
+    Call<SearchPassword> findPhoneNumber(@Field("email") String email,
+                                         @Field("name") String name,
+                                         @Field("phone") String phone);
+
+    /**
+     * 등록된 계좌 요청
+     *
+     * @param usercode
+     * @return
+     */
+    @GET(Constants.SELECT_ACCOUNT_REQUEST_URL)
+    Call<AccountList> selectAccount(@Query("usercode") String usercode);
+
+
+    /**
+     * QR코드 상품정보 요청
+     *
+     * @param qrcode
+     * @return
+     */
+    @FormUrlEncoded
+    @POST(Constants.SELECT_PRODUCT_QRCODE_REQUEST_URL)
+    Call<Product> selectQRCodeProduct(@Field("qrcode") String qrcode);
+
+
+    /**
+     * 결제번호 상품정보 요청
+     *
+     * @param payproduct_code
+     * @return
+     */
+    @FormUrlEncoded
+    @POST(Constants.SELECT_PRODUCT_PAYMENT_NUMBER_REQUEST_URL)
+    Call<Product> selectPaymentNumberProduct(@Field("payproduct_code") String payproduct_code);
+
+    /**
+     * 개인결제 결제 요청
+     *
+     * @param qrcode
+     * @param usercode
+     * @return
+     */
+    @FormUrlEncoded
+    @POST(Constants.UPDATE_PAYMENT_QRCODE_REQUEST_URL)
+    Call<String> updateQRCodePayment(@Field("qrcode") String qrcode,
+                                     @Field("usercode") String usercode);
 }

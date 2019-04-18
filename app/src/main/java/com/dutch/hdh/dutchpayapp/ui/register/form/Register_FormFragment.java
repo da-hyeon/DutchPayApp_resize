@@ -2,6 +2,7 @@ package com.dutch.hdh.dutchpayapp.ui.register.form;
 
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,8 @@ import com.dutch.hdh.dutchpayapp.base.fragment.BaseFragment;
 import com.dutch.hdh.dutchpayapp.databinding.FragmentRegisterFormBinding;
 import com.kinda.alert.KAlertDialog;
 
+import java.util.Objects;
+
 public class Register_FormFragment extends BaseFragment implements Register_FormContract.View{
 
     private FragmentRegisterFormBinding mBinding;
@@ -20,7 +23,7 @@ public class Register_FormFragment extends BaseFragment implements Register_Form
     private EditText mRegisterEditText[];
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         mBinding = DataBindingUtil.inflate(inflater , R.layout.fragment_register_form, container, false);
 
@@ -48,16 +51,16 @@ public class Register_FormFragment extends BaseFragment implements Register_Form
                 mBinding.etCN
         };
 
-        mPresenter = new Register_FormPresenter(this , getContext() , getActivity().getSupportFragmentManager() );
+        mPresenter = new Register_FormPresenter(this , getContext() , Objects.requireNonNull(getActivity()).getSupportFragmentManager() );
     }
 
     @Override
     public void showDialog(String content) {
-        new KAlertDialog(getContext(), KAlertDialog.WARNING_TYPE)
+        new KAlertDialog(Objects.requireNonNull(getContext()), KAlertDialog.WARNING_TYPE)
                 .setTitleText("실패")
                 .setContentText(content)
                 .setConfirmText("확인")
-                .setConfirmClickListener(sDialog -> sDialog.dismissWithAnimation())
+                .setConfirmClickListener(KAlertDialog::dismissWithAnimation)
                 .show();
     }
 }
