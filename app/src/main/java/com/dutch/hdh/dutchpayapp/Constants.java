@@ -24,20 +24,6 @@ public class Constants {
     /**
      * Bundle ID
      */
-    //PaymentDialog -> PaymentPasswordFragment
-    public static final String PRODUCT_CODE = "productCode";
-    public static final String PRODUCT_AMOUNT = "productAmount";
-    public static final String ENTRANCE_PATH = "entrancePath";
-
-
-    /**
-     * Extra ID
-     */
-    //SelectRefundAcountActivity -> WithdrawalActivity
-    public static final String ACCOUNT_TYPE_CODE = "accountTypeCode";
-    public static final String ACCOUNT_NUMBER = "accountNumber";
-
-
     //PaymentDialog + DutchpayNewConfirmFragment -> PaymentPasswordFragment
     public static final String ENTRANCE_PATH = "entrancePath";
 
@@ -48,6 +34,15 @@ public class Constants {
     //DutchpayNewConfirmFragment -> PaymentPasswordFragment
     public static final String PAYMENT_INFO = "dutchpayInfo";
     public static final String PAYMENT_LIST_JSON = "dutchpayGroupJson";
+
+
+    /**
+     * Extra ID
+     */
+    //SelectRefundAcountActivity -> WithdrawalActivity
+    public static final String ACCOUNT_TYPE_CODE = "accountTypeCode";
+    public static final String ACCOUNT_NUMBER = "accountNumber";
+
 
     /**
      * API URL

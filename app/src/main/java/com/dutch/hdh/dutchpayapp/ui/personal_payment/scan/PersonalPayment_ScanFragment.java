@@ -49,12 +49,6 @@ public class PersonalPayment_ScanFragment extends BaseFragment implements Person
 
         initData();
 
-        mBinding.svCamera.setOnClickListener(v->{
-            MyApplication myApplication = MyApplication.getInstance();
-            myApplication.getPaymentDialog(getContext()).setDialog(null, getFragmentManager(), "10", 10000);
-            myApplication.getPaymentDialog(getContext()).show();
-        });
-
         return mBinding.getRoot();
     }
 

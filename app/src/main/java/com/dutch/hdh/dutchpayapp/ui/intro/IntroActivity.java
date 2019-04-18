@@ -22,6 +22,8 @@ public class IntroActivity extends BaseActivity {
     Runnable r = new Runnable() {
         @Override
         public void run() {
+            isPermissionCheck();
+
             //팝업창 뷰 생성
             notiPopup = getLayoutInflater().inflate(R.layout.dialog_notice, null);
 

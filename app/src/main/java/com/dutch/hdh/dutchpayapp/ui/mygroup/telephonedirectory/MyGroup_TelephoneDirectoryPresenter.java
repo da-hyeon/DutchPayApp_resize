@@ -73,7 +73,7 @@ public class MyGroup_TelephoneDirectoryPresenter implements MyGroup_TelephoneDir
             }
 
             if (cursor != null) {
-                while (cursor.moveToNext()) {
+                do {
                     String name = cursor.getString
                             (cursor.getColumnIndex(ContactsContract
                                     .CommonDataKinds.Phone.DISPLAY_NAME));
@@ -95,7 +95,7 @@ public class MyGroup_TelephoneDirectoryPresenter implements MyGroup_TelephoneDir
                         mTelephoneDirectoryArrayList.add(new TelephoneDirectory(name, directoryPhoneNumber, false));
                         mTelephoneDirectorySaveArrayList.add(new TelephoneDirectory(name, directoryPhoneNumber.replace("-", ""), false));
                     }
-                }
+                }while (cursor.moveToNext());
             }
 
             mListview_telephoneDirectoryAdapter = new ListView_TelephoneDirectoryAdapter(mView, this , mContext, mTelephoneDirectoryArrayList);
