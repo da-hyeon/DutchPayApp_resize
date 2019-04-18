@@ -21,10 +21,11 @@ public class Payment_InfomationDialog extends BaseCustomDialog implements Paymen
     private Payment_InfomationDialogContract.Presenter mPresenter;
     private FragmentManager mFragmentManager;
 
+    private boolean path;
     /**
-     * QR 코드를 통한 경로 생성자
+     * 생성자
      */
-    public Payment_InfomationDialog(@NonNull Context context) {
+    public Payment_InfomationDialog(@NonNull Context context ) {
         super(context);
     }
 
@@ -35,13 +36,13 @@ public class Payment_InfomationDialog extends BaseCustomDialog implements Paymen
         //getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
         mBinding = DataBindingUtil.inflate(LayoutInflater.from(getContext()), R.layout.dialog_payment_infomation, null, false);
-        setContentView(mBinding.getRoot());
-
         initData();
 
         mBinding.btOK.setOnClickListener(v ->
                 mPresenter.clickOK()
         );
+
+        setContentView(mBinding.getRoot());
     }
 
     /**
@@ -97,6 +98,11 @@ public class Payment_InfomationDialog extends BaseCustomDialog implements Paymen
         mBinding.tvMyDutchMoney.setText(String.format("%,d", money) + " 원");
     }
 
+    @Override
+    public void hideDialog() {
+        dismiss();
+    }
+
 
     @Override
     public void dismiss() {
@@ -105,9 +111,15 @@ public class Payment_InfomationDialog extends BaseCustomDialog implements Paymen
     }
 
     public void setDialog(PersonalPayment_ScanContract.View mScanView, FragmentManager mFragmentManager, String mProductCode, int mProductAmount) {
-        mPresenter = new Payment_InfomationDialogPresenter(this, getContext(), mProductCode, mProductAmount);
-        mPresenter.setScanView(mScanView);
-
         this.mFragmentManager = mFragmentManager;
+
+        mPresenter = new Payment_InfomationDialogPresenter(this,  mFragmentManager , getContext(),mProductCode, mProductAmount);
+        mPresenter.setScanView(mScanView);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        mPresenter.initVIew();
     }
 }

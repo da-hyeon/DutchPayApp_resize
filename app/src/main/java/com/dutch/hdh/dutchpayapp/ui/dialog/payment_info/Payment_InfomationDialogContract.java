@@ -7,6 +7,8 @@ public interface Payment_InfomationDialogContract {
     interface View extends BaseCustomDialogContract.View {
         void changePaymentAmount(int amount);
         void changeMyMoney(int money);
+
+        void hideDialog();
     }
     interface Presenter{
         void setScanView(PersonalPayment_ScanContract.View mScanView);

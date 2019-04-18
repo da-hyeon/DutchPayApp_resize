@@ -2,9 +2,17 @@ package com.dutch.hdh.dutchpayapp.ui.dialog.payment_info;
 
 import android.app.Activity;
 import android.content.Context;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 
+import com.dutch.hdh.dutchpayapp.Constants;
 import com.dutch.hdh.dutchpayapp.MyApplication;
+import com.dutch.hdh.dutchpayapp.R;
+import com.dutch.hdh.dutchpayapp.ui.payment_password.PaymentPasswordFragment;
+import com.dutch.hdh.dutchpayapp.ui.personal_payment.main.PersonalPayment_MainFragment;
 import com.dutch.hdh.dutchpayapp.ui.personal_payment.scan.PersonalPayment_ScanContract;
 
 import retrofit2.Call;
@@ -15,10 +23,13 @@ public class Payment_InfomationDialogPresenter implements Payment_InfomationDial
 
     private Payment_InfomationDialogContract.View mView;
     private PersonalPayment_ScanContract.View mScanView;
+    private FragmentManager mFragmentManager;
+
     private Context mContext;
     private Activity mActivity;
 
     private MyApplication mMyApplication;
+
     private String mProductCode;
     private int mProductAmount;
 
@@ -27,9 +38,10 @@ public class Payment_InfomationDialogPresenter implements Payment_InfomationDial
     /**
      * 생성자
      */
-    Payment_InfomationDialogPresenter(Payment_InfomationDialogContract.View mView, Context mContext , String mProductCode , int mProductAmount) {
+    Payment_InfomationDialogPresenter(Payment_InfomationDialogContract.View mView, FragmentManager mFragmentManager ,Context mContext , String mProductCode , int mProductAmount) {
         this.mView = mView;
         this.mContext = mContext;
+        this.mFragmentManager = mFragmentManager;
         this.mProductCode = mProductCode;
         this.mProductAmount = mProductAmount;
 
@@ -69,43 +81,26 @@ public class Payment_InfomationDialogPresenter implements Payment_InfomationDial
      */
     @Override
     public void clickOK() {
+        Bundle bundle = new Bundle();
+        //상품코드
+        bundle.putString(Constants.PRODUCT_CODE, mProductCode);
+        //상품가격
+        bundle.putInt(Constants.PRODUCT_AMOUNT, mProductAmount);
+        //입장경로 - 개인결제
+        bundle.putBoolean(Constants.ENTRANCE_PATH, true);
 
+        //결제비밀번호 입력을 위해 해당 프래그먼트 이동
+        FragmentTransaction fragmentTransaction = mFragmentManager.beginTransaction();
+        fragmentTransaction.setCustomAnimations(R.anim.fade_in, 0, 0, R.anim.fade_out);
 
-        Call<String> productPayment;
-        productPayment = MyApplication
-                .getRestAdapter()
-                .updateQRCodePayment(mProductCode,
-                        mMyApplication.getUserInfo().getUserCode());
+        PaymentPasswordFragment paymentPasswordFragment = new PaymentPasswordFragment();
+        paymentPasswordFragment.setArguments(bundle);
+        fragmentTransaction.replace(R.id.flFragmentContainer, paymentPasswordFragment, PaymentPasswordFragment.class.getName());
+        fragmentTransaction.addToBackStack(PaymentPasswordFragment.class.getName());
+        fragmentTransaction.commit();
 
-
-        productPayment.enqueue(new Callback<String>() {
-            @Override
-            public void onResponse(@NonNull Call<String> call, @NonNull Response<String> response) {
-                if (response.isSuccessful()) {
-                    //결제 성공
-                    isSuccessPayment = true;
-
-                    //오류검출
-                    if (response.body() != null && response.body().equals("alreadyPayment")) {
-                        mView.showFailDialog("실패", "해당 상품은 결제가 완료 되었습니다.");
-                        return;
-                    }
-
-                    mView.showSuccessDialog("성공", "결제 완료");
-                    mMyApplication.getUserInfo().setUserMoney(mMyApplication.getUserInfo().getUserMoney() - mProductAmount);
-
-                }
-                //DB 접근 오류
-                else {
-                    mView.showFailDialog("실패", "해당 상품을 찾을 수 없습니다.");
-                }
-            }
-
-            @Override
-            public void onFailure(@NonNull Call<String> call, @NonNull Throwable t) {
-                //서버통신 오류
-                mView.showFailDialog("실패", "서버와 통신할 수 없습니다.");
-            }
-        });
+        //다이얼로그 닫기
+        mView.hideDialog();
     }
+
 }
