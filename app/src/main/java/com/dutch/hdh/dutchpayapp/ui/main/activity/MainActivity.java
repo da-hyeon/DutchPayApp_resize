@@ -36,8 +36,6 @@ public class MainActivity extends BaseActivity implements MainActivityContract.V
         mPresenter = new MainActivityPresenter(this, this, getSupportFragmentManager(), mBinding.drawerLayout, this);
         toggle = new ActionBarDrawerToggle(this, mBinding.drawerLayout, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
 
-        isPermissionCheck();
-
         //객체생성 및 데이터 초기화
         initData();
 
@@ -107,24 +105,24 @@ public class MainActivity extends BaseActivity implements MainActivityContract.V
         );
 
         //이용안내 버튼
-        mBinding.navigationView.llService.setOnClickListener(v -> {
-            mPresenter.clickService();
-        });
+        mBinding.navigationView.llService.setOnClickListener(v ->
+            mPresenter.clickService()
+        );
 
         //고객센터(로그아웃) 버튼
-        mBinding.navigationView.llCustomerCenter.setOnClickListener(v -> {
+        mBinding.navigationView.llCustomerCenter.setOnClickListener(v ->
             //mPresenter.clickLogout()
-            mPresenter.clickCustomerCenter();
-        });
+            mPresenter.clickCustomerCenter()
+       );
 
         mBinding.navigationView.ivHome.setOnClickListener(v->
             mPresenter.clickHome()
         );
 
         //설정 버튼
-        mBinding.navigationView.ivSetting.setOnClickListener(v -> {
-            mPresenter.clickSetup();
-        });
+        mBinding.navigationView.ivSetting.setOnClickListener(v ->
+            mPresenter.clickSetup()
+        );
     }
 
     /**
