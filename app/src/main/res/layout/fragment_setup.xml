@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
     <data>
         <variable
             name="Fragment"
@@ -9,9 +11,7 @@
             type="com.dutch.hdh.dutchpayapp.ui.setup.setting.SetupPresenter"/>
     </data>
 
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<android.support.constraint.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#f2f1f2">
@@ -36,11 +36,11 @@
             android:layout_width="43dp"
             android:layout_height="16dp"
             android:background="@drawable/switch_track"
-            android:checked="false"
             android:switchMinWidth="43dp"
             android:switchPadding="0dp"
             android:thumb="@drawable/switch_thumb"
             android:track="@color/transparent"
+            android:checked="@{Presenter.autoFlag}"
             app:layout_constraintBottom_toBottomOf="@+id/textView11"
             app:layout_constraintEnd_toEndOf="@+id/swPush"
             app:layout_constraintTop_toTopOf="@+id/textView11" />
@@ -50,11 +50,11 @@
             android:layout_width="43dp"
             android:layout_height="16dp"
             android:background="@drawable/switch_track"
-            android:checked="false"
             android:switchMinWidth="43dp"
             android:switchPadding="0dp"
             android:thumb="@drawable/switch_thumb"
             android:track="@color/transparent"
+            android:checked="@{Presenter.pushFlag}"
             app:layout_constraintBottom_toBottomOf="@+id/textView12"
             app:layout_constraintEnd_toEndOf="@+id/swMarketing"
             app:layout_constraintTop_toTopOf="@+id/textView12" />
@@ -66,11 +66,11 @@
             android:layout_marginEnd="17dp"
             android:layout_marginRight="17dp"
             android:background="@drawable/switch_track"
-            android:checked="false"
             android:switchMinWidth="43dp"
             android:switchPadding="0dp"
             android:thumb="@drawable/switch_thumb"
             android:track="@color/transparent"
+            android:checked="@{Presenter.marketingFlag}"
             app:layout_constraintBottom_toBottomOf="@+id/textView18"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/textView18" />
@@ -189,6 +189,7 @@
             android:layout_height="26dp"
             android:layout_marginEnd="17dp"
             android:layout_marginRight="17dp"
+            android:onClick="@{()-> Presenter.onInviteClick()}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -233,6 +234,46 @@
             app:srcCompat="@drawable/next_arrow" />
     </android.support.constraint.ConstraintLayout>
 
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/constraintLayout14"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="11dp"
+        android:background="@drawable/box7"
+        android:onClick="@{()-> Presenter.onLogoutClick()}"
+        app:layout_constraintEnd_toEndOf="@+id/constraintLayout10"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/constraintLayout10"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout13">
+
+        <TextView
+            android:id="@+id/textView22"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="17dp"
+            android:layout_marginLeft="17dp"
+            android:fontFamily="@font/malgunfont"
+            android:includeFontPadding="false"
+            android:text="로그아웃"
+            android:textColor="#2a2a2a"
+            android:textSize="13.71dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/imageView11"
+            android:layout_width="9dp"
+            android:layout_height="26dp"
+            android:layout_marginEnd="17dp"
+            android:layout_marginRight="17dp"
+            android:onClick="@{()-> Presenter.onLogoutClick()}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/next_arrow" />
+    </android.support.constraint.ConstraintLayout>
+
     <TextView
         android:id="@+id/textView32"
         android:layout_width="wrap_content"
@@ -243,8 +284,8 @@
         android:text="Version 1.0.3"
         android:textColor="#0f69ff"
         android:textSize="12.6dp"
-        app:layout_constraintStart_toStartOf="@+id/constraintLayout13"
-        app:layout_constraintTop_toBottomOf="@+id/constraintLayout13" />
+        app:layout_constraintStart_toStartOf="@+id/constraintLayout14"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout14" />
 
     <TextView
         android:id="@+id/textView33"

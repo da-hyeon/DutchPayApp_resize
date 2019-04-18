@@ -101,7 +101,7 @@ public class MainActivity extends BaseActivity implements MainActivityContract.V
 
         //공지사항 버튼
         mBinding.navigationView.llNotice.setOnClickListener(v ->
-                {}
+                {mPresenter.clickNotice();}
         );
 
         //이용안내 버튼

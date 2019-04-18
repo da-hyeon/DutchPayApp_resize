@@ -26,6 +26,7 @@ import com.dutch.hdh.dutchpayapp.ui.mygroup.edit.MyGroup_EditFragment;
 import com.dutch.hdh.dutchpayapp.ui.mygroup.main.MyGroup_MainFragment;
 import com.dutch.hdh.dutchpayapp.ui.mygroup.telephonedirectory.MyGroup_TelephoneDirectoryFragment;
 import com.dutch.hdh.dutchpayapp.ui.mypage.main.MyPage_MainFragment;
+import com.dutch.hdh.dutchpayapp.ui.notice.NoticeFragment;
 import com.dutch.hdh.dutchpayapp.ui.payment_password.PaymentPasswordFragment;
 import com.dutch.hdh.dutchpayapp.ui.personal_payment.main.PersonalPayment_MainFragment;
 import com.dutch.hdh.dutchpayapp.ui.personal_payment.scan.PersonalPayment_ScanFragment;
@@ -535,6 +536,14 @@ public class MainActivityPresenter implements MainActivityContract.Presenter {
     @Override
     public void clickNotice() {
 
+        //프래그먼트 이동
+        FragmentTransaction fragmentTransaction = mFragmentManager.beginTransaction();
+        fragmentTransaction.setCustomAnimations(R.anim.fade_in, 0, 0, R.anim.fade_out);
+
+        NoticeFragment noticeFragment = new NoticeFragment();
+        fragmentTransaction.replace(R.id.flFragmentContainer, noticeFragment, NoticeFragment.class.getName());
+        fragmentTransaction.addToBackStack(NoticeFragment.class.getName());
+        fragmentTransaction.commit();
     }
 
     /**

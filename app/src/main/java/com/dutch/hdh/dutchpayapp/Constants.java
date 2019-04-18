@@ -30,10 +30,13 @@ public class Constants {
     //PaymentDialog -> PaymentPasswordFragment
     public static final String PRODUCT_CODE = "productCode";
     public static final String PRODUCT_AMOUNT = "productAmount";
+<<<<<<< HEAD
 
     //DutchpayNewConfirmFragment -> PaymentPasswordFragment
     public static final String PAYMENT_INFO = "dutchpayInfo";
     public static final String PAYMENT_LIST_JSON = "dutchpayGroupJson";
+=======
+>>>>>>> 06bfa0f6ad14a9fdd791782dd66798315bccb48e
 
 
     /**
@@ -44,6 +47,13 @@ public class Constants {
     public static final String ACCOUNT_NUMBER = "accountNumber";
 
 
+<<<<<<< HEAD
+=======
+    //DutchpayNewConfirmFragment -> PaymentPasswordFragment
+    public static final String PAYMENT_INFO = "dutchpayInfo";
+    public static final String PAYMENT_LIST_JSON = "dutchpayGroupJson";
+
+>>>>>>> 06bfa0f6ad14a9fdd791782dd66798315bccb48e
     /**
      * API URL
      */
