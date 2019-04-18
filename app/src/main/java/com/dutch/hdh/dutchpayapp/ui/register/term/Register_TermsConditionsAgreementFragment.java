@@ -22,8 +22,9 @@ public class Register_TermsConditionsAgreementFragment extends BaseFragment impl
     private Register_TermsConditionsAgreementPresenter mPresenter;
 
     private CheckBox mTermsConditions[];
-    private ImageView mAllView[];
-    private View mView[];
+    private ImageView mAllViewImage[];
+    private View mTermView[];
+    private View mAllView[];
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
@@ -53,15 +54,16 @@ public class Register_TermsConditionsAgreementFragment extends BaseFragment impl
         }
 
         //약관 동의 클릭
-        for(int i  = 0 ; i < mView.length; i++){
+        for(int i  = 0 ; i < mTermView.length; i++){
             int finalI = i;
-            mView[i].setOnClickListener(v->{
+            mTermView[i].setOnClickListener(v->{
                     //클릭처리
                 mTermsConditions[finalI].setChecked(!mTermsConditions[finalI].isChecked());
                 mPresenter.clickTOS(finalI, mTermsConditions[finalI].isChecked());
             });
         }
 
+        //전체보기 클릭
         for(int i = 0; i < mAllView.length; i++){
             int finalI = i;
             mAllView[i].setOnClickListener(v ->
@@ -94,7 +96,7 @@ public class Register_TermsConditionsAgreementFragment extends BaseFragment impl
         };
 
 
-        mAllView = new ImageView[]{
+        mAllViewImage = new ImageView[]{
                 mBinding.viewAll1,
                 mBinding.viewAll2,
                 mBinding.viewAll3,
@@ -103,7 +105,16 @@ public class Register_TermsConditionsAgreementFragment extends BaseFragment impl
                 mBinding.viewAll6,
         };
 
-        mView = new View[]{
+        mAllView = new View[]{
+                mBinding.vAllView1,
+                mBinding.vAllView2,
+                mBinding.vAllView3,
+                mBinding.vAllView4,
+                mBinding.vAllView5,
+                mBinding.vAllView6
+        };
+
+        mTermView = new View[]{
                 mBinding.vAgreeTerm1,
                 mBinding.vAgreeTerm2,
                 mBinding.vAgreeTerm3,
@@ -137,7 +148,7 @@ public class Register_TermsConditionsAgreementFragment extends BaseFragment impl
 
     @Override
     public void changeAllView(int index, int id) {
-        mAllView[index].setImageResource(id);
+        mAllViewImage[index].setImageResource(id);
     }
 
     @Override

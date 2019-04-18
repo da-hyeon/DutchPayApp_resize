@@ -27,7 +27,6 @@
             android:theme="@style/AppTheme.FullScreen.Transparent"
             android:windowSoftInputMode="adjustNothing"
             tools:replace="screenOrientation">
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -77,20 +76,19 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.FullScreen.Transparent"
             android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
-
         <activity
             android:name=".ui.find.email.FindEmailActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.FullScreen.Transparent"
             android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
-
         <activity
             android:name=".ui.find.password.FindPasswordActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.FullScreen.Transparent"
             android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
+        <activity android:name=".ui.intro.IntroActivity"></activity>
     </application>
 
 </manifest>

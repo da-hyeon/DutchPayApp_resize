@@ -31,6 +31,9 @@ public class UserInfo {
     @SerializedName("myPoint")
     private int userMoney;
 
+    @SerializedName("message")
+    private String message;
+
     private boolean userState;
 
     public String getUserCode() {
@@ -111,5 +114,13 @@ public class UserInfo {
 
     public void setUserMoney(int userMoney) {
         this.userMoney = userMoney;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
     }
 }

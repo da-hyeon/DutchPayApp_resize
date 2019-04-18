@@ -35,6 +35,11 @@ public class FindPasswordActivity extends BaseActivity implements FindPasswordCo
         mBinding.btOK.setOnClickListener(v->
                 mPresenter.clickOKButton(mEditTextArray)
         );
+
+        //인증번호요청 클릭
+        mBinding.btAuthNumber.setOnClickListener(v->
+                mPresenter.clickAuthNumber(mBinding.etMyPhoneNumber.getText().toString())
+        );
     }
 
     /**

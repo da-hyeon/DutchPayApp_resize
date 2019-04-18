@@ -7,6 +7,7 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 
+import com.dutch.hdh.dutchpayapp.Constants;
 import com.dutch.hdh.dutchpayapp.MyApplication;
 import com.dutch.hdh.dutchpayapp.R;
 import com.dutch.hdh.dutchpayapp.data.db.UserInfo;
@@ -58,8 +59,12 @@ public class LoginPresenter implements LoginContract.Presenter {
                 public void onResponse(@NonNull Call<UserInfo> call, @NonNull Response<UserInfo> response) {
                     if (response.body() != null) {
                         mMyApplication.setUserInfo(response.body());
-                        mMyApplication.getUserInfo().setUserState(true);
-                        mView.showSuccessDialog(mMyApplication.getUserInfo().getUserName()+"님 환영합니다.");
+                        if(mMyApplication.getUserInfo().getMessage() == null) {
+                            mMyApplication.getUserInfo().setUserState(true);
+                            mView.showSuccessDialog(mMyApplication.getUserInfo().getUserName() + "님 환영합니다.");
+                        } else {
+                            mView.showFailDialog("해당 아이디는 탈퇴처리 되었습니다.");
+                        }
                     } else {
                         mView.showFailDialog("아이디와 비밀번호를 확인해주세요.");
                     }

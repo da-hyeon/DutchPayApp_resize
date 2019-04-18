@@ -13,5 +13,6 @@ public interface FindPasswordContract {
     interface Presenter {
         void clickCancel();
         void clickOKButton(EditText[] mEditTextArray);
+        void clickAuthNumber(String PhoneNumber);
     }
 }

@@ -1,18 +1,15 @@
 package com.dutch.hdh.dutchpayapp;
 
-import android.widget.ImageView;
-
 public class Constants {
 
     /**
-     * IMAGE BASE URL
-     * */
-    public static final String BASE_IMAGE_URL = "http://dutchkor02.cafe24.com/image/";
+     * ErrorCode
+     */
+    public static final String USER_WITHDRAWAL = "withdrawal"; //탈퇴한 회원 Msg
 
     /**
      * API URL
      */
-
     public static final String USER_REGISTER_REQUEST_URL = "dutchpay_register3.php"; //회원가입 요청
 
     public static final String CREATE_GROUP_REQUEST_URL = "dutchpay_groupapplication.php"; //그룹생성 요청
@@ -27,6 +24,11 @@ public class Constants {
     /**
      * Bundle ID
      */
+    //PaymentDialog -> PaymentPasswordFragment
+    public static final String PRODUCT_CODE = "productCode";
+    public static final String PRODUCT_AMOUNT = "productAmount";
+    public static final String ENTRANCE_PATH = "entrancePath";
+
 
     /**
      * Extra ID
@@ -34,6 +36,7 @@ public class Constants {
     //SelectRefundAcountActivity -> WithdrawalActivity
     public static final String ACCOUNT_TYPE_CODE = "accountTypeCode";
     public static final String ACCOUNT_NUMBER = "accountNumber";
+
 
     //PaymentDialog + DutchpayNewConfirmFragment -> PaymentPasswordFragment
     public static final String ENTRANCE_PATH = "entrancePath";
@@ -51,7 +54,7 @@ public class Constants {
      */
     public static final String IMAGE_URL = "image/";                                                //이미지 경로 URl
 
-    public static final String USER_LOGIN_REQUEST_URL = "dutchpay_login.php";                       //로그인 요청
+    public static final String USER_LOGIN_REQUEST_URL = "dutchpay_login1.php";                       //로그인 요청
 
     public static final String DUTCHPAY_CARD_COMPANY_SELECT = "dutchpay_cardselect.php"; //등록할 카드회사 목록 가져오기
     public static final String DUTCHPAY_CARD_REGISTER = "dutchpay_cardregister.php"; //카드등록
@@ -61,7 +64,6 @@ public class Constants {
     public static final String DUTCHPAY_HISTORY_REQUEST_URL = "dutchpay_dutchpaytotallist.php"; //더치페이 내역 요청
     public static final String DUTCHPAY_DETAIL_REQUEST_URL = "dutchpay_dutchpaydetail.php"; //더치페이 내역 상세 요청
     public static final String DUTCHPAY_NEW_REQUEST_URL = "dutchpay_dutchpay.php"; //더치페이 신설 요청
-
 
     /**
      * Dutchpay State
@@ -224,7 +226,7 @@ public class Constants {
     /**
      * 더치페이 그룹 아이콘 경로
      */
-    public static int groupIconID(int num){
+    public static int groupIconID(int num) {
         switch (num) {
             case 0:
                 return R.drawable.group_icon01;
@@ -239,7 +241,7 @@ public class Constants {
             case 5:
                 return R.drawable.group_icon06;
             default:
-                return  R.drawable.group_icon01;
+                return R.drawable.group_icon01;
         }
     }
 }

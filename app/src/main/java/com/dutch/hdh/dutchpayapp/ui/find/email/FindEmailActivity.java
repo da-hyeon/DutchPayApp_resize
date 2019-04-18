@@ -33,6 +33,11 @@ public class FindEmailActivity extends BaseActivity implements FindEmailContract
         mBinding.btOK.setOnClickListener(v ->
                 mPresenter.clickOKButton(mEditTextArray)
         );
+
+        //인증번호요청 클릭
+        mBinding.btAuthNumber.setOnClickListener(v->
+            mPresenter.clickAuthNumber(mBinding.etPhoneNumber.getText().toString())
+        );
     }
 
     /**

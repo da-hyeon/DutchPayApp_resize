@@ -27,7 +27,7 @@ public class MainFragmentPresenter implements MainFragmentContract.Presenter {
     private Context mContext;
     private FragmentManager mFragmentManager;
     private Activity mActivity;
-    private MyApplication myApplication;
+    private MyApplication mMyApplication;
     private EventImageSliderAdapter mEventImageSliderAdapter;
     private EventList eventList;
 
@@ -37,7 +37,7 @@ public class MainFragmentPresenter implements MainFragmentContract.Presenter {
         this.mFragmentManager = mFragmentManager;
         this.mActivity = mActivity;
         mEventImageSliderAdapter = new EventImageSliderAdapter(mView, mContext, mFragmentManager);
-        myApplication = MyApplication.getInstance();
+        mMyApplication = MyApplication.getInstance();
     }
 
     /**
@@ -45,7 +45,7 @@ public class MainFragmentPresenter implements MainFragmentContract.Presenter {
      */
     @Override
     public void initLoginState() {
-        mView.showUserInfo(myApplication.getUserInfo().getUserName(), myApplication.getUserInfo().getUserMoney(), myApplication.getUserInfo().isUserState());
+        mView.showUserInfo(mMyApplication.getUserInfo().getUserName(), mMyApplication.getUserInfo().getUserMoney(), mMyApplication.getUserInfo().isUserState());
     }
 
     /**
@@ -53,7 +53,7 @@ public class MainFragmentPresenter implements MainFragmentContract.Presenter {
      */
     @Override
     public void onResume() {
-        mView.changeUserMoney(myApplication.getUserInfo().getUserMoney());
+        mView.changeUserMoney(mMyApplication.getUserInfo().getUserMoney());
     }
 
     /**
@@ -97,7 +97,12 @@ public class MainFragmentPresenter implements MainFragmentContract.Presenter {
      * 개인결제 시작하기 클릭 이벤트 처리
      */
     @Override
-    public void clickSolopay() {
+    public void clickPersonalPaymemt() {
+        //로그인 체크
+        if(!mMyApplication.getUserInfo().isUserState()){
+            mView.showFailDialog("실패" , "로그인을 해주세요.");
+            return;
+        }
 
         //프래그먼트 이동
         FragmentTransaction fragmentTransaction = mFragmentManager.beginTransaction();
@@ -112,9 +117,9 @@ public class MainFragmentPresenter implements MainFragmentContract.Presenter {
      * 더치페이 시작하기 클릭 이벤트 처리
      */
     @Override
-    public void clickDutchpay() {
+    public void clickDutchPayment() {
         //로그인 체크
-        if(!myApplication.getUserInfo().isUserState()){
+        if(!mMyApplication.getUserInfo().isUserState()){
             mView.showFailDialog("실패" , "로그인을 해주세요.");
             return;
         }
