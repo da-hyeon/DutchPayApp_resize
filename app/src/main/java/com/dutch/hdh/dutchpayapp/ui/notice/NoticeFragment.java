@@ -53,7 +53,7 @@ public class NoticeFragment extends BaseFragment {
         mWebSettings.setJavaScriptEnabled(true); //자바스크립트 허용
         mWebSettings.setLoadWithOverviewMode(true); //스크린 크기 맞춤
 
-        //mBinding.wvNotice.loadUrl("");
+        mBinding.wvNotice.loadUrl("http://dutchkor02.cafe24.com/dutchpay_notice.php");
 
         return mBinding.getRoot();
     }

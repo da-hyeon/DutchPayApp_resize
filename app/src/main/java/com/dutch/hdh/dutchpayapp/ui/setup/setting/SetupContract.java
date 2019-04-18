@@ -12,5 +12,13 @@ public interface SetupContract {
 
     interface Presenter{
 
+        //클릭
+        void autoOnClick();
+        void autoOffClick();
+        void pushOnClick();
+        void pushOffClick();
+        void marketingOnClick();
+        void marketingOffClick();
+
     }
 }
