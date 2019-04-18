@@ -40,6 +40,8 @@ public class Register_TermsConditionsAgreementFragment extends BaseFragment impl
         //전체동의 클릭
         mBinding.vAgreeAllTerm.setOnClickListener(v->{
             //클릭처리
+            mBinding.cbCompleteAgreement.setChecked(!mBinding.cbCompleteAgreement.isChecked());
+            mPresenter.clickAllTOS(mBinding.cbCompleteAgreement.isChecked());
         });
 
         //약관 동의 클릭
@@ -55,6 +57,8 @@ public class Register_TermsConditionsAgreementFragment extends BaseFragment impl
             int finalI = i;
             mView[i].setOnClickListener(v->{
                     //클릭처리
+                mTermsConditions[finalI].setChecked(!mTermsConditions[finalI].isChecked());
+                mPresenter.clickTOS(finalI, mTermsConditions[finalI].isChecked());
             });
         }
 
