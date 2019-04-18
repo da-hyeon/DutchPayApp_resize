@@ -16,5 +16,4 @@ public class BaseActivityPresenter implements BaseActivityContract.Presenter {
         this.mContext = mContext;
         this.mFragmentManager = mFragmentManager;
     }
-
 }

@@ -38,7 +38,6 @@ public class CardSelectView extends LinearLayout {
     }
 
     private void init() {
-//        Log.e("테스트", mCardListResultArrayList.toString());
         mCardListAdapter = new CardSelectListAdapter(mContext, mCardListResultArrayList);
         mBinding.lvCardSelect.setAdapter(mCardListAdapter);
         mBinding.lvCardSelect.setOnItemClickListener(new AdapterView.OnItemClickListener() {

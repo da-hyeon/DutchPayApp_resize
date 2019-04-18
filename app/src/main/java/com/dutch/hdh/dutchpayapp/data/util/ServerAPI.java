@@ -1,10 +1,13 @@
 package com.dutch.hdh.dutchpayapp.data.util;
 
 import com.dutch.hdh.dutchpayapp.Constants;
+import com.dutch.hdh.dutchpayapp.data.db.AccountBankList;
+import com.dutch.hdh.dutchpayapp.data.db.AccountRegisterList;
 import com.dutch.hdh.dutchpayapp.data.db.EventList;
 import com.dutch.hdh.dutchpayapp.data.db.MyGroup;
 import com.dutch.hdh.dutchpayapp.data.db.CardCompanyList;
 import com.dutch.hdh.dutchpayapp.data.db.CardRegisterList;
+import com.dutch.hdh.dutchpayapp.data.db.PayHistoryList;
 import com.dutch.hdh.dutchpayapp.data.db.UserInfo;
 
 import retrofit2.Call;
@@ -27,6 +30,7 @@ public interface ServerAPI {
 
     /**
      * 회원가입 요청
+     *
      * @param userName
      * @param userEmail
      * @param userPassword
@@ -48,6 +52,7 @@ public interface ServerAPI {
 
     /**
      * 그룹생성 요청
+     *
      * @param groupaname
      * @param usercode
      * @param groupcontent
@@ -57,14 +62,15 @@ public interface ServerAPI {
     @FormUrlEncoded
     @POST(Constants.CREATE_GROUP_REQUEST_URL)
     Call<Void> createGroup(
-            @Field("groupaname") String groupaname ,
-            @Field("usercode") String usercode ,
-            @Field("groupcontent") String groupcontent ,
+            @Field("groupaname") String groupaname,
+            @Field("usercode") String usercode,
+            @Field("groupcontent") String groupcontent,
             @Field("peoplenumber") String peoplenumber);
 
 
     /**
      * 그룹목록 요청
+     *
      * @param usercode
      * @return
      */
@@ -73,6 +79,7 @@ public interface ServerAPI {
 
     /**
      * 그룹삭제 요청
+     *
      * @param groupacode
      * @return
      */
@@ -85,8 +92,8 @@ public interface ServerAPI {
     @FormUrlEncoded
     @POST(Constants.UPDATE_GROUP_REQUEST_URL)
     Call<Void> updateGroup(
-            @Field("groupacode") String groupacode ,
-            @Field("groupcontent") String groupcontent ,
+            @Field("groupacode") String groupacode,
+            @Field("groupcontent") String groupcontent,
             @Field("peoplenumber") String peoplenumber);
 
     @GET(Constants.SELECT_EVENT_ONGOING_REQUEST_URL)
@@ -95,10 +102,11 @@ public interface ServerAPI {
     @GET(Constants.SELECT_EVENT_ENDPROGRESS_REQUEST_URL)
     Call<EventList> selectEndProgressEvent();
 
+
     /**
      * 등록할 카드목록가져오기
      */
-    @GET(Constants.DUTCHPAY_CARD_SELECT)
+    @GET(Constants.DUTCHPAY_CARD_COMPANY_SELECT)
     Call<CardCompanyList> getCardSelectList();
 
     /**
@@ -126,6 +134,20 @@ public interface ServerAPI {
 
 
     /**
+     * 대표카드 설정 요청
+     *
+     * @param maincardcode
+     * @param subcardcode
+     */
+    @FormUrlEncoded
+    @POST(Constants.DUTCHPAY_CARD_REPRESENTATIVE_CARD)
+    Call<Void> setCardRepresentativeCard(
+            @Field("maincardcode") String maincardcode,
+            @Field("subcardcode") String subcardcode
+    );
+
+
+    /**
      * 카드삭제 요청
      *
      * @param cardcode
@@ -133,5 +155,136 @@ public interface ServerAPI {
     @GET(Constants.DUTCHPAY_CARD_DELETE)
     Call<Void> setCardDelete(
             @Query("cardcode") String cardcode);
+
+
+    /**
+     * 은행 목록가져오기
+     */
+    @GET(Constants.DUTCHPAY_ACCOUNT_BANK_SELECT)
+    Call<AccountBankList> getBankSelectList();
+
+    /**
+     * 계좌등록 요청
+     *
+     * @param accountno
+     * @param accounttypecode
+     * @param usercode
+     */
+    @FormUrlEncoded
+    @POST(Constants.DUTCHPAY_ACCOUNT_REGISTER)
+    Call<Void> setAccountRegister(
+            @Field("accountno") String accountno,
+            @Field("accounttypecode") String accounttypecode,
+            @Field("usercode") String usercode);
+
+    /**
+     * 등록한 계좌목록 요청
+     *
+     * @param usercode
+     */
+    @GET(Constants.DUTCHPAY_ACCOUNT_REGISTER_SELECT)
+    Call<AccountRegisterList> getAccountRegisterList(
+            @Query("usercode") String usercode);
+
+
+    /**
+     * 대표계좌 설정 요청
+     *
+     * @param mainaccountcode
+     * @param subaccountcode
+     */
+    @FormUrlEncoded
+    @POST(Constants.DUTCHPAY_ACCOUNT_REPRESENTATIVE_ACCOUNT)
+    Call<Void> setAccountRepresentativeCard(
+            @Field("mainaccountcode") String mainaccountcode,
+            @Field("subaccountcode") String subaccountcode
+    );
+
+    /**
+     * 계좌삭제 요청
+     *
+     * @param accountcode
+     */
+    @GET(Constants.DUTCHPAY_ACCOUNT_DELETE)
+    Call<Void> setAccountDelete(
+            @Query("accountcode") String accountcode);
+
+
+    /**
+     * 포인트 보내기
+     *
+     * @param giveamount
+     * @param buttonnumber
+     * @param usercode
+     * @param pointqrcode
+     * @param phonenumber
+     * @param username
+     */
+    @FormUrlEncoded
+    @POST(Constants.DUTCHPAY_POINT_SEND)
+    Call<Void> setPointSend(
+            @Field("giveamount") String giveamount,
+            @Field("buttonnumber") String buttonnumber,
+            @Field("usercode") String usercode,
+            @Field("pointqrcode") String pointqrcode,
+            @Field("phonenumber") String phonenumber,
+            @Field("username") String username
+    );
+
+    /**
+     * 포인트 충전
+     * 상품권 번호로 충전
+     *
+     * @param qrcode
+     */
+    @FormUrlEncoded
+    @POST(Constants.DUTCHPAY_POINT_RECEIVE)
+    Call<Void> getPointSend(
+            @Field("qrcode") String qrcode
+    );
+
+    /**
+     * 1주 사용내역 목록 요청
+     *
+     * @param usercode
+     */
+    @FormUrlEncoded
+    @POST(Constants.DUTCHPAY_PAY_ONE_WEEK)
+    Call<PayHistoryList> getPayOneWeekList(
+            @Field("usercode") String usercode
+    );
+
+    /**
+     * 1달 사용내역 목록 요청
+     *
+     * @param usercode
+     */
+    @FormUrlEncoded
+    @POST(Constants.DUTCHPAY_PAY_ONE_MONTH)
+    Call<PayHistoryList> getPayOneMonthList(
+            @Field("usercode") String usercode
+    );
+
+    /**
+     * 3달 사용내역 목록 요청
+     *
+     * @param usercode
+     */
+    @FormUrlEncoded
+    @POST(Constants.DUTCHPAY_PAY_3_MONTH)
+    Call<PayHistoryList> getPay3MonthList(
+            @Field("usercode") String usercode
+    );
+
+    /**
+     * 전체 사용내역 목록 요청
+     *
+     * @param usercode
+     */
+    @FormUrlEncoded
+    @POST(Constants.DUTCHPAY_PAY_HISTORY)
+    Call<PayHistoryList> getPayHistoryList(
+            @Field("usercode") String usercode
+    );
 
 }

@@ -29,11 +29,13 @@ public class AddCardPresenter implements AddCardContract.Presenter {
     private Context mContext;
     private AddCardContract.View mView;
     private ActivityCardAddBinding mBinding;
+    private MyApplication mMyApplication;
 
     public AddCardPresenter(Context context, AddCardContract.View view, ActivityCardAddBinding activityAddCardBinding) {
         this.mContext = context;
         this.mView = view;
         this.mBinding = activityAddCardBinding;
+        mMyApplication = MyApplication.getInstance();
     }
 
     /**
@@ -64,12 +66,12 @@ public class AddCardPresenter implements AddCardContract.Presenter {
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 Log.e("onTextChanged", "onTextChanged");
 
+
             }
 
             @Override
             public void afterTextChanged(Editable s) {
                 Log.e("afterTextChanged", "afterTextChanged");
-
 
                 switch (maxCount) {
                     case 2:
@@ -113,20 +115,19 @@ public class AddCardPresenter implements AddCardContract.Presenter {
                     .getRestAdapter()
                     .setCardRegister(mBinding.etCardNum1.getText().toString() + mBinding.etCardNum2.getText().toString() + mBinding.etCardNum3.getText().toString() + mBinding.etCardNum4.getText().toString(),
                             cardTypeCode,
-                            Constants.USER_CODE);
+                            mMyApplication.getUserInfo().getUserCode());
 
             cardRegister.enqueue(new Callback<Void>() {
                 @Override
                 public void onResponse(Call<Void> call, Response<Void> response) {
-                    if (response.body() == null) {
-
-                    } else {
-
+                    if (response.isSuccessful()) {
+                        mView.showCommonDialog("알림", "카드등록이 완료되었습니다.", true);
                     }
                 }
 
                 @Override
                 public void onFailure(Call<Void> call, Throwable t) {
+                    mView.showCommonDialog("알림", "카드등록 처리를 하지 못했습니다.", false);
                 }
             });
         }
@@ -139,27 +140,37 @@ public class AddCardPresenter implements AddCardContract.Presenter {
     public boolean cardValidate() {
         if (mBinding.tvCardSelect == null || mBinding.tvCardSelect.getText().toString().trim().isEmpty() ||
                 mBinding.tvCardSelect.getText().toString().trim().isEmpty()) {
-            Toast.makeText(mContext, "카드사를 선택하세요.", Toast.LENGTH_SHORT).show();
+
+            mView.showCommonDialog("알림", "카드사를 선택하세요.", false);
+
             return false;
         }
         if (mBinding.etCardNum1 == null || mBinding.etCardNum1.getText().toString().trim().matches("") ||
                 mBinding.etCardNum2 == null || mBinding.etCardNum2.getText().toString().trim().matches("") ||
                 mBinding.etCardNum3 == null || mBinding.etCardNum3.getText().toString().trim().matches("") ||
                 mBinding.etCardNum4 == null || mBinding.etCardNum4.getText().toString().trim().matches("")) {
-            Toast.makeText(mContext, "카드번호를 입력하세요.", Toast.LENGTH_SHORT).show();
+
+            mView.showCommonDialog("알림", "카드번호를 입력하세요.", false);
+
             return false;
         }
 
         if (mBinding.etCardYear == null || mBinding.etCardYear.getText().toString().trim().matches("")) {
-            Toast.makeText(mContext, "카드년도을 입력하세요.", Toast.LENGTH_SHORT).show();
+
+            mView.showCommonDialog("알림", "카드년도을 입력하세요", false);
+
             return false;
         }
         if (mBinding.etCardMonth == null || mBinding.etCardMonth.getText().toString().trim().matches("")) {
-            Toast.makeText(mContext, "카드월을 입력하세요.", Toast.LENGTH_SHORT).show();
+
+            mView.showCommonDialog("알림", "카드월을 입력하세요.", false);
+
             return false;
         }
         if (mBinding.etCardCVC == null || mBinding.etCardCVC.getText().toString().trim().matches("")) {
-            Toast.makeText(mContext, "카드월을 입력하세요.", Toast.LENGTH_SHORT).show();
+
+            mView.showCommonDialog("알림", "CVC 번호를 입력하세요.", false);
+
             return false;
         }
         return true;

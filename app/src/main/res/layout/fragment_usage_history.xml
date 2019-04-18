@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/layoutBG"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="52.85dp"
+            android:layout_marginLeft="17.14dp"
+            android:layout_marginTop="18.85dp"
+            android:layout_marginRight="17.14dp"
+            android:background="@android:color/white"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10.85dp"
+                android:fontFamily="@font/malgunfont"
+                android:includeFontPadding="false"
+                android:text="My 더치머니"
+                android:textColor="@color/walletFontColor"
+                android:textSize="17.14dp"
+                android:textStyle="bold" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1" />
+
+            <TextView
+                android:id="@+id/tvMyMoney"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/malgunfont"
+                android:includeFontPadding="false"
+                android:text="1,500,000,000"
+                android:textColor="@color/walletSubColor"
+                android:textSize="18dp"
+                android:textStyle="bold" />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10.57dp"
+                android:fontFamily="@font/malgunfont"
+                android:includeFontPadding="false"
+                android:text="원"
+                android:textColor="@color/walletSubColor"
+                android:textSize="14.85dp" />
+
+
+            <ImageView
+                android:id="@+id/ivBalanceManagement"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10.85dp"
+                android:src="@drawable/mywallet1_1" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="17.14dp"
+            android:layout_marginTop="25.42dp"
+            android:layout_marginRight="17.14dp"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_weight="1" />
+
+                <ImageView
+                    android:id="@+id/ivPayAllStatus"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="8dp"
+                    android:src="@drawable/wallet16_1" />
+
+
+                <ImageView
+                    android:id="@+id/ivPayDutchPayStatus"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="8dp"
+                    android:src="@drawable/wallet16_2" />
+
+                <ImageView
+                    android:id="@+id/ivPaySoloPayStatus"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="8dp"
+                    android:src="@drawable/wallet16_3" />
+
+                <ImageView
+                    android:id="@+id/ivPaySendReceiveStatus"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/wallet16_4" />
+
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4.57dp"
+                android:background="@drawable/box8">
+
+                <LinearLayout
+                    android:id="@+id/llWeek"
+                    android:layout_width="0dp"
+                    android:layout_height="26.27dp"
+                    android:layout_weight="1"
+                    android:background="@android:color/white">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:fontFamily="@font/malgunfont"
+                        android:gravity="center"
+                        android:includeFontPadding="false"
+                        android:text="1주"
+                        android:textColor="#2a2a2a"
+                        android:textSize="10.28dp" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="1px"
+                    android:layout_height="match_parent"
+                    android:background="#cecece" />
+
+                <LinearLayout
+
+                    android:id="@+id/llOneMonth"
+                    android:layout_width="0dp"
+                    android:layout_height="26.27dp"
+                    android:layout_weight="1"
+                    android:background="@android:color/white">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:fontFamily="@font/malgunfont"
+                        android:gravity="center"
+                        android:includeFontPadding="false"
+                        android:text="1개월"
+                        android:textColor="#2a2a2a"
+                        android:textSize="10.28dp" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="1px"
+                    android:layout_height="match_parent"
+                    android:background="#cecece" />
+
+                <LinearLayout
+
+                    android:id="@+id/llThreeMonth"
+                    android:layout_width="0dp"
+                    android:layout_height="26.27dp"
+                    android:layout_weight="1"
+                    android:background="@android:color/white">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:fontFamily="@font/malgunfont"
+                        android:gravity="center"
+                        android:includeFontPadding="false"
+                        android:text="3개월"
+                        android:textColor="#2a2a2a"
+                        android:textSize="10.28dp" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="1px"
+                    android:layout_height="match_parent"
+                    android:background="#cecece" />
+
+                <LinearLayout
+
+                    android:id="@+id/llAllDay"
+                    android:layout_width="0dp"
+                    android:layout_height="26.27dp"
+                    android:layout_weight="1"
+                    android:background="@android:color/white">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:fontFamily="@font/malgunfont"
+                        android:gravity="center"
+                        android:includeFontPadding="false"
+                        android:text="전체기간"
+                        android:textColor="#2a2a2a"
+                        android:textSize="10.28dp" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <ListView
+                android:id="@+id/lvUsageHistory"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="11.71dp"
+                android:layout_weight="1"
+                android:divider="@color/SendAndReceiveListDividerColor"
+                android:dividerHeight="1px"
+                android:listSelector="@android:color/transparent"
+                android:scrollbars="none" />
+        </LinearLayout>
+
+
+    </LinearLayout>
+</layout>

@@ -33,6 +33,7 @@ import com.dutch.hdh.dutchpayapp.ui.setup.invite.InviteFragment;
 import com.dutch.hdh.dutchpayapp.ui.setup.setting.SetupFragment;
 import com.dutch.hdh.dutchpayapp.ui.solopay.SoloPayFragment;
 import com.dutch.hdh.dutchpayapp.ui.wallet.mywallet.MyWalletFragment;
+import com.dutch.hdh.dutchpayapp.ui.wallet.sendandreceive.SendReceiveFragment;
 
 import java.util.List;
 
@@ -49,7 +50,6 @@ public class MainActivityPresenter implements MainActivityContract.Presenter {
 
     private MainFragment mMainFragment;
     private LoginFragment mLoginFragment;
-    private MyWalletFragment mMyWalletFragment;
 
     //private ArrayList<SimpleTarget> targetArrayList;
 
@@ -65,7 +65,6 @@ public class MainActivityPresenter implements MainActivityContract.Presenter {
 
         mLoginFragment = new LoginFragment();
         mMainFragment = new MainFragment();
-        mMyWalletFragment = new MyWalletFragment();
 
         mMyApplication = MyApplication.getInstance();
         //targetArrayList = new ArrayList<>();
@@ -80,9 +79,7 @@ public class MainActivityPresenter implements MainActivityContract.Presenter {
             mView.changeTitle("로그인");
             mView.hideBell();
             mView.showExit();
-        }
-
-        else if (getCurrentFragment() instanceof Register_TermsConditionsAgreementFragment ||
+        } else if (getCurrentFragment() instanceof Register_TermsConditionsAgreementFragment ||
                 getCurrentFragment() instanceof Register_ViewAllTermsConditionsFragment ||
                 getCurrentFragment() instanceof Register_FormFragment ||
                 getCurrentFragment() instanceof Register_PaymentPasswordFragment) {
@@ -90,111 +87,76 @@ public class MainActivityPresenter implements MainActivityContract.Presenter {
             mView.hideBell();
             mView.showExit();
 
-        }
-
-        else if (getCurrentFragment() instanceof Register_SuccessFragment) {
+        } else if (getCurrentFragment() instanceof Register_SuccessFragment) {
             mView.changeTitle("회원가입 완료");
 
-        }
-
-        else if (getCurrentFragment() instanceof SoloPayFragment) {
+        } else if (getCurrentFragment() instanceof SoloPayFragment) {
             mView.changeTitle("결제");
             mView.hideBell();
             mView.showExit();
-        }
-
-        else if (getCurrentFragment() instanceof DutchpayStartFragment) {
+        } else if (getCurrentFragment() instanceof DutchpayStartFragment) {
             mView.changeTitle("더치페이");
             mView.hideBell();
             mView.showExit();
-        }
-
-        else if (getCurrentFragment() instanceof DutchpayNewFragment) {
+        } else if (getCurrentFragment() instanceof DutchpayNewFragment) {
             mView.changeTitle("신규 더치페이");
-        }
-
-        else if (getCurrentFragment() instanceof DutchpayDetailFragment) {
+        } else if (getCurrentFragment() instanceof DutchpayDetailFragment) {
             mView.changeTitle("더치페이");
-        }
-
-        else if (getCurrentFragment() instanceof DutchpayPhotoFragment) {
+        } else if (getCurrentFragment() instanceof DutchpayPhotoFragment) {
             mView.changeTitle("더치페이 사진");
-        }
-
-        else if(getCurrentFragment() instanceof Event_MainFragment){
+        } else if (getCurrentFragment() instanceof Event_MainFragment) {
             mView.changeTitle("이벤트");
             mView.hideBell();
             mView.showExit();
-        }
-
-        else if(getCurrentFragment() instanceof MyPage_MainFragment){
+        } else if (getCurrentFragment() instanceof MyPage_MainFragment) {
             mView.changeTitle("내정보");
             mView.hideBell();
             mView.showExit();
-        }
-
-        else if(getCurrentFragment() instanceof MyGroup_MainFragment){
+        } else if (getCurrentFragment() instanceof MyGroup_MainFragment) {
             mView.changeTitle("My 그룹");
             mView.hideBell();
             mView.showExit();
-        }
-
-        else if(getCurrentFragment() instanceof MyGroup_EditFragment){
-            if(mMyApplication.entranceGroupPath) {
+        } else if (getCurrentFragment() instanceof MyGroup_EditFragment) {
+            if (mMyApplication.entranceGroupPath) {
                 mView.changeTitle("My 그룹 편집");
             } else {
                 mView.changeTitle("My 그룹 신규추가");
             }
             mView.hideBell();
             mView.showExit();
-        }
-
-        else if(getCurrentFragment() instanceof MyGroup_TelephoneDirectoryFragment){
+        } else if (getCurrentFragment() instanceof MyGroup_TelephoneDirectoryFragment) {
             mView.changeTitle("전화부호부");
             mView.hideBell();
             mView.showExit();
-        }
-
-
-        else if (getCurrentFragment() instanceof InfoFragment) {
+        } else if (getCurrentFragment() instanceof InfoFragment) {
             mView.changeTitle("이용안내");
             mView.hideBell();
             mView.showExit();
-        }
-
-        else if (getCurrentFragment() instanceof CustomerFragment) {
+        } else if (getCurrentFragment() instanceof CustomerFragment) {
             mView.changeTitle("고객센터");
             mView.hideBell();
             mView.showExit();
-        }
-
-        else if (getCurrentFragment() instanceof MyWalletFragment) {
+        } else if (getCurrentFragment() instanceof MyWalletFragment) {
             mView.changeTitle("My 지갑");
             mView.hideBell();
             mView.showExit();
-        }
-
-        else if (getCurrentFragment() instanceof DutchpayNewFragment) {
+        } else if (getCurrentFragment() instanceof SendReceiveFragment) {
+            mView.changeTitle("주고받기");
+            mView.hideBell();
+            mView.showExit();
+        } else if (getCurrentFragment() instanceof DutchpayNewFragment) {
             mView.changeTitle("신규 더치페이");
-        }
-
-        else if (getCurrentFragment() instanceof DutchpayDetailFragment) {
+        } else if (getCurrentFragment() instanceof DutchpayDetailFragment) {
             mView.changeTitle("더치페이");
-        }
-
-        else if (getCurrentFragment() instanceof SetupFragment) {
+        } else if (getCurrentFragment() instanceof SetupFragment) {
             mView.changeTitle("설정");
             mView.hideBell();
             mView.showExit();
-        }
-
-        else if (getCurrentFragment() instanceof InviteFragment) {
+        } else if (getCurrentFragment() instanceof InviteFragment) {
             mView.changeTitle("친구초대");
             mView.hideBell();
             mView.showExit();
-        }
-
-        else if (getCurrentFragment() instanceof MainFragment) {
+        } else if (getCurrentFragment() instanceof MainFragment) {
             initLoginState();
             mView.changeTitle("");
             mView.showBell();
@@ -500,11 +462,22 @@ public class MainActivityPresenter implements MainActivityContract.Presenter {
     @Override
     public void clickMyWallet() {
         mView.hideDrawerLayout();
+
+        if (getCurrentFragment() instanceof MyWalletFragment)
+            return;
+
+
+        if (!mMyApplication.getUserInfo().isUserState()) {
+            mView.showFailDialog("실패", "로그인을 해주세요.");
+            return;
+        }
+
         setDefaultMainStack();
         //프래그먼트 이동
+        MyWalletFragment myWalletFragment = new MyWalletFragment();
         FragmentTransaction fragmentTransaction = mFragmentManager.beginTransaction();
         fragmentTransaction.setCustomAnimations(R.anim.fade_in, 0, 0, R.anim.fade_out);
-        fragmentTransaction.replace(R.id.flFragmentContainer, mMyWalletFragment, MyWalletFragment.class.getName());
+        fragmentTransaction.replace(R.id.flFragmentContainer, myWalletFragment, MyWalletFragment.class.getName());
         fragmentTransaction.addToBackStack(MyWalletFragment.class.getName());
         fragmentTransaction.commit();
     }

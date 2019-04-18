@@ -54,7 +54,6 @@
             android:theme="@style/AppTheme.FullScreen.Transparent"
             android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
 
-
         <activity
             android:name=".ui.wallet.managementcard.ManagementCardActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"
@@ -62,6 +61,19 @@
             android:theme="@style/AppTheme.FullScreen.Transparent"
             android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
 
+        <activity
+            android:name=".ui.wallet.myaccount.MyAccountActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.FullScreen.Transparent"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
+
+        <activity
+            android:name=".ui.wallet.addaccount.AddAccountActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.FullScreen.Transparent"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
 
     </application>
 

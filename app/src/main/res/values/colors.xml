@@ -10,6 +10,7 @@
 
     <color name="buttonDefault">#e0e0e0</color>
     <color name="buttonSelect">#0f69fe</color>
+    <color name="buttonUnSelect">#5f5f5f</color>
 
 
     <!--Top Bar Color-->
@@ -35,6 +36,21 @@
     <color name="textSelect">#ffffff</color>
     <color name="textDefault">#5f5f5f</color>
 
+
+    <!--Dialog Common Color-->
+    <color name="dialogCommonTitleFontColor">#101010</color>
+    <color name="dialogCommonContentFontColor">#101010</color>
+
+    <!--SendAndReceive Color-->
+    <color name="SendAndReceiveFontColor">#2a2a2a</color>
+    <color name="SendAndReceiveListDividerColor">#f3f2f2</color>
+    <color name="SendAndReceiveListContentColor">#acacac</color>
+    <color name="SendAndReceiveListPriceColor">#0f69ff</color>
+
+
+    <!--PayUsageHistoryColor-->
+    <color name="PayUsageTabSelectColor">#cfcfcf</color>
+
     <!--CardListColor-->
     <color name="hanaCardColor">#288479</color>
     <color name="kbCardColor">#f7b500</color>
@@ -42,4 +58,6 @@
     <color name="bcCardColor">#ea1d24</color>
     <color name="hyundaiCardColor">#212021</color>
     <color name="samsungCardColor">#0062aa</color>
+    <color name="nhCardColor">#0165b3</color>
+    <color name="ibkCardColor">#1899d3</color>
 </resources>

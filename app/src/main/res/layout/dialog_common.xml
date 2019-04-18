@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="226.56dp"
+            android:layout_marginLeft="46.57dp"
+            android:layout_marginTop="170.28dp"
+            android:layout_marginRight="46.57dp"
+            android:background="@drawable/round_box">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+
+                    <TextView
+                        android:id="@+id/tvTitle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="26.85dp"
+                        android:layout_marginBottom="6.57dp"
+                        android:fontFamily="@font/malgunfont"
+                        android:includeFontPadding="false"
+                        android:text="Title"
+                        android:textColor="@color/dialogCommonTitleFontColor"
+                        android:textSize="14.85dp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tvContent"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:ellipsize="end"
+                        android:fontFamily="@font/malgunfont"
+                        android:includeFontPadding="false"
+                        android:maxLines="2"
+                        android:text="Content"
+                        android:textColor="@color/dialogCommonContentFontColor"
+                        android:textSize="10.85dp"
+                        android:textStyle="bold" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="58.57dp">
+
+                        <ImageView
+                            android:id="@+id/ivCancel"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+
+                            android:src="@drawable/wallet5_btn1" />
+
+                        <View
+                            android:layout_width="8.28dp"
+                            android:layout_height="wrap_content" />
+
+                        <ImageView
+                            android:id="@+id/ivConfirm"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:src="@drawable/wallet5_btn2" />
+                    </LinearLayout>
+
+
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+</layout>
