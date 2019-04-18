@@ -1,6 +1,9 @@
 package com.dutch.hdh.dutchpayapp.data.util;
 
 import com.dutch.hdh.dutchpayapp.Constants;
+import com.dutch.hdh.dutchpayapp.data.db.CardCompanyList;
+import com.dutch.hdh.dutchpayapp.data.db.CardRegisterList;
+import com.dutch.hdh.dutchpayapp.data.db.Dutchpayhistory;
 import com.dutch.hdh.dutchpayapp.data.db.AccountList;
 import com.dutch.hdh.dutchpayapp.data.db.ErrorCode;
 import com.dutch.hdh.dutchpayapp.data.db.EventList;
@@ -9,6 +12,7 @@ import com.dutch.hdh.dutchpayapp.data.db.Product;
 import com.dutch.hdh.dutchpayapp.data.db.SearchEmail;
 import com.dutch.hdh.dutchpayapp.data.db.SearchPassword;
 import com.dutch.hdh.dutchpayapp.data.db.UserInfo;
+import com.dutch.hdh.dutchpayapp.data.db.UserList;
 
 import retrofit2.Call;
 import retrofit2.http.Field;
@@ -79,6 +83,15 @@ public interface ServerAPI {
     Call<MyGroup> getGroupList(@Query("usercode") String usercode);
 
     /**
+     * 그룹목록 요청2
+     *
+     * @param usercode
+     * @return
+     */
+    @GET(Constants.SELECT_GROUP_REQUEST_URL_2)
+    Call<MyGroup> getGroupList2(@Query("usercode") String usercode);
+
+    /**
      * 그룹삭제 요청
      *
      * @param groupacode
@@ -88,6 +101,47 @@ public interface ServerAPI {
     @POST(Constants.DELETE_GROUP_REQUEST_URL)
     Call<Void> deleteGroup(
             @Field("groupacode") String groupacode);
+
+
+
+    /**
+     * 등록할 카드목록가져오기
+     */
+    @GET(Constants.DUTCHPAY_CARD_COMPANY_SELECT)
+    Call<CardCompanyList> getCardSelectList();
+
+    /**
+     * 카드등록 요청
+     *
+     * @param cardno
+     * @param cardtypecode
+     * @param usercode
+     */
+    @FormUrlEncoded
+    @POST(Constants.DUTCHPAY_CARD_REGISTER)
+    Call<Void> setCardRegister(
+            @Field("cardno") String cardno,
+            @Field("cardtypecode") String cardtypecode,
+            @Field("usercode") String usercode);
+
+    /**
+     * 등록한 카드목록 요청
+     *
+     * @param usercode
+     */
+    @GET(Constants.DUTCHPAY_CARD_REGISTER_SELECT)
+    Call<CardRegisterList> getRegisterCardList(
+            @Query("usercode") String usercode);
+
+
+    /**
+     * 카드삭제 요청
+     *
+     * @param cardcode
+     */
+    @GET(Constants.DUTCHPAY_CARD_DELETE)
+    Call<Void> setCardDelete(
+            @Query("cardcode") String cardcode);
 
 
     /**
@@ -145,6 +199,35 @@ public interface ServerAPI {
     @POST(Constants.CHANGE_PASSWORD_REQUEST_URL)
     Call<Void> changePassword(@Field("password") String password,
                               @Field("usercode") String usercode);
+
+    /**
+     * 더치페이 내역 요청
+     * @param usercode
+     */
+    @FormUrlEncoded
+    @POST(Constants.DUTCHPAY_HISTORY_REQUEST_URL)
+    Call<Dutchpayhistory> getDutchapyHistoryList(@Field("usercode") String usercode);
+
+    /**
+     * 더치페이 시작 요청
+     *
+     * @param usercode
+     * @param dutchpay_title
+     * @param total_price
+     * @param dutchpay_content
+     * @param dutchpay_message
+     * @param user_list1
+     * @return
+     */
+    @FormUrlEncoded
+    @POST(Constants.DUTCHPAY_NEW_REQUEST_URL)
+    Call<Void> setNewDutchpay(
+            @Field("usercode") int usercode,
+            @Field("dutchpay_title") String dutchpay_title,
+            @Field("total_price") int total_price,
+            @Field("dutchpay_content") String dutchpay_content,
+            @Field("dutchpay_message") String dutchpay_message,
+            @Field("user_list1") String user_list1);
 
     /**
      * 전화번호 변경 요청

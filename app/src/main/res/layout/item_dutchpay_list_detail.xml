@@ -57,6 +57,7 @@
 
     <Button
         android:id="@+id/btReRequest"
+        style="?android:attr/borderlessButtonStyle"
         android:layout_width="35dp"
         android:layout_height="12dp"
         android:layout_marginEnd="4dp"
@@ -65,13 +66,14 @@
         android:textColor="#ffffff"
         android:textSize="6dp"
         android:textStyle="bold"
-        style="?android:attr/borderlessButtonStyle"
+        android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="@+id/btCancel"
         app:layout_constraintEnd_toStartOf="@+id/btCancel"
         app:layout_constraintTop_toTopOf="@+id/btCancel" />
 
     <Button
         android:id="@+id/btCancel"
+        style="?android:attr/borderlessButtonStyle"
         android:layout_width="35dp"
         android:layout_height="12dp"
         android:layout_marginEnd="18dp"
@@ -80,7 +82,7 @@
         android:textColor="#ffffff"
         android:textSize="6dp"
         android:textStyle="bold"
-        style="?android:attr/borderlessButtonStyle"
+        android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="@+id/ivState"
         app:layout_constraintEnd_toStartOf="@+id/ivState"
         app:layout_constraintTop_toTopOf="@+id/ivState" />

@@ -5,16 +5,29 @@ import android.databinding.ObservableArrayList;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 
 import com.dutch.hdh.dutchpayapp.Constants;
+import com.dutch.hdh.dutchpayapp.MyApplication;
 import com.dutch.hdh.dutchpayapp.R;
 import com.dutch.hdh.dutchpayapp.adapter.DutchpayStartListAdapter;
+import com.dutch.hdh.dutchpayapp.data.db.Dutchpayhistory;
+import com.dutch.hdh.dutchpayapp.data.db.DutchpaytotalList;
 import com.dutch.hdh.dutchpayapp.ui.dutchpay.startdetail.DutchpayDetailFragment;
 import com.dutch.hdh.dutchpayapp.ui.dutchpay.newdutchpay.DutchpayNewFragment;
+import com.google.gson.Gson;
+
+import java.util.ArrayList;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class DutchpayStartPresenter implements DutchpayStartContract.Presenter{
 
     private DutchpayStartContract.View mView;
+
+    private MyApplication mMyApplication;
 
     private ObservableArrayList<TempStartListModel> mStartList;
     private DutchpayStartListAdapter mAdapter;
@@ -23,16 +36,39 @@ public class DutchpayStartPresenter implements DutchpayStartContract.Presenter{
         this.mView = mView;
         this.mStartList = new ObservableArrayList<>();
         this.mAdapter = new DutchpayStartListAdapter(mStartList,this);
+        this.mMyApplication = MyApplication.getInstance();
     }
 
     @Override
     public void listInit() {
-        //더미 데이터 셋
-        mStartList.add(new TempStartListModel("[BAR 홍대점]","국민카드","50,000원","2019/04/26    18:36:28",1));
-        mStartList.add(new TempStartListModel("[CU 편의점]","신한카드","30,000원","2019/04/20    10:30:06",2));
-        mStartList.add(new TempStartListModel("[우도 음식점]","하나카드","120,000원","2019/04/15    05:12:00",3));
-        mStartList.add(new TempStartListModel("[신사 호프]","하나카드","360,000원","2019/03/31    19:02:07",0));
-        mStartList.add(new TempStartListModel("[북경오리]","하나카드","540.000","2019/03/28    12:06:45",0));
+        //리스트 불러오기
+        Call<Dutchpayhistory> getDutchpayHistoryList = MyApplication
+                .getRestAdapter()
+                .getDutchapyHistoryList(mMyApplication.getUserInfo().getUserCode());
+
+        getDutchpayHistoryList.enqueue(new Callback<Dutchpayhistory>() {
+            @Override
+            public void onResponse(Call<Dutchpayhistory> call, Response<Dutchpayhistory> response) {
+                if(response.body() != null){
+                    ArrayList<DutchpaytotalList> list = response.body().getDutchpayHistoryList();
+                    Gson gson = new Gson();
+                    String a = gson.toJson(response.body());
+                    Log.e("List? ->",a);
+
+                    for(int i=0; i<list.size(); i++){
+                        DutchpaytotalList item = list.get(i);
+                        int status = dutchpayStatusCheck(item);
+
+                        mStartList.add(new TempStartListModel(item.getShop(), String.valueOf(item.getCost()), item.getDate(),status));
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Dutchpayhistory> call, Throwable t) {
+                Log.e("fail",t.getMessage());
+            }
+        });
 
         mAdapter.notifyDataSetChanged();
 
@@ -62,7 +98,7 @@ public class DutchpayStartPresenter implements DutchpayStartContract.Presenter{
         FragmentTransaction fragmentTransaction = fm.beginTransaction();
         fragmentTransaction.setCustomAnimations(R.anim.fade_in, 0, 0, R.anim.fade_out);
 
-        DutchpayNewFragment dutchpayNewFragment = new DutchpayNewFragment();
+        DutchpayNewFragment dutchpayNewFragment = mMyApplication.getDutchpayNewFragment();
         fragmentTransaction.replace(R.id.flFragmentContainer,dutchpayNewFragment, DutchpayNewFragment.class.getName());
         fragmentTransaction.addToBackStack(DutchpayNewFragment.class.getName());
         fragmentTransaction.commit();
@@ -117,4 +153,14 @@ public class DutchpayStartPresenter implements DutchpayStartContract.Presenter{
         mAdapter.setItem(newList);
         mAdapter.notifyDataSetChanged();
     }
+
+    private int dutchpayStatusCheck(DutchpaytotalList item){
+
+        if(item.isCostcomplete()){ //거래완료
+            return Constants.DUTCHPAY_STATE_COMPLETE;
+        } else { //입금대기
+            return Constants.DUTCHPAY_STATE_WAIT;
+        }
+    }
+
 }

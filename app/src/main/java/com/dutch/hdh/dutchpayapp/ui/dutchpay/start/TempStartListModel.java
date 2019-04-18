@@ -7,9 +7,8 @@ public class TempStartListModel {
     String date;
     int state;
 
-    public TempStartListModel(String shop, String card, String cost, String date, int state) {
+    public TempStartListModel(String shop, String cost, String date,int state) {
         this.shop = shop;
-        this.card = card;
         this.cost = cost;
         this.date = date;
         this.state = state;

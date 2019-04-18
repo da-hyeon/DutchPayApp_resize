@@ -4,6 +4,22 @@ import android.widget.ImageView;
 
 public class Constants {
 
+    /**
+     * IMAGE BASE URL
+     * */
+    public static final String BASE_IMAGE_URL = "http://dutchkor02.cafe24.com/image/";
+
+    /**
+     * API URL
+     */
+
+    public static final String USER_REGISTER_REQUEST_URL = "dutchpay_register3.php"; //회원가입 요청
+
+    public static final String CREATE_GROUP_REQUEST_URL = "dutchpay_groupapplication.php"; //그룹생성 요청
+    public static final String SELECT_GROUP_REQUEST_URL = "dutchpay_groupselect.php"; //그룹리스트 요청
+    public static final String SELECT_GROUP_REQUEST_URL_2 = "dutchpay_groupselect1.php"; //그룹리스트(유저 ver) 요청
+    public static final String DELETE_GROUP_REQUEST_URL = "dutchpay_groupdelete.php"; //그룹삭제 요청
+    public static final String UPDATE_GROUP_REQUEST_URL = "dutchpay_groupupdate.php"; //그룹삭제 요청
     public static final String LOG_TAG = "DUTCHPAY_LOG";
     public static final boolean LOG_PRINT = true;
 
@@ -26,13 +42,28 @@ public class Constants {
 
     public static final String USER_LOGIN_REQUEST_URL = "dutchpay_login.php";                       //로그인 요청
 
-    public static final String USER_REGISTER_REQUEST_URL = "dutchpay_register3.php";                //회원가입 요청
+    public static final String DUTCHPAY_CARD_COMPANY_SELECT = "dutchpay_cardselect.php"; //등록할 카드회사 목록 가져오기
+    public static final String DUTCHPAY_CARD_REGISTER = "dutchpay_cardregister.php"; //카드등록
+    public static final String DUTCHPAY_CARD_REGISTER_SELECT = "dutchpay_registeredcardselect.php"; //등록한 카드목록 가져오기
+    public static final String DUTCHPAY_CARD_DELETE = "dutchpay_carddelete.php"; //카드 삭제
 
-    public static final String CREATE_GROUP_REQUEST_URL = "dutchpay_groupapplication.php";          //그룹생성 요청
-    public static final String SELECT_GROUP_REQUEST_URL = "dutchpay_groupselect.php";               //그룹리스트 요청
-    public static final String DELETE_GROUP_REQUEST_URL = "dutchpay_groupdelete.php";               //그룹삭제 요청
-    public static final String UPDATE_GROUP_REQUEST_URL = "dutchpay_groupupdate.php";               //그룹삭제 요청
+    public static final String DUTCHPAY_HISTORY_REQUEST_URL = "dutchpay_dutchpaytotallist.php"; //더치페이 내역 요청
+    public static final String DUTCHPAY_NEW_REQUEST_URL = "dutchpay_dutchpay.php"; //더치페이 신설 요청
 
+
+    /**
+     * Dutchpay State
+     */
+    public static final int DUTCHPAY_STATE_WAIT = 0;
+    public static final int DUTCHPAY_STATE_REQUEST = 1;
+    public static final int DUTCHPAY_STATE_COMPLETE = 2;
+    public static final int DUTCHPAY_STATE_CANCEL = 3;
+
+
+    /**
+     * Test userCode
+     */
+    public static final String USER_CODE = "5";
     public static final String SELECT_EVENT_ONGOING_REQUEST_URL = "dutchpay_event.php";             //진행중인 이벤트 목록 요청
     public static final String SELECT_EVENT_ENDPROGRESS_REQUEST_URL = "dutchpay_endevent.php";      //진행중인 이벤트 목록 요청
 
@@ -177,4 +208,27 @@ public class Constants {
                 return 100;
         }
     }
+
+    /**
+     * 더치페이 그룹 아이콘 경로
+     */
+    public static int groupIconID(int num){
+        switch (num) {
+            case 0:
+                return R.drawable.group_icon01;
+            case 1:
+                return R.drawable.group_icon02;
+            case 2:
+                return R.drawable.group_icon03;
+            case 3:
+                return R.drawable.group_icon04;
+            case 4:
+                return R.drawable.group_icon05;
+            case 5:
+                return R.drawable.group_icon06;
+            default:
+                return  R.drawable.group_icon01;
+        }
+    }
 }
+

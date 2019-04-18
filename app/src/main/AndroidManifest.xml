@@ -25,8 +25,9 @@
             android:launchMode="singleTop"
             android:screenOrientation="fullSensor"
             android:theme="@style/AppTheme.FullScreen.Transparent"
-            android:windowSoftInputMode="adjustNothing"
+            android:windowSoftInputMode="adjustNothing">
             tools:replace="screenOrientation">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

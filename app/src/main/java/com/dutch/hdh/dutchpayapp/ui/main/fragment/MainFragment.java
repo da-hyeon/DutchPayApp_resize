@@ -42,9 +42,9 @@ public class MainFragment extends BaseFragment implements MainFragmentContract.V
         );
 
         //더치페이 시작하기 버튼 클릭
-        mBinding.ivDutchPay.setOnClickListener(v->{
-
-        });
+        mBinding.ivDutchPay.setOnClickListener(v->
+            mPresenter.clickDutchpay()
+        );
 
         //모든 이벤트 보기 버튼 클릭
         mBinding.llAllEvent.setOnClickListener(v->

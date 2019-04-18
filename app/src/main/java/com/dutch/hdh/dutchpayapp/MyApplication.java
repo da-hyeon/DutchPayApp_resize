@@ -7,7 +7,9 @@ import android.content.Context;
 import com.dutch.hdh.dutchpayapp.data.db.PersonalPaymentInformation;
 import com.dutch.hdh.dutchpayapp.data.db.UserInfo;
 import com.dutch.hdh.dutchpayapp.data.util.ServerAPI;
+import com.dutch.hdh.dutchpayapp.ui.dutchpay.newdutchpay.DutchpayNewFragment;
 import com.dutch.hdh.dutchpayapp.ui.dialog.payment_info.Payment_InfomationDialog;
+>>>>>>> dahyun
 import com.dutch.hdh.dutchpayapp.ui.mygroup.edit.MyGroup_EditFragment;
 import com.dutch.hdh.dutchpayapp.ui.register.term.Register_TermsConditionsAgreementFragment;
 
@@ -43,6 +45,9 @@ public class MyApplication extends Application {
 
     private static final String BASE_URL = "http://dutchkor02.cafe24.com/";
 
+    //더치페이 그룹 체크용
+    private boolean dutchpayGroup;
+
 
     //타임아웃
     private static final int CONNECT_TIMEOUT = 15;
@@ -56,6 +61,7 @@ public class MyApplication extends Application {
 
     private Register_TermsConditionsAgreementFragment mRegister_termsConditionsAgreementFragment;
     private MyGroup_EditFragment mMyGroup_EditFragment;
+    private DutchpayNewFragment mDutchpayNewFragment;
     private Payment_InfomationDialog mPayment_InfomationDialog;
 
     private Activity mActivity;
@@ -64,6 +70,8 @@ public class MyApplication extends Application {
     public void onCreate() {
         super.onCreate();
         appInstance = this;
+
+        this.dutchpayGroup = false;
     }
 
     /**
@@ -122,6 +130,15 @@ public class MyApplication extends Application {
     }
 
     /**
+     * DutchpayNewFragment Singleton
+     */
+    public DutchpayNewFragment getDutchpayNewFragment() {
+        if(mDutchpayNewFragment == null)
+            mDutchpayNewFragment = new DutchpayNewFragment();
+		return mDutchpayNewFragment;
+    }
+
+	/**
      * Payment_InfomationDialog Singleton
      */
     public Payment_InfomationDialog getPaymentDialog(Context context) {
@@ -131,8 +148,9 @@ public class MyApplication extends Application {
         return mPayment_InfomationDialog;
     }
 
-
-
+    public void setDutchpayNewFragment(DutchpayNewFragment mDutchpayNewFragment) {
+        this.mDutchpayNewFragment = mDutchpayNewFragment;
+    }
 
     /**
      * getActivity
@@ -229,5 +247,13 @@ public class MyApplication extends Application {
 
     public static String getBaseUrl() {
         return BASE_URL;
+    }
+
+    public boolean isDutchpayGroup() {
+        return dutchpayGroup;
+    }
+
+    public void setDutchpayGroup(boolean dutchpayGroup) {
+        this.dutchpayGroup = dutchpayGroup;
     }
 }
