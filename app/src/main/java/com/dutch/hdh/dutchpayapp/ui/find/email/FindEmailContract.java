@@ -14,5 +14,6 @@ public interface FindEmailContract {
     interface Presenter{
         void clickCancel();
         void clickOKButton(EditText[] mEditTextArray);
+        void clickAuthNumber(String PhoneNumber);
     }
 }

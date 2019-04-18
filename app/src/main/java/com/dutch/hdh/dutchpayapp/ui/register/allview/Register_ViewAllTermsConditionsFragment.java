@@ -30,6 +30,12 @@ public class Register_ViewAllTermsConditionsFragment extends BaseFragment implem
                 mPresenter.clickTOS(mBinding.agreeCheck.isChecked())
         );
 
+        //체크 뷰 클릭
+        mBinding.vAgreeTerm.setOnClickListener(v-> {
+            mBinding.agreeCheck.setChecked(!mBinding.agreeCheck.isChecked());
+            mPresenter.clickTOS(mBinding.agreeCheck.isChecked());
+        });
+
         return mBinding.getRoot();
     }
 

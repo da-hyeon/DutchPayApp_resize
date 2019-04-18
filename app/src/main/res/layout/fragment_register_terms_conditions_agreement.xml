@@ -38,6 +38,7 @@
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView1" />
+
             <!--clickLayout-->
             <View
                 android:id="@+id/vAgreeAllTerm"
@@ -48,13 +49,12 @@
                 app:layout_constraintTop_toTopOf="@+id/linearLayout"
                 app:layout_constraintBottom_toBottomOf="@+id/view"/>
 
-
             <View
                 android:id="@+id/vAgreeTerm1"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 app:layout_constraintLeft_toLeftOf="@+id/linearLayout"
-                app:layout_constraintRight_toRightOf="@+id/linearLayout"
+                app:layout_constraintRight_toLeftOf="@+id/viewAll_1"
                 app:layout_constraintTop_toBottomOf="@+id/view"
                 app:layout_constraintBottom_toTopOf="@+id/vView1"/>
 
@@ -63,7 +63,7 @@
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 app:layout_constraintLeft_toLeftOf="@+id/linearLayout"
-                app:layout_constraintRight_toRightOf="@+id/linearLayout"
+                app:layout_constraintRight_toLeftOf="@+id/viewAll_1"
                 app:layout_constraintTop_toBottomOf="@+id/vView1"
                 app:layout_constraintBottom_toTopOf="@+id/vView2"/>
 
@@ -72,7 +72,7 @@
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 app:layout_constraintLeft_toLeftOf="@+id/linearLayout"
-                app:layout_constraintRight_toRightOf="@+id/linearLayout"
+                app:layout_constraintRight_toLeftOf="@+id/viewAll_1"
                 app:layout_constraintTop_toBottomOf="@+id/vView2"
                 app:layout_constraintBottom_toTopOf="@+id/vView3"/>
 
@@ -81,7 +81,7 @@
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 app:layout_constraintLeft_toLeftOf="@+id/linearLayout"
-                app:layout_constraintRight_toRightOf="@+id/linearLayout"
+                app:layout_constraintRight_toLeftOf="@+id/viewAll_1"
                 app:layout_constraintTop_toBottomOf="@+id/vView3"
                 app:layout_constraintBottom_toTopOf="@+id/vView4"/>
 
@@ -90,7 +90,7 @@
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 app:layout_constraintLeft_toLeftOf="@+id/linearLayout"
-                app:layout_constraintRight_toRightOf="@+id/linearLayout"
+                app:layout_constraintRight_toLeftOf="@+id/viewAll_1"
                 app:layout_constraintTop_toBottomOf="@+id/vView4"
                 app:layout_constraintBottom_toTopOf="@+id/vView5"/>
 
@@ -99,10 +99,66 @@
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 app:layout_constraintLeft_toLeftOf="@+id/linearLayout"
-                app:layout_constraintRight_toRightOf="@+id/linearLayout"
+                app:layout_constraintRight_toLeftOf="@+id/viewAll_1"
                 app:layout_constraintTop_toBottomOf="@+id/vView5"
                 app:layout_constraintBottom_toBottomOf="@+id/linearLayout"/>
             <!---->
+
+            <!--AllView 레이아웃-->
+
+            <View
+                android:id="@+id/vAllView1"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintLeft_toLeftOf="@+id/viewAll_1"
+                app:layout_constraintRight_toRightOf="@+id/linearLayout"
+                app:layout_constraintTop_toBottomOf="@+id/vAgreeAllTerm"
+                app:layout_constraintBottom_toBottomOf="@+id/vView1"/>
+
+            <View
+                android:id="@+id/vAllView2"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintLeft_toLeftOf="@+id/viewAll_1"
+                app:layout_constraintRight_toRightOf="@+id/linearLayout"
+                app:layout_constraintTop_toBottomOf="@+id/vAllView1"
+                app:layout_constraintBottom_toBottomOf="@+id/vView2"/>
+
+            <View
+                android:id="@+id/vAllView3"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintLeft_toLeftOf="@+id/viewAll_1"
+                app:layout_constraintRight_toRightOf="@+id/linearLayout"
+                app:layout_constraintTop_toBottomOf="@+id/vAllView2"
+                app:layout_constraintBottom_toBottomOf="@+id/vView3"/>
+
+            <View
+                android:id="@+id/vAllView4"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintLeft_toLeftOf="@+id/viewAll_1"
+                app:layout_constraintRight_toRightOf="@+id/linearLayout"
+                app:layout_constraintTop_toBottomOf="@+id/vAllView3"
+                app:layout_constraintBottom_toBottomOf="@+id/vView4"/>
+
+            <View
+                android:id="@+id/vAllView5"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintLeft_toLeftOf="@+id/viewAll_1"
+                app:layout_constraintRight_toRightOf="@+id/linearLayout"
+                app:layout_constraintTop_toBottomOf="@+id/vAllView4"
+                app:layout_constraintBottom_toBottomOf="@+id/vView5"/>
+
+            <View
+                android:id="@+id/vAllView6"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintLeft_toLeftOf="@+id/viewAll_1"
+                app:layout_constraintRight_toRightOf="@+id/linearLayout"
+                app:layout_constraintTop_toBottomOf="@+id/vAllView5"
+                app:layout_constraintBottom_toBottomOf="@+id/linearLayout"/>
 
             <!--구분선-->
             <View
@@ -466,6 +522,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="9.7dp"
                 android:scaleType="fitXY"
+                android:visibility="gone"
                 android:src="@drawable/join_join_kakao"
                 app:layout_constraintLeft_toLeftOf="@+id/linearLayout"
                 app:layout_constraintRight_toRightOf="@+id/linearLayout"

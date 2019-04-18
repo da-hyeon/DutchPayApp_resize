@@ -6,6 +6,7 @@ import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.EditText;
 
 import com.dutch.hdh.dutchpayapp.R;
@@ -25,12 +26,20 @@ public class Register_FormFragment extends BaseFragment implements Register_Form
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
         mBinding = DataBindingUtil.inflate(inflater , R.layout.fragment_register_form, container, false);
+
 
         initData();
 
+        //다음 버튼 클릭
         mBinding.btNext.setOnClickListener(v->
                 mPresenter.clickRegister(mRegisterEditText)
+        );
+
+        //인증번호 요청 버튼 클릭
+        mBinding.ibAuthNumber.setOnClickListener(v->
+            mPresenter.clickAuthNumber(mBinding.etPhone.getText().toString())
         );
 
         return mBinding.getRoot();
@@ -54,13 +63,18 @@ public class Register_FormFragment extends BaseFragment implements Register_Form
         mPresenter = new Register_FormPresenter(this , getContext() , Objects.requireNonNull(getActivity()).getSupportFragmentManager() );
     }
 
+    /**
+     * 성공 다이얼로그 보이기
+     * OK = 다이얼로그 닫기
+     */
     @Override
-    public void showDialog(String content) {
-        new KAlertDialog(Objects.requireNonNull(getContext()), KAlertDialog.WARNING_TYPE)
-                .setTitleText("실패")
-                .setContentText(content)
-                .setConfirmText("확인")
-                .setConfirmClickListener(KAlertDialog::dismissWithAnimation)
-                .show();
+    public void showSuccessDialog(String title, String content) {
+        new KAlertDialog(Objects.requireNonNull(getContext()), KAlertDialog.SUCCESS_TYPE)
+        .setTitleText(title)
+        .setContentText(content)
+        .setConfirmText("확인")
+        .setConfirmClickListener(sDialog -> {
+            sDialog.dismissWithAnimation();
+        }).show();
     }
 }

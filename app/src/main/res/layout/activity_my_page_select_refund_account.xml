@@ -163,6 +163,7 @@
             android:textSize="18dp"
             android:inputType="number"
             android:textStyle="bold"
+            android:visibility="gone"
             android:fontFamily="@font/malgunfont"
             android:includeFontPadding="false"/>
 
