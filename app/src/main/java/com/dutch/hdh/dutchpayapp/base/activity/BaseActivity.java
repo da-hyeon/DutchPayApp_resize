@@ -11,6 +11,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 
+import com.dutch.hdh.dutchpayapp.MyApplication;
 import com.dutch.hdh.dutchpayapp.R;
 import com.dutch.hdh.dutchpayapp.data.util.LogUtils;
 import com.kinda.alert.KAlertDialog;
@@ -18,7 +19,7 @@ import com.kinda.alert.KAlertDialog;
 public class BaseActivity extends AppCompatActivity implements BaseActivityContract.View {
 
     private BaseActivityContract.Presenter mPresenter;
-
+    private MyApplication myApplication;
     // Permission
     public static final int PERMISSION = 0x00;
 
@@ -26,8 +27,10 @@ public class BaseActivity extends AppCompatActivity implements BaseActivityContr
     public void onCreate(Bundle savedInstanceState, PersistableBundle persistentState) {
         super.onCreate(savedInstanceState, persistentState);
         mPresenter = new BaseActivityPresenter(this, this, this, getSupportFragmentManager());
+        myApplication = MyApplication.getInstance();
+        myApplication.setActivity(this);
 
-
+        mPresenter.AutoLoginCheck();
     }
 
     @Override
@@ -153,5 +156,13 @@ public class BaseActivity extends AppCompatActivity implements BaseActivityContr
         } catch (IllegalStateException e) {
             LogUtils.e(e);
         }
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        //자동로그인이 켜져 있으면 해당 계정 저장
+
+        //꺼져있으면 해당 네임파일 null
     }
 }

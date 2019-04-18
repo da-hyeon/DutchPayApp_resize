@@ -35,7 +35,7 @@ public class LoginFragment extends BaseFragment implements LoginContract.View{
 
         //로그인버튼 클릭
         mBinding.btnLogin.setOnClickListener(v->
-                    mPresenter.clickLogin(mBinding.editUserID.getText().toString(), mBinding.editUserPW.getText().toString())
+                    mPresenter.clickLogin(mBinding.editUserID.getText().toString(), mBinding.editUserPW.getText().toString() , mBinding.cbAutoLogin.isChecked())
         );
 
         //회원가입 버튼 클릭
@@ -50,6 +50,10 @@ public class LoginFragment extends BaseFragment implements LoginContract.View{
         mBinding.vFindPassword.setOnClickListener(v->
             mPresenter.clickFindPassword()
         );
+
+        mBinding.vAutoLogin.setOnClickListener(v->{
+            mBinding.cbAutoLogin.setChecked(!mBinding.cbAutoLogin.isChecked());
+        });
 
         return mBinding.getRoot();
     }

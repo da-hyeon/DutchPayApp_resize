@@ -24,7 +24,7 @@ public class SetupFragment extends BaseFragment implements SetupContract.View{
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         mBinding = DataBindingUtil.inflate(LayoutInflater.from(container.getContext()), R.layout.fragment_setup,container,false);
         mBinding.setFragment(this);
-        mPresenter = new SetupPresenter(this);
+        mPresenter = new SetupPresenter(this , getActivity(), getFragmentManager());
         mBinding.setPresenter(mPresenter);
 
         mBinding.swAutoLogin.setOnClickListener(v -> {

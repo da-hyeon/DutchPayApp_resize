@@ -13,5 +13,6 @@ public interface PaymentPasswordContract {
         void clickNumber(String numberText);
         void clickDeleteButton();
         void clickOKButton();
+        void clickSuccessDialog();
     }
 }

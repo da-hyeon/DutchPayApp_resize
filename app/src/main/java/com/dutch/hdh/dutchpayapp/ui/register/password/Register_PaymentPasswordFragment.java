@@ -58,7 +58,7 @@ public class Register_PaymentPasswordFragment extends BaseFragment implements Re
      */
     private void initData() {
 
-        mPresenter = new Register_PaymentPasswordPresenter(this , getContext() , getFragmentManager());
+        mPresenter = new Register_PaymentPasswordPresenter(this , getContext() ,getActivity() , getFragmentManager());
 
 
         //숫자데이터

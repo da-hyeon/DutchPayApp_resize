@@ -132,9 +132,11 @@ public class PersonalPayment_MainPresenter implements PersonalPayment_MainContra
                 public void onResponse(@NonNull Call<Product> call, @NonNull Response<Product> response) {
                     if (response.isSuccessful()) {
                         if (response.body() != null) {
-                            Product product = response.body();
+                            MyApplication myApplication = MyApplication.getInstance();
+                            myApplication.setProduct(response.body());
+
                             if (!mMyApplication.getPaymentDialog(mContext).isShowing()) {
-                                mMyApplication.getPaymentDialog(mContext).setDialog(null, mFragmentManager, product.getProductCode(), product.getProductPrice());
+                                mMyApplication.getPaymentDialog(mContext).setDialog(null, mFragmentManager, myApplication.getProduct().getProductCode(), myApplication.getProduct().getProductPrice());
                                 mMyApplication.getPaymentDialog(mContext).show();
                             }
                         } else {

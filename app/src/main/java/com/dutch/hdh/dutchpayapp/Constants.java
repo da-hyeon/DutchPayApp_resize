@@ -2,6 +2,18 @@ package com.dutch.hdh.dutchpayapp;
 
 public class Constants {
 
+
+    /**
+     * SharedPreferences
+     */
+    //File name
+    public static final String  USER_INFOMATION = "userInfo"; //저장된 유저정보 파일이름
+
+    //Data
+    public static final String  USER_ID = "userID"; //저장된 유저ID
+    public static final String  USER_PASSWORD = "userPassword"; //저장된 유저Password
+
+
     /**
      * ErrorCode
      */
@@ -35,12 +47,19 @@ public class Constants {
     public static final String PAYMENT_INFO = "dutchpayInfo";
     public static final String PAYMENT_LIST_JSON = "dutchpayGroupJson";
 
+
     /**
      * Extra ID
      */
     //SelectRefundAcountActivity -> WithdrawalActivity
     public static final String ACCOUNT_TYPE_CODE = "accountTypeCode";
     public static final String ACCOUNT_NUMBER = "accountNumber";
+
+    //PaymentPassword -> ReceiptActivity
+    public static final String PAYMENT_DATE = "date";
+    public static final String PAYMENT_STORE_NAME = "storeName";
+    public static final String PAYMENT_AMOUNT = "amount";
+    public static final String PAYMENT_STORE_LOCATION = "storeLocation";
 
     /**
      * API URL

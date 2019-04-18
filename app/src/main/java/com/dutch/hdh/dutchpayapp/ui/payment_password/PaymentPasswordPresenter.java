@@ -1,6 +1,8 @@
 package com.dutch.hdh.dutchpayapp.ui.payment_password;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentManager;
@@ -8,8 +10,11 @@ import android.util.Log;
 
 import com.dutch.hdh.dutchpayapp.Constants;
 import com.dutch.hdh.dutchpayapp.MyApplication;
+import com.dutch.hdh.dutchpayapp.R;
+import com.dutch.hdh.dutchpayapp.ui.receipt.ReceiptActivity;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collections;
 
 import retrofit2.Call;
@@ -20,6 +25,7 @@ public class PaymentPasswordPresenter implements PaymentPasswordContract.Present
 
     private PaymentPasswordContract.View mView;
     private Context mContext;
+    private Activity mActivity;
     private FragmentManager mFragmentManager;
     private MyApplication mMyApplication;
 
@@ -36,11 +42,12 @@ public class PaymentPasswordPresenter implements PaymentPasswordContract.Present
     //true = 개인결제 , false = 더치페이
     private boolean mPath;
 
-    public PaymentPasswordPresenter(PaymentPasswordContract.View mView, Context mContext, FragmentManager mFragmentManager , Bundle bundle) {
+    public PaymentPasswordPresenter(PaymentPasswordContract.View mView, Context mContext, Activity mActivity , FragmentManager mFragmentManager, Bundle bundle) {
         this.mView = mView;
         this.mContext = mContext;
+        this.mActivity = mActivity;
         this.mFragmentManager = mFragmentManager;
-        if(bundle != null){
+        if (bundle != null) {
             //공용
             mPath = bundle.getBoolean(Constants.ENTRANCE_PATH);
 
@@ -98,7 +105,7 @@ public class PaymentPasswordPresenter implements PaymentPasswordContract.Present
 
     @Override
     public void clickOKButton() {
-        if(isEmpty()) {
+        if (isEmpty()) {
             mView.showFailDialog("실패", "결제 비밀번호는 6자리 입니다.");
         } else {
             if (isSame()) {
@@ -161,7 +168,7 @@ public class PaymentPasswordPresenter implements PaymentPasswordContract.Present
                     setnewDutchpay.enqueue(new Callback<Void>() {
                         @Override
                         public void onResponse(Call<Void> call, Response<Void> response) {
-                            Log.e("response",response.message());
+                            Log.e("response", response.message());
 
                             mView.showSuccessDialog("성공", "결제 완료");
                             mMyApplication.getUserInfo().setUserMoney(mMyApplication.getUserInfo().getUserMoney() - dutchCost);
@@ -178,9 +185,7 @@ public class PaymentPasswordPresenter implements PaymentPasswordContract.Present
                         }
                     });
                 }
-            }
-
-            else {
+            } else {
 
                 mView.showFailDialog("실패", "결제 비밀번호가 틀렸습니다.");
             }
@@ -188,10 +193,33 @@ public class PaymentPasswordPresenter implements PaymentPasswordContract.Present
     }
 
     /**
+     * 다이얼로그 확인버튼
+     */
+    @Override
+    public void clickSuccessDialog() {
+
+        Intent intent = new Intent(mContext, ReceiptActivity.class);
+        mView.setDefaultMainStack();
+        intent.putExtra(Constants.PAYMENT_DATE ,currentTime());
+
+        if (mPath) {
+            intent.putExtra(Constants.PAYMENT_STORE_NAME ,mMyApplication.getProduct().getProductName());
+            intent.putExtra(Constants.PAYMENT_AMOUNT , mMyApplication.getProduct().getProductPrice());
+            intent.putExtra(Constants.PAYMENT_STORE_LOCATION ,mMyApplication.getProduct().getProductAddress());
+
+        } else {
+
+        }
+
+        mContext.startActivity(intent);
+        mActivity.overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+    }
+
+    /**
      * 비밀번호 6자리 입력 조회
      */
-    private boolean isEmpty(){
-        if(mPassword.length() < 6){
+    private boolean isEmpty() {
+        if (mPassword.length() < 6) {
             return true;
         }
         return false;
@@ -200,12 +228,28 @@ public class PaymentPasswordPresenter implements PaymentPasswordContract.Present
     /**
      * 비밀번호가 같은지 조회
      */
-    private boolean isSame(){
-        if(mMyApplication.getUserInfo().getUserEasyPassword().equals(mPassword)){
+    private boolean isSame() {
+        if (mMyApplication.getUserInfo().getUserEasyPassword().equals(mPassword)) {
             return true;
         }
         return false;
     }
 
+    /**
+     * 현재날짜 + 시간 구하기
+     */
+    private String currentTime() {
+        Calendar cal = Calendar.getInstance();
+        //현재 년도, 월, 일
+        int year = cal.get(cal.YEAR);
+        int month = cal.get(cal.MONTH) + 1;
+        int date = cal.get(cal.DATE);
 
+        //현재 (시,분,초)
+        int hour = cal.get(cal.HOUR_OF_DAY);
+        int min = cal.get(cal.MINUTE);
+        int sec = cal.get(cal.SECOND);
+
+        return year + "년 " + month + "월 " + date +"일 " + hour +"시 " + min + "분 " + sec + "초";
+    }
 }
