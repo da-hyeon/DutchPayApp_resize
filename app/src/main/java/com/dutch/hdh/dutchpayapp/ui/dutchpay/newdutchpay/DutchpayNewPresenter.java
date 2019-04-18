@@ -50,7 +50,7 @@ public class DutchpayNewPresenter implements DutchpayNewContract.Presenter {
     private int myCost;
     private int lastCost;
     private int lastMem;
-    private boolean dutchFlag = true;
+    private boolean dutchFlag;
     private Gson gson;
 
     public DutchpayNewPresenter(DutchpayNewContract.View mView) {
@@ -62,6 +62,7 @@ public class DutchpayNewPresenter implements DutchpayNewContract.Presenter {
         this.myCost = 0;
         this.lastCost = -1;
         this.lastMem = -1;
+        this.dutchFlag = true;
         this.gson = new Gson();
     }
 
@@ -167,6 +168,8 @@ public class DutchpayNewPresenter implements DutchpayNewContract.Presenter {
 
     @Override
     public void reDutchpayLogic() {
+        oldCost = oldCost.equals("") ? "0" : oldCost;
+
         int payedcost = 0;
         int cost = Integer.parseInt(oldCost);
 
@@ -304,8 +307,6 @@ public class DutchpayNewPresenter implements DutchpayNewContract.Presenter {
     }
 
     public void onDutchClick(){
-        dutchFlag = true;
-
         mView.setDutchBtColor(true);
         mView.setTypeBtColor(false);
 
@@ -313,17 +314,15 @@ public class DutchpayNewPresenter implements DutchpayNewContract.Presenter {
         dutchpayLogic();
 
         //리스트 내 금액 클릭 금지
-        listEditableSet(dutchFlag);
+        listEditableSet(true);
     }
 
     public void onTypingClick(){
-        dutchFlag = false;
-
         mView.setDutchBtColor(false);
         mView.setTypeBtColor(true);
 
         //리스트 내 금액 클릭 가능
-        listEditableSet(dutchFlag);
+        listEditableSet(false);
         //예외처리
         solopayCheck();
     }

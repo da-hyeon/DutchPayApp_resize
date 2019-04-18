@@ -3,6 +3,7 @@ package com.dutch.hdh.dutchpayapp.data.util;
 import com.dutch.hdh.dutchpayapp.Constants;
 import com.dutch.hdh.dutchpayapp.data.db.CardCompanyList;
 import com.dutch.hdh.dutchpayapp.data.db.CardRegisterList;
+import com.dutch.hdh.dutchpayapp.data.db.DutchpayDetail;
 import com.dutch.hdh.dutchpayapp.data.db.Dutchpayhistory;
 import com.dutch.hdh.dutchpayapp.data.db.AccountList;
 import com.dutch.hdh.dutchpayapp.data.db.ErrorCode;
@@ -207,6 +208,19 @@ public interface ServerAPI {
     @FormUrlEncoded
     @POST(Constants.DUTCHPAY_HISTORY_REQUEST_URL)
     Call<Dutchpayhistory> getDutchapyHistoryList(@Field("usercode") String usercode);
+
+    /**
+     * 더치페이 내역 상세 요청
+     *
+     * @param usercode
+     * @param dutchpaycode
+     * @return
+     */
+    @FormUrlEncoded
+    @POST(Constants.DUTCHPAY_DETAIL_REQUEST_URL)
+    Call<DutchpayDetail> getDutchpayDetail(
+            @Field("usercode") String usercode,
+            @Field("dutchpaycode") int dutchpaycode);
 
     /**
      * 더치페이 시작 요청

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentManager;
+import android.util.Log;
 
 import com.dutch.hdh.dutchpayapp.Constants;
 import com.dutch.hdh.dutchpayapp.MyApplication;
@@ -24,8 +25,13 @@ public class PaymentPasswordPresenter implements PaymentPasswordContract.Present
 
     private String mPassword;
 
+    //개인결제
     private String mProductCode;
     private int mProductAmount;
+
+    //더치페이
+    private ArrayList<String> mDutchInfo;
+    private String mDutchJson;
 
     //true = 개인결제 , false = 더치페이
     private boolean mPath;
@@ -35,9 +41,18 @@ public class PaymentPasswordPresenter implements PaymentPasswordContract.Present
         this.mContext = mContext;
         this.mFragmentManager = mFragmentManager;
         if(bundle != null){
+            //공용
+            mPath = bundle.getBoolean(Constants.ENTRANCE_PATH);
+
+            //개인결제
             mProductCode = bundle.getString(Constants.PRODUCT_CODE);
             mProductAmount = bundle.getInt(Constants.PRODUCT_AMOUNT);
-            mPath = bundle.getBoolean(Constants.ENTRANCE_PATH);
+
+
+            //더치페이
+            mDutchInfo = bundle.getStringArrayList(Constants.PAYMENT_INFO);
+            mDutchJson = bundle.getString(Constants.PAYMENT_LIST_JSON);
+
         }
         mMyApplication = MyApplication.getInstance();
         mPassword = "";
@@ -124,14 +139,50 @@ public class PaymentPasswordPresenter implements PaymentPasswordContract.Present
                             mView.showFailDialog("실패", "서버와 통신할 수 없습니다.");
                         }
                     });
-                } else {
-                    mView.showFailDialog("실패", "결제 비밀번호가 틀렸습니다.");
+                }
+                //입장경로 - 더치페이
+                else {
+                    //데이터 분석
+                    String dutchTitle = mDutchInfo.get(0);
+                    int dutchCost = Integer.parseInt(mDutchInfo.get(3));
+                    String dutchContent = mDutchInfo.get(1);
+                    String dutchMessage = mDutchInfo.get(2);
+
+                    //더치페이 개설 및 금액 결제
+                    Call<Void> setnewDutchpay = MyApplication
+                            .getRestAdapter()
+                            .setNewDutchpay(Integer.parseInt(mMyApplication.getUserInfo().getUserCode()),
+                                    dutchTitle,
+                                    dutchCost,
+                                    dutchContent,
+                                    dutchMessage,
+                                    mDutchJson);
+
+                    setnewDutchpay.enqueue(new Callback<Void>() {
+                        @Override
+                        public void onResponse(Call<Void> call, Response<Void> response) {
+                            Log.e("response",response.message());
+
+                            mView.showSuccessDialog("성공", "결제 완료");
+                            mMyApplication.getUserInfo().setUserMoney(mMyApplication.getUserInfo().getUserMoney() - dutchCost);
+
+                            //더치페이 완료
+                            mMyApplication.setDutchpayGroup(false);
+                            mMyApplication.setDutchpayNewFragment(null);
+                        }
+
+                        @Override
+                        public void onFailure(Call<Void> call, Throwable t) {
+                            //서버통신 오류
+                            mView.showFailDialog("실패", "서버와 통신할 수 없습니다.");
+                        }
+                    });
                 }
             }
-            //입장경로 - 더치페이
-            else {
-                //결제 API 작성부분
 
+            else {
+
+                mView.showFailDialog("실패", "결제 비밀번호가 틀렸습니다.");
             }
         }
     }

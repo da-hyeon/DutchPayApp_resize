@@ -27,7 +27,7 @@ public class DutchpayDetailFragment extends BaseFragment implements DutchpayDeta
         mBinding.setPresenter(mPresenter);
 
         //리스트 초기 생성
-        mPresenter.listInit();
+        mPresenter.listInit(getArguments());
 
         return mBinding.getRoot();
     }
@@ -39,4 +39,10 @@ public class DutchpayDetailFragment extends BaseFragment implements DutchpayDeta
         mBinding.recyclerView2.setAdapter(mPresenter.getmAdapter());
         mBinding.recyclerView2.setLayoutManager(new LinearLayoutManager(getActivity().getApplicationContext()));
     }
+
+    public void setDutchpayTitle(String title) {
+
+    }
+
+
 }

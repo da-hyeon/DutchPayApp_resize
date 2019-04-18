@@ -7,11 +7,14 @@ public class TempStartListModel {
     String date;
     int state;
 
-    public TempStartListModel(String shop, String cost, String date,int state) {
+    int dutchpayid;
+
+    public TempStartListModel(String shop, String cost, String date,int state,int dutchpayid) {
         this.shop = shop;
         this.cost = cost;
         this.date = date;
         this.state = state;
+        this.dutchpayid = dutchpayid;
     }
 
     public String getShop() {
@@ -52,5 +55,9 @@ public class TempStartListModel {
 
     public void setState(int state) {
         this.state = state;
+    }
+
+    public int getDutchpayid() {
+        return dutchpayid;
     }
 }

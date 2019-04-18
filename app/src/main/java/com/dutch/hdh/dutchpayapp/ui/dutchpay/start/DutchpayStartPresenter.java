@@ -2,6 +2,7 @@ package com.dutch.hdh.dutchpayapp.ui.dutchpay.start;
 
 import android.databinding.BindingAdapter;
 import android.databinding.ObservableArrayList;
+import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.RecyclerView;
@@ -59,7 +60,7 @@ public class DutchpayStartPresenter implements DutchpayStartContract.Presenter{
                         DutchpaytotalList item = list.get(i);
                         int status = dutchpayStatusCheck(item);
 
-                        mStartList.add(new TempStartListModel(item.getShop(), String.valueOf(item.getCost()), item.getDate(),status));
+                        mStartList.add(new TempStartListModel(item.getShop(), String.valueOf(item.getCost()), item.getDate(),status,item.getDutchpayid()));
                     }
                 }
             }
@@ -79,16 +80,10 @@ public class DutchpayStartPresenter implements DutchpayStartContract.Presenter{
     //내역 클릭
     @Override
     public void onItemClick(TempStartListModel item) {
-            //임시 이동
-        FragmentManager fm = mView.getFragmentManager();
+       Bundle bundle = new Bundle();
+       bundle.putInt("dutchpayID",item.getDutchpayid());
 
-        FragmentTransaction fragmentTransaction = fm.beginTransaction();
-        fragmentTransaction.setCustomAnimations(R.anim.fade_in, 0, 0, R.anim.fade_out);
-
-        DutchpayDetailFragment dutchpayDetailFragment = new DutchpayDetailFragment();
-        fragmentTransaction.replace(R.id.flFragmentContainer,dutchpayDetailFragment , DutchpayDetailFragment.class.getName());
-        fragmentTransaction.addToBackStack(DutchpayDetailFragment.class.getName());
-        fragmentTransaction.commit();
+       moveToDutchpayDetail(bundle);
     }
 
     //더치페이 새로 시작하기
@@ -97,15 +92,8 @@ public class DutchpayStartPresenter implements DutchpayStartContract.Presenter{
         mMyApplication.setDutchpayGroup(false);
         mMyApplication.setDutchpayNewFragment(null);
 
-        FragmentManager fm = mView.getFragmentManager();
-
-        FragmentTransaction fragmentTransaction = fm.beginTransaction();
-        fragmentTransaction.setCustomAnimations(R.anim.fade_in, 0, 0, R.anim.fade_out);
-
-        DutchpayNewFragment dutchpayNewFragment = mMyApplication.getDutchpayNewFragment();
-        fragmentTransaction.replace(R.id.flFragmentContainer,dutchpayNewFragment, DutchpayNewFragment.class.getName());
-        fragmentTransaction.addToBackStack(DutchpayNewFragment.class.getName());
-        fragmentTransaction.commit();
+        //더페이 시작 페이지로 이동
+        moveToNewDutchpay();
     }
 
     public DutchpayStartListAdapter getmAdapter() {
@@ -167,4 +155,28 @@ public class DutchpayStartPresenter implements DutchpayStartContract.Presenter{
         }
     }
 
+    private void moveToNewDutchpay(){
+        FragmentManager fm = mView.getFragmentManager();
+
+        FragmentTransaction fragmentTransaction = fm.beginTransaction();
+        fragmentTransaction.setCustomAnimations(R.anim.fade_in, 0, 0, R.anim.fade_out);
+
+        DutchpayNewFragment dutchpayNewFragment = mMyApplication.getDutchpayNewFragment();
+        fragmentTransaction.replace(R.id.flFragmentContainer,dutchpayNewFragment, DutchpayNewFragment.class.getName());
+        fragmentTransaction.addToBackStack(DutchpayNewFragment.class.getName());
+        fragmentTransaction.commit();
+    }
+
+    private void moveToDutchpayDetail(Bundle bundle){
+        FragmentManager fm = mView.getFragmentManager();
+
+        FragmentTransaction fragmentTransaction = fm.beginTransaction();
+        fragmentTransaction.setCustomAnimations(R.anim.fade_in, 0, 0, R.anim.fade_out);
+
+        DutchpayDetailFragment dutchpayDetailFragment = new DutchpayDetailFragment();
+        dutchpayDetailFragment.setArguments(bundle);
+        fragmentTransaction.replace(R.id.flFragmentContainer,dutchpayDetailFragment , DutchpayDetailFragment.class.getName());
+        fragmentTransaction.addToBackStack(DutchpayDetailFragment.class.getName());
+        fragmentTransaction.commit();
+    }
 }

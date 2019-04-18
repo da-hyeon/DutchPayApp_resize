@@ -114,22 +114,6 @@ public class DutchpayNewFragment extends BaseFragment implements DutchpayNewCont
                 mPresenter.listInit(getArguments());
             }
         }
-
-        if(mPresenter.isDutchFlag()){ //더치페이 활성화
-           setDutchBtColor(true);
-           setTypeBtColor(false);
-
-            //리스트 내 금액 클릭 금지
-            mPresenter.listEditableSet(mPresenter.isDutchFlag());
-        } else { //직접입력 활성화
-            setDutchBtColor(false);
-            setTypeBtColor(true);
-
-            //리스트 내 금액 클릭 가능
-            mPresenter.listEditableSet(mPresenter.isDutchFlag());
-            //예외처리
-            mPresenter.solopayCheck();
-        }
     }
 
     @Override

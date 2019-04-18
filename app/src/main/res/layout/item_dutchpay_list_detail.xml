@@ -20,12 +20,13 @@
         android:layout_marginStart="14dp"
         android:fontFamily="@font/malgunfont"
         android:includeFontPadding="false"
-        android:text="대표자"
         android:textColor="#2a2a2a"
         android:textSize="14dp"
+        android:text="@{item.name}"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="대표자" />
 
     <TextView
         android:id="@+id/textView64"
@@ -37,13 +38,14 @@
         android:layout_marginRight="17dp"
         android:fontFamily="@font/malgunfont"
         android:includeFontPadding="false"
-        android:text="1,000,000,000원"
         android:textColor="#999999"
         android:textSize="13.71dp"
+        android:text="@{item.coast}"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/btReRequest"
         app:layout_constraintStart_toEndOf="@+id/tvUserName"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="1,000,000,000원" />
 
     <ImageView
         android:id="@+id/ivState"

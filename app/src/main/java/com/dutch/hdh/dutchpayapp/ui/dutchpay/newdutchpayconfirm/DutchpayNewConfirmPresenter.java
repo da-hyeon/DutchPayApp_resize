@@ -3,12 +3,17 @@ package com.dutch.hdh.dutchpayapp.ui.dutchpay.newdutchpayconfirm;
 import android.databinding.ObservableArrayList;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 
+import com.dutch.hdh.dutchpayapp.Constants;
 import com.dutch.hdh.dutchpayapp.MyApplication;
+import com.dutch.hdh.dutchpayapp.R;
 import com.dutch.hdh.dutchpayapp.adapter.DutchpayConfirmListAdapter;
 import com.dutch.hdh.dutchpayapp.data.db.UserList;
 import com.dutch.hdh.dutchpayapp.ui.dutchpay.newdutchpay.TempNewListModel;
+import com.dutch.hdh.dutchpayapp.ui.mygroup.directinput.MyGroup_DirectInputFragment;
+import com.dutch.hdh.dutchpayapp.ui.payment_password.PaymentPasswordFragment;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.reflect.TypeToken;
@@ -50,13 +55,15 @@ public class DutchpayNewConfirmPresenter implements DutchpayNewConfirmContract.P
 
         List<TempConfirmListModel> list = gson.fromJson(mData.getString("JList"),new TypeToken<List<TempConfirmListModel>>(){}.getType());
         for(TempConfirmListModel model : list){
+            //페이지 리스트 생성
             mConfirmList.add(model);
 
-            //flag 보완완
+            //flag 보완
            String tmp = "";
            tmp = model.completeFlag ? "Y" : "N";
 
-            user_list.add(new UserList(model.getName(),model.getPhone(),model.getCost(),tmp));
+           //서버 전송용 리스트 생성
+           user_list.add(new UserList(model.getName(),model.getPhone(),model.getCost(),tmp));
         }
 
         json = gson.toJson(user_list);
@@ -68,39 +75,13 @@ public class DutchpayNewConfirmPresenter implements DutchpayNewConfirmContract.P
 
     @Override
     public void onPayClick() {
-        ArrayList<String> data = mData.getStringArrayList("Info");
+        Bundle bundle = new Bundle();
 
-        //더치페이 개설 및 금액 결제
-        Call<Void> setnewDutchpay = MyApplication
-                .getRestAdapter()
-                .setNewDutchpay(Integer.parseInt(mMyApplication.getUserInfo().getUserCode()),
-                        data.get(0),
-                        Integer.parseInt(data.get(3)),
-                        data.get(1),
-                        data.get(2),
-                        json);
+        bundle.putStringArrayList(Constants.PAYMENT_INFO,mData.getStringArrayList("Info"));
+        bundle.putString(Constants.PAYMENT_LIST_JSON,json);
 
-        setnewDutchpay.enqueue(new Callback<Void>() {
-            @Override
-            public void onResponse(Call<Void> call, Response<Void> response) {
-                Log.e("response",response.message());
-//                mView.showSuccessDialog("성공", groupName + "그룹이 변경되었습니다.");
-            }
-
-            @Override
-            public void onFailure(Call<Void> call, Throwable t) {
-                Log.d("fail", t.getMessage());
-            }
-        });
-
-        int newMoney = mMyApplication.getUserInfo().getUserMoney() - Integer.parseInt(data.get(3));
-        mMyApplication.getUserInfo().setUserMoney(newMoney);
-
-        //더치페이 완료
-        mMyApplication.setDutchpayGroup(false);
-        mMyApplication.setDutchpayNewFragment(null);
-        //메인으로 이동
-        mView.setDefaultMainStack();
+        //결제 비밀번호 페이지로 이동
+        moveToPaymentPassword(bundle);
     }
 
     public ObservableArrayList<TempConfirmListModel> getmConfirmList() {
@@ -109,5 +90,17 @@ public class DutchpayNewConfirmPresenter implements DutchpayNewConfirmContract.P
 
     public DutchpayConfirmListAdapter getmAdapter() {
         return mAdapter;
+    }
+
+    private void moveToPaymentPassword(Bundle bundle){
+        FragmentManager fm = mView.getFragmentManager();
+        FragmentTransaction fragmentTransaction = fm.beginTransaction();
+        fragmentTransaction.setCustomAnimations(R.anim.fade_in, 0, 0, R.anim.fade_out);
+
+        PaymentPasswordFragment paymentPasswordFragment = new PaymentPasswordFragment();
+        paymentPasswordFragment.setArguments(bundle);
+        fragmentTransaction.replace(R.id.flFragmentContainer,paymentPasswordFragment, PaymentPasswordFragment.class.getName());
+        fragmentTransaction.addToBackStack(PaymentPasswordFragment.class.getName());
+        fragmentTransaction.commit();
     }
 }

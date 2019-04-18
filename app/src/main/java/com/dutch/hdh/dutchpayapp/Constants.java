@@ -35,11 +35,16 @@ public class Constants {
     public static final String ACCOUNT_TYPE_CODE = "accountTypeCode";
     public static final String ACCOUNT_NUMBER = "accountNumber";
 
+    //PaymentDialog + DutchpayNewConfirmFragment -> PaymentPasswordFragment
+    public static final String ENTRANCE_PATH = "entrancePath";
+
     //PaymentDialog -> PaymentPasswordFragment
     public static final String PRODUCT_CODE = "productCode";
     public static final String PRODUCT_AMOUNT = "productAmount";
-    public static final String ENTRANCE_PATH = "entrancePath";
 
+    //DutchpayNewConfirmFragment -> PaymentPasswordFragment
+    public static final String PAYMENT_INFO = "dutchpayInfo";
+    public static final String PAYMENT_LIST_JSON = "dutchpayGroupJson";
 
     /**
      * API URL
@@ -54,6 +59,7 @@ public class Constants {
     public static final String DUTCHPAY_CARD_DELETE = "dutchpay_carddelete.php"; //카드 삭제
 
     public static final String DUTCHPAY_HISTORY_REQUEST_URL = "dutchpay_dutchpaytotallist.php"; //더치페이 내역 요청
+    public static final String DUTCHPAY_DETAIL_REQUEST_URL = "dutchpay_dutchpaydetail.php"; //더치페이 내역 상세 요청
     public static final String DUTCHPAY_NEW_REQUEST_URL = "dutchpay_dutchpay.php"; //더치페이 신설 요청
 
 
