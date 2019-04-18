@@ -26,6 +26,8 @@ import com.dutch.hdh.dutchpayapp.ui.mygroup.edit.MyGroup_EditFragment;
 import com.dutch.hdh.dutchpayapp.ui.mygroup.main.MyGroup_MainFragment;
 import com.dutch.hdh.dutchpayapp.ui.mygroup.telephonedirectory.MyGroup_TelephoneDirectoryFragment;
 import com.dutch.hdh.dutchpayapp.ui.mypage.main.MyPage_MainFragment;
+import com.dutch.hdh.dutchpayapp.ui.payment_password.PaymentPasswordFragment;
+import com.dutch.hdh.dutchpayapp.ui.personal_payment.main.PersonalPayment_MainFragment;
 import com.dutch.hdh.dutchpayapp.ui.personal_payment.scan.PersonalPayment_ScanFragment;
 import com.dutch.hdh.dutchpayapp.ui.register.allview.Register_ViewAllTermsConditionsFragment;
 import com.dutch.hdh.dutchpayapp.ui.register.form.Register_FormFragment;
@@ -34,8 +36,6 @@ import com.dutch.hdh.dutchpayapp.ui.register.success.Register_SuccessFragment;
 import com.dutch.hdh.dutchpayapp.ui.register.term.Register_TermsConditionsAgreementFragment;
 import com.dutch.hdh.dutchpayapp.ui.setup.invite.InviteFragment;
 import com.dutch.hdh.dutchpayapp.ui.setup.setting.SetupFragment;
-import com.dutch.hdh.dutchpayapp.ui.solopay.SoloPayFragment;
-import com.dutch.hdh.dutchpayapp.ui.personal_payment.main.PersonalPayment_MainFragment;
 
 import java.util.List;
 
@@ -53,8 +53,6 @@ public class MainActivityPresenter implements MainActivityContract.Presenter {
     private MainFragment mMainFragment;
     private LoginFragment mLoginFragment;
 
-    //private ArrayList<SimpleTarget> targetArrayList;
-
     /**
      * 생성자
      */
@@ -69,7 +67,6 @@ public class MainActivityPresenter implements MainActivityContract.Presenter {
         mMainFragment = new MainFragment();
 
         mMyApplication = MyApplication.getInstance();
-        //targetArrayList = new ArrayList<>();
     }
 
     /**
@@ -90,12 +87,19 @@ public class MainActivityPresenter implements MainActivityContract.Presenter {
             mView.hideBell();
             mView.showExit();
         }
+
         else if (getCurrentFragment() instanceof Register_SuccessFragment) {
             mView.changeTitle("회원가입 완료");
         }
 
         else if(getCurrentFragment() instanceof PersonalPayment_MainFragment){
             mView.changeTitle("결제");
+            mView.hideBell();
+            mView.showExit();
+        }
+
+        else if(getCurrentFragment() instanceof PaymentPasswordFragment){
+            mView.changeTitle("결제 비밀번호 입력");
             mView.hideBell();
             mView.showExit();
         }
@@ -124,6 +128,12 @@ public class MainActivityPresenter implements MainActivityContract.Presenter {
 
         else if(getCurrentFragment() instanceof MyGroup_TelephoneDirectoryFragment){
             mView.changeTitle("전화부호부");
+            mView.hideBell();
+            mView.showExit();
+        }
+
+        else if(getCurrentFragment() instanceof MyGroup_DirectInputFragment){
+            mView.changeTitle("직접입력");
             mView.hideBell();
             mView.showExit();
         }
@@ -396,6 +406,7 @@ public class MainActivityPresenter implements MainActivityContract.Presenter {
         //프래그먼트 이동
         FragmentTransaction fragmentTransaction = mFragmentManager.beginTransaction();
         fragmentTransaction.setCustomAnimations(R.anim.fade_in, 0, 0, R.anim.fade_out);
+
         PersonalPayment_MainFragment soloPayFragment = new PersonalPayment_MainFragment();
         fragmentTransaction.replace(R.id.flFragmentContainer, soloPayFragment, PersonalPayment_MainFragment.class.getName());
         fragmentTransaction.addToBackStack(PersonalPayment_MainFragment.class.getName());
@@ -409,7 +420,7 @@ public class MainActivityPresenter implements MainActivityContract.Presenter {
     public void clickDutchpayStart() {
         //메뉴 닫기 , 프래그먼트 닫기
         mView.hideDrawerLayout();
-        setDefaultMainStack();
+
 
         if (getCurrentFragment() instanceof DutchpayStartFragment)
             return;
@@ -418,6 +429,8 @@ public class MainActivityPresenter implements MainActivityContract.Presenter {
             mView.showFailDialog("실패" , "로그인을 해주세요.");
             return;
         }
+
+        setDefaultMainStack();
 
         //프래그먼트 이동
         FragmentTransaction fragmentTransaction = mFragmentManager.beginTransaction();
@@ -563,7 +576,7 @@ public class MainActivityPresenter implements MainActivityContract.Presenter {
     }
 
     /**
-     * 로그아웃 클릭 이벤트 처리
+     * 로그아웃 버튼 클릭 이벤트 처리
      */
     @Override
     public void clickLogout() {
@@ -577,7 +590,17 @@ public class MainActivityPresenter implements MainActivityContract.Presenter {
     }
 
     /**
-     * 설정 클릭 이벤트 처리
+     * 홈 버튼 클릭 이벤트 처리
+     */
+    @Override
+    public void clickHome() {
+        //메뉴 닫기 , 프래그먼트 닫기
+        mView.hideDrawerLayout();
+        setDefaultMainStack();
+    }
+
+    /**
+     * 설정 버튼 클릭 이벤트 처리
      */
     @Override
     public void clickSetup() {

@@ -116,8 +116,12 @@ public class MainActivity extends BaseActivity implements MainActivityContract.V
             mPresenter.clickCustomerCenter();
         });
 
+        mBinding.navigationView.ivHome.setOnClickListener(v->
+            mPresenter.clickHome()
+        );
+
         //설정 버튼
-        mBinding.navigationView.imageSetting.setOnClickListener(v -> {
+        mBinding.navigationView.ivSetting.setOnClickListener(v -> {
             mPresenter.clickSetup();
         });
     }

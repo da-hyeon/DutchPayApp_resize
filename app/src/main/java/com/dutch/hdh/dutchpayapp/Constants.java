@@ -35,6 +35,12 @@ public class Constants {
     public static final String ACCOUNT_TYPE_CODE = "accountTypeCode";
     public static final String ACCOUNT_NUMBER = "accountNumber";
 
+    //PaymentDialog -> PaymentPasswordFragment
+    public static final String PRODUCT_CODE = "productCode";
+    public static final String PRODUCT_AMOUNT = "productAmount";
+    public static final String ENTRANCE_PATH = "entrancePath";
+
+
     /**
      * API URL
      */
