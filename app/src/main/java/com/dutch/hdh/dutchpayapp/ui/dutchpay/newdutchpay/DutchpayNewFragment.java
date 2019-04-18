@@ -180,7 +180,11 @@ public class DutchpayNewFragment extends BaseFragment implements DutchpayNewCont
         }
 
         mBinding.tvMemNum.setText("총 "+mPresenter.getmNewList().size()+"명");
-        setMyCost(mPresenter.getmNewList().get(mPresenter.getmNewList().size()-1).getCost()+"");
+        if(mPresenter.getmNewList().size() != 0) {
+            setMyCost(mPresenter.getmNewList().get(mPresenter.getmNewList().size() - 1).getCost() + "");
+        } else {
+            setMyCost(0+"");
+        }
 
         //어댑터 셋팅
         mBinding.setMemberList(mPresenter.getmNewList());

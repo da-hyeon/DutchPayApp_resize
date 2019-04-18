@@ -30,6 +30,7 @@ public class NoticeFragment extends BaseFragment {
         mBinding.wvNotice.setWebViewClient(new WebViewClient());
         mBinding.wvNotice.setVerticalScrollBarEnabled(false); //스크롤바 설정
         mBinding.wvNotice.setHorizontalScrollBarEnabled(false); //..
+        mBinding.wvNotice.setOverScrollMode(View.OVER_SCROLL_NEVER);
 
         mBinding.wvNotice.setOnKeyListener((v, keyCode, event) -> { //백버튼 수정
 

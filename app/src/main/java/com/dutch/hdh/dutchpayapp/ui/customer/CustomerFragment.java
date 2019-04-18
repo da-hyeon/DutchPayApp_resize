@@ -35,21 +35,33 @@ public class CustomerFragment extends BaseFragment implements CustomerContract.V
         mBinding.viFAQlist1.ivOpen.setOnClickListener(v -> {
             mPresenter.onListClick(1);
         });
+        mBinding.viFAQlist1.clback.setOnClickListener(v->
+                mPresenter.onListClick(1)
+        );
 
         mBinding.viFAQlist2.tvTitle.setText("더치머니를 현금으로 전환할 수 있나요?");
         mBinding.viFAQlist2.ivOpen.setOnClickListener(v -> {
             mPresenter.onListClick(2);
         });
+        mBinding.viFAQlist2.clback.setOnClickListener(v->
+                mPresenter.onListClick(2)
+        );
 
         mBinding.viFAQlist3.tvTitle.setText("결제 제한 시간이 있나요?");
         mBinding.viFAQlist3.ivOpen.setOnClickListener(v -> {
             mPresenter.onListClick(3);
         });
+        mBinding.viFAQlist3.clback.setOnClickListener(v->
+                mPresenter.onListClick(3)
+        );
 
         mBinding.viFAQlist4.tvTitle.setText("고객센터 이용가능 시간이 어떻게 되나요?");
         mBinding.viFAQlist4.ivOpen.setOnClickListener(v -> {
             mPresenter.onListClick(4);
         });
+        mBinding.viFAQlist4.clback.setOnClickListener(v->
+                mPresenter.onListClick(4)
+        );
 
         return mBinding.getRoot();
     }

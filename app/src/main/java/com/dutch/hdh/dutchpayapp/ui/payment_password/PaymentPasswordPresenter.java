@@ -208,7 +208,9 @@ public class PaymentPasswordPresenter implements PaymentPasswordContract.Present
             intent.putExtra(Constants.PAYMENT_STORE_LOCATION ,mMyApplication.getProduct().getProductAddress());
 
         } else {
-
+            intent.putExtra(Constants.PAYMENT_STORE_NAME ,mDutchInfo.get(0));
+            intent.putExtra(Constants.PAYMENT_AMOUNT , Integer.parseInt(mDutchInfo.get(3)));
+            intent.putExtra(Constants.PAYMENT_STORE_LOCATION ,"더치페이 선결제");
         }
 
         mContext.startActivity(intent);

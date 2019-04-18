@@ -255,7 +255,6 @@ public class DutchpayNewPresenter implements DutchpayNewContract.Presenter {
             int memCost = newcost / (newmemcount);
             myCost = newcost - (memCost * (newmemcount - 1));
 
-
             if(dutchList.contains(mNewList.size()-1)){ //방장에게 남은 돈 몰아주기
 
                 for (int i = 0; i < dutchList.size(); i++) {

@@ -1,5 +1,7 @@
 package com.dutch.hdh.dutchpayapp.ui.dutchpay.startdetail;
 
+import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 
@@ -17,9 +19,12 @@ public interface DutchpayDetailContract {
         void adapterInit();
 
         FragmentManager getFragmentManager();
+        Context getContext();
+        Activity getActivity();
 
         void showSuccessDialog(String a,String b);
         void showFailDialog(String a, String b);
+        void setDefaultMainStack();
     }
 
     interface Presenter{

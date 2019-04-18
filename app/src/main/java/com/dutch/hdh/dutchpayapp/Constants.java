@@ -9,10 +9,13 @@ public class Constants {
     //File name
     public static final String  USER_INFOMATION = "userInfo"; //저장된 유저정보 파일이름
 
+    public static final String  USER_SETTING = "usersetting"; //유저 설정값 저장
+
     //Data
     public static final String  USER_ID = "userID"; //저장된 유저ID
     public static final String  USER_PASSWORD = "userPassword"; //저장된 유저Password
 
+    public static final String USER_AUTOLOGIN = "userAutologin"; //자동로그인 설정값
 
     /**
      * ErrorCode

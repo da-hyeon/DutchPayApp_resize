@@ -29,9 +29,9 @@ public class SetupPresenter implements SetupContract.Presenter {
     private Activity mActivity;
     private FragmentManager mFragmentManager;
 
-    public SetupPresenter(SetupContract.View mView, Activity mActivity, FragmentManager mFragmentManager) {
+    public SetupPresenter(SetupContract.View mView, Activity mActivity, FragmentManager mFragmentManager,boolean autologin) {
         this.mView = mView;
-        this.autoFlag.set(true);
+        this.autoFlag.set(autologin);
         this.pushFlag.set(true);
         this.marketingFlag.set(true);
         this.mActivity = mActivity;
@@ -67,12 +67,14 @@ public class SetupPresenter implements SetupContract.Presenter {
     @Override
     public void autoOnClick() {
         autoLogin(true);
+        settingSave();
     }
 
     //자동 로글인 오프 설정
     @Override
     public void autoOffClick() {
         autoLogin(false);
+        settingSave();
     }
 
     //푸시 온 설정
@@ -124,6 +126,19 @@ public class SetupPresenter implements SetupContract.Presenter {
             editor.putString(Constants.USER_ID,""); // 이메일 저장
             editor.putString(Constants.USER_PASSWORD, ""); // 비밀번호 저장
         }
+
+        editor.commit();
+    }
+
+    /**
+     *  변경 사항 저장
+     */
+    private void settingSave(){
+        SharedPreferences sharedPreferences = mActivity.getSharedPreferences(Constants.USER_SETTING, MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+
+        //앱 내에 유저설정 저장
+        editor.putBoolean(Constants.USER_AUTOLOGIN, autoFlag.get()); //자동 로그인 설정 저장
 
         editor.commit();
     }

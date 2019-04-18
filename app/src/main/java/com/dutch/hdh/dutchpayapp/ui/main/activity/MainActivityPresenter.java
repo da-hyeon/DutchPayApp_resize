@@ -158,6 +158,10 @@ public class MainActivityPresenter implements MainActivityContract.Presenter {
             mView.changeTitle("친구초대");
             mView.hideBell();
             mView.showExit();
+        } else if (getCurrentFragment() instanceof NoticeFragment){
+            mView.changeTitle("공지사항");
+            mView.hideBell();
+            mView.showExit();
         } else if (getCurrentFragment() instanceof MainFragment) {
             initLoginState();
             mView.changeTitle("");
@@ -499,6 +503,13 @@ public class MainActivityPresenter implements MainActivityContract.Presenter {
      */
     @Override
     public void clickNotice() {
+        //메뉴 닫기 , 프래그먼트 닫기
+        mView.hideDrawerLayout();
+
+        if (getCurrentFragment() instanceof NoticeFragment)
+            return;
+
+        setDefaultMainStack();
 
         //프래그먼트 이동
         FragmentTransaction fragmentTransaction = mFragmentManager.beginTransaction();
