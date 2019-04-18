@@ -166,6 +166,9 @@ public class DutchpayNewPresenter implements DutchpayNewContract.Presenter {
 
                 mView.setDutchCost(oldCost);
                 mView.makeToast("더치페이는 2백만원까지 가능합니다.");
+            } else if (Integer.parseInt(oldCost) == 0){
+                oldCost = "0";
+                mView.setDutchCost(oldCost);
             }
         }
     }

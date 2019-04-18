@@ -28,7 +28,12 @@ public class TempNewListModel {
 
         @Override
         public void afterTextChanged(Editable s) {
-            cost = s.toString();
+            if(s.toString().equals("") || Integer.parseInt(s.toString()) == 0){
+                cost = "0";
+            } else {
+                cost = s.toString();
+            }
+
             editedCheck = true;
         }
     };

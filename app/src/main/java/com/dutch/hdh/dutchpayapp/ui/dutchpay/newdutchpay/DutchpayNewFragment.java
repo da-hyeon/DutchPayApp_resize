@@ -49,7 +49,12 @@ public class DutchpayNewFragment extends BaseFragment implements DutchpayNewCont
             //리스트 마지막_더치 대표자 데이터 셋팅
 
             mPresenter.getmNewList().get(mPresenter.getmNewList().size()-1).setEditedCheck(true);
-            mPresenter.getmNewList().get(mPresenter.getmNewList().size()-1).setCost(s.toString());
+
+            if(!s.toString().equals("") && Integer.parseInt(s.toString()) == 0){
+                mPresenter.getmNewList().get(mPresenter.getmNewList().size()-1).setCost("0");
+            } else {
+                mPresenter.getmNewList().get(mPresenter.getmNewList().size()-1).setCost(s.toString());
+            }
         }
     };
 
