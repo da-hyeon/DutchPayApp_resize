@@ -24,8 +24,10 @@ import com.dutch.hdh.dutchpayapp.data.db.DirectInputParticipants;
 import com.dutch.hdh.dutchpayapp.databinding.FragmentDutchpayNewStartBinding;
 import com.dutch.hdh.dutchpayapp.ui.dutchpay.start.ItemDecoration;
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class DutchpayNewFragment extends BaseFragment implements DutchpayNewContract.View {
 
@@ -113,6 +115,14 @@ public class DutchpayNewFragment extends BaseFragment implements DutchpayNewCont
             if(getArguments() != null){
                 mPresenter.listInit(getArguments());
             }
+        } else {
+            if(getArguments() != null){
+                if( !(getArguments().getString("dutchpayListData").equals("")) ) { //이전 리스트 유무 체크
+                    String oldList = getArguments().getString("dutchpayListData");
+
+                    Log.e("oldlist ->" ,oldList);
+                }
+            }
         }
     }
 
@@ -157,17 +167,20 @@ public class DutchpayNewFragment extends BaseFragment implements DutchpayNewCont
     }
 
     @Override
+    public void setDutchCost(String oldCost) {
+        mBinding.etCost.setText(oldCost);
+    }
+
+    @Override
     public void adapterInit(){
         if( !(mBinding.etCost.getText().toString().equals("")) ) {
             //금액 입력
 
-            if( !(mPresenter.dutchpayLogic()) ){ //최소값 오류
-                Toast.makeText(getActivity().getApplicationContext(),"금액을 확인해주세요",Toast.LENGTH_SHORT).show();
-            }
+            mPresenter.reDutchpayLogic();
         }
 
         mBinding.tvMemNum.setText("총 "+mPresenter.getmNewList().size()+"명");
-        setMyCost(mPresenter.getMyCost()+"");
+        setMyCost(mPresenter.getmNewList().get(mPresenter.getmNewList().size()-1).getCost()+"");
 
         //어댑터 셋팅
         mBinding.setMemberList(mPresenter.getmNewList());
@@ -176,6 +189,11 @@ public class DutchpayNewFragment extends BaseFragment implements DutchpayNewCont
         mBinding.rvMemberlist.addItemDecoration(new ItemDecoration(38));
 
         mPresenter.getmAdapter().notifyDataSetChanged();
+    }
+
+    @Override
+    public void makeToast(String message) {
+        Toast.makeText(getActivity().getApplicationContext(),message,Toast.LENGTH_SHORT).show();
     }
 
     /**

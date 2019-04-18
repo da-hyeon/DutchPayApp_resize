@@ -76,4 +76,11 @@ public class DutchpayNewInfoFragment extends BaseFragment implements DutchpayNew
 
         return info;
     }
+
+    /**
+     * 뒤로가기 처리
+     */
+    public void onBackPressed(){
+        mPresenter.clickBackPressed();
+    }
 }

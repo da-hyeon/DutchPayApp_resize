@@ -68,15 +68,23 @@ public class DutchpayNewPresenter implements DutchpayNewContract.Presenter {
 
     @Override
     public void listInit(Bundle bundle) {
+        TempNewListModel leader = null;
 
         if( !(bundle.getString("dutchpayListData").equals("")) ) { //이전 리스트 유무 체크
             mNewList.clear();
             String oldList = bundle.getString("dutchpayListData");
 
+            Log.e("oldlist ->",oldList);
+
             List<TempNewListModel> oldlist = gson.fromJson(oldList, new TypeToken<List<TempNewListModel>>(){}.getType());
             for(TempNewListModel model : oldlist){
                 if( !(model.getName().equals("")) ) {
-                    mNewList.add(new TempNewListModel(model.getName(),model.getPhone(),model.getCost(),model.isCompleteFlag(),model.isEditableFlag(),model.editedCheck));
+                    if( !(model.isEditedCheck()) ){
+                        dutchFlag = false;
+                    }
+                    mNewList.add(new TempNewListModel(model.getName(),model.getPhone(),model.getCost(),model.isCompleteFlag(),model.isEditableFlag(),model.isEditedCheck()));
+                } else {
+                    leader = new TempNewListModel(model.getName(),model.getPhone(),model.getCost(),model.isCompleteFlag(),model.isEditableFlag(),model.isEditedCheck());
                 }
             }
         }
@@ -113,7 +121,25 @@ public class DutchpayNewPresenter implements DutchpayNewContract.Presenter {
         }
 
         if(mNewList.size() != 0){ //다음 버튼 생성용
-            mNewList.add(new TempNewListModel("", ""));
+            if(leader == null){
+                mNewList.add(new TempNewListModel("",""));
+            } else {
+                mNewList.add(leader);
+                myCost = Integer.parseInt(leader.getCost());
+                dutchFlag = !(leader.isEditedCheck());
+            }
+        }
+
+        String newlist = gson.toJson(mNewList);
+        Log.e("newlist ->",newlist);
+
+        //데이터 반영 끝
+        mMyApplication.setDutchpayGroup(false);
+
+        if(dutchFlag){
+            onDutchClick();
+        } else {
+            onTypingClick();
         }
 
         //binding
@@ -129,7 +155,17 @@ public class DutchpayNewPresenter implements DutchpayNewContract.Presenter {
             Log.e("change --> ",newcost+"");
 
             if(mNewList.size() >0) { //리스트 존재 여부 확인
-                dutchpayLogic();
+                reDutchpayLogic();
+            }
+
+            //오류방지
+            oldCost = oldCost.equals("") ? "0" : oldCost;
+
+            if(Integer.parseInt(oldCost) >= 2000000){
+                oldCost = String.valueOf(2000000);
+
+                mView.setDutchCost(oldCost);
+                mView.makeToast("더치페이는 2백만원까지 가능합니다.");
             }
         }
     }
@@ -175,6 +211,7 @@ public class DutchpayNewPresenter implements DutchpayNewContract.Presenter {
 
         //더치할 멤버_포지션 리스트 생성
         ArrayList<Integer> dutchList = new ArrayList<>();
+        Log.e("size check ->",mNewList.size()+"");
         for(int i=0; i<mNewList.size(); i++){
             if( !(mNewList.get(i).getCost().equals(""))) { //오류 보정_멤버 중 더치페이 금액 달성자가 있을시 변동 유무 플래그 초기화
                 if (Integer.parseInt(mNewList.get(i).getCost()) == cost) {
@@ -217,6 +254,7 @@ public class DutchpayNewPresenter implements DutchpayNewContract.Presenter {
         if(newmemcount != 0){
             int memCost = newcost / (newmemcount);
             myCost = newcost - (memCost * (newmemcount - 1));
+
 
             if(dutchList.contains(mNewList.size()-1)){ //방장에게 남은 돈 몰아주기
 
@@ -290,9 +328,9 @@ public class DutchpayNewPresenter implements DutchpayNewContract.Presenter {
     }
 
     public void onNextClick(){
-        Bundle bundle = new Bundle();
-        String jList = gson.toJson(mNewList);
-        bundle.putString("oldList",jList);
+        mMyApplication.setDutchpayGroup(true);
+
+        Bundle bundle = makeListBundle();
         bundle.putString("total",oldCost);
 
         FragmentManager fm = mView.getFragmentManager();
@@ -438,7 +476,7 @@ public class DutchpayNewPresenter implements DutchpayNewContract.Presenter {
     }
 
     private Bundle makeListBundle(){
-        Bundle bundle = new Bundle(1);
+        Bundle bundle = new Bundle();
 
         if(mNewList.size() != 0) {
             String oldList = gson.toJson(mNewList);

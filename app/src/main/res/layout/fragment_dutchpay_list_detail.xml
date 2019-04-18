@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout >
+<layout>
     <data>
         <import type="android.databinding.ObservableArrayList"/>
         <import type="com.dutch.hdh.dutchpayapp.ui.dutchpay.startdetail.TempDetailListModel"/>
@@ -71,13 +71,14 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <Button
-                android:id="@+id/button10"
+                android:id="@+id/btPointSend"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="28dp"
                 android:background="#0f69fe"
                 android:fontFamily="@font/malgunfont"
                 android:includeFontPadding="false"
+                android:onClick="@{()-> Presenter.onPayClick()}"
                 android:text="포인트 보내기"
                 android:textColor="#ffffff"
                 android:textSize="15dp"
@@ -105,35 +106,35 @@
                     android:text="원"
                     android:textColor="#959595"
                     android:textSize="11dp"
-                    app:layout_constraintBottom_toBottomOf="@+id/textView57"
-                    app:layout_constraintEnd_toEndOf="@+id/textView56" />
+                    app:layout_constraintBottom_toBottomOf="@+id/tvCost"
+                    app:layout_constraintEnd_toEndOf="@+id/tvShop" />
 
                 <TextView
-                    android:id="@+id/textView57"
+                    android:id="@+id/tvCost"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="8dp"
-                    android:text="50,000"
+                    android:fontFamily="@font/malgunfont"
+                    android:includeFontPadding="false"
                     android:textColor="#ff3737"
                     android:textSize="12.6dp"
                     android:textStyle="bold"
-                    android:fontFamily="@font/malgunfont"
-                    android:includeFontPadding="false"
                     app:layout_constraintBottom_toBottomOf="@+id/textView55"
-                    app:layout_constraintEnd_toStartOf="@+id/textView58" />
+                    app:layout_constraintEnd_toStartOf="@+id/textView58"
+                    tools:text="50,000" />
 
                 <TextView
-                    android:id="@+id/textView56"
+                    android:id="@+id/tvShop"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="31dp"
-                    android:text="[BAR 홍대점]"
-                    android:textColor="#959595"
-                    android:textSize="13.7dp"
                     android:fontFamily="@font/malgunfont"
                     android:includeFontPadding="false"
+                    android:textColor="#959595"
+                    android:textSize="13.7dp"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/textView54" />
+                    app:layout_constraintTop_toTopOf="@+id/textView54"
+                    tools:text="[BAR 홍대점]" />
 
                 <TextView
                     android:id="@+id/textView60"
@@ -144,7 +145,7 @@
                     android:includeFontPadding="false"
                     android:textColor="#959595"
                     android:textSize="11dp"
-                    app:layout_constraintBottom_toBottomOf="@+id/textView59"
+                    app:layout_constraintBottom_toBottomOf="@+id/tvMemCount"
                     app:layout_constraintEnd_toEndOf="@+id/textView58" />
 
                 <TextView
@@ -188,19 +189,19 @@
                     app:layout_constraintTop_toBottomOf="@+id/textView55" />
 
                 <TextView
-                    android:id="@+id/textView59"
+                    android:id="@+id/tvMemCount"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="8dp"
                     android:layout_marginBottom="8dp"
-                    android:text="5"
+                    android:fontFamily="@font/malgunfont"
+                    android:includeFontPadding="false"
                     android:textColor="#1462f1"
                     android:textSize="12.6dp"
                     android:textStyle="bold"
-                    android:fontFamily="@font/malgunfont"
-                    android:includeFontPadding="false"
                     app:layout_constraintBottom_toBottomOf="@+id/textView61"
-                    app:layout_constraintEnd_toStartOf="@+id/textView60" />
+                    app:layout_constraintEnd_toStartOf="@+id/textView60"
+                    tools:text="5" />
 
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/recyclerView2"

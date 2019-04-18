@@ -41,7 +41,22 @@ public class DutchpayDetailFragment extends BaseFragment implements DutchpayDeta
     }
 
     public void setDutchpayTitle(String title) {
+        mBinding.tvShop.setText(title);
+    }
 
+    @Override
+    public void setDutchpayCost(String cost) {
+        mBinding.tvCost.setText(cost);
+    }
+
+    @Override
+    public void setDutchpayMemCount(String memCount) {
+        mBinding.tvMemCount.setText(memCount);
+    }
+
+    @Override
+    public void setPointButtonGone() {
+        mBinding.btPointSend.setVisibility(View.GONE);
     }
 
 
