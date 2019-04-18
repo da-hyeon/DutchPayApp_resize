@@ -276,4 +276,12 @@ public class MyGroup_EditPresenter implements MyGroup_EditContract.Presenter {
             mView.showFailDialog("실패", "그룹은 최소 2인 이상입니다.");
         }
     }
+
+    /**
+     * 접근 경로 설정
+     */
+    @Override
+    public void DutchFlagInit() {
+        mMyApplication.setDutchpayGroup(false);
+    }
 }

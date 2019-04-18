@@ -165,14 +165,28 @@ public class MyGroup_TelephoneDirectoryPresenter implements MyGroup_TelephoneDir
             bundle.putParcelableArrayList("itemList", mBundle.getParcelableArrayList("itemList"));
             bundle.putParcelableArrayList("InputMember", null);
             bundle.putParcelableArrayList("telephoneInputMember", mListview_telephoneDirectoryAdapter.getSelectList());
-            mMyApplication.getMyGroup_EditFragment().setArguments(bundle);
+
+            if(mMyApplication.isDutchpayGroup()) { //접근 경로_더치페이에서
+                bundle.putString("dutchpayListData",mBundle.getString("dutchpayListData"));
+                mMyApplication.getDutchpayNewFragment().setArguments(bundle);
+            } else { //접근 경로_그룹에서
+                mMyApplication.getMyGroup_EditFragment().setArguments(bundle);
+            }
+
             mFragmentManager.popBackStack();
         } else {
             Bundle bundle = new Bundle();
             bundle.putParcelableArrayList("itemList", mBundle.getParcelableArrayList("itemList"));
             bundle.putParcelableArrayList("InputMember", null);
             bundle.putParcelableArrayList("telephoneInputMember", null);
-            mMyApplication.getMyGroup_EditFragment().setArguments(bundle);
+
+            if(mMyApplication.isDutchpayGroup()) { //접근 경로_더치페이에서
+                bundle.putString("dutchpayListData",mBundle.getString("dutchpayListData"));
+                mMyApplication.getDutchpayNewFragment().setArguments(bundle);
+            } else { //접근 경로_그룹에서
+                mMyApplication.getMyGroup_EditFragment().setArguments(bundle);
+            }
+
             mView.showFailDialog("실패", "선택한 연락처가 없습니다.");
         }
     }

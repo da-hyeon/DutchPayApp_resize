@@ -10,9 +10,10 @@ public class UserList {
     String phone;
 
     String price;
-    boolean prepay_status;
 
-    public UserList(String name, String phone, String price, boolean prepay_status) {
+    String prepay_status;
+
+    public UserList(String name, String phone, String price, String prepay_status) {
         this.name = name;
         this.phone = phone;
         this.price = price;
@@ -43,11 +44,11 @@ public class UserList {
         this.price = price;
     }
 
-    public boolean isPrepay_status() {
+    public String getPrepay_status() {
         return prepay_status;
     }
 
-    public void setPrepay_status(boolean prepay_status) {
+    public void setPrepay_status(String prepay_status) {
         this.prepay_status = prepay_status;
     }
 }

@@ -26,5 +26,7 @@ public class MyGroup_EditContract {
         void clickDirectInput();
         void clickBackPressed();
         void clickComplete(String groupName);
+
+        void DutchFlagInit();
     }
 }

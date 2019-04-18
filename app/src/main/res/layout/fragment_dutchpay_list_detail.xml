@@ -78,7 +78,7 @@
                 android:background="#0f69fe"
                 android:fontFamily="@font/malgunfont"
                 android:includeFontPadding="false"
-                android:text="미입금 전체 재요청"
+                android:text="포인트 보내기"
                 android:textColor="#ffffff"
                 android:textSize="15dp"
                 android:textStyle="bold"

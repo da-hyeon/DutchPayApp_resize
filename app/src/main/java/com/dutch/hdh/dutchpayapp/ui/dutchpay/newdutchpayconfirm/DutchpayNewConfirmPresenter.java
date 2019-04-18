@@ -51,7 +51,12 @@ public class DutchpayNewConfirmPresenter implements DutchpayNewConfirmContract.P
         List<TempConfirmListModel> list = gson.fromJson(mData.getString("JList"),new TypeToken<List<TempConfirmListModel>>(){}.getType());
         for(TempConfirmListModel model : list){
             mConfirmList.add(model);
-            user_list.add(new UserList(model.getName(),model.getPhone(),model.getCost(),model.completeFlag));
+
+            //flag 보완완
+           String tmp = "";
+           tmp = model.completeFlag ? "Y" : "N";
+
+            user_list.add(new UserList(model.getName(),model.getPhone(),model.getCost(),tmp));
         }
 
         json = gson.toJson(user_list);
@@ -88,9 +93,14 @@ public class DutchpayNewConfirmPresenter implements DutchpayNewConfirmContract.P
             }
         });
 
-        //상세 내역으로 이동
-        FragmentManager fm = mView.getFragmentManager();
-        fm.popBackStack();
+        int newMoney = mMyApplication.getUserInfo().getUserMoney() - Integer.parseInt(data.get(3));
+        mMyApplication.getUserInfo().setUserMoney(newMoney);
+
+        //더치페이 완료
+        mMyApplication.setDutchpayGroup(false);
+        mMyApplication.setDutchpayNewFragment(null);
+        //메인으로 이동
+        mView.setDefaultMainStack();
     }
 
     public ObservableArrayList<TempConfirmListModel> getmConfirmList() {

@@ -20,6 +20,7 @@ import com.dutch.hdh.dutchpayapp.data.db.DirectInputParticipants;
 import com.dutch.hdh.dutchpayapp.data.db.Dutchpayhistory;
 import com.dutch.hdh.dutchpayapp.data.db.GroupParticipants;
 import com.dutch.hdh.dutchpayapp.data.db.MyGroup;
+import com.dutch.hdh.dutchpayapp.data.db.TelephoneDirectory;
 import com.dutch.hdh.dutchpayapp.databinding.ItemDutchpayNewMemberBinding;
 import com.dutch.hdh.dutchpayapp.ui.dutchpay.newdutchaddgroup.DutchpayNewAddGroupFragment;
 import com.dutch.hdh.dutchpayapp.ui.dutchpay.newdutchaddgroup.DutchpayNewAddGroupModel;
@@ -49,7 +50,7 @@ public class DutchpayNewPresenter implements DutchpayNewContract.Presenter {
     private int myCost;
     private int lastCost;
     private int lastMem;
-    private boolean dutchFlag;
+    private boolean dutchFlag = true;
     private Gson gson;
 
     public DutchpayNewPresenter(DutchpayNewContract.View mView) {
@@ -61,7 +62,6 @@ public class DutchpayNewPresenter implements DutchpayNewContract.Presenter {
         this.myCost = 0;
         this.lastCost = -1;
         this.lastMem = -1;
-        this.dutchFlag = true;
         this.gson = new Gson();
     }
 
@@ -92,7 +92,6 @@ public class DutchpayNewPresenter implements DutchpayNewContract.Presenter {
         }
 
         if(bundle.getString("InputGroupMember") != null){ //그룹 추가 리스트 유무 체크
-            Log.e("getlist ->",bundle.getString("InputGroupMember"));
             List<DutchpayNewAddGroupModel> list = gson.fromJson(bundle.getString("InputGroupMember"),new TypeToken<List<DutchpayNewAddGroupModel>>(){}.getType());
             for(DutchpayNewAddGroupModel model : list) {
                 List<GroupParticipants> members = gson.fromJson(model.getGmember(),new TypeToken<List<GroupParticipants>>(){}.getType());
@@ -102,12 +101,20 @@ public class DutchpayNewPresenter implements DutchpayNewContract.Presenter {
             }
         }
 
+        if(bundle.getParcelableArrayList("telephoneInputMember") != null){ //연락처 추가 리스트 유무 체크
+            ArrayList<TelephoneDirectory> telephoneDirectories = bundle.getParcelableArrayList("telephoneInputMember");
+            String tmpJson = gson.toJson(telephoneDirectories);
+
+            List<TelephoneDirectory> list = gson.fromJson(tmpJson, new TypeToken<List<TelephoneDirectory>>() {}.getType());
+            for (TelephoneDirectory model : list) {
+                mNewList.add(new TempNewListModel(model.getName(), model.getPhoneNumber()));
+            }
+        }
+
         if(mNewList.size() != 0){ //다음 버튼 생성용
             mNewList.add(new TempNewListModel("", ""));
         }
 
-        //data update 완료
-        mMyApplication.setDutchpayGroup(false);
         //binding
         mView.adapterInit();
     }
@@ -280,11 +287,9 @@ public class DutchpayNewPresenter implements DutchpayNewContract.Presenter {
     }
 
     public void onNextClick(){
-        //mNewList.remove(mNewList.size()-1); //버튼용_더미 데이터 삭제
-
         Bundle bundle = new Bundle();
         String jList = gson.toJson(mNewList);
-        bundle.putString("JList",jList);
+        bundle.putString("oldList",jList);
         bundle.putString("total",oldCost);
 
         FragmentManager fm = mView.getFragmentManager();
@@ -299,6 +304,8 @@ public class DutchpayNewPresenter implements DutchpayNewContract.Presenter {
     }
 
     public void onDutchClick(){
+        dutchFlag = true;
+
         mView.setDutchBtColor(true);
         mView.setTypeBtColor(false);
 
@@ -306,15 +313,17 @@ public class DutchpayNewPresenter implements DutchpayNewContract.Presenter {
         dutchpayLogic();
 
         //리스트 내 금액 클릭 금지
-        listEditableSet(true);
+        listEditableSet(dutchFlag);
     }
 
     public void onTypingClick(){
+        dutchFlag = false;
+
         mView.setDutchBtColor(false);
         mView.setTypeBtColor(true);
 
         //리스트 내 금액 클릭 가능
-        listEditableSet(false);
+        listEditableSet(dutchFlag);
         //예외처리
         solopayCheck();
     }
@@ -358,7 +367,7 @@ public class DutchpayNewPresenter implements DutchpayNewContract.Presenter {
         mAdapter.setItem(mNewList);
     }
 
-    private void listEditableSet(boolean dutchflag){
+    public void listEditableSet(boolean dutchflag){
 
         if(dutchflag){ //리스트 내 금액 클릭 금지
             memCostEditable(false);
@@ -371,7 +380,7 @@ public class DutchpayNewPresenter implements DutchpayNewContract.Presenter {
         }
     }
 
-    private void solopayCheck(){
+    public void solopayCheck(){
         if(mNewList.size() <= 1){
             mView.setMyCostEditable(false);
         }
@@ -440,5 +449,9 @@ public class DutchpayNewPresenter implements DutchpayNewContract.Presenter {
         }
 
         return bundle;
+    }
+
+    public boolean isDutchFlag() {
+        return dutchFlag;
     }
 }

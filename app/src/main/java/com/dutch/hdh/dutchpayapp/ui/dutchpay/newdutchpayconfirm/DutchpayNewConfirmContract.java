@@ -8,6 +8,7 @@ public interface DutchpayNewConfirmContract {
         //어댑터 셋팅
         void adapterInit();
 
+        void setDefaultMainStack();
         FragmentManager getFragmentManager();
     }
 

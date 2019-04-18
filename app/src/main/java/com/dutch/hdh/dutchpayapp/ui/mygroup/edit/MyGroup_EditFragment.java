@@ -41,6 +41,9 @@ public class MyGroup_EditFragment extends BaseFragment implements MyGroup_EditCo
             mPresenter.clickComplete(mBinding.etGroupName.getText().toString())
         );
 
+        //더치페이 플래그 초기화
+        mPresenter.DutchFlagInit();
+
         return mBinding.getRoot();
     }
 

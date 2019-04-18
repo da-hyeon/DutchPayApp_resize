@@ -8,6 +8,7 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 
 import com.dutch.hdh.dutchpayapp.R;
 import com.dutch.hdh.dutchpayapp.base.fragment.BaseFragment;
@@ -26,6 +27,9 @@ public class CustomerFragment extends BaseFragment implements CustomerContract.V
         mBinding.setFragment(this);
         mPresenter = new CustomerPresenter(this);
         mBinding.setPresenter(mPresenter);
+
+        //키보드 설정 변경
+        getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_NOTHING);
 
         //FAQ 리스트 셋팅
         mBinding.viFAQlist1.ivOpen.setOnClickListener(v -> {

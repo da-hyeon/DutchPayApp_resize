@@ -93,6 +93,10 @@ public class DutchpayStartPresenter implements DutchpayStartContract.Presenter{
 
     //더치페이 새로 시작하기
     public void onNewClick(){
+        //기존 더치페이가 존재한다면 초기화
+        mMyApplication.setDutchpayGroup(false);
+        mMyApplication.setDutchpayNewFragment(null);
+
         FragmentManager fm = mView.getFragmentManager();
 
         FragmentTransaction fragmentTransaction = fm.beginTransaction();
