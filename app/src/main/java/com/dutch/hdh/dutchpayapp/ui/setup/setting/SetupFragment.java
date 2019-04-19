@@ -1,5 +1,6 @@
 package com.dutch.hdh.dutchpayapp.ui.setup.setting;
 
+import android.content.SharedPreferences;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -10,9 +11,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
 
+import com.dutch.hdh.dutchpayapp.Constants;
 import com.dutch.hdh.dutchpayapp.R;
 import com.dutch.hdh.dutchpayapp.base.fragment.BaseFragment;
 import com.dutch.hdh.dutchpayapp.databinding.FragmentSetupBinding;
+
+import static android.content.Context.MODE_PRIVATE;
 
 public class SetupFragment extends BaseFragment implements SetupContract.View{
 
@@ -24,7 +28,12 @@ public class SetupFragment extends BaseFragment implements SetupContract.View{
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         mBinding = DataBindingUtil.inflate(LayoutInflater.from(container.getContext()), R.layout.fragment_setup,container,false);
         mBinding.setFragment(this);
-        mPresenter = new SetupPresenter(this , getActivity(), getFragmentManager());
+
+        //저장한 유저 셋팅 불러오기
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences(Constants.USER_SETTING, MODE_PRIVATE);
+        boolean autologin = sharedPreferences.getBoolean(Constants.USER_AUTOLOGIN, false);
+
+        mPresenter = new SetupPresenter(this , getActivity(), getFragmentManager(),autologin);
         mBinding.setPresenter(mPresenter);
 
         mBinding.swAutoLogin.setOnClickListener(v -> {

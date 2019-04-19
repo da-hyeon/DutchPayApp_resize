@@ -98,7 +98,10 @@ public class IntroActivity extends BaseActivity {
                 }
             });
         }
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/yunmi
     }
 
     @Override

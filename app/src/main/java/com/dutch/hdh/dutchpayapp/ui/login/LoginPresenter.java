@@ -62,9 +62,25 @@ public class LoginPresenter implements LoginContract.Presenter {
                 public void onResponse(@NonNull Call<UserInfo> call, @NonNull Response<UserInfo> response) {
                     if (response.body() != null) {
                         mMyApplication.setUserInfo(response.body());
+<<<<<<< HEAD
                         mMyApplication.getUserInfo().setUserState(true);
                         mView.showSuccessDialog(mMyApplication.getUserInfo().getUserName()+"님 환영합니다.");
                         autoLogin(isAutoLoginCheck);
+=======
+                        if (mMyApplication.getUserInfo().getMessage() == null) {
+
+                            mMyApplication.getUserInfo().setUserState(true);
+                            mView.showSuccessDialog(mMyApplication.getUserInfo().getUserName() + "님 환영합니다.");
+                            //자동로그인
+                            autoLogin(isAutoLoginCheck);
+
+                            //세팅 - 자동로그인
+                            setCheck(isAutoLoginCheck);
+
+                        } else {
+                            mView.showFailDialog("아이디와 비밀번호를 확인해주세요.");
+                        }
+>>>>>>> origin/yunmi
                     } else {
                         mView.showFailDialog("아이디와 비밀번호를 확인해주세요.");
                     }
@@ -136,6 +152,16 @@ public class LoginPresenter implements LoginContract.Presenter {
             editor.putString(Constants.USER_ID,""); // 이메일 저장
             editor.putString(Constants.USER_PASSWORD, ""); // 비밀번호 저장
         }
+
+        editor.commit();
+    }
+
+    private void setCheck(boolean isAutoLoginCheck) {
+        SharedPreferences sharedPreferences = mActivity.getSharedPreferences(Constants.USER_SETTING, MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+
+        //자동 로그인 설정 저장
+        editor.putBoolean(Constants.USER_AUTOLOGIN, isAutoLoginCheck);
 
         editor.commit();
     }

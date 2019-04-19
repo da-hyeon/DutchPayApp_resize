@@ -12,6 +12,9 @@ import android.view.ViewGroup;
 import com.dutch.hdh.dutchpayapp.R;
 import com.dutch.hdh.dutchpayapp.base.fragment.BaseFragment;
 import com.dutch.hdh.dutchpayapp.databinding.FragmentDutchpayListDetailBinding;
+import com.kinda.alert.KAlertDialog;
+
+import java.util.Objects;
 
 public class DutchpayDetailFragment extends BaseFragment implements DutchpayDetailContract.View{
 
@@ -59,5 +62,26 @@ public class DutchpayDetailFragment extends BaseFragment implements DutchpayDeta
         mBinding.btPointSend.setVisibility(View.GONE);
     }
 
+    /**
+     * 성공 다이얼로그 보이기
+     * OK = 되돌아가기
+     */
+    @Override
+    public void showSuccessDialog(String title, String content) {
+
+        KAlertDialog dialog = new KAlertDialog(Objects.requireNonNull(getContext()), KAlertDialog.SUCCESS_TYPE);
+
+        dialog.setTitleText(title);
+        dialog.setContentText(content);
+        dialog.setConfirmText("확인");
+        dialog.setConfirmClickListener(sDialog -> {
+            sDialog.dismissWithAnimation();
+            mPresenter.clickSuccessDialog();
+        });
+
+        if (!dialog.isShowing()) {
+            dialog.show();
+        }
+    }
 
 }

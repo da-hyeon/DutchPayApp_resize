@@ -1,5 +1,6 @@
 package com.dutch.hdh.dutchpayapp.ui.dutchpay.startdetail;
 
+import android.content.Intent;
 import android.databinding.BindingAdapter;
 import android.databinding.ObservableArrayList;
 import android.os.Bundle;
@@ -8,6 +9,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 
+import com.dutch.hdh.dutchpayapp.Constants;
 import com.dutch.hdh.dutchpayapp.MyApplication;
 import com.dutch.hdh.dutchpayapp.R;
 import com.dutch.hdh.dutchpayapp.adapter.DutchpayDetailListAdapter;
@@ -18,10 +20,12 @@ import com.dutch.hdh.dutchpayapp.data.db.Dutchpayhistory;
 import com.dutch.hdh.dutchpayapp.data.db.DutchpaytotalList;
 import com.dutch.hdh.dutchpayapp.ui.dutchpay.photo.DutchpayPhotoFragment;
 import com.dutch.hdh.dutchpayapp.ui.dutchpay.start.TempStartListModel;
+import com.dutch.hdh.dutchpayapp.ui.receipt.ReceiptActivity;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -42,6 +46,7 @@ public class DutchpayDetailPresenter implements DutchpayDetailContract.Presenter
     private int mMyCost;
     private int mAllMemCost = 0;
     private int mLeaderPosition = 0;
+    private String mRoomTitle;
 
     public DutchpayDetailPresenter(DutchpayDetailContract.View mView) {
         this.mView = mView;
@@ -68,12 +73,13 @@ public class DutchpayDetailPresenter implements DutchpayDetailContract.Presenter
                     //방 정보 꺼내기
                     ArrayList<DutchDetailRoom> roomInfo = response.body().getRoominfo();
                     DutchDetailRoom room = roomInfo.get(0);
+                    mRoomTitle = room.getShop();
 
                     //멤버 리스트 꺼내기
                     ArrayList<DutchDetailMember> memberInfo = response.body().getMemberinfo();
 
                     //방정보 셋팅
-                    mView.setDutchpayTitle(room.getShop());
+                    mView.setDutchpayTitle(mRoomTitle);
                     mView.setDutchpayCost(String.valueOf(room.getCost()));
                     mView.setDutchpayMemCount(String.valueOf(memberInfo.size()));
 
@@ -180,5 +186,39 @@ public class DutchpayDetailPresenter implements DutchpayDetailContract.Presenter
                 mView.showFailDialog("실패", "서버와 통신할 수 없습니다.");
             }
         });
+    }
+
+    /**
+     * 다이얼로그 확인버튼
+     */
+    public void clickSuccessDialog() {
+
+        Intent intent = new Intent(mView.getContext(), ReceiptActivity.class);
+        mView.setDefaultMainStack();
+        intent.putExtra(Constants.PAYMENT_DATE ,currentTime());
+        intent.putExtra(Constants.PAYMENT_STORE_NAME ,mRoomTitle);
+        intent.putExtra(Constants.PAYMENT_AMOUNT , mMyCost);
+        intent.putExtra(Constants.PAYMENT_STORE_LOCATION ,"더치페이 참가 결제");
+
+        mView.getContext().startActivity(intent);
+        mView.getActivity().overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+    }
+
+    /**
+     * 현재날짜 + 시간 구하기
+     */
+    private String currentTime() {
+        Calendar cal = Calendar.getInstance();
+        //현재 년도, 월, 일
+        int year = cal.get(cal.YEAR);
+        int month = cal.get(cal.MONTH) + 1;
+        int date = cal.get(cal.DATE);
+
+        //현재 (시,분,초)
+        int hour = cal.get(cal.HOUR_OF_DAY);
+        int min = cal.get(cal.MINUTE);
+        int sec = cal.get(cal.SECOND);
+
+        return year + "년 " + month + "월 " + date +"일 " + hour +"시 " + min + "분 " + sec + "초";
     }
 }

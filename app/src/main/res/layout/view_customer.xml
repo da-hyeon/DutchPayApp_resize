@@ -12,7 +12,7 @@
         android:background="#f1f1f1">
 
         <android.support.constraint.ConstraintLayout
-            android:id="@+id/constraintLayout7"
+            android:id="@+id/clback"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
@@ -30,12 +30,12 @@
                 android:layout_height="48dp"
                 android:layout_marginStart="17dp"
                 android:layout_marginLeft="17dp"
+                android:fontFamily="@font/malgunfont"
                 android:gravity="center_vertical"
+                android:includeFontPadding="false"
                 android:text="결제를 취소하면 환불은 어떻게 되나요?"
                 android:textColor="#1a1a1a"
                 android:textSize="13.71dp"
-                android:fontFamily="@font/malgunfont"
-                android:includeFontPadding="false"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
