@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.databinding.ObservableBoolean;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 
 import com.dutch.hdh.dutchpayapp.Constants;
 import com.dutch.hdh.dutchpayapp.MyApplication;
@@ -29,9 +30,9 @@ public class SetupPresenter implements SetupContract.Presenter {
     private Activity mActivity;
     private FragmentManager mFragmentManager;
 
-    public SetupPresenter(SetupContract.View mView, Activity mActivity, FragmentManager mFragmentManager,boolean autologin) {
+    public SetupPresenter(SetupContract.View mView, Activity mActivity, FragmentManager mFragmentManager) {
         this.mView = mView;
-        this.autoFlag.set(autologin);
+        this.autoFlag.set(false);
         this.pushFlag.set(true);
         this.marketingFlag.set(true);
         this.mActivity = mActivity;
@@ -143,7 +144,10 @@ public class SetupPresenter implements SetupContract.Presenter {
         SharedPreferences.Editor editor = sharedPreferences.edit();
 
         //앱 내에 유저설정 저장
-        editor.putBoolean(Constants.USER_AUTOLOGIN, autoFlag.get()); //자동 로그인 설정 저장
+        editor.putBoolean(Constants.USER_AUTOLOGIN, !(autoFlag.get()) ); //자동 로그인 설정 저장
+
+        String t = autoFlag.get() ? "t" : "f";
+        Log.e("autoFlag ->", t);
 
         editor.commit();
     }

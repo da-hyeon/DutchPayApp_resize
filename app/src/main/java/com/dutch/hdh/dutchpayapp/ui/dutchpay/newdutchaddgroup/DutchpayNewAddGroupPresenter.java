@@ -59,7 +59,7 @@ public class DutchpayNewAddGroupPresenter implements DutchpayNewAddGroupContract
         //그룹불러오기
         Call<MyGroup> getGroupList2 = MyApplication
                 .getRestAdapter()
-                .getGroupList2(String.valueOf(0));
+                .getGroupList2(mMyApplication.getUserInfo().getUserCode());
 
         getGroupList2.enqueue(new Callback<MyGroup>() {
             @Override

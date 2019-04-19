@@ -666,6 +666,9 @@ public class MainActivityPresenter implements MainActivityContract.Presenter {
         mView.hideDrawerLayout();
         setDefaultMainStack();
 
+        if (getCurrentFragment() instanceof InfoFragment)
+            return;
+
         //프래그먼트 이동
         FragmentTransaction fragmentTransaction = mFragmentManager.beginTransaction();
         fragmentTransaction.setCustomAnimations(R.anim.fade_in, 0, 0, R.anim.fade_out);
@@ -685,6 +688,9 @@ public class MainActivityPresenter implements MainActivityContract.Presenter {
         mView.hideDrawerLayout();
         setDefaultMainStack();
 
+        if (getCurrentFragment() instanceof CustomerFragment)
+            return;
+
         //프래그먼트 이동
         FragmentTransaction fragmentTransaction = mFragmentManager.beginTransaction();
         fragmentTransaction.setCustomAnimations(R.anim.fade_in, 0, 0, R.anim.fade_out);
@@ -702,6 +708,10 @@ public class MainActivityPresenter implements MainActivityContract.Presenter {
     public void clickHome() {
         //메뉴 닫기 , 프래그먼트 닫기
         mView.hideDrawerLayout();
+
+        if (getCurrentFragment() instanceof MainFragment)
+            return;
+
         setDefaultMainStack();
     }
 
@@ -712,6 +722,13 @@ public class MainActivityPresenter implements MainActivityContract.Presenter {
     public void clickSetup() {
         //메뉴 닫기 , 프래그먼트 닫기
         mView.hideDrawerLayout();
+
+
+        if (!mMyApplication.getUserInfo().isUserState()) {
+            mView.showFailDialog("실패", "로그인을 해주세요.");
+            return;
+        }
+
         setDefaultMainStack();
 
         //프래그먼트 이동
