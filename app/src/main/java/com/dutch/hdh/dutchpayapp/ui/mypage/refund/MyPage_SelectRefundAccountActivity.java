@@ -28,6 +28,7 @@ public class MyPage_SelectRefundAccountActivity extends BaseActivity implements 
         mBinding.vCancel.setOnClickListener(v->
             mPresenter.clickCancel()
         );
+
     }
 
     /**

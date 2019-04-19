@@ -5,6 +5,8 @@ import android.content.Intent;
 
 import com.dutch.hdh.dutchpayapp.Constants;
 
+import java.util.Objects;
+
 public class ReceiptPresenter implements ReceiptContract.Presenter {
 
     private ReceiptContract.View mView;
@@ -18,6 +20,7 @@ public class ReceiptPresenter implements ReceiptContract.Presenter {
         this.mView = mView;
         this.mContext = mContext;
         this.mIntent = mIntent;
+
     }
 
     /**
@@ -25,10 +28,10 @@ public class ReceiptPresenter implements ReceiptContract.Presenter {
      */
     @Override
     public void setVIew() {
-        String date = mIntent.getExtras().getString(Constants.PAYMENT_DATE);
-        String storeName = mIntent.getExtras().getString(Constants.PAYMENT_STORE_NAME);
+        String date = Objects.requireNonNull(mIntent.getExtras()).getString(Constants.PAYMENT_DATE);
+        String storeName = Objects.requireNonNull(mIntent.getExtras()).getString(Constants.PAYMENT_STORE_NAME);
         int amount = mIntent.getExtras().getInt(Constants.PAYMENT_AMOUNT);
-        String storeLocation = mIntent.getExtras().getString(Constants.PAYMENT_STORE_LOCATION);
+        String storeLocation = Objects.requireNonNull(mIntent.getExtras()).getString(Constants.PAYMENT_STORE_LOCATION);
 
         mView.changeDate(date);
         mView.changeStoreName(storeName);

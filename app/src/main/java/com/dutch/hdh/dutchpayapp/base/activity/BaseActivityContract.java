@@ -14,6 +14,5 @@ public interface BaseActivityContract {
         void hideKeyboard();
     }
     interface Presenter{
-        void AutoLoginCheck();
     }
 }

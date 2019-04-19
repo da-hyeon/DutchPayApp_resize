@@ -1,10 +1,12 @@
 package com.dutch.hdh.dutchpayapp.base.activity;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.os.PersistableBundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -16,10 +18,10 @@ import com.dutch.hdh.dutchpayapp.R;
 import com.dutch.hdh.dutchpayapp.data.util.LogUtils;
 import com.kinda.alert.KAlertDialog;
 
+@SuppressLint("Registered")
 public class BaseActivity extends AppCompatActivity implements BaseActivityContract.View {
 
     private BaseActivityContract.Presenter mPresenter;
-    private MyApplication myApplication;
     // Permission
     public static final int PERMISSION = 0x00;
 
@@ -27,10 +29,8 @@ public class BaseActivity extends AppCompatActivity implements BaseActivityContr
     public void onCreate(Bundle savedInstanceState, PersistableBundle persistentState) {
         super.onCreate(savedInstanceState, persistentState);
         mPresenter = new BaseActivityPresenter(this, this, this, getSupportFragmentManager());
-        myApplication = MyApplication.getInstance();
+        MyApplication myApplication = MyApplication.getInstance();
         myApplication.setActivity(this);
-
-        mPresenter.AutoLoginCheck();
     }
 
     @Override
@@ -43,7 +43,7 @@ public class BaseActivity extends AppCompatActivity implements BaseActivityContr
      * 권한 획득 결과
      */
     @Override
-    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         switch (requestCode) {
             case PERMISSION:
                 // 권한은 입력받은 순서대로 돌아옴
@@ -116,7 +116,7 @@ public class BaseActivity extends AppCompatActivity implements BaseActivityContr
                     finish();
                 })
                 .setCancelText("취소")
-                .setCancelClickListener(sDialog -> sDialog.dismissWithAnimation())
+                .setCancelClickListener(KAlertDialog::dismissWithAnimation)
                 .show();
     }
 
@@ -129,9 +129,7 @@ public class BaseActivity extends AppCompatActivity implements BaseActivityContr
                 .setTitleText(title)
                 .setContentText(content)
                 .setConfirmText("확인")
-                .setConfirmClickListener(sDialog -> {
-                    sDialog.dismissWithAnimation();
-                })
+                .setConfirmClickListener(KAlertDialog::dismissWithAnimation)
                 .show();
     }
 
@@ -156,13 +154,5 @@ public class BaseActivity extends AppCompatActivity implements BaseActivityContr
         } catch (IllegalStateException e) {
             LogUtils.e(e);
         }
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        //자동로그인이 켜져 있으면 해당 계정 저장
-
-        //꺼져있으면 해당 네임파일 null
     }
 }

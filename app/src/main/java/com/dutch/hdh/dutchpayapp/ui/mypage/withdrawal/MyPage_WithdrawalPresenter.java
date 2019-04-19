@@ -3,7 +3,9 @@ package com.dutch.hdh.dutchpayapp.ui.mypage.withdrawal;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
 
 import com.dutch.hdh.dutchpayapp.Constants;
 import com.dutch.hdh.dutchpayapp.MyApplication;
@@ -14,6 +16,8 @@ import com.dutch.hdh.dutchpayapp.ui.mypage.refund.MyPage_SelectRefundAccountActi
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+
+import static android.content.Context.MODE_PRIVATE;
 
 public class MyPage_WithdrawalPresenter implements MyPage_WithdrawalContract.Presenter {
     private MyPage_WithdrawalContract.View mView;
@@ -37,11 +41,11 @@ public class MyPage_WithdrawalPresenter implements MyPage_WithdrawalContract.Pre
     @Override
     public void initView(Intent intent) {
         mView.changeRefundAmount(mMyApplication.getUserInfo().getUserMoney());
-        int accountTypeCode = intent.getIntExtra(Constants.ACCOUNT_TYPE_CODE , 100);
+        int accountTypeCode = intent.getIntExtra(Constants.ACCOUNT_TYPE_CODE, 100);
         String accountNumber = intent.getStringExtra(Constants.ACCOUNT_NUMBER);
 
         //선택한 계좌가 없을때
-        if(accountTypeCode == 100){
+        if (accountTypeCode == 100) {
             //대표계좌설정
             Call<AccountList> changePassword = MyApplication
                     .getRestAdapter()
@@ -119,10 +123,73 @@ public class MyPage_WithdrawalPresenter implements MyPage_WithdrawalContract.Pre
     }
 
     /**
+     * 탈퇴하기 버튼 클릭 이벤트 처리
+     */
+    @Override
+    public void clickWithdrawal() {
+        mView.showWarningDialog("경고", "정말 회원 탈퇴를 하시겠습니까?");
+    }
+
+    /**
+     * 성공 다이얼로그 확인 버튼 이벤트 처리
+     */
+    @Override
+    public void clickOKSuccessDialog() {
+        autoLogin();
+        if (android.os.Build.VERSION.SDK_INT >= 16) {
+            mActivity.finishAffinity();
+            System.runFinalization();
+            System.exit(0);
+        } else {
+            ActivityCompat.finishAffinity(mActivity);
+            System.runFinalization();
+            System.exit(0);
+        }
+    }
+
+    /**
+     * 경고 다이얼로그 확인 버튼 이벤트 처리
+     */
+    @Override
+    public void clickOKFailDialog() {
+        Call<Void> withdrawal = MyApplication
+                .getRestAdapter()
+                .withdrawal(mMyApplication.getUserInfo().getUserCode());
+
+        withdrawal.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(@NonNull Call<Void> call, @NonNull Response<Void> response) {
+                if (response.isSuccessful()) {
+                    mView.showSuccessDialog("성공", "회원탈퇴가 정상적으로 처리되었습니다.\n앱이 종료됩니다.");
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<Void> call, @NonNull Throwable t) {
+                // mView.showFailDialog(t.getMessage());
+            }
+        });
+    }
+
+    /**
      * 뒤로가기 처리
      */
     @Override
     public void clickCancel() {
         mView.finish();
+    }
+
+    /**
+     * 자동로그인 처리
+     */
+    private void autoLogin() {
+        SharedPreferences sharedPreferences = mActivity.getSharedPreferences(Constants.USER_INFOMATION, MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+
+        editor.putString(Constants.USER_ID, ""); // 이메일 저장
+        editor.putString(Constants.USER_PASSWORD, ""); // 비밀번호 저장
+
+
+        editor.commit();
     }
 }

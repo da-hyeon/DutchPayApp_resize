@@ -14,7 +14,7 @@ import com.dutch.hdh.dutchpayapp.R;
 import com.dutch.hdh.dutchpayapp.base.fragment.BaseFragment;
 import com.dutch.hdh.dutchpayapp.databinding.FragmentMainBinding;
 
-public class MainFragment extends BaseFragment implements MainFragmentContract.View{
+public class MainFragment extends BaseFragment implements MainFragmentContract.View {
 
     private FragmentMainBinding mBinding;
     private MainFragmentContract.Presenter mPresenter;
@@ -29,7 +29,7 @@ public class MainFragment extends BaseFragment implements MainFragmentContract.V
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_main, container, false);
-        mPresenter = new MainFragmentPresenter(this, getContext() , getFragmentManager() , getActivity());
+        mPresenter = new MainFragmentPresenter(this, getContext(), getFragmentManager(), getActivity());
 
         initData();
 
@@ -37,19 +37,27 @@ public class MainFragment extends BaseFragment implements MainFragmentContract.V
         mBinding.tvTitle.setSelected(true);
 
         //개인결제 시작하기 버튼 클릭
-        mBinding.ivSoloPay.setOnClickListener(v->
-            mPresenter.clickPersonalPaymemt()
+        mBinding.ivSoloPay.setOnClickListener(v ->
+                mPresenter.clickPersonalPaymemt()
         );
 
         //더치페이 시작하기 버튼 클릭
-        mBinding.ivDutchPay.setOnClickListener(v->
-            mPresenter.clickDutchPayment()
+        mBinding.ivDutchPay.setOnClickListener(v ->
+                mPresenter.clickDutchPayment()
         );
 
         //모든 이벤트 보기 버튼 클릭
-        mBinding.llAllEvent.setOnClickListener(v->
-            mPresenter.clickAllEvent()
+        mBinding.llAllEvent.setOnClickListener(v ->
+                mPresenter.clickAllEvent()
         );
+
+
+        mBinding.layoutSuccessLogin.setOnClickListener(v -> {
+            if (mBinding.layoutSuccessLogin.getVisibility() == View.VISIBLE) {
+                mPresenter.clickMyMoney();
+            }
+        });
+
 
         //ViewPager 슬라이드
         mBinding.vpMainVP.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
@@ -97,7 +105,7 @@ public class MainFragment extends BaseFragment implements MainFragmentContract.V
             mBinding.txtUserDutchMoney.setText(String.format("%,d", userDutchMoney) + " ");
         } else {
             mBinding.layoutSuccessLogin.setVisibility(View.GONE);
-             mBinding.layoutNoneLogin.setVisibility(View.VISIBLE);
+            mBinding.layoutNoneLogin.setVisibility(View.VISIBLE);
         }
     }
 
@@ -116,7 +124,7 @@ public class MainFragment extends BaseFragment implements MainFragmentContract.V
     @SuppressLint("DefaultLocale")
     @Override
     public void changeUserMoney(int money) {
-        mBinding.txtUserDutchMoney.setText(String.format("%,d" , money));
+        mBinding.txtUserDutchMoney.setText(String.format("%,d", money));
     }
 
     /**

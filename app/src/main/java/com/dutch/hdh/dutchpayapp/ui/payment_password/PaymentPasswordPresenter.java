@@ -42,7 +42,10 @@ public class PaymentPasswordPresenter implements PaymentPasswordContract.Present
     //true = 개인결제 , false = 더치페이
     private boolean mPath;
 
-    public PaymentPasswordPresenter(PaymentPasswordContract.View mView, Context mContext, Activity mActivity , FragmentManager mFragmentManager, Bundle bundle) {
+    /**
+     * 생성자
+     */
+    PaymentPasswordPresenter(PaymentPasswordContract.View mView, Context mContext, Activity mActivity , FragmentManager mFragmentManager, Bundle bundle) {
         this.mView = mView;
         this.mContext = mContext;
         this.mActivity = mActivity;
@@ -65,6 +68,9 @@ public class PaymentPasswordPresenter implements PaymentPasswordContract.Present
         mPassword = "";
     }
 
+    /**
+     * 랜덤 번호 생성
+     */
     @Override
     public void initRandomNumber() {
         //난수생성
@@ -79,6 +85,9 @@ public class PaymentPasswordPresenter implements PaymentPasswordContract.Present
         }
     }
 
+    /**
+     * 숫자키패드 클릭 이벤트 처리
+     */
     @Override
     public void clickNumber(String numberText) {
         if (mPassword.length() < 6) {
@@ -94,6 +103,9 @@ public class PaymentPasswordPresenter implements PaymentPasswordContract.Present
         }
     }
 
+    /**
+     * 삭제 버튼 클릭 이벤트 처리
+     */
     @Override
     public void clickDeleteButton() {
         mPassword = "";
@@ -103,8 +115,12 @@ public class PaymentPasswordPresenter implements PaymentPasswordContract.Present
         }
     }
 
+    /**
+     * 확인 버튼 클릭 이벤트 처리
+     */
     @Override
     public void clickOKButton() {
+        //결제비밀번호가 채워지지 않았다면
         if (isEmpty()) {
             mView.showFailDialog("실패", "결제 비밀번호는 6자리 입니다.");
         } else {
@@ -167,7 +183,7 @@ public class PaymentPasswordPresenter implements PaymentPasswordContract.Present
 
                     setnewDutchpay.enqueue(new Callback<Void>() {
                         @Override
-                        public void onResponse(Call<Void> call, Response<Void> response) {
+                        public void onResponse(@NonNull Call<Void> call, @NonNull Response<Void> response) {
                             Log.e("response", response.message());
 
                             mView.showSuccessDialog("성공", "결제 완료");
@@ -179,7 +195,7 @@ public class PaymentPasswordPresenter implements PaymentPasswordContract.Present
                         }
 
                         @Override
-                        public void onFailure(Call<Void> call, Throwable t) {
+                        public void onFailure(@NonNull Call<Void> call, @NonNull Throwable t) {
                             //서버통신 오류
                             mView.showFailDialog("실패", "서버와 통신할 수 없습니다.");
                         }
@@ -199,7 +215,7 @@ public class PaymentPasswordPresenter implements PaymentPasswordContract.Present
     public void clickSuccessDialog() {
 
         Intent intent = new Intent(mContext, ReceiptActivity.class);
-        mView.setDefaultMainStack();
+
         intent.putExtra(Constants.PAYMENT_DATE ,currentTime());
 
         if (mPath) {
@@ -210,29 +226,24 @@ public class PaymentPasswordPresenter implements PaymentPasswordContract.Present
         } else {
 
         }
-
         mContext.startActivity(intent);
         mActivity.overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+
+        mView.setDefaultMainStack();
     }
 
     /**
      * 비밀번호 6자리 입력 조회
      */
     private boolean isEmpty() {
-        if (mPassword.length() < 6) {
-            return true;
-        }
-        return false;
+        return mPassword.length() < 6;
     }
 
     /**
      * 비밀번호가 같은지 조회
      */
     private boolean isSame() {
-        if (mMyApplication.getUserInfo().getUserEasyPassword().equals(mPassword)) {
-            return true;
-        }
-        return false;
+        return mMyApplication.getUserInfo().getUserEasyPassword().equals(mPassword);
     }
 
     /**
@@ -241,14 +252,14 @@ public class PaymentPasswordPresenter implements PaymentPasswordContract.Present
     private String currentTime() {
         Calendar cal = Calendar.getInstance();
         //현재 년도, 월, 일
-        int year = cal.get(cal.YEAR);
-        int month = cal.get(cal.MONTH) + 1;
-        int date = cal.get(cal.DATE);
+        int year = cal.get(Calendar.YEAR);
+        int month = cal.get(Calendar.MONTH) + 1;
+        int date = cal.get(Calendar.DATE);
 
         //현재 (시,분,초)
-        int hour = cal.get(cal.HOUR_OF_DAY);
-        int min = cal.get(cal.MINUTE);
-        int sec = cal.get(cal.SECOND);
+        int hour = cal.get(Calendar.HOUR_OF_DAY);
+        int min = cal.get(Calendar.MINUTE);
+        int sec = cal.get(Calendar.SECOND);
 
         return year + "년 " + month + "월 " + date +"일 " + hour +"시 " + min + "분 " + sec + "초";
     }

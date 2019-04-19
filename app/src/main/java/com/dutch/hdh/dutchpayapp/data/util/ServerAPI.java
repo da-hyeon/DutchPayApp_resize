@@ -336,4 +336,16 @@ public interface ServerAPI {
     @POST(Constants.UPDATE_PAYMENT_QRCODE_REQUEST_URL)
     Call<String> updateQRCodePayment(@Field("qrcode") String qrcode ,
                                         @Field("usercode") String usercode);
+
+
+    /**
+     * 회원탈퇴 요청
+     *
+     * @param usercode
+     * @return
+     */
+    @FormUrlEncoded
+    @POST(Constants.USER_DELETE_REQUEST_URL)
+    Call<Void> withdrawal(
+            @Field("usercode") String usercode);
 }

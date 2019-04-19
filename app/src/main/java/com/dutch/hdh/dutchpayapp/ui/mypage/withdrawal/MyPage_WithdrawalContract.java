@@ -16,5 +16,8 @@ public interface MyPage_WithdrawalContract {
         void initView(Intent intent);
         void clickCancel();
         void clickChangeRefundAccount();
+        void clickWithdrawal();
+        void clickOKSuccessDialog();
+        void clickOKFailDialog();
     }
 }

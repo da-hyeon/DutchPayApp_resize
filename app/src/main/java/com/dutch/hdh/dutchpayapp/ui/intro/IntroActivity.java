@@ -7,7 +7,6 @@ import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.constraint.ConstraintLayout;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
@@ -17,7 +16,6 @@ import com.dutch.hdh.dutchpayapp.Constants;
 import com.dutch.hdh.dutchpayapp.MyApplication;
 import com.dutch.hdh.dutchpayapp.R;
 import com.dutch.hdh.dutchpayapp.base.activity.BaseActivity;
-import com.dutch.hdh.dutchpayapp.base.fragment.BaseFragmentContract;
 import com.dutch.hdh.dutchpayapp.data.db.UserInfo;
 import com.dutch.hdh.dutchpayapp.ui.main.activity.MainActivity;
 
@@ -63,7 +61,6 @@ public class IntroActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_intro);
 
-<<<<<<< HEAD
         MyApplication mMyApplication = MyApplication.getInstance();
 
         //저장된 아이디 ,비밀번호 불러오기
@@ -101,9 +98,7 @@ public class IntroActivity extends BaseActivity {
                 }
             });
         }
-=======
 
->>>>>>> 3d780fb7a6961694dd43b5acfb89ffadc6d8ead3
     }
 
     @Override

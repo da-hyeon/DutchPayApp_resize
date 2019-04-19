@@ -16,6 +16,7 @@ import com.dutch.hdh.dutchpayapp.data.db.EventList;
 import com.dutch.hdh.dutchpayapp.ui.dutchpay.start.DutchpayStartFragment;
 import com.dutch.hdh.dutchpayapp.ui.event.main.Event_MainFragment;
 import com.dutch.hdh.dutchpayapp.ui.personal_payment.main.PersonalPayment_MainFragment;
+import com.dutch.hdh.dutchpayapp.ui.wallet.mywallet.MyWalletFragment;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -147,6 +148,21 @@ public class MainFragmentPresenter implements MainFragmentContract.Presenter {
         Event_MainFragment event_MainFragment = new Event_MainFragment();
         fragmentTransaction.replace(R.id.flFragmentContainer, event_MainFragment, Event_MainFragment.class.getName());
         fragmentTransaction.addToBackStack(Event_MainFragment.class.getName());
+        fragmentTransaction.commit();
+    }
+
+    /**
+     * 금액 클릭 이벤트 처리
+     */
+    @Override
+    public void clickMyMoney() {
+        //프래그먼트 이동
+        FragmentTransaction fragmentTransaction = mFragmentManager.beginTransaction();
+        fragmentTransaction.setCustomAnimations(R.anim.fade_in, 0, 0, R.anim.fade_out);
+
+        MyWalletFragment myWalletFragment = new MyWalletFragment();
+        fragmentTransaction.replace(R.id.flFragmentContainer, myWalletFragment, MyWalletFragment.class.getName());
+        fragmentTransaction.addToBackStack(MyWalletFragment.class.getName());
         fragmentTransaction.commit();
     }
 

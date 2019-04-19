@@ -1,5 +1,6 @@
 package com.dutch.hdh.dutchpayapp.ui.mypage.withdrawal;
 
+import android.annotation.SuppressLint;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.DrawableRes;
@@ -7,6 +8,7 @@ import android.support.annotation.DrawableRes;
 import com.dutch.hdh.dutchpayapp.R;
 import com.dutch.hdh.dutchpayapp.base.activity.BaseActivity;
 import com.dutch.hdh.dutchpayapp.databinding.ActivityMyPageWithdrawalBinding;
+import com.kinda.alert.KAlertDialog;
 
 public class MyPage_WithdrawalActivity extends BaseActivity implements MyPage_WithdrawalContract.View {
 
@@ -36,6 +38,10 @@ public class MyPage_WithdrawalActivity extends BaseActivity implements MyPage_Wi
         mBinding.btChangeRefundAccount.setOnClickListener(v->
                 mPresenter.clickChangeRefundAccount()
         );
+
+        mBinding.btWihdrawal.setOnClickListener(v->
+            mPresenter.clickWithdrawal()
+        );
     }
 
     /**
@@ -45,6 +51,7 @@ public class MyPage_WithdrawalActivity extends BaseActivity implements MyPage_Wi
             mPresenter.initView(getIntent());
     }
 
+    @SuppressLint({"SetTextI18n", "DefaultLocale"})
     @Override
     public void changeRefundAmount(int amount) {
         mBinding.tvRefundAmount.setText(String.format("%,d" , amount) + "원");
@@ -72,5 +79,46 @@ public class MyPage_WithdrawalActivity extends BaseActivity implements MyPage_Wi
     @Override
     public void changeAccountNumber(String accountNumber) {
         mBinding.tvAccountNumber.setText(accountNumber);
+    }
+
+    /**
+     * 성공 다이얼로그 보이기
+     * OK = 되돌아가기
+     */
+    @Override
+    public void showSuccessDialog(String title, String content) {
+
+        KAlertDialog dialog = new KAlertDialog(this, KAlertDialog.SUCCESS_TYPE);
+
+        dialog.setTitleText(title);
+        dialog.setContentText(content);
+        dialog.setConfirmText("확인");
+        dialog.setConfirmClickListener(sDialog -> {
+            sDialog.dismissWithAnimation();
+            mPresenter.clickOKSuccessDialog();
+        });
+        dialog.show();
+    }
+
+
+    /**
+     * 경고 다이얼로그 보이기
+     * OK = 되돌아가기
+     * Cancel = 다이얼로그 감추기
+     */
+    @Override
+    public void showWarningDialog(String title, String content) {
+
+        KAlertDialog dialog = new KAlertDialog(this, KAlertDialog.WARNING_TYPE);
+        dialog.setTitleText(title);
+        dialog.setContentText(content);
+        dialog.setConfirmText("확인");
+        dialog.setConfirmClickListener(sDialog -> {
+            sDialog.dismissWithAnimation();
+            mPresenter.clickOKFailDialog();
+        });
+        dialog.setCancelText("취소");
+        dialog.setCancelClickListener(KAlertDialog::dismissWithAnimation);
+        dialog.show();
     }
 }

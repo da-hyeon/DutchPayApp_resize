@@ -33,9 +33,4 @@ public class BaseActivityPresenter implements BaseActivityContract.Presenter {
         this.mFragmentManager = mFragmentManager;
         mMyApplication = MyApplication.getInstance();
     }
-
-    @Override
-    public void AutoLoginCheck() {
-
-    }
 }

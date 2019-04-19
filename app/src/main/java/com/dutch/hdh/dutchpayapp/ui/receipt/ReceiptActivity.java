@@ -1,9 +1,8 @@
 package com.dutch.hdh.dutchpayapp.ui.receipt;
 
+import android.annotation.SuppressLint;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 
 import com.dutch.hdh.dutchpayapp.R;
 import com.dutch.hdh.dutchpayapp.base.activity.BaseActivity;
@@ -54,6 +53,7 @@ public class ReceiptActivity extends BaseActivity implements ReceiptContract.Vie
     /**
      * 금액 변경하기
      */
+    @SuppressLint({"DefaultLocale", "SetTextI18n"})
     @Override
     public void changeAmount(int amount) {
         mBinding.tvAmount.setText(String.format("%,d" , amount)+ "원");

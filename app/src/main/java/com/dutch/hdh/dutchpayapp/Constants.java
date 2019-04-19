@@ -23,12 +23,15 @@ public class Constants {
      * API URL
      */
     public static final String USER_REGISTER_REQUEST_URL = "dutchpay_register3.php"; //회원가입 요청
+    public static final String USER_DELETE_REQUEST_URL = "dutchpay_memberdelete.php"; //회원탈퇴 요청
 
     public static final String CREATE_GROUP_REQUEST_URL = "dutchpay_groupapplication.php"; //그룹생성 요청
     public static final String SELECT_GROUP_REQUEST_URL = "dutchpay_groupselect.php"; //그룹리스트 요청
     public static final String SELECT_GROUP_REQUEST_URL_2 = "dutchpay_groupselect1.php"; //그룹리스트(유저 ver) 요청
     public static final String DELETE_GROUP_REQUEST_URL = "dutchpay_groupdelete.php"; //그룹삭제 요청
     public static final String UPDATE_GROUP_REQUEST_URL = "dutchpay_groupupdate.php"; //그룹삭제 요청
+
+
     public static final String LOG_TAG = "DUTCHPAY_LOG";
     public static final boolean LOG_PRINT = true;
 
@@ -46,10 +49,7 @@ public class Constants {
     //DutchpayNewConfirmFragment -> PaymentPasswordFragment
     public static final String PAYMENT_INFO = "dutchpayInfo";
     public static final String PAYMENT_LIST_JSON = "dutchpayGroupJson";
-<<<<<<< HEAD
 
-=======
->>>>>>> 3d780fb7a6961694dd43b5acfb89ffadc6d8ead3
 
     /**
      * Extra ID
@@ -58,15 +58,12 @@ public class Constants {
     public static final String ACCOUNT_TYPE_CODE = "accountTypeCode";
     public static final String ACCOUNT_NUMBER = "accountNumber";
 
-<<<<<<< HEAD
     //PaymentPassword -> ReceiptActivity
     public static final String PAYMENT_DATE = "date";
     public static final String PAYMENT_STORE_NAME = "storeName";
     public static final String PAYMENT_AMOUNT = "amount";
     public static final String PAYMENT_STORE_LOCATION = "storeLocation";
 
-=======
->>>>>>> 3d780fb7a6961694dd43b5acfb89ffadc6d8ead3
     /**
      * API URL
      */
