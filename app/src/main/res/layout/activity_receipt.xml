@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="receiptActivity"
+            type="com.dutch.hdh.dutchpayapp.ui.receipt.ReceiptActivity"/>
+
+    </data>
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/layoutBG">
+
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/clAppBar"
+            android:layout_width="match_parent"
+            android:layout_height="62.67dp"
+            android:layout_marginLeft="17.14dp"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/malgunfont"
+                android:includeFontPadding="false"
+                android:text="결제 내역"
+                android:textColor="#2a2a2a"
+                android:textSize="18.85dp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tvCancel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="17.14dp"
+                android:fontFamily="@font/malgunfont"
+                android:includeFontPadding="false"
+                android:text="닫기"
+                android:textColor="#2a2a2a"
+                android:textSize="18.85dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <View
+                android:id="@+id/vCancel"
+                android:layout_width="70dp"
+                android:layout_height="match_parent"
+                app:layout_constraintRight_toRightOf="parent" />
+
+
+        </android.support.constraint.ConstraintLayout>
+
+        <View
+            android:id="@+id/vLine"
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="#dbd9da"
+            app:layout_constraintTop_toBottomOf="@+id/clAppBar" />
+
+        <TextView
+            android:id="@+id/tvTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="17.14dp"
+            android:layout_marginTop="28.57dp"
+            android:fontFamily="@font/malgunfont"
+            android:includeFontPadding="false"
+            android:text="개인결제"
+            android:textColor="#1e1e1e"
+            android:textSize="13.71dp"
+            android:textStyle="bold"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/vLine" />
+
+        <View
+            android:id="@+id/vMain"
+            android:layout_width="0dp"
+            android:layout_height="150.85dp"
+            android:layout_marginLeft="17.14dp"
+            android:layout_marginTop="7.14dp"
+            android:layout_marginRight="17.14dp"
+            android:background="#ffffff"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvTitle" />
+
+        <TextView
+            android:id="@+id/tvDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="32.85dp"
+            android:layout_marginTop="27.71dp"
+            android:fontFamily="@font/malgunfont"
+            android:includeFontPadding="false"
+            android:text="2019/04/26"
+            android:textColor="#2a2a2a"
+            android:textSize="13.71dp"
+            android:textStyle="bold"
+            app:layout_constraintLeft_toLeftOf="@+id/vMain"
+            app:layout_constraintTop_toTopOf="@+id/vMain" />
+
+        <Button
+            android:id="@+id/vRed"
+            android:layout_width="50.71dp"
+            android:layout_height="20.28dp"
+            android:layout_marginRight="32.85dp"
+            android:background="@drawable/outline_round_over_red"
+            android:fontFamily="@font/malgunfont"
+            android:includeFontPadding="false"
+            android:text="개인결제"
+            android:textColor="#ffffff"
+            android:textSize="10dp"
+            android:textStyle="bold"
+            app:layout_constraintRight_toRightOf="@+id/vMain"
+            app:layout_constraintTop_toTopOf="@+id/tvDate" />
+
+
+        <TextView
+            android:id="@+id/tvStoreName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="32.85dp"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/malgunfont"
+            android:includeFontPadding="false"
+            android:text="새마을 식당"
+            android:textColor="#2a2a2a"
+            android:textSize="13.71dp"
+            android:textStyle="bold"
+            app:layout_constraintLeft_toLeftOf="@+id/vMain"
+            app:layout_constraintTop_toBottomOf="@+id/tvDate" />
+
+
+        <TextView
+            android:id="@+id/tvAmount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/malgunfont"
+            android:includeFontPadding="false"
+            android:text="50,000원"
+            android:textColor="#2a2a2a"
+            android:textSize="13.71dp"
+            android:textStyle="bold"
+            app:layout_constraintRight_toRightOf="@+id/vRed"
+            app:layout_constraintTop_toBottomOf="@+id/tvDate" />
+
+        <TextView
+            android:id="@+id/tvStoreLocation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="32.85dp"
+            android:layout_marginTop="28.57dp"
+            android:fontFamily="@font/malgunfont"
+            android:includeFontPadding="false"
+            android:text="상점위치 : 서울시"
+            android:textColor="#2a2a2a"
+            android:textSize="13.71dp"
+            android:textStyle="bold"
+            app:layout_constraintLeft_toLeftOf="@+id/vMain"
+            app:layout_constraintTop_toBottomOf="@+id/tvStoreName" />
+
+    </android.support.constraint.ConstraintLayout>
+</layout>

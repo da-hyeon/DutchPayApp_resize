@@ -8,6 +8,8 @@ import android.support.v4.widget.DrawerLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
+import com.dutch.hdh.dutchpayapp.ui.main.fragment.MainFragment;
+
 public interface MainActivityContract {
     interface View{
         //init
@@ -16,7 +18,7 @@ public interface MainActivityContract {
         //show
         void showDrawerLayout();
         void showToast(String content);
-        void showUserInfo(boolean state);
+        void showUserInfo(boolean state,String userName);
         void showBell();
         void showExit();
         void showFailDialog(String title ,String content);
@@ -40,6 +42,7 @@ public interface MainActivityContract {
         void initMainFragment();
         void initLoginState();
 
+        MainFragment getMainFragment();
 //        튜토리얼
 //        void initToturial(ImageView imageView, String title , String content);
 //        void initToturial(LinearLayout linearLayout, String title , String content);
@@ -60,7 +63,6 @@ public interface MainActivityContract {
         void clickNotice();
         void clickService();
         void clickCustomerCenter();
-        void clickLogout();
         void clickHome();
         void clickSetup();
     }

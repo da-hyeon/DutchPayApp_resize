@@ -22,7 +22,7 @@ import com.kinda.alert.KAlertDialog;
 
 public class MainActivity extends BaseActivity implements MainActivityContract.View {
 
-    private MyApplication myApplication;
+
 
     private ActivityMainBinding mBinding;
     public MainActivityContract.Presenter mPresenter;
@@ -39,6 +39,7 @@ public class MainActivity extends BaseActivity implements MainActivityContract.V
         //객체생성 및 데이터 초기화
         initData();
 
+        //textView 포커스 주기
         mBinding.navigationView.tvNameTitle.setSelected(true);
 
         //메뉴버튼
@@ -130,10 +131,6 @@ public class MainActivity extends BaseActivity implements MainActivityContract.V
      */
     @Override
     public void initData() {
-        //myApplication Activity 등록
-        myApplication = MyApplication.getInstance();
-        myApplication.setActivity(this);
-
         //drawerLayout 등록
         mBinding.drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
@@ -190,8 +187,11 @@ public class MainActivity extends BaseActivity implements MainActivityContract.V
         Toast.makeText(this, content, Toast.LENGTH_SHORT).show();
     }
 
+    /**
+     * 유저정보 보여주기
+     */
     @Override
-    public void showUserInfo(boolean state) {
+    public void showUserInfo(boolean state ,String userName) {
         if (state) {
             //레이아웃 숨기기
             mBinding.navigationView.layoutLogin.setVisibility(View.GONE);
@@ -202,7 +202,7 @@ public class MainActivity extends BaseActivity implements MainActivityContract.V
             mBinding.navigationView.tvLogin.setVisibility(View.GONE);
             mBinding.navigationView.tvRegister.setVisibility(View.GONE);
 
-            mBinding.navigationView.tvNameTitle.setText(myApplication.getUserInfo().getUserName() + "님, 안녕하세요!");
+            mBinding.navigationView.tvNameTitle.setText(userName + "님, 안녕하세요!");
         } else {
             //레이아웃 보이기
             mBinding.navigationView.layoutLogin.setVisibility(View.VISIBLE);
@@ -300,7 +300,7 @@ public class MainActivity extends BaseActivity implements MainActivityContract.V
             if (v instanceof EditText) {
                 Rect outRect = new Rect();
                 v.getGlobalVisibleRect(outRect);
-                if (!outRect.contains((int)ev.getRawX(), (int)ev.getRawY())) {
+                if (!outRect.contains((int) ev.getRawX(), (int) ev.getRawY())) {
                     v.clearFocus();
                     InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
                     imm.hideSoftInputFromWindow(v.getWindowToken(), 0);

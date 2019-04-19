@@ -33,8 +33,6 @@ public class Payment_InfomationDialogPresenter implements Payment_InfomationDial
     private String mProductCode;
     private int mProductAmount;
 
-    private boolean isSuccessPayment;
-
     /**
      * 생성자
      */
@@ -71,7 +69,7 @@ public class Payment_InfomationDialogPresenter implements Payment_InfomationDial
      */
     @Override
     public void onDismiss() {
-        if (mScanView != null && !isSuccessPayment) {
+        if (mScanView != null) {
             mScanView.showCamera(1001);
         }
     }
@@ -81,6 +79,8 @@ public class Payment_InfomationDialogPresenter implements Payment_InfomationDial
      */
     @Override
     public void clickOK() {
+        mScanView = null;
+
         Bundle bundle = new Bundle();
         //상품코드
         bundle.putString(Constants.PRODUCT_CODE, mProductCode);

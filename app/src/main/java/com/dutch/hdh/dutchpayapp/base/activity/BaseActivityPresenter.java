@@ -2,9 +2,20 @@ package com.dutch.hdh.dutchpayapp.base.activity;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.SharedPreferences;
+import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentManager;
+import android.util.Log;
 
+import com.dutch.hdh.dutchpayapp.Constants;
 import com.dutch.hdh.dutchpayapp.MyApplication;
+import com.dutch.hdh.dutchpayapp.data.db.UserInfo;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
+import static android.content.Context.MODE_PRIVATE;
 
 public class BaseActivityPresenter implements BaseActivityContract.Presenter {
 
@@ -21,5 +32,10 @@ public class BaseActivityPresenter implements BaseActivityContract.Presenter {
         this.mActivity = mActivity;
         this.mFragmentManager = mFragmentManager;
         mMyApplication = MyApplication.getInstance();
+    }
+
+    @Override
+    public void AutoLoginCheck() {
+
     }
 }

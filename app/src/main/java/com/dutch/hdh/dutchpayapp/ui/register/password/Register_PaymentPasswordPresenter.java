@@ -1,12 +1,15 @@
 package com.dutch.hdh.dutchpayapp.ui.register.password;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 
+import com.dutch.hdh.dutchpayapp.Constants;
 import com.dutch.hdh.dutchpayapp.MyApplication;
 import com.dutch.hdh.dutchpayapp.R;
 import com.dutch.hdh.dutchpayapp.data.db.UserInfo;
@@ -19,12 +22,15 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static android.content.Context.MODE_PRIVATE;
+
 public class Register_PaymentPasswordPresenter implements Register_PaymentPasswordContract.Presenter {
 
     private Register_PaymentPasswordContract.View mView;
     private Context mContext;
+    private Activity mActivity;
     private FragmentManager mFragmentManager;
-    private MyApplication myApplication;
+    private MyApplication mMyApplication;
 
     //비밀번호 확인
     private String mPassword;
@@ -33,13 +39,14 @@ public class Register_PaymentPasswordPresenter implements Register_PaymentPasswo
     // false = 비밀번호 1차입력 , true = 비밀번호 2차 입력
     private boolean isPasswordCheck;
 
-    Register_PaymentPasswordPresenter(Register_PaymentPasswordContract.View mView, Context mContext, FragmentManager mFragmentManager) {
+    Register_PaymentPasswordPresenter(Register_PaymentPasswordContract.View mView, Context mContext, Activity mActivity , FragmentManager mFragmentManager) {
         this.mView = mView;
         this.mContext = mContext;
+        this.mActivity = mActivity;
         this.mFragmentManager = mFragmentManager;
         mPassword = "";
         isPasswordCheck = false;
-        myApplication = MyApplication.getInstance();
+        mMyApplication = MyApplication.getInstance();
     }
 
     @Override
@@ -139,11 +146,14 @@ public class Register_PaymentPasswordPresenter implements Register_PaymentPasswo
                     userRegister.enqueue(new Callback<UserInfo>() {
                         @Override
                         public void onResponse(@NonNull Call<UserInfo> call, @NonNull Response<UserInfo> response) {
-                            myApplication.setUserInfo(response.body());
-                            myApplication.getUserInfo().setUserState(true);
+                            mMyApplication.setUserInfo(response.body());
+                            mMyApplication.getUserInfo().setUserState(true);
 
                             mView.showSuccessDialog("회원가입이 완료 되었습니다.");
-                            myApplication.getUserInfo().setUserState(true);
+                            mMyApplication.getUserInfo().setUserState(true);
+
+                            //앱 내에 유저정보 저장
+                            autoLogin();
                         }
 
                         @Override
@@ -184,5 +194,17 @@ public class Register_PaymentPasswordPresenter implements Register_PaymentPasswo
      */
     private boolean isSame() {
         return mPassword.equals(mPasswordCheck);
+    }
+
+    /**
+     * 자동로그인 처리
+     */
+    private void autoLogin(){
+        SharedPreferences sharedPreferences = mActivity.getSharedPreferences(Constants.USER_INFOMATION ,MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(Constants.USER_ID,mMyApplication.getUserInfo().getUserEmail()); // 이메일 저장
+        editor.putString(Constants.USER_PASSWORD,mMyApplication.getUserInfo().getUserPassword()); // 비밀번호 저장
+
+        editor.commit();
     }
 }

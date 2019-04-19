@@ -45,6 +45,7 @@ public class MainFragmentPresenter implements MainFragmentContract.Presenter {
      */
     @Override
     public void initLoginState() {
+        Log.d("UserState" , mMyApplication.getUserInfo().isUserState()+"");
         mView.showUserInfo(mMyApplication.getUserInfo().getUserName(), mMyApplication.getUserInfo().getUserMoney(), mMyApplication.getUserInfo().isUserState());
     }
 

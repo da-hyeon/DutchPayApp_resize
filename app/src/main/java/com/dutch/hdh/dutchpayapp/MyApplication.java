@@ -5,6 +5,7 @@ import android.app.Application;
 import android.content.Context;
 
 import com.dutch.hdh.dutchpayapp.data.db.PersonalPaymentInformation;
+import com.dutch.hdh.dutchpayapp.data.db.Product;
 import com.dutch.hdh.dutchpayapp.data.db.UserInfo;
 import com.dutch.hdh.dutchpayapp.data.util.ServerAPI;
 import com.dutch.hdh.dutchpayapp.ui.dutchpay.newdutchpay.DutchpayNewFragment;
@@ -42,6 +43,9 @@ public class MyApplication extends Application {
     //true = 진행중 , false = 진행 종료.
     private static boolean onGoingCheck;
 
+    //true = 로그인 , false = 비로그인
+    public static boolean isLoginState;
+
     private static final String BASE_URL = "http://dutchkor02.cafe24.com/";
 
     //더치페이 그룹 체크용
@@ -56,6 +60,7 @@ public class MyApplication extends Application {
     private static ServerAPI Interface;
 
     private UserInfo mUserInfo;
+    private Product mProduct;
     private PersonalPaymentInformation mPersonalPaymentInformation;
 
     private Register_TermsConditionsAgreementFragment mRegister_termsConditionsAgreementFragment;
@@ -93,10 +98,24 @@ public class MyApplication extends Application {
         }
         return mUserInfo;
     }
-
     public void setUserInfo(UserInfo mUserInfo) {
         this.mUserInfo = mUserInfo;
     }
+
+
+    /**
+     * Product Singleton
+     */
+    public Product getProduct() {
+        if (mProduct == null)
+            mProduct = new Product();
+
+        return mProduct;
+    }
+    public void setProduct(Product mProduct) {
+        this.mProduct = mProduct;
+    }
+
 
     /**
      * PersonalPaymentInformation Singleton
@@ -146,6 +165,9 @@ public class MyApplication extends Application {
 
         return mPayment_InfomationDialog;
     }
+
+
+
 
     public void setDutchpayNewFragment(DutchpayNewFragment mDutchpayNewFragment) {
         this.mDutchpayNewFragment = mDutchpayNewFragment;

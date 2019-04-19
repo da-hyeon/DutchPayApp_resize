@@ -1,10 +1,12 @@
 package com.dutch.hdh.dutchpayapp.ui.payment_password;
 
 import android.content.Context;
+import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +16,10 @@ import android.widget.TextView;
 import com.dutch.hdh.dutchpayapp.R;
 import com.dutch.hdh.dutchpayapp.base.fragment.BaseFragment;
 import com.dutch.hdh.dutchpayapp.databinding.FragmentPaymentPasswordBinding;
+import com.dutch.hdh.dutchpayapp.ui.receipt.ReceiptActivity;
+import com.kinda.alert.KAlertDialog;
+
+import java.util.Objects;
 
 
 public class PaymentPasswordFragment extends BaseFragment implements PaymentPasswordContract.View {
@@ -29,7 +35,7 @@ public class PaymentPasswordFragment extends BaseFragment implements PaymentPass
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_payment_password, container, false);
-        mPresenter = new PaymentPasswordPresenter(this , getContext() , getFragmentManager() , getArguments());
+        mPresenter = new PaymentPasswordPresenter(this , getContext() , getActivity(), getFragmentManager() , getArguments());
 
         initData();
 
@@ -96,4 +102,30 @@ public class PaymentPasswordFragment extends BaseFragment implements PaymentPass
             mDotImage[index].setImageResource(R.drawable.password_off);
         }
     }
+
+    /**
+     * 성공 다이얼로그 보이기
+     * OK = 되돌아가기
+     */
+    @Override
+    public void showSuccessDialog(String title, String content) {
+
+        KAlertDialog dialog = new KAlertDialog(Objects.requireNonNull(getContext()), KAlertDialog.SUCCESS_TYPE);
+
+        dialog.setTitleText(title);
+        dialog.setContentText(content);
+        dialog.setConfirmText("확인");
+        dialog.setConfirmClickListener(sDialog -> {
+            sDialog.dismissWithAnimation();
+            mPresenter.clickSuccessDialog();
+        });
+
+        if (!dialog.isShowing()) {
+            dialog.show();
+        }
+    }
+
+
+
+
 }

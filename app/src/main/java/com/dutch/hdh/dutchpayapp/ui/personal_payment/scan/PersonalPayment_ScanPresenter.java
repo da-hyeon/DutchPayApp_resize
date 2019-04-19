@@ -67,10 +67,12 @@ public class PersonalPayment_ScanPresenter implements PersonalPayment_ScanContra
                                 if (response.isSuccessful()) {
                                     if (response.body() != null) {
                                         if (response.body().getProductName() != null) {
-                                            Product product = response.body();
+
                                             MyApplication myApplication = MyApplication.getInstance();
+
+                                            myApplication.setProduct(response.body());
                                             if (!myApplication.getPaymentDialog(mContext).isShowing()) {
-                                                myApplication.getPaymentDialog(mContext).setDialog(mView, mFragmentManager, product.getProductCode(), product.getProductPrice());
+                                                myApplication.getPaymentDialog(mContext).setDialog(mView, mFragmentManager, myApplication.getProduct().getProductCode(), myApplication.getProduct().getProductPrice());
                                                 myApplication.getPaymentDialog(mContext).show();
                                             }
                                         } else {
