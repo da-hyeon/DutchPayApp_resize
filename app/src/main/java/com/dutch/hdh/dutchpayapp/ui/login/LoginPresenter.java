@@ -62,16 +62,9 @@ public class LoginPresenter implements LoginContract.Presenter {
                 public void onResponse(@NonNull Call<UserInfo> call, @NonNull Response<UserInfo> response) {
                     if (response.body() != null) {
                         mMyApplication.setUserInfo(response.body());
-                        if (mMyApplication.getUserInfo().getMessage() == null) {
-
-                            mMyApplication.getUserInfo().setUserState(true);
-                            mView.showSuccessDialog(mMyApplication.getUserInfo().getUserName() + "님 환영합니다.");
-                            //자동로그인
-                            autoLogin(isAutoLoginCheck);
-
-                        } else {
-                            mView.showFailDialog("아이디와 비밀번호를 확인해주세요.");
-                        }
+                        mMyApplication.getUserInfo().setUserState(true);
+                        mView.showSuccessDialog(mMyApplication.getUserInfo().getUserName()+"님 환영합니다.");
+                        autoLogin(isAutoLoginCheck);
                     } else {
                         mView.showFailDialog("아이디와 비밀번호를 확인해주세요.");
                     }

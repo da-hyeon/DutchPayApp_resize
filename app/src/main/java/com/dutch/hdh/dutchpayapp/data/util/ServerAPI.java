@@ -7,11 +7,8 @@ import com.dutch.hdh.dutchpayapp.data.db.EventList;
 import com.dutch.hdh.dutchpayapp.data.db.MyGroup;
 import com.dutch.hdh.dutchpayapp.data.db.CardCompanyList;
 import com.dutch.hdh.dutchpayapp.data.db.CardRegisterList;
-<<<<<<< HEAD
 import com.dutch.hdh.dutchpayapp.data.db.DutchpayDetail;
-=======
 import com.dutch.hdh.dutchpayapp.data.db.PayHistoryList;
->>>>>>> sungguen
 import com.dutch.hdh.dutchpayapp.data.db.Dutchpayhistory;
 import com.dutch.hdh.dutchpayapp.data.db.AccountList;
 import com.dutch.hdh.dutchpayapp.data.db.Product;
@@ -466,7 +463,6 @@ public interface ServerAPI {
      */
     @FormUrlEncoded
     @POST(Constants.UPDATE_PAYMENT_QRCODE_REQUEST_URL)
-<<<<<<< HEAD
     Call<String> updateQRCodePayment(@Field("qrcode") String qrcode ,
                                         @Field("usercode") String usercode);
 
@@ -481,8 +477,5 @@ public interface ServerAPI {
     @POST(Constants.USER_DELETE_REQUEST_URL)
     Call<Void> withdrawal(
             @Field("usercode") String usercode);
-=======
-    Call<String> updateQRCodePayment(@Field("qrcode") String qrcode,
-                                     @Field("usercode") String usercode);
->>>>>>> sungguen
+
 }

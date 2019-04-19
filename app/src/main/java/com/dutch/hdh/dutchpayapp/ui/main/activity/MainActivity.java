@@ -35,7 +35,7 @@ public class MainActivity extends BaseActivity implements MainActivityContract.V
         mBinding.setMainActiviy(this);
         mPresenter = new MainActivityPresenter(this, this, getSupportFragmentManager(), mBinding.drawerLayout, this);
         toggle = new ActionBarDrawerToggle(this, mBinding.drawerLayout, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-
+        mPresenter.setActivity();
         //객체생성 및 데이터 초기화
         initData();
 

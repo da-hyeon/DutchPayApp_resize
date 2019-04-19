@@ -3,17 +3,11 @@ package com.dutch.hdh.dutchpayapp.ui.view;
 import android.content.Context;
 import android.databinding.DataBindingUtil;
 import android.view.LayoutInflater;
-import android.view.View;
-import android.widget.AdapterView;
 import android.widget.LinearLayout;
 
-import com.dutch.hdh.dutchpayapp.R;
-import com.dutch.hdh.dutchpayapp.adapter.CardSelectListAdapter;
-import com.dutch.hdh.dutchpayapp.data.db.CardCompanyList;
-import com.dutch.hdh.dutchpayapp.databinding.DialogCardSelectBinding;
-import com.dutch.hdh.dutchpayapp.databinding.DialogCommonBinding;
 
-import java.util.ArrayList;
+import com.dutch.hdh.dutchpayapp.R;
+import com.dutch.hdh.dutchpayapp.databinding.DialogCommonBinding;
 
 public class CommonDialogView extends LinearLayout {
 

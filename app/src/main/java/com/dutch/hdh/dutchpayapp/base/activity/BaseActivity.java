@@ -1,15 +1,12 @@
 package com.dutch.hdh.dutchpayapp.base.activity;
 
-<<<<<<< HEAD
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.pm.PackageManager;
-=======
 import android.app.Dialog;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 
->>>>>>> sungguen
 import android.os.Bundle;
 import android.os.IBinder;
 import android.os.PersistableBundle;
@@ -25,15 +22,14 @@ import android.view.WindowManager;
 import com.dutch.hdh.dutchpayapp.MyApplication;
 import com.dutch.hdh.dutchpayapp.R;
 import com.dutch.hdh.dutchpayapp.ui.view.CommonDialogView;
+
 import android.view.inputmethod.InputMethodManager;
 
 import com.dutch.hdh.dutchpayapp.data.util.LogUtils;
 import com.kinda.alert.KAlertDialog;
 
-<<<<<<< HEAD
+
 @SuppressLint("Registered")
-=======
->>>>>>> sungguen
 public class BaseActivity extends AppCompatActivity implements BaseActivityContract.View {
 
     private BaseActivityContract.Presenter mPresenter;
@@ -43,12 +39,8 @@ public class BaseActivity extends AppCompatActivity implements BaseActivityContr
     @Override
     public void onCreate(Bundle savedInstanceState, PersistableBundle persistentState) {
         super.onCreate(savedInstanceState, persistentState);
-<<<<<<< HEAD
         mPresenter = new BaseActivityPresenter(this, this, this, getSupportFragmentManager());
-        MyApplication myApplication = MyApplication.getInstance();
-        myApplication.setActivity(this);
-=======
-        mPresenter = new BaseActivityPresenter(this, this, getSupportFragmentManager());
+
     }
 
 
@@ -60,7 +52,7 @@ public class BaseActivity extends AppCompatActivity implements BaseActivityContr
         build.setContentView(new CommonDialogView(this, title, content, true, new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (v.getId() == R.id.ivConfirm) {
+                if (v.getId() == R.id.ivConfirm) {  //고치기
                     build.dismiss();
                     if (isBack) {
                         onBackPressed();
@@ -78,13 +70,11 @@ public class BaseActivity extends AppCompatActivity implements BaseActivityContr
         window.setAttributes(lp);
         window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
->>>>>>> sungguen
     }
 
     /**
      * 임시로 공용 다이얼로
      */
-
 
 
     @Override

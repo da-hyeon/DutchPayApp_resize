@@ -37,7 +37,7 @@ public interface MainActivityContract {
 
     interface Presenter{
         void onFragmentResume();
-
+        void setActivity();
         //init
         void initMainFragment();
         void initLoginState();
