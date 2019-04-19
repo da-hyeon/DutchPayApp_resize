@@ -244,6 +244,22 @@ public interface ServerAPI {
             @Field("user_list1") String user_list1);
 
     /**
+     * 더치페이 참가자 송금 요청
+     * @param usercode_leader
+     * @param usercode_self
+     * @param dutchpaycode
+     * @param dutchpaypcode
+     * @return
+     */
+    @FormUrlEncoded
+    @POST(Constants.DUTCHPAY_MEMBER_PAY_REQUEST_URL)
+    Call<Void> setMemberDutchpay(
+            @Field("usercode_leader") int usercode_leader,
+            @Field("usercode_self") int usercode_self,
+            @Field("dutchpaycode") int dutchpaycode,
+            @Field("dutchpaypcode") int dutchpaypcode);
+
+    /**
      * 전화번호 변경 요청
      *
      * @param phone

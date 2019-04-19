@@ -18,9 +18,12 @@ public interface DutchpayNewContract {
         void setMyCost(String mycost);
         void setMyCostEditable(boolean flag);
         void setMemCount(int count);
+        void setDutchCost(String oldCost);
 
         //어댑터 셋팅
         void adapterInit();
+
+        void makeToast(String message);
 
         FragmentManager getFragmentManager();
         Activity getActivity();

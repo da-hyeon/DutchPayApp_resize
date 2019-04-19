@@ -22,11 +22,11 @@ public class DutchDetailMember {
     @SerializedName("방장0번멤버1번")
     int leaderFlag;
 
-    @SerializedName("멤버결제여부")
-    boolean payComplete;
+    @SerializedName("개인결제여부")
+    String payComplete;
 
     @SerializedName("선결제여부")
-    boolean prePayed;
+    String prePayed;
 
     public int getMemDutchcode() {
         return memDutchcode;
@@ -76,19 +76,19 @@ public class DutchDetailMember {
         this.leaderFlag = leaderFlag;
     }
 
-    public boolean isPayComplete() {
+    public String getPayComplete() {
         return payComplete;
     }
 
-    public void setPayComplete(boolean payComplete) {
+    public void setPayComplete(String payComplete) {
         this.payComplete = payComplete;
     }
 
-    public boolean isPrePayed() {
+    public String getPrePayed() {
         return prePayed;
     }
 
-    public void setPrePayed(boolean prePayed) {
+    public void setPrePayed(String prePayed) {
         this.prePayed = prePayed;
     }
 }

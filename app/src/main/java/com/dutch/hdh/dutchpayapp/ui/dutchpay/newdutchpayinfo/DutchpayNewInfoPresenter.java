@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
+
+import com.dutch.hdh.dutchpayapp.MyApplication;
 import com.dutch.hdh.dutchpayapp.R;
 import com.dutch.hdh.dutchpayapp.ui.dutchpay.newdutchpayconfirm.DutchpayNewConfirmFragment;
 import com.google.gson.Gson;
@@ -13,17 +15,21 @@ import java.util.ArrayList;
 public class DutchpayNewInfoPresenter implements DutchpayNewInfoContract.Presenter {
 
     DutchpayNewInfoContract.View mView;
-    Bundle mData;
+
+    private MyApplication mMyApplication;
+
+    private Bundle mData;
 
     public DutchpayNewInfoPresenter(DutchpayNewInfoContract.View mView,Bundle data) {
         this.mView = mView;
         this.mData = data;
+        this.mMyApplication = MyApplication.getInstance();
     }
 
     public void onNextClick(){
         ArrayList<String> info = mView.getText();
         info.add(mData.getString("total"));
-        String jList = mData.getString("oldList");
+        String jList = mData.getString("dutchpayListData");
         Bundle bundle = new Bundle(2);
         bundle.putStringArrayList("Info",info);
         bundle.putString("JList",jList);
@@ -67,5 +73,17 @@ public class DutchpayNewInfoPresenter implements DutchpayNewInfoContract.Present
 
 
         mView.setCount(start+count);
+    }
+
+    /**
+     * 뒤로가기 이벤트 처리
+     */
+    public void clickBackPressed() {
+        Bundle bundle = new Bundle();
+        bundle.putString("dutchpayListData",mData.getString("dutchpayListData"));
+        mMyApplication.getDutchpayNewFragment().setArguments(bundle);
+
+        FragmentManager fm = mView.getFragmentManager();
+        fm.popBackStack();
     }
 }

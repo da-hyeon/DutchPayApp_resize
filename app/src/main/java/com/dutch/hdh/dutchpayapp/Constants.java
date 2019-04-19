@@ -46,7 +46,10 @@ public class Constants {
     //DutchpayNewConfirmFragment -> PaymentPasswordFragment
     public static final String PAYMENT_INFO = "dutchpayInfo";
     public static final String PAYMENT_LIST_JSON = "dutchpayGroupJson";
+<<<<<<< HEAD
 
+=======
+>>>>>>> 3d780fb7a6961694dd43b5acfb89ffadc6d8ead3
 
     /**
      * Extra ID
@@ -55,12 +58,15 @@ public class Constants {
     public static final String ACCOUNT_TYPE_CODE = "accountTypeCode";
     public static final String ACCOUNT_NUMBER = "accountNumber";
 
+<<<<<<< HEAD
     //PaymentPassword -> ReceiptActivity
     public static final String PAYMENT_DATE = "date";
     public static final String PAYMENT_STORE_NAME = "storeName";
     public static final String PAYMENT_AMOUNT = "amount";
     public static final String PAYMENT_STORE_LOCATION = "storeLocation";
 
+=======
+>>>>>>> 3d780fb7a6961694dd43b5acfb89ffadc6d8ead3
     /**
      * API URL
      */
@@ -76,6 +82,7 @@ public class Constants {
     public static final String DUTCHPAY_HISTORY_REQUEST_URL = "dutchpay_dutchpaytotallist.php"; //더치페이 내역 요청
     public static final String DUTCHPAY_DETAIL_REQUEST_URL = "dutchpay_dutchpaydetail.php"; //더치페이 내역 상세 요청
     public static final String DUTCHPAY_NEW_REQUEST_URL = "dutchpay_dutchpay.php"; //더치페이 신설 요청
+    public static final String DUTCHPAY_MEMBER_PAY_REQUEST_URL = "dutchpay_dutchpayinside.php"; //더치페이 포인트 지불 요청
 
     /**
      * Dutchpay State

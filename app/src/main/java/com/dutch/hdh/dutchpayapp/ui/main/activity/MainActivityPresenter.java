@@ -13,6 +13,7 @@ import com.dutch.hdh.dutchpayapp.R;
 import com.dutch.hdh.dutchpayapp.ui.customer.CustomerFragment;
 import com.dutch.hdh.dutchpayapp.ui.dutchpay.newdutchaddgroup.DutchpayNewAddGroupFragment;
 import com.dutch.hdh.dutchpayapp.ui.dutchpay.newdutchpay.DutchpayNewFragment;
+import com.dutch.hdh.dutchpayapp.ui.dutchpay.newdutchpayinfo.DutchpayNewInfoFragment;
 import com.dutch.hdh.dutchpayapp.ui.dutchpay.photo.DutchpayPhotoFragment;
 import com.dutch.hdh.dutchpayapp.ui.dutchpay.start.DutchpayStartFragment;
 import com.dutch.hdh.dutchpayapp.ui.dutchpay.startdetail.DutchpayDetailFragment;
@@ -287,6 +288,10 @@ public class MainActivityPresenter implements MainActivityContract.Presenter {
             }
             if (fragmentList.get(i) instanceof DutchpayNewAddGroupFragment) {
                 ((DutchpayNewAddGroupFragment) fragmentList.get(i)).onBackPressed();
+                return;
+            }
+            if (fragmentList.get(i) instanceof DutchpayNewInfoFragment) {
+                ((DutchpayNewInfoFragment) fragmentList.get(i)).onBackPressed();
                 return;
             }
         }

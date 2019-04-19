@@ -63,6 +63,7 @@ public class IntroActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_intro);
 
+<<<<<<< HEAD
         MyApplication mMyApplication = MyApplication.getInstance();
 
         //저장된 아이디 ,비밀번호 불러오기
@@ -100,6 +101,9 @@ public class IntroActivity extends BaseActivity {
                 }
             });
         }
+=======
+
+>>>>>>> 3d780fb7a6961694dd43b5acfb89ffadc6d8ead3
     }
 
     @Override

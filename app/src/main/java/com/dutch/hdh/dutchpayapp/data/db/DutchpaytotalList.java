@@ -14,7 +14,7 @@ public class DutchpaytotalList {
     String date;
 
     @SerializedName("내부결제완료여부")
-    boolean costcomplete;
+    String costcomplete;
 
     @SerializedName("더치페이코드")
     int dutchpayid;
@@ -43,11 +43,11 @@ public class DutchpaytotalList {
         this.date = date;
     }
 
-    public boolean isCostcomplete() {
+    public String getCostcomplete() {
         return costcomplete;
     }
 
-    public void setCostcomplete(boolean costcomplete) {
+    public void setCostcomplete(String costcomplete) {
         this.costcomplete = costcomplete;
     }
 

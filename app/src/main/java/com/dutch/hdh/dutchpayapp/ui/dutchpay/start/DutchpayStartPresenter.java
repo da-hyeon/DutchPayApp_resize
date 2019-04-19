@@ -52,9 +52,6 @@ public class DutchpayStartPresenter implements DutchpayStartContract.Presenter{
             public void onResponse(Call<Dutchpayhistory> call, Response<Dutchpayhistory> response) {
                 if(response.body() != null){
                     ArrayList<DutchpaytotalList> list = response.body().getDutchpayHistoryList();
-                    Gson gson = new Gson();
-                    String a = gson.toJson(response.body());
-                    Log.e("List? ->",a);
 
                     for(int i=0; i<list.size(); i++){
                         DutchpaytotalList item = list.get(i);
@@ -90,6 +87,7 @@ public class DutchpayStartPresenter implements DutchpayStartContract.Presenter{
     public void onNewClick(){
         //기존 더치페이가 존재한다면 초기화
         mMyApplication.setDutchpayGroup(false);
+        mMyApplication.setDutchpayBack(false);
         mMyApplication.setDutchpayNewFragment(null);
 
         //더페이 시작 페이지로 이동
@@ -148,7 +146,7 @@ public class DutchpayStartPresenter implements DutchpayStartContract.Presenter{
 
     private int dutchpayStatusCheck(DutchpaytotalList item){
 
-        if(item.isCostcomplete()){ //거래완료
+        if(item.getCostcomplete().equals("Y")){ //거래완료
             return Constants.DUTCHPAY_STATE_COMPLETE;
         } else { //입금대기
             return Constants.DUTCHPAY_STATE_WAIT;

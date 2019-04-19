@@ -34,21 +34,26 @@ public class DutchpayDetailPresenter implements DutchpayDetailContract.Presenter
     private DutchpayDetailListAdapter mAdapter;
 
     private MyApplication mMyApplication;
+    private Gson gson;
+
+    private int mLeaderCode;
+    private int mRoomCode;
+    private int mMemPayCode;
+    private int mMyCost;
+    private int mAllMemCost = 0;
+    private int mLeaderPosition = 0;
 
     public DutchpayDetailPresenter(DutchpayDetailContract.View mView) {
         this.mView = mView;
         this.mDetailList = new ObservableArrayList<>();
         this.mAdapter = new DutchpayDetailListAdapter(mDetailList,this);
         this.mMyApplication = MyApplication.getInstance();
+        this.gson = new Gson();
     }
 
     @Override
     public void listInit(Bundle bundle) {
         int dutchpayId = bundle.getInt("dutchpayID");
-
-        Gson gson = new GsonBuilder()
-                .setLenient()
-                .create();
 
         //리스트 불러오기
         Call<DutchpayDetail> getDutchpayDetail = MyApplication
@@ -60,28 +65,54 @@ public class DutchpayDetailPresenter implements DutchpayDetailContract.Presenter
             @Override
             public void onResponse(Call<DutchpayDetail> call, Response<DutchpayDetail> response) {
                 if(response.body() != null){
+                    //방 정보 꺼내기
                     ArrayList<DutchDetailRoom> roomInfo = response.body().getRoominfo();
-                    for(int i=0; i<roomInfo.size(); i++){
+                    DutchDetailRoom room = roomInfo.get(0);
 
-                    }
-
-                    String a = gson.toJson(roomInfo);
-                    Log.e("Room? ->",a);
-
+                    //멤버 리스트 꺼내기
                     ArrayList<DutchDetailMember> memberInfo = response.body().getMemberinfo();
+
+                    //방정보 셋팅
+                    mView.setDutchpayTitle(room.getShop());
+                    mView.setDutchpayCost(String.valueOf(room.getCost()));
+                    mView.setDutchpayMemCount(String.valueOf(memberInfo.size()));
 
                     String b = gson.toJson(memberInfo);
                     Log.e("Member? ->",b);
 
+                    for(int i=0; i<memberInfo.size(); i++) {
+                        DutchDetailMember member = memberInfo.get(i);
 
+                        if(member.getLeaderFlag() == 0){ //방장
+                            mLeaderCode = member.getMemCode();
+                            mRoomCode = member.getRoomCode();
+                            mLeaderPosition = i;
+                        } else {
+                            mAllMemCost += member.getMemCost();
+                        }
 
+                        boolean imageFlag = false;
+                        if(member.getMemCode() == Integer.parseInt(mMyApplication.getUserInfo().getUserCode())){ //본인 체크
+                            imageFlag = true;
+                            mMemPayCode = member.getMemDutchcode();
+                            mMyCost = member.getMemCost();
 
-//                    for(int i=0; i<list.size(); i++){
-//                        DutchpaytotalList item = list.get(i);
-//                        int status = dutchpayStatusCheck(item);
-//
-//                        mStartList.add(new TempStartListModel(item.getShop(), String.valueOf(item.getCost()), item.getDate(),status,item.getDutchpayid()));
-//                    }
+                            if(member.getPayComplete().equals("Y") || member.getPrePayed().equals("Y")){
+                                mView.setPointButtonGone();
+                            }
+                        }
+
+                        int payed = 0;
+                        if(member.getPrePayed().equals("Y") || member.getPayComplete().equals("Y")){
+                            payed = 2;
+                        }
+                        mDetailList.add(new TempDetailListModel(member.getNaem(),imageFlag,String.valueOf(member.getMemCost()),payed));
+
+                    }
+                    //방장 금액 반영
+                    mDetailList.get(mLeaderPosition).setCoast(String.valueOf(room.getCost() - mAllMemCost));
+
+                    mAdapter.notifyDataSetChanged();
                 }
             }
 
@@ -90,15 +121,6 @@ public class DutchpayDetailPresenter implements DutchpayDetailContract.Presenter
                 Log.e("fail",t.getMessage());
             }
         });
-
-
-        //더미 데이터 셋
-        mDetailList.add(new TempDetailListModel("",false,"",1));
-        mDetailList.add(new TempDetailListModel("",true,"",2));
-        mDetailList.add(new TempDetailListModel("",false,"",3));
-        mDetailList.add(new TempDetailListModel("",false,"",0));
-
-        mAdapter.notifyDataSetChanged();
 
         //binding
         mView.adapterInit();
@@ -130,5 +152,33 @@ public class DutchpayDetailPresenter implements DutchpayDetailContract.Presenter
         fragmentTransaction.replace(R.id.flFragmentContainer,dutchpayPhotoFragment , DutchpayPhotoFragment.class.getName());
         fragmentTransaction.addToBackStack(DutchpayPhotoFragment.class.getName());
         fragmentTransaction.commit();
+    }
+
+    public void onPayClick(){
+        //더치페이 참여자 결제
+        Call<Void> setMemberDutchpay = MyApplication
+                .getRestAdapter()
+                .setMemberDutchpay(
+                        mLeaderCode,
+                        Integer.parseInt(mMyApplication.getUserInfo().getUserCode()),
+                        mRoomCode,
+                        mMemPayCode
+                );
+
+        setMemberDutchpay.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                Log.e("response",response.message());
+
+                mView.showSuccessDialog("성공", "결제 완료");
+                mMyApplication.getUserInfo().setUserMoney(mMyApplication.getUserInfo().getUserMoney() - mMyCost);
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                //서버통신 오류
+                mView.showFailDialog("실패", "서버와 통신할 수 없습니다.");
+            }
+        });
     }
 }

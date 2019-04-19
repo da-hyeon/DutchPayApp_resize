@@ -50,6 +50,7 @@ public class MyApplication extends Application {
 
     //더치페이 그룹 체크용
     private boolean dutchpayGroup;
+    private boolean dutchpayBack;
 
 
     //타임아웃
@@ -276,5 +277,13 @@ public class MyApplication extends Application {
 
     public void setDutchpayGroup(boolean dutchpayGroup) {
         this.dutchpayGroup = dutchpayGroup;
+    }
+
+    public boolean isDutchpayBack() {
+        return dutchpayBack;
+    }
+
+    public void setDutchpayBack(boolean dutchpayBack) {
+        this.dutchpayBack = dutchpayBack;
     }
 }
