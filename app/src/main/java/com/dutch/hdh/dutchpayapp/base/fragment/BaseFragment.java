@@ -47,6 +47,7 @@ public class BaseFragment extends Fragment implements BaseFragmentContract.View 
     /**
      * 메인 프래그먼트 빼고 모두 스택에서 제거
      */
+    @Override
     public void setDefaultMainStack() {
         FragmentManager fragmentManager = getFragmentManager();
         int count = 0;

@@ -2,6 +2,8 @@ package com.dutch.hdh.dutchpayapp.ui.receipt;
 
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 
 import com.dutch.hdh.dutchpayapp.R;
 import com.dutch.hdh.dutchpayapp.base.activity.BaseActivity;
@@ -64,4 +66,5 @@ public class ReceiptActivity extends BaseActivity implements ReceiptContract.Vie
     public void changeLocatiion(String location) {
         mBinding.tvStoreLocation.setText(location);
     }
+
 }

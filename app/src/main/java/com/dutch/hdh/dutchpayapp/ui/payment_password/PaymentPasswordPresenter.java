@@ -199,14 +199,13 @@ public class PaymentPasswordPresenter implements PaymentPasswordContract.Present
     public void clickSuccessDialog() {
 
         Intent intent = new Intent(mContext, ReceiptActivity.class);
+        mView.setDefaultMainStack();
+        intent.putExtra(Constants.PAYMENT_DATE ,currentTime());
 
         if (mPath) {
-            setDefaultMainStack();
-            intent.putExtra(Constants.PAYMENT_DATE ,currentTime());
             intent.putExtra(Constants.PAYMENT_STORE_NAME ,mMyApplication.getProduct().getProductName());
             intent.putExtra(Constants.PAYMENT_AMOUNT , mMyApplication.getProduct().getProductPrice());
             intent.putExtra(Constants.PAYMENT_STORE_LOCATION ,mMyApplication.getProduct().getProductAddress());
-
 
         } else {
 
@@ -234,19 +233,6 @@ public class PaymentPasswordPresenter implements PaymentPasswordContract.Present
             return true;
         }
         return false;
-    }
-
-    /**
-     * 메인 프래그먼트 빼고 모두 스택에서 제거
-     */
-    public void setDefaultMainStack() {
-        int count = 0;
-        if (mFragmentManager != null) {
-            count = mFragmentManager.getBackStackEntryCount() - 1;
-        }
-        for (int i = 0; i < count; ++i) {
-            mFragmentManager.popBackStack();
-        }
     }
 
     /**
