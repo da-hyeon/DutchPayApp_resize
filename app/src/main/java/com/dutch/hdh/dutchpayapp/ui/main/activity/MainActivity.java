@@ -97,7 +97,7 @@ public class MainActivity extends BaseActivity implements MainActivityContract.V
 
         //My 지갑 버튼
         mBinding.navigationView.llMyWallet.setOnClickListener(v ->
-                {}
+                mPresenter.clickMyWallet()
         );
 
         //공지사항 버튼

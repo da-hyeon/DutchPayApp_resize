@@ -38,7 +38,7 @@ public class ManagementCardPresenter implements ManagementCardContract.Presenter
         Intent intent = new Intent(mContext, AddCardActivity.class);
         mContext.startActivity(intent);
         if (mContext instanceof ManagementCardActivity) {
-            ((ManagementCardActivity) mContext).overridePendingTransition(R.anim.slide_up_in, R.anim.slide_down_out);
+            ((ManagementCardActivity) mContext).overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
         }
     }
 

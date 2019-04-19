@@ -10,9 +10,10 @@ import com.dutch.hdh.dutchpayapp.R;
 import com.dutch.hdh.dutchpayapp.ui.register.form.Register_FormFragment;
 import com.dutch.hdh.dutchpayapp.ui.wallet.myaccount.MyAccountActivity;
 import com.dutch.hdh.dutchpayapp.ui.wallet.mycard.MyCardActivity;
+import com.dutch.hdh.dutchpayapp.ui.wallet.payhistory.PayUsageHistoryFragment;
 import com.dutch.hdh.dutchpayapp.ui.wallet.sendandreceive.SendReceiveFragment;
 
-public class MyWalletPresenter implements MyWalletContract.Presenter{
+public class MyWalletPresenter implements MyWalletContract.Presenter {
 
 
     private MyWalletContract.View mView;
@@ -50,6 +51,12 @@ public class MyWalletPresenter implements MyWalletContract.Presenter{
 
     @Override
     public void clickHistory() {
+        FragmentTransaction fragmentTransaction = mFragmentManager.beginTransaction();
+        fragmentTransaction.setCustomAnimations(R.anim.fade_in,0,0,  R .anim.fade_out);
+        PayUsageHistoryFragment payUsageHistoryFragment = new PayUsageHistoryFragment();
+        fragmentTransaction.replace(R.id.flFragmentContainer, payUsageHistoryFragment , PayUsageHistoryFragment.class.getName());
+        fragmentTransaction.addToBackStack(PayUsageHistoryFragment.class.getName());
+        fragmentTransaction.commit();
     }
 
     @Override

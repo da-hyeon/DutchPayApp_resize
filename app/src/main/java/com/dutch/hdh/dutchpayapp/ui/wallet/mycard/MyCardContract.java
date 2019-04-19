@@ -40,5 +40,9 @@ public interface MyCardContract extends BaseActivityContract {
 
         //대표카드 선택
         void setRepresentativeCard(String mainCardCode, String subCardCode);
+
+        //뷰페이저
+
+        void checkViewPager(ViewPager viewPager, TabLayout tabLayout);
     }
 }

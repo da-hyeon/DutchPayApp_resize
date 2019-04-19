@@ -6,7 +6,7 @@ import android.content.pm.PackageManager;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
-import android.util.SparseArray;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.SurfaceHolder;
 import android.view.View;
@@ -19,10 +19,8 @@ import com.dutch.hdh.dutchpayapp.data.db.SendPoint;
 import com.dutch.hdh.dutchpayapp.databinding.FragmentSendReceiveBinding;
 import com.dutch.hdh.dutchpayapp.util.Trace;
 import com.google.android.gms.vision.CameraSource;
-import com.google.android.gms.vision.Detector;
 import com.google.android.gms.vision.barcode.Barcode;
 import com.google.android.gms.vision.barcode.BarcodeDetector;
-import com.google.gson.Gson;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.MultiFormatWriter;
 import com.google.zxing.WriterException;
@@ -39,6 +37,7 @@ public class SendReceiveFragment extends BaseFragment implements SendReceiveCont
     private BarcodeDetector mBarcodeDetector;
     private CameraSource mCameraSource;
     private SendPoint mSendPoint;
+//    private ArrayList<Integer> mBarcodeArrayList = new ArrayList<Integer>();
 
     @Override
     public void onAttach(Context context) {
@@ -85,19 +84,19 @@ public class SendReceiveFragment extends BaseFragment implements SendReceiveCont
         mBinding.llDirectlyInputTab.setOnClickListener(v ->
                 mPresenter.clickDirectlyInputTab()
         );
-
-        //연락처 추가
-        mBinding.ivContactAdd.setOnClickListener(v ->
-                mPresenter.clickContactAdd()
-        );
-        //그룹 추가
-        mBinding.ivGroupAdd.setOnClickListener(v ->
-                mPresenter.clickGroupAdd()
-        );
-        //직접 추가
-        mBinding.ivDirectlyInputAdd.setOnClickListener(v ->
-                mPresenter.clickDirectlyInputAdd()
-        );
+//
+//        //연락처 추가
+//        mBinding.ivContactAdd.setOnClickListener(v ->
+//                mPresenter.clickContactAdd()
+//        );
+//        //그룹 추가
+//        mBinding.ivGroupAdd.setOnClickListener(v ->
+//                mPresenter.clickGroupAdd()
+//        );
+//        //직접 추가
+//        mBinding.ivDirectlyInputAdd.setOnClickListener(v ->
+//                mPresenter.clickDirectlyInputAdd()
+//        );
 
         mBarcodeDetector = new BarcodeDetector.Builder(getContext())
                 .setBarcodeFormats(Barcode.QR_CODE)
@@ -144,27 +143,37 @@ public class SendReceiveFragment extends BaseFragment implements SendReceiveCont
         Trace.e(mPresenter.isValidateAmount());
         if (!mPresenter.isValidateAmount()) {
             showCommonDialog("알림", "금액을 입력하세요,", false);
+            mBinding.etSendPrice.requestFocus();
             return;
         }
-
         if (mBinding.llDirectlyInput.getVisibility() == View.VISIBLE) {
             mBinding.llDirectlyInput.setVisibility(View.GONE);
         }
         if (mBinding.llQRAndBarcode.getVisibility() == View.GONE) {
             mBinding.llQRAndBarcode.setVisibility(View.VISIBLE);
         }
+
+        //API 요청후 바코드생성
+        mSendPoint = new SendPoint();
+        mSendPoint.setGiveAmount(mBinding.etSendPrice.getText().toString().trim());
+        mSendPoint.setButtonnumber("1");
+        mSendPoint.setUsercode(mMyApplication.getUserInfo().getUserCode());
+        mSendPoint.setPointqrcode(UUID.randomUUID().toString());
+        mSendPoint.setUsername("park");
+        mSendPoint.setPhonenumber("1111");
+
+
+        //포인트 전달 API
+        mPresenter.sendPoint(mSendPoint, view);
+    }
+
+    @Override
+    public void showGeneratorCode(boolean isCheck, View view) {
         try {
-
-            mSendPoint = new SendPoint();
-            mSendPoint.setGiveAmount(mBinding.etSendPrice.getText().toString().trim());
-            mSendPoint.setButtonnumber("1");
-            mSendPoint.setUsercode(mMyApplication.getUserInfo().getUserCode());
-            mSendPoint.setPointqrcode(UUID.randomUUID().toString());
-
             if (view.getId() == mBinding.llQRcodeTab.getId()) {
-                mBinding.ivQrAndBarcode.setImageBitmap(mPresenter.getQrCodeAndBarcodeBitmap(new QRCodeWriter().encode("테스트", BarcodeFormat.QR_CODE, 806, 800)));
+                mBinding.ivQrAndBarcode.setImageBitmap(mPresenter.getQrCodeAndBarcodeBitmap(new QRCodeWriter().encode(mSendPoint.getPointqrcode(), BarcodeFormat.QR_CODE, 806, 800)));
             } else {
-                mBinding.ivQrAndBarcode.setImageBitmap(mPresenter.getQrCodeAndBarcodeBitmap(new MultiFormatWriter().encode("", BarcodeFormat.CODE_128, 1160, 488)));
+                mBinding.ivQrAndBarcode.setImageBitmap(mPresenter.getQrCodeAndBarcodeBitmap(new MultiFormatWriter().encode(mSendPoint.getPointqrcode(), BarcodeFormat.CODE_128, 1160, 488)));
             }
         } catch (WriterException e) {
             e.printStackTrace();
@@ -196,13 +205,20 @@ public class SendReceiveFragment extends BaseFragment implements SendReceiveCont
     }
 
     @Override
+    public void showReceiveComplete(String giftCode) {
+        mPresenter.getPoint(giftCode, mBinding.svScanView, mCameraSource);
+    }
+
+
+    @Override
     public void showCommonDialog(String title, String content, boolean isBack) {
         super.showCommonDialog(title, content, isBack);
     }
+
     @Override
     public void onResume() {
         super.onResume();
-        mPresenter.setProcessor(mBarcodeDetector);
+        mPresenter.setProcessor(mBarcodeDetector, mCameraSource);
         mPresenter.surfaceViewCallback(mBinding.svScanView);
     }
 }

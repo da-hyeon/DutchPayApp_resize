@@ -66,7 +66,6 @@ public class AddCardPresenter implements AddCardContract.Presenter {
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 Log.e("onTextChanged", "onTextChanged");
 
-
             }
 
             @Override
@@ -103,8 +102,8 @@ public class AddCardPresenter implements AddCardContract.Presenter {
     }
 
     /**
-     * 서버쪽으로 data 전달
      *
+     * 서버쪽으로 data 전달
      * @param cardTypeCode 카드회사 코드
      */
     @Override

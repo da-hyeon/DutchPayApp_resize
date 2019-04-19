@@ -12,14 +12,11 @@ import android.view.Gravity;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.ImageView;
 
 import com.dutch.hdh.dutchpayapp.R;
-import com.dutch.hdh.dutchpayapp.databinding.DialogCommonBinding;
 import com.dutch.hdh.dutchpayapp.ui.view.CommonDialogView;
 import android.view.inputmethod.InputMethodManager;
 
-import com.dutch.hdh.dutchpayapp.R;
 import com.dutch.hdh.dutchpayapp.data.util.LogUtils;
 import com.kinda.alert.KAlertDialog;
 

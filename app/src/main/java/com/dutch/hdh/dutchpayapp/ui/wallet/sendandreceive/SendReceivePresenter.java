@@ -1,32 +1,43 @@
 package com.dutch.hdh.dutchpayapp.ui.wallet.sendandreceive;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Color;
-import android.graphics.Typeface;
+import android.graphics.drawable.ColorDrawable;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.util.SparseArray;
+import android.view.Gravity;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.dutch.hdh.dutchpayapp.MyApplication;
 import com.dutch.hdh.dutchpayapp.R;
 import com.dutch.hdh.dutchpayapp.data.db.SendPoint;
+import com.dutch.hdh.dutchpayapp.data.util.LogUtils;
 import com.dutch.hdh.dutchpayapp.databinding.FragmentSendReceiveBinding;
+import com.dutch.hdh.dutchpayapp.ui.main.activity.MainActivity;
 import com.dutch.hdh.dutchpayapp.ui.mygroup.directinput.MyGroup_DirectInputFragment;
 import com.dutch.hdh.dutchpayapp.ui.mygroup.main.MyGroup_MainFragment;
 import com.dutch.hdh.dutchpayapp.ui.mygroup.telephonedirectory.MyGroup_TelephoneDirectoryFragment;
+import com.dutch.hdh.dutchpayapp.ui.view.CommonDialogView;
+import com.dutch.hdh.dutchpayapp.ui.wallet.mycard.MyCardActivity;
 import com.dutch.hdh.dutchpayapp.util.Trace;
+import com.google.android.gms.vision.CameraSource;
 import com.google.android.gms.vision.Detector;
 import com.google.android.gms.vision.barcode.Barcode;
 import com.google.android.gms.vision.barcode.BarcodeDetector;
 import com.google.zxing.common.BitMatrix;
 
 import java.io.UnsupportedEncodingException;
+import java.util.logging.Handler;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -97,42 +108,42 @@ public class SendReceivePresenter implements SendReceiveContract.Presenter {
         return bmp;
     }
 
-    @Override
-    public void clickContactAdd() {
-        FragmentTransaction fragmentTransaction = mFragmentManager.beginTransaction();
-        fragmentTransaction.setCustomAnimations(R.anim.fade_in, 0, 0, R.anim.fade_out);
-        MyGroup_TelephoneDirectoryFragment myGroup_telephoneDirectoryFragment = new MyGroup_TelephoneDirectoryFragment();
-        fragmentTransaction.replace(R.id.flFragmentContainer, myGroup_telephoneDirectoryFragment, MyGroup_TelephoneDirectoryFragment.class.getName());
-        fragmentTransaction.addToBackStack(MyGroup_TelephoneDirectoryFragment.class.getName());
-        fragmentTransaction.commit();
-    }
-
-    @Override
-    public void clickGroupAdd() {
-        FragmentTransaction fragmentTransaction = mFragmentManager.beginTransaction();
-        fragmentTransaction.setCustomAnimations(R.anim.fade_in, 0, 0, R.anim.fade_out);
-        MyGroup_MainFragment myGroup_mainFragment = new MyGroup_MainFragment();
-        fragmentTransaction.replace(R.id.flFragmentContainer, myGroup_mainFragment, MyGroup_MainFragment.class.getName());
-        fragmentTransaction.addToBackStack(MyGroup_MainFragment.class.getName());
-        fragmentTransaction.commit();
-    }
-
-    @Override
-    public void clickDirectlyInputAdd() {
-        FragmentTransaction fragmentTransaction = mFragmentManager.beginTransaction();
-        fragmentTransaction.setCustomAnimations(R.anim.fade_in, 0, 0, R.anim.fade_out);
-        MyGroup_DirectInputFragment myGroup_directInputFragment = new MyGroup_DirectInputFragment();
-        fragmentTransaction.replace(R.id.flFragmentContainer, myGroup_directInputFragment, MyGroup_DirectInputFragment.class.getName());
-        fragmentTransaction.addToBackStack(MyGroup_DirectInputFragment.class.getName());
-        fragmentTransaction.commit();
-    }
+//    @Override
+//    public void clickContactAdd() {
+//        FragmentTransaction fragmentTransaction = mFragmentManager.beginTransaction();
+//        fragmentTransaction.setCustomAnimations(R.anim.fade_in, 0, 0, R.anim.fade_out);
+//        MyGroup_TelephoneDirectoryFragment myGroup_telephoneDirectoryFragment = new MyGroup_TelephoneDirectoryFragment();
+//        fragmentTransaction.replace(R.id.flFragmentContainer, myGroup_telephoneDirectoryFragment, MyGroup_TelephoneDirectoryFragment.class.getName());
+//        fragmentTransaction.addToBackStack(MyGroup_TelephoneDirectoryFragment.class.getName());
+//        fragmentTransaction.commit();
+//    }
+//
+//    @Override
+//    public void clickGroupAdd() {
+//        FragmentTransaction fragmentTransaction = mFragmentManager.beginTransaction();
+//        fragmentTransaction.setCustomAnimations(R.anim.fade_in, 0, 0, R.anim.fade_out);
+//        MyGroup_MainFragment myGroup_mainFragment = new MyGroup_MainFragment();
+//        fragmentTransaction.replace(R.id.flFragmentContainer, myGroup_mainFragment, MyGroup_MainFragment.class.getName());
+//        fragmentTransaction.addToBackStack(MyGroup_MainFragment.class.getName());
+//        fragmentTransaction.commit();
+//    }
+//
+//    @Override
+//    public void clickDirectlyInputAdd() {
+//        FragmentTransaction fragmentTransaction = mFragmentManager.beginTransaction();
+//        fragmentTransaction.setCustomAnimations(R.anim.fade_in, 0, 0, R.anim.fade_out);
+//        MyGroup_DirectInputFragment myGroup_directInputFragment = new MyGroup_DirectInputFragment();
+//        fragmentTransaction.replace(R.id.flFragmentContainer, myGroup_directInputFragment, MyGroup_DirectInputFragment.class.getName());
+//        fragmentTransaction.addToBackStack(MyGroup_DirectInputFragment.class.getName());
+//        fragmentTransaction.commit();
+//    }
 
 
     /**
      * barcodeDetector Processor 등록
      */
     @Override
-    public void setProcessor(BarcodeDetector barcodeDetector) {
+    public void setProcessor(BarcodeDetector barcodeDetector, CameraSource cameraSource) {
         barcodeDetector.setProcessor(new Detector.Processor<Barcode>() {
             @Override
             public void release() {
@@ -152,6 +163,10 @@ public class SendReceivePresenter implements SendReceiveContract.Presenter {
                         e.printStackTrace();
                     }
                     Trace.e(barcodeContents);
+//                    barcodeDetector.release();
+                    mView.showReceiveComplete(barcodeContents);
+                    cameraSource.stop();
+
                 }
             }
         });
@@ -187,7 +202,8 @@ public class SendReceivePresenter implements SendReceiveContract.Presenter {
     }
 
     @Override
-    public void sendPoint(SendPoint sendPoint) {
+    public void sendPoint(SendPoint sendPoint, View view) {
+
         Call<Void> setPointSend = MyApplication.getInstance()
                 .getRestAdapter()
                 .setPointSend(
@@ -202,17 +218,66 @@ public class SendReceivePresenter implements SendReceiveContract.Presenter {
         setPointSend.enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
-                if (response.body() == null) {
-
+                if (response.isSuccessful()) {
+                    mView.showGeneratorCode(response.isSuccessful(), view);
                 } else {
-                    Trace.e("cardRegisterList", "cardRegisterList");
-
+                    mView.showGeneratorCode(response.isSuccessful(), view);
                 }
             }
 
             @Override
             public void onFailure(Call<Void> call, Throwable t) {
 
+            }
+        });
+    }
+
+    @Override
+    public void getPoint(String giftCode, SurfaceView surfaceView, CameraSource cameraSource) {
+        Call<Void> getPointSend = MyApplication.getInstance()
+                .getRestAdapter()
+                .getPointReceive(giftCode);
+
+        getPointSend.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                if (response.isSuccessful()) {
+//                    if (mContext instanceof MainActivity){
+//                        ((MainActivity) mContext).runOnUiThread(() -> {
+//                            mView.showCommonDialog("알림", "상품권 전달이 완료되었습니다.", false);
+//                        });
+//                    }
+
+                    Dialog build = new Dialog(mContext);
+                    build.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                    build.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                    build.setContentView(new CommonDialogView(mContext, "알림", "상품권을 전달 받았습니다.", true, new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            if (v.getId() == R.id.ivConfirm) {
+                                build.dismiss();
+                                mView.showSendView();
+                            }
+                        }
+                    }));
+                    WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
+                    lp.copyFrom(build.getWindow().getAttributes());
+                    lp.width = WindowManager.LayoutParams.MATCH_PARENT;
+                    lp.height = WindowManager.LayoutParams.MATCH_PARENT;
+                    lp.gravity = Gravity.TOP;
+                    build.show();
+                    Window window = build.getWindow();
+                    window.setAttributes(lp);
+                    window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+                } else {
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                Log.e("테스트", t.toString() + "");
             }
         });
     }

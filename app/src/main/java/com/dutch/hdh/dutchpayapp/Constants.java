@@ -29,6 +29,8 @@ public class Constants {
     /**
      * Bundle ID
      */
+    public static final String PAY_USAGE_HISTORY = "payUsageHistory";
+
 
     /**
      * Extra ID
@@ -73,10 +75,7 @@ public class Constants {
      * 사용내역 목록 불러오기
      * */
 
-    public static final String DUTCHPAY_PAY_ONE_WEEK = "dutchpay_payoneweek.php";                         //1주 사용내역
-    public static final String DUTCHPAY_PAY_ONE_MONTH = "dutchpay_payonemonth.php";                       //1달 사용내역
-    public static final String DUTCHPAY_PAY_3_MONTH = "dutchpay_pay3month.php";                           //3달 사용내역
-    public static final String DUTCHPAY_PAY_HISTORY = "dutchpay_payhistory.php";                          //전체목록
+    public static final String DUTCHPAY_PAY_USAGE_HISTORY = "dutchpay_totallist.php";                         //사용내역
 
     /**
      * Dutchpay State

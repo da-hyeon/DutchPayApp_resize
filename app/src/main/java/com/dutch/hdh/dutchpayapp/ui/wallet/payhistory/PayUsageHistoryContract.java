@@ -6,6 +6,9 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.dutch.hdh.dutchpayapp.base.fragment.BaseFragmentContract;
+import com.dutch.hdh.dutchpayapp.data.db.PayHistoryList;
+
+import java.util.ArrayList;
 
 
 public interface PayUsageHistoryContract extends BaseFragmentContract {
@@ -13,6 +16,8 @@ public interface PayUsageHistoryContract extends BaseFragmentContract {
 
         //init
         void initData();
+        //사용내역 리스트 보여주기?
+        void setPayUsageHistoryList(ArrayList<PayHistoryList.PayHistoryListResult> payHistoryListResultArrayList);
     }
 
     interface Presenter {
@@ -21,22 +26,10 @@ public interface PayUsageHistoryContract extends BaseFragmentContract {
         //주기받기 탭버튼 체크
         void checkDateSortButton(LinearLayout linearLayout, boolean isCheck);
 
-        //전체보기
-        void clickPayAllStatus();
-        //더치페이 보기
-        void clickPayDutchPayStatus();
-        //개인결제 보기
-        void clickPaySoloPayStatus();
-        //주기/받기
-        void clickPaySendReceiveStatus();
-        //1주 사용내역 요청
-        void clickOneWeekPayList();
-        //1개월 사용내역 요청
-        void clickOneMonthPayList();
-        //3개월 사용내역 요청
-        void clickThreeMonthPayList();
-        //1주 사용내역 요청
-        void clickAllPayList();
+
+        void getPayUsageHistoryList(String buttonType, String userCode, String payType);
+
+        void clickUsagePayDetail(PayHistoryList.PayHistoryListResult payHistoryListResult);
 
     }
 }

@@ -2,117 +2,82 @@ package com.dutch.hdh.dutchpayapp.data.db;
 
 import java.util.ArrayList;
 
-public class PayHistoryList {
+public class PayHistoryList  {
 
-    private ArrayList<PayHistoryListResult> payhistory;
+    private ArrayList<PayHistoryListResult> totallist;
 
-    public ArrayList<PayHistoryListResult> getPayhistory() {
-        return payhistory;
+    public ArrayList<PayHistoryListResult> getTotallist() {
+        return totallist;
     }
 
-    public void setPayhistory(ArrayList<PayHistoryListResult> payhistory) {
-        this.payhistory = payhistory;
+    public void setTotallist(ArrayList<PayHistoryListResult> totallist) {
+        this.totallist = totallist;
     }
 
     public class PayHistoryListResult {
-        private String payment_no;
-        private String payment_price;
-        private String payment_card_code;
-        private String payment_account_code;
-        private String payment_type;
-        private String user_email;
-        private String user_no;
-        private String payment_date;
-        private String payment_status;
-        private String refound_status;
-        private String payment_room_status;
 
-        public String getPayment_no() {
-            return payment_no;
+        private String payment_Code;
+        private String Pay_Types;
+        private String singleTitle;
+        private String dutchPay_Title;
+        private String payMent_Price;
+        private String user_Code;
+        private String progress_Date;
+
+        public String getPayment_Code() {
+            return payment_Code;
         }
 
-        public void setPayment_no(String payment_no) {
-            this.payment_no = payment_no;
+        public void setPayment_Code(String payment_Code) {
+            this.payment_Code = payment_Code;
         }
 
-        public String getPayment_price() {
-            return payment_price;
+        public String getPay_Types() {
+            return Pay_Types;
         }
 
-        public void setPayment_price(String payment_price) {
-            this.payment_price = payment_price;
+        public void setPay_Types(String pay_Types) {
+            Pay_Types = pay_Types;
         }
 
-        public String getPayment_card_code() {
-            return payment_card_code;
+        public String getSingleTitle() {
+            return singleTitle;
         }
 
-        public void setPayment_card_code(String payment_card_code) {
-            this.payment_card_code = payment_card_code;
+        public void setSingleTitle(String singleTitle) {
+            this.singleTitle = singleTitle;
         }
 
-        public String getPayment_account_code() {
-            return payment_account_code;
+        public String getDutchPay_Title() {
+            return dutchPay_Title;
         }
 
-        public void setPayment_account_code(String payment_account_code) {
-            this.payment_account_code = payment_account_code;
+        public void setDutchPay_Title(String dutchPay_Title) {
+            this.dutchPay_Title = dutchPay_Title;
         }
 
-        public String getPayment_type() {
-            return payment_type;
+        public String getPayMent_Price() {
+            return payMent_Price;
         }
 
-        public void setPayment_type(String payment_type) {
-            this.payment_type = payment_type;
+        public void setPayMent_Price(String payMent_Price) {
+            this.payMent_Price = payMent_Price;
         }
 
-        public String getUser_email() {
-            return user_email;
+        public String getUser_Code() {
+            return user_Code;
         }
 
-        public void setUser_email(String user_email) {
-            this.user_email = user_email;
+        public void setUser_Code(String user_Code) {
+            this.user_Code = user_Code;
         }
 
-        public String getUser_no() {
-            return user_no;
+        public String getProgress_Date() {
+            return progress_Date;
         }
 
-        public void setUser_no(String user_no) {
-            this.user_no = user_no;
-        }
-
-        public String getPayment_date() {
-            return payment_date;
-        }
-
-        public void setPayment_date(String payment_date) {
-            this.payment_date = payment_date;
-        }
-
-        public String getPayment_status() {
-            return payment_status;
-        }
-
-        public void setPayment_status(String payment_status) {
-            this.payment_status = payment_status;
-        }
-
-        public String getRefound_status() {
-            return refound_status;
-        }
-
-        public void setRefound_status(String refound_status) {
-            this.refound_status = refound_status;
-        }
-
-        public String getPayment_room_status() {
-            return payment_room_status;
-        }
-
-        public void setPayment_room_status(String payment_room_status) {
-            this.payment_room_status = payment_room_status;
+        public void setProgress_Date(String progress_Date) {
+            this.progress_Date = progress_Date;
         }
     }
 }

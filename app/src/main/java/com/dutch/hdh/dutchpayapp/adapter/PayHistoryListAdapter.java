@@ -2,19 +2,15 @@ package com.dutch.hdh.dutchpayapp.adapter;
 
 import android.content.Context;
 import android.databinding.DataBindingUtil;
-import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
 import com.dutch.hdh.dutchpayapp.R;
-import com.dutch.hdh.dutchpayapp.data.db.AccountRegisterList;
 import com.dutch.hdh.dutchpayapp.data.db.PayHistoryList;
-import com.dutch.hdh.dutchpayapp.databinding.ItemBankListBinding;
 import com.dutch.hdh.dutchpayapp.databinding.ItemUsageHistoryBinding;
 import com.dutch.hdh.dutchpayapp.ui.wallet.payhistory.PayUsageHistoryContract;
-import com.dutch.hdh.dutchpayapp.util.FormatUtil;
 
 import java.util.ArrayList;
 
@@ -60,13 +56,14 @@ public class PayHistoryListAdapter extends BaseAdapter {
             holder = (ItemPayUsageHolder) convertView.getTag();
         }
         PayHistoryList.PayHistoryListResult mPayHistoryListResult = payHistoryListResultArrayList.get(position);
-        holder.mItemBankListBinding.tvUsageDate.setText(mPayHistoryListResult.getPayment_date());
-        holder.mItemBankListBinding.tvUsageName.setText(mPayHistoryListResult.getPayment_date());
-        holder.mItemBankListBinding.tvUsageDate.setText(mPayHistoryListResult.getPayment_date());
-
-//        holder.mItemBankListBinding.tvBankName.setText(mPayHistoryListResult.getAccount_TypeName());
-//        holder.mItemBankListBinding.tvAccountNumber.setText(FormatUtil.getHyphenCardMasking(mPayHistoryListResult.getAccount_No()));
-
+        holder.itemUsageHistoryBinding.tvUsageDate.setText(mPayHistoryListResult.getProgress_Date());
+        if ("단독".equals(mPayHistoryListResult.getPay_Types())) {
+            holder.itemUsageHistoryBinding.tvUsageName.setText(mPayHistoryListResult.getSingleTitle());
+        } else {
+            holder.itemUsageHistoryBinding.tvUsageName.setText(mPayHistoryListResult.getDutchPay_Title());
+        }
+        holder.itemUsageHistoryBinding.tvUsagePrice.setText(String.format("%,d", Integer.parseInt(mPayHistoryListResult.getPayMent_Price()))+"원");
+        holder.itemUsageHistoryBinding.ivUsagePayStatus.setImageResource(getPayStatusImage(mPayHistoryListResult.getPay_Types()));
 
         return holder.mView;
     }
@@ -74,29 +71,23 @@ public class PayHistoryListAdapter extends BaseAdapter {
     /**
      * 결제 타입에대한 이미지
      */
-    private int getPayStatusImage(int accountTypeCode) {
-        switch (accountTypeCode) {
-            case 0:
+    private int getPayStatusImage(String payType) {
+        switch (payType) {
+            case "단독":
                 return R.drawable.wallet16_5;
-            case 1:
+            case "더치페이":
                 return R.drawable.wallet16_6;
-            case 2:
-                return R.drawable.wallet16_7;
-            case 3:
-                return R.drawable.wallet16_8;
-            case 4:
-                return R.drawable.wallet16_9;
         }
         return R.drawable.wallet16_5;
     }
 
     class ItemPayUsageHolder {
         View mView;
-        ItemUsageHistoryBinding mItemBankListBinding;
+        ItemUsageHistoryBinding itemUsageHistoryBinding;
 
         ItemPayUsageHolder(ItemUsageHistoryBinding itemUsageHistoryBinding) {
             this.mView = itemUsageHistoryBinding.getRoot();
-            this.mItemBankListBinding = itemUsageHistoryBinding;
+            this.itemUsageHistoryBinding = itemUsageHistoryBinding;
         }
     }
 }

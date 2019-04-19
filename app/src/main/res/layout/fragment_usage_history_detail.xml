@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/layoutBG"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="17.14dp"
+            android:layout_marginRight="17.14dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tvHistoryType"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="28.57dp"
+                android:text="개인결제"
+                android:textColor="#2a2a2a"
+                android:textSize="13.71dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="179.14dp"
+                android:layout_marginTop="7.14dp"
+                android:background="@drawable/standard_box"
+                android:orientation="vertical"
+                android:paddingLeft="32.85dp"
+                android:paddingTop="27.71dp"
+                android:paddingRight="32.85dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.4"
+                        android:gravity="center_vertical"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/tvUsageDate"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/malgunfont"
+                            android:includeFontPadding="false"
+                            android:text="2019/04/26"
+                            android:textColor="#2a2a2a"
+                            android:textSize="11.42dp" />
+
+                        <TextView
+                            android:id="@+id/tvUsageName"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:fontFamily="@font/malgunfont"
+                            android:includeFontPadding="false"
+                            android:text="새마을식당"
+                            android:textColor="#2a2a2a"
+                            android:textSize="13.71dp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="21.14dp"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical|right"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:id="@+id/ivUsagePayStatus"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/wallet16_5" />
+
+                        <TextView
+                            android:id="@+id/tvUsagePrice"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="9.14dp"
+                            android:fontFamily="@font/malgunfont"
+                            android:includeFontPadding="false"
+                            android:text="50,000원"
+                            android:textColor="#2a2a2a"
+                            android:textSize="13.71dp" />
+
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="28.57dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:fontFamily="@font/malgunfont"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:includeFontPadding="false"
+                        android:text="상가 사업자번호: 12-12345-123456"
+                        android:textColor="#2a2a2a"
+                        android:textSize="9.71dp" />
+
+                    <TextView
+                        android:fontFamily="@font/malgunfont"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:includeFontPadding="false"
+                        android:text="상가 위치: 서울시 강남구 논현로 145길 16"
+                        android:textColor="#2a2a2a"
+                        android:textSize="9.71dp" />
+
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+</layout>

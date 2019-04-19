@@ -65,7 +65,7 @@ public class CardRegisterListAdapter extends BaseAdapter {
         holder.mItemCardListBinding.tvCardName.setText(mCardRegisterListResult.getCard_TypeName());
         holder.mItemCardListBinding.tvCardNumber.setText(FormatUtil.getHyphenCardMasking(mCardRegisterListResult.getCard_No()));
 
-        holder.mItemCardListBinding.ivCardDelete.setOnClickListener(v -> {
+        holder.mItemCardListBinding.llCardDelete.setOnClickListener(v -> {
             if (mPresenter.isRepresentativeCard(mCardRegisterListResult.getCard_Choice())) {
                 mView.showCommonDialog("알림", "대표카드는 삭제 할수 없습니다.", false);
             } else {

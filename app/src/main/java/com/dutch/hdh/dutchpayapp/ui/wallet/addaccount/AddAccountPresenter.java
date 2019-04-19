@@ -102,7 +102,6 @@ public class AddAccountPresenter implements AddAccountContract.Presenter {
                             accountTypeCode,
                             mMyApplication.getUserInfo().getUserCode()
                             );
-
             accountRegister.enqueue(new Callback<Void>() {
                 @Override
                 public void onResponse(Call<Void> call, Response<Void> response) {
@@ -110,7 +109,6 @@ public class AddAccountPresenter implements AddAccountContract.Presenter {
                         mView.showCommonDialog("알림", "계좌등록이 완료되었습니다.", true);
                     }
                 }
-
                 @Override
                 public void onFailure(Call<Void> call, Throwable t) {
                     mView.showCommonDialog("알림", "계좌등록 처리를 하지 못했습니다.", false);
@@ -139,7 +137,6 @@ public class AddAccountPresenter implements AddAccountContract.Presenter {
                 mBinding.etAccountPassword2 == null || mBinding.etAccountPassword2.getText().toString().trim().matches("") ||
                 mBinding.etAccountPassword3 == null || mBinding.etAccountPassword3.getText().toString().trim().matches("") ||
                 mBinding.etAccountPassword4 == null || mBinding.etAccountPassword4.getText().toString().trim().matches("")) {
-
             mView.showCommonDialog("알림", "비밀번호를 입력하세요.", false);
 
             return false;

@@ -1,31 +1,20 @@
 package com.dutch.hdh.dutchpayapp.ui.wallet.payhistory;
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.Color;
-import android.graphics.Typeface;
+import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.util.SparseArray;
-import android.view.SurfaceHolder;
-import android.view.SurfaceView;
-import android.view.View;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
+import com.dutch.hdh.dutchpayapp.Constants;
 import com.dutch.hdh.dutchpayapp.MyApplication;
 import com.dutch.hdh.dutchpayapp.R;
-import com.dutch.hdh.dutchpayapp.data.db.SendPoint;
-import com.dutch.hdh.dutchpayapp.databinding.FragmentSendReceiveBinding;
-import com.dutch.hdh.dutchpayapp.ui.mygroup.directinput.MyGroup_DirectInputFragment;
-import com.dutch.hdh.dutchpayapp.ui.mygroup.main.MyGroup_MainFragment;
-import com.dutch.hdh.dutchpayapp.ui.mygroup.telephonedirectory.MyGroup_TelephoneDirectoryFragment;
-import com.dutch.hdh.dutchpayapp.ui.wallet.sendandreceive.SendReceiveContract;
+import com.dutch.hdh.dutchpayapp.data.db.PayHistoryList;
+import com.dutch.hdh.dutchpayapp.ui.wallet.payhistorydetail.PayUsageHistoryDetailFragment;
 import com.dutch.hdh.dutchpayapp.util.Trace;
-import com.google.android.gms.vision.Detector;
-import com.google.android.gms.vision.barcode.Barcode;
-import com.google.android.gms.vision.barcode.BarcodeDetector;
-import com.google.zxing.common.BitMatrix;
+import com.google.gson.Gson;
+
+import java.util.ArrayList;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -37,7 +26,6 @@ public class PayUsageHistoryPresenter implements PayUsageHistoryContract.Present
     private PayUsageHistoryContract.View mView;
     private Context mContext;
     private FragmentManager mFragmentManager;
-    private FragmentSendReceiveBinding mFragmentSendReceiveBinding;
 
 
     public PayUsageHistoryPresenter(PayUsageHistoryContract.View view, Context context, FragmentManager fragmentManager) {
@@ -55,43 +43,63 @@ public class PayUsageHistoryPresenter implements PayUsageHistoryContract.Present
         }
     }
 
-    @Override
-    public void clickPayAllStatus() {
 
+    @Override
+    public void getPayUsageHistoryList(String buttonType, String userCode, String payTypes) {
+        Call<PayHistoryList> getPayHistory = MyApplication.getInstance()
+                .getRestAdapter()
+                .getUsageHistoryList(buttonType, userCode);
+
+        getPayHistory.enqueue(new Callback<PayHistoryList>() {
+            @Override
+            public void onResponse(Call<PayHistoryList> call, Response<PayHistoryList> response) {
+                if (response.isSuccessful()) {
+                    Trace.e("getPayUsageHistoryList", "getPayUsageHistoryList");
+                    ArrayList<PayHistoryList.PayHistoryListResult> mPayHistoryListResultArrayList = new ArrayList<>();
+
+                    if (response.body().getTotallist().size() != 0) {
+                        for (int i = 0; i < response.body().getTotallist().size(); i++) {
+                            switch (payTypes) {
+                                case "단독":
+                                    if (payTypes.equals(response.body().getTotallist().get(i).getPay_Types())) {
+                                        mPayHistoryListResultArrayList.add(response.body().getTotallist().get(i));
+                                    }
+                                    break;
+                                case "더치페이":
+                                    if (payTypes.equals(response.body().getTotallist().get(i).getPay_Types())) {
+                                        mPayHistoryListResultArrayList.add(response.body().getTotallist().get(i));
+                                    }
+                                    break;
+                                case "0":
+                                    mPayHistoryListResultArrayList.add(response.body().getTotallist().get(i));
+                                    break;
+                            }
+                        }
+                    }
+                    mView.setPayUsageHistoryList(mPayHistoryListResultArrayList);
+
+                } else {
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<PayHistoryList> call, Throwable t) {
+
+            }
+        });
     }
 
     @Override
-    public void clickPayDutchPayStatus() {
-
-    }
-
-    @Override
-    public void clickPaySoloPayStatus() {
-
-    }
-
-    @Override
-    public void clickPaySendReceiveStatus() {
-
-    }
-
-    @Override
-    public void clickOneWeekPayList() {
-
-    }
-
-    @Override
-    public void clickOneMonthPayList() {
-
-    }
-
-    @Override
-    public void clickThreeMonthPayList() {
-
-    }
-
-    @Override
-    public void clickAllPayList() {
-
+    public void clickUsagePayDetail(PayHistoryList.PayHistoryListResult payHistoryListResult) {
+        Bundle bundle = new Bundle();
+        bundle.putString(Constants.PAY_USAGE_HISTORY, new Gson().toJson(payHistoryListResult).toString());
+        FragmentTransaction fragmentTransaction = mFragmentManager.beginTransaction();
+        fragmentTransaction.setCustomAnimations(R.anim.fade_in, 0, 0, R.anim.fade_out);
+        PayUsageHistoryDetailFragment payUsageHistoryDetailFragment = new PayUsageHistoryDetailFragment();
+        payUsageHistoryDetailFragment.setArguments(bundle);
+        fragmentTransaction.replace(R.id.flFragmentContainer, payUsageHistoryDetailFragment, PayUsageHistoryDetailFragment.class.getName());
+        fragmentTransaction.addToBackStack(PayUsageHistoryDetailFragment.class.getName());
+        fragmentTransaction.commit();
     }
 }

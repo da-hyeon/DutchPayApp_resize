@@ -86,43 +86,12 @@ public class AccountRegisterListAdapter extends BaseAdapter {
             }
         });
 
-        holder.mItemBankListBinding.llBankBackground.setBackgroundColor(Color.parseColor(getBankCompanyColor(Integer.parseInt(mAccountRegisterListResult.getAccount_TypeCode()))));
+        holder.mItemBankListBinding.llBankBackground.setBackgroundColor(Color.parseColor(mPresenter.getBankBackgroundColor((mAccountRegisterListResult.getAccount_TypeCode()))));
 
 
         return holder.mView;
     }
 
-    /**
-     * 카드사에 따른 백그라운드 컬러
-     */
-    private String getBankCompanyColor(int accountTypeCode) {
-        switch (accountTypeCode) {
-            case 0:
-                return "#288479";
-            case 1:
-                return "#f7b500";
-            case 2:
-                return "#0f479e";
-            case 3:
-                return "#ea1d24";
-            case 4:
-                return "#212021";
-            case 5:
-                return "#0165b3";
-            case 6:
-                return "#ea1d24";
-            case 7:
-                return "#1899d3";
-            case 8:
-                return "#f7b500";
-            case 9:
-                return "#288479";
-            case 10:
-                return "#212021";
-
-        }
-        return "#ffffff";
-    }
 
     class ItemBankHolder {
         View mView;

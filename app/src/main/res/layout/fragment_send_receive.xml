@@ -293,7 +293,7 @@
                             android:orientation="horizontal">
 
 
-                            <ImageView
+                       <!--     <ImageView
                                 android:id="@+id/ivContactAdd"
                                 android:layout_width="112dp"
                                 android:layout_height="38.85dp"
@@ -311,7 +311,7 @@
                                 android:id="@+id/ivDirectlyInputAdd"
                                 android:layout_width="112dp"
                                 android:layout_height="38.85dp"
-                                android:src="@drawable/add" />
+                                android:src="@drawable/add" />-->
 
                         </LinearLayout>
 

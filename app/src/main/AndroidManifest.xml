@@ -23,10 +23,11 @@
             android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"
             android:exported="true"
             android:launchMode="singleTop"
-            android:screenOrientation="fullSensor"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.FullScreen.Transparent"
-            android:windowSoftInputMode="adjustNothing">
-            tools:replace="screenOrientation">
+            android:windowSoftInputMode="adjustNothing"
+            tools:replace="screenOrientation"
+            >
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -72,8 +73,7 @@
             android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
 
         <activity
-
-            android:name=".ui.wallet.myaccount.MyAccountActivity"
+            android:name=".ui.find.email.FindEmailActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.FullScreen.Transparent"
@@ -81,12 +81,33 @@
 
 
         <activity
-            android:name=".ui.find.email.FindEmailActivity"
+            android:name=".ui.find.password.FindPasswordActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.FullScreen.Transparent"
             android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
 
+
+        <activity
+            android:name=".ui.wallet.mycard.MyCardActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.FullScreen.Transparent"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
+
+        <activity
+            android:name=".ui.wallet.addcard.AddCardActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.FullScreen.Transparent"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
+
+        <activity
+            android:name=".ui.wallet.managementcard.ManagementCardActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.FullScreen.Transparent"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
 
         <activity
             android:name=".ui.wallet.addaccount.AddAccountActivity"
@@ -96,11 +117,12 @@
             android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
 
         <activity
-            android:name=".ui.find.password.FindPasswordActivity"
+            android:name=".ui.wallet.myaccount.MyAccountActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.FullScreen.Transparent"
             android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
+
     </application>
 
 </manifest>

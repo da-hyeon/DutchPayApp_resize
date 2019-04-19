@@ -41,7 +41,7 @@ public class MyAccountPresenter implements MyAccountContract.Presenter {
         Intent intent = new Intent(mContext, AddAccountActivity.class);
         mContext.startActivity(intent);
         if (mContext instanceof MyAccountActivity) {
-            ((MyAccountActivity) mContext).overridePendingTransition(R.anim.slide_up_in, R.anim.slide_down_out);
+            ((MyAccountActivity) mContext).overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
         }
     }
 

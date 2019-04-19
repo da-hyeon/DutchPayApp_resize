@@ -36,6 +36,8 @@ import com.dutch.hdh.dutchpayapp.ui.setup.invite.InviteFragment;
 import com.dutch.hdh.dutchpayapp.ui.setup.setting.SetupFragment;
 import com.dutch.hdh.dutchpayapp.ui.solopay.SoloPayFragment;
 import com.dutch.hdh.dutchpayapp.ui.wallet.mywallet.MyWalletFragment;
+import com.dutch.hdh.dutchpayapp.ui.wallet.payhistory.PayUsageHistoryFragment;
+import com.dutch.hdh.dutchpayapp.ui.wallet.payhistorydetail.PayUsageHistoryDetailFragment;
 import com.dutch.hdh.dutchpayapp.ui.wallet.sendandreceive.SendReceiveFragment;
 import com.dutch.hdh.dutchpayapp.ui.personal_payment.main.PersonalPayment_MainFragment;
 
@@ -174,15 +176,36 @@ public class MainActivityPresenter implements MainActivityContract.Presenter {
             mView.changeTitle("더치페이");
             mView.hideBell();
             mView.showExit();
-        } else if (getCurrentFragment() instanceof SendReceiveFragment) {
+        }
+
+        else if (getCurrentFragment() instanceof SendReceiveFragment) {
             mView.changeTitle("주고받기");
             mView.hideBell();
             mView.showExit();
-        } else if (getCurrentFragment() instanceof DutchpayNewFragment) {
+
+        }
+
+        else if (getCurrentFragment() instanceof PayUsageHistoryFragment) {
+            mView.changeTitle("사용내역");
+            mView.hideBell();
+            mView.showExit();
+        }
+        else if (getCurrentFragment() instanceof PayUsageHistoryDetailFragment) {
+            mView.changeTitle("사용내역 상세");
+            mView.hideBell();
+            mView.showExit();
+        }
+
+        else if (getCurrentFragment() instanceof DutchpayNewFragment) {
             mView.changeTitle("신규 더치페이");
-        } else if (getCurrentFragment() instanceof DutchpayDetailFragment) {
+        }
+
+        else if (getCurrentFragment() instanceof DutchpayDetailFragment) {
             mView.changeTitle("더치페이");
-        } else if (getCurrentFragment() instanceof SetupFragment) {
+        }
+
+        else if (getCurrentFragment() instanceof SetupFragment) {
+
         }
 
         else if (getCurrentFragment() instanceof DutchpayNewAddGroupFragment) {

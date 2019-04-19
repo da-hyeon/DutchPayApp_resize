@@ -61,7 +61,7 @@ public class MyCardPresenter implements MyCardContract.Presenter {
         Intent intent = new Intent(mContext, ManagementCardActivity.class);
         mContext.startActivity(intent);
         if (mContext instanceof MyCardActivity) {
-            ((MyCardActivity) mContext).overridePendingTransition(R.anim.slide_up_in, R.anim.slide_down_out);
+            ((MyCardActivity) mContext).overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
         }
     }
 
@@ -71,7 +71,7 @@ public class MyCardPresenter implements MyCardContract.Presenter {
         Intent intent = new Intent(mContext, AddCardActivity.class);
         mContext.startActivity(intent);
         if (mContext instanceof MyCardActivity) {
-            ((MyCardActivity) mContext).overridePendingTransition(R.anim.slide_up_in, R.anim.slide_down_out);
+            ((MyCardActivity) mContext).overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
         }
     }
 
@@ -110,7 +110,7 @@ public class MyCardPresenter implements MyCardContract.Presenter {
         cardRegisterList.enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
-                if (response.body() == null) {
+                if (response.isSuccessful()) {
                     getRegisterCardList();
                     Trace.e("setRepresentativeCard", "setRepresentativeCard");
                 } else {
@@ -121,6 +121,30 @@ public class MyCardPresenter implements MyCardContract.Presenter {
             @Override
             public void onFailure(Call<Void> call, Throwable t) {
 
+            }
+        });
+    }
+
+    @Override
+    public void checkViewPager(ViewPager viewPager, TabLayout tabLayout) {
+
+        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int i, float v, int i1) {
+
+            }
+
+            @Override
+            public void onPageSelected(int i) {
+
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int i) {
+
+                if (tabLayout.getSelectedTabPosition() + 1 == viewPager.getAdapter().getCount()) {
+                    viewPager.setVisibility(View.GONE);
+                }
             }
         });
     }

@@ -211,16 +211,37 @@
                 </LinearLayout>
             </LinearLayout>
 
-            <ListView
-                android:id="@+id/lvUsageHistory"
+            <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="11.71dp"
-                android:layout_weight="1"
-                android:divider="@color/SendAndReceiveListDividerColor"
-                android:dividerHeight="1px"
-                android:listSelector="@android:color/transparent"
-                android:scrollbars="none" />
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/tvCheckUsagePayList"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:visibility="gone"
+                    android:text="등록된 사용내역이 없습니다."
+                    android:textColor="@color/topBarFontColor"
+                    android:fontFamily="@font/malgunfont"
+                    android:includeFontPadding="false"
+                    android:textSize="20dp" />
+
+                <ListView
+                    android:id="@+id/lvUsageHistory"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="11.71dp"
+                    android:layout_weight="1"
+                    android:divider="@android:color/transparent"
+                    android:dividerHeight="8dp"
+                    android:listSelector="@android:color/transparent"
+                    android:scrollbars="none" />
+
+            </FrameLayout>
+
+
         </LinearLayout>
 
 

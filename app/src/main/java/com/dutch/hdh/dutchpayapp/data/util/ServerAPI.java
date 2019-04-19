@@ -8,18 +8,12 @@ import com.dutch.hdh.dutchpayapp.data.db.MyGroup;
 import com.dutch.hdh.dutchpayapp.data.db.CardCompanyList;
 import com.dutch.hdh.dutchpayapp.data.db.CardRegisterList;
 import com.dutch.hdh.dutchpayapp.data.db.PayHistoryList;
-import com.dutch.hdh.dutchpayapp.data.db.CardCompanyList;
-import com.dutch.hdh.dutchpayapp.data.db.CardRegisterList;
 import com.dutch.hdh.dutchpayapp.data.db.Dutchpayhistory;
 import com.dutch.hdh.dutchpayapp.data.db.AccountList;
-import com.dutch.hdh.dutchpayapp.data.db.ErrorCode;
-import com.dutch.hdh.dutchpayapp.data.db.EventList;
-import com.dutch.hdh.dutchpayapp.data.db.MyGroup;
 import com.dutch.hdh.dutchpayapp.data.db.Product;
 import com.dutch.hdh.dutchpayapp.data.db.SearchEmail;
 import com.dutch.hdh.dutchpayapp.data.db.SearchPassword;
 import com.dutch.hdh.dutchpayapp.data.db.UserInfo;
-import com.dutch.hdh.dutchpayapp.data.db.UserList;
 
 import retrofit2.Call;
 import retrofit2.http.Field;
@@ -257,51 +251,20 @@ public interface ServerAPI {
      */
     @FormUrlEncoded
     @POST(Constants.DUTCHPAY_POINT_RECEIVE)
-    Call<Void> getPointSend(
+    Call<Void> getPointReceive(
             @Field("qrcode") String qrcode
     );
 
     /**
-     * 1주 사용내역 목록 요청
+     * 사용내역 목록 요청
      *
+     * @param buttontype
      * @param usercode
      */
     @FormUrlEncoded
-    @POST(Constants.DUTCHPAY_PAY_ONE_WEEK)
-    Call<PayHistoryList> getPayOneWeekList(
-            @Field("usercode") String usercode
-    );
-
-    /**
-     * 1달 사용내역 목록 요청
-     *
-     * @param usercode
-     */
-    @FormUrlEncoded
-    @POST(Constants.DUTCHPAY_PAY_ONE_MONTH)
-    Call<PayHistoryList> getPayOneMonthList(
-            @Field("usercode") String usercode
-    );
-
-    /**
-     * 3달 사용내역 목록 요청
-     *
-     * @param usercode
-     */
-    @FormUrlEncoded
-    @POST(Constants.DUTCHPAY_PAY_3_MONTH)
-    Call<PayHistoryList> getPay3MonthList(
-            @Field("usercode") String usercode
-    );
-
-    /**
-     * 전체 사용내역 목록 요청
-     *
-     * @param usercode
-     */
-    @FormUrlEncoded
-    @POST(Constants.DUTCHPAY_PAY_HISTORY)
-    Call<PayHistoryList> getPayHistoryList(
+    @POST(Constants.DUTCHPAY_PAY_USAGE_HISTORY)
+    Call<PayHistoryList> getUsageHistoryList(
+            @Field("buttontype") String buttontype,
             @Field("usercode") String usercode
     );
 
@@ -456,6 +419,7 @@ public interface ServerAPI {
      * @param payproduct_code
      * @return
      */
+
     @FormUrlEncoded
     @POST(Constants.SELECT_PRODUCT_PAYMENT_NUMBER_REQUEST_URL)
     Call<Product> selectPaymentNumberProduct(@Field("payproduct_code") String payproduct_code);

@@ -19,7 +19,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="0.4"
+                android:layout_weight="0.7"
                 android:gravity="center_vertical"
                 android:orientation="vertical">
 
@@ -67,7 +67,6 @@
                     android:layout_marginTop="9.14dp"
                     android:fontFamily="@font/malgunfont"
                     android:includeFontPadding="false"
-                    android:text="50,000원"
                     android:textColor="#2a2a2a"
                     android:textSize="13.71dp" />
 

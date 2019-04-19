@@ -104,7 +104,7 @@
                     android:layout_marginTop="24.85dp"
                     android:layout_marginRight="17.14dp"
                     android:layout_marginBottom="24.85dp"
-                    android:background="@color/hanaCardColor">
+                    >
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -123,7 +123,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="29.14dp"
-                                android:src="@drawable/hana_bank" />
+                                 />
 
                             <View
                                 android:layout_width="0dp"

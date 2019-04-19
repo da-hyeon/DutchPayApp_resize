@@ -74,10 +74,13 @@ public class MyCardActivity extends BaseActivity implements MyCardContract.View 
     public void setRegisterCardList(ArrayList<CardRegisterList.CardRegisterListResult> cardRegisterListResultArrayList) {
         if (cardRegisterListResultArrayList.size() == 0) {
             mBinding.vpCardList.setVisibility(View.GONE);
+        } else {
+            mBinding.vpCardList.setVisibility(View.VISIBLE);
         }
         CardImageSliderAdapter cardImageSliderAdapter = new CardImageSliderAdapter(this, cardRegisterListResultArrayList, this);
         mBinding.vpCardList.setAdapter(cardImageSliderAdapter);
         mBinding.tlIndicator.setupWithViewPager(mBinding.vpCardList, true);
+        mPresenter.checkViewPager(mBinding.vpCardList, mBinding.tlIndicator);
     }
 
     @Override
@@ -114,9 +117,6 @@ public class MyCardActivity extends BaseActivity implements MyCardContract.View 
     @Override
     protected void onResume() {
         super.onResume();
-        if (mBinding.vpCardList.getVisibility() == View.GONE) {
-            mBinding.vpCardList.setVisibility(View.VISIBLE);
-        }
         initData();
     }
 
