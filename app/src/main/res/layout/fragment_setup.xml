@@ -200,7 +200,7 @@
         </android.support.constraint.ConstraintLayout>
 
         <android.support.constraint.ConstraintLayout
-            android:id="@+id/constraintLayout13"
+            android:id="@+id/clGoHomePage"
             android:layout_width="0dp"
             android:layout_height="48dp"
             android:layout_marginTop="11dp"
@@ -247,7 +247,7 @@
             app:layout_constraintEnd_toEndOf="@+id/constraintLayout10"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/constraintLayout10"
-            app:layout_constraintTop_toBottomOf="@+id/constraintLayout13">
+            app:layout_constraintTop_toBottomOf="@+id/clGoHomePage">
 
             <TextView
                 android:id="@+id/textView22"

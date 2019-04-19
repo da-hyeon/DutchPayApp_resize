@@ -60,10 +60,7 @@ public class Constants {
     //DutchpayNewConfirmFragment -> PaymentPasswordFragment
     public static final String PAYMENT_INFO = "dutchpayInfo";
     public static final String PAYMENT_LIST_JSON = "dutchpayGroupJson";
-<<<<<<< HEAD
     public static final String PAY_USAGE_HISTORY = "payUsageHistory";
-=======
->>>>>>> origin/yunmi
 
 
     /**

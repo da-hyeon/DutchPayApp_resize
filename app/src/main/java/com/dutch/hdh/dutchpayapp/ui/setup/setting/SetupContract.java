@@ -20,5 +20,7 @@ public interface SetupContract {
         void marketingOnClick();
         void marketingOffClick();
 
+        void clickGoHomePage();
+
     }
 }

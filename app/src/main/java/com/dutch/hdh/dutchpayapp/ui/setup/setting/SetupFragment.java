@@ -63,6 +63,10 @@ public class SetupFragment extends BaseFragment implements SetupContract.View{
             mPresenter.marketingFlag.set( !(mPresenter.marketingFlag.get()));
         });
 
+        mBinding.clGoHomePage.setOnClickListener(v->
+            mPresenter.clickGoHomePage()
+        );
+
 
         return mBinding.getRoot();
     }

@@ -101,6 +101,11 @@ public class SetupPresenter implements SetupContract.Presenter {
 
     }
 
+    @Override
+    public void clickGoHomePage() {
+
+    }
+
     /**
      * 메인 프래그먼트 빼고 모두 스택에서 제거
      */

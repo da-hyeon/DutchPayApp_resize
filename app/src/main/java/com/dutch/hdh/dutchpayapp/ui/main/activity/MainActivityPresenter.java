@@ -43,11 +43,8 @@ import com.dutch.hdh.dutchpayapp.ui.wallet.mywallet.MyWalletFragment;
 import com.dutch.hdh.dutchpayapp.ui.wallet.payhistory.PayUsageHistoryFragment;
 import com.dutch.hdh.dutchpayapp.ui.wallet.payhistorydetail.PayUsageHistoryDetailFragment;
 import com.dutch.hdh.dutchpayapp.ui.wallet.sendandreceive.SendReceiveFragment;
-import com.dutch.hdh.dutchpayapp.ui.personal_payment.main.PersonalPayment_MainFragment;
 
 import java.util.List;
-
-import retrofit2.http.HEAD;
 
 public class MainActivityPresenter implements MainActivityContract.Presenter {
     private MainActivityContract.View mView;
@@ -164,20 +161,14 @@ public class MainActivityPresenter implements MainActivityContract.Presenter {
             } else {
                 mView.changeTitle("My 그룹 신규추가");
             }
-            mView.hideBell();
-            mView.showExit();
         }
 
         else if (getCurrentFragment() instanceof MyGroup_TelephoneDirectoryFragment) {
             mView.changeTitle("전화부호부");
-            mView.hideBell();
-            mView.showExit();
         }
 
         else if (getCurrentFragment() instanceof MyGroup_DirectInputFragment) {
             mView.changeTitle("직접입력");
-            mView.hideBell();
-            mView.showExit();
         }
 
         else if (getCurrentFragment() instanceof Event_MainFragment ||
@@ -203,13 +194,6 @@ public class MainActivityPresenter implements MainActivityContract.Presenter {
             mView.changeTitle("My 지갑");
         }
 
-        else if (getCurrentFragment() instanceof Event_MainFragment ||
-                getCurrentFragment() instanceof Event_DetailFragment) {
-            mView.changeTitle("이벤트");
-            mView.hideBell();
-            mView.showExit();
-        }
-
         else if (getCurrentFragment() instanceof MyPage_MainFragment) {
             mView.changeTitle("내정보");
             mView.hideBell();
@@ -230,7 +214,6 @@ public class MainActivityPresenter implements MainActivityContract.Presenter {
             mView.changeTitle("주고받기");
             mView.hideBell();
             mView.showExit();
-
         }
 
         else if (getCurrentFragment() instanceof PayUsageHistoryFragment) {
@@ -283,17 +266,15 @@ public class MainActivityPresenter implements MainActivityContract.Presenter {
             mView.changeTitle("친구초대");
             mView.hideBell();
             mView.showExit();
-<<<<<<< HEAD
         }
 
-        else if (getCurrentFragment() instanceof MainFragment) {
-=======
-        } else if (getCurrentFragment() instanceof NoticeFragment){
+        else if (getCurrentFragment() instanceof NoticeFragment){
             mView.changeTitle("공지사항");
             mView.hideBell();
             mView.showExit();
-        } else if (getCurrentFragment() instanceof MainFragment) {
->>>>>>> origin/yunmi
+        }
+
+        else if (getCurrentFragment() instanceof MainFragment) {
             initLoginState();
             mView.changeTitle("");
             mView.showBell();

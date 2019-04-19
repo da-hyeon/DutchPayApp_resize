@@ -50,6 +50,7 @@ public class LoginPresenter implements LoginContract.Presenter {
      */
     @Override
     public void clickLogin(String userID, String userPassword, boolean isAutoLoginCheck) {
+
         if (userID.equals("") || userPassword.equals("")) {
             mView.showFailDialog("빈칸을 채워주세요.");
         } else {
@@ -62,25 +63,15 @@ public class LoginPresenter implements LoginContract.Presenter {
                 public void onResponse(@NonNull Call<UserInfo> call, @NonNull Response<UserInfo> response) {
                     if (response.body() != null) {
                         mMyApplication.setUserInfo(response.body());
-<<<<<<< HEAD
                         mMyApplication.getUserInfo().setUserState(true);
                         mView.showSuccessDialog(mMyApplication.getUserInfo().getUserName()+"님 환영합니다.");
+
+                        //자동로그인
                         autoLogin(isAutoLoginCheck);
-=======
-                        if (mMyApplication.getUserInfo().getMessage() == null) {
 
-                            mMyApplication.getUserInfo().setUserState(true);
-                            mView.showSuccessDialog(mMyApplication.getUserInfo().getUserName() + "님 환영합니다.");
-                            //자동로그인
-                            autoLogin(isAutoLoginCheck);
+                        //세팅 - 자동로그인
+                        setCheck(isAutoLoginCheck);
 
-                            //세팅 - 자동로그인
-                            setCheck(isAutoLoginCheck);
-
-                        } else {
-                            mView.showFailDialog("아이디와 비밀번호를 확인해주세요.");
-                        }
->>>>>>> origin/yunmi
                     } else {
                         mView.showFailDialog("아이디와 비밀번호를 확인해주세요.");
                     }

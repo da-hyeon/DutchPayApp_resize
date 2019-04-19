@@ -97,5 +97,6 @@ public class LoginFragment extends BaseFragment implements LoginContract.View{
         super.onResume();
         mBinding.editUserID.setText("");
         mBinding.editUserPW.setText("");
+        mBinding.cbAutoLogin.setChecked(false);
     }
 }
