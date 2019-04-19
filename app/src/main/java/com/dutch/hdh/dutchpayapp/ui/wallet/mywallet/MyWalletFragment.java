@@ -29,7 +29,7 @@ public class MyWalletFragment extends BaseFragment implements MyWalletContract.V
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_wallet, container, false);
-        mPresenter = new MyWalletPresenter(this, mMyApplication.getActivity());
+        mPresenter = new MyWalletPresenter(this, getContext(), getFragmentManager());
         initView();
         return mBinding.getRoot();
     }
@@ -39,22 +39,24 @@ public class MyWalletFragment extends BaseFragment implements MyWalletContract.V
         //카드 메뉴
         mBinding.llCard.setOnClickListener(v -> {
                     mPresenter.clickCard();
-                    mMyApplication.getActivity().overridePendingTransition(R.anim.slide_up_in, R.anim.slide_down_out);
+                    mMyApplication.getActivity().overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
                 }
         );
         //계좌 메뉴
         mBinding.llAccount.setOnClickListener(v ->
                 {
+                    mPresenter.clickAccount();
+                    mMyApplication.getActivity().overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
                 }
         );
         //주고받기 메뉴
         mBinding.llSendAndReceive.setOnClickListener(v ->
-                {
-                }
+                mPresenter.clickSendReceive()
         );
         //사용내역 메뉴
         mBinding.llHistory.setOnClickListener(v ->
                 {
+                    mPresenter.clickHistory();
                 }
         );
         //상품권 메뉴
@@ -62,6 +64,9 @@ public class MyWalletFragment extends BaseFragment implements MyWalletContract.V
                 {
                 }
         );
+
+        mBinding.tvMyMoney.setText(String.format("%,d", mMyApplication.getUserInfo().getUserMoney()));
+
     }
 
     @Override

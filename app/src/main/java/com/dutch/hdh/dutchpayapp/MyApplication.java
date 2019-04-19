@@ -43,10 +43,14 @@ public class MyApplication extends Application {
     //true = 진행중 , false = 진행 종료.
     private static boolean onGoingCheck;
 
+<<<<<<< HEAD
     //true = 로그인 , false = 비로그인
     public static boolean isLoginState;
 
     private static final String BASE_URL = "http://dutchkor02.cafe24.com/";
+=======
+    private static final String BASE_URL = "https://dutchkor02.cafe24.com/";
+>>>>>>> sungguen
 
     //더치페이 그룹 체크용
     private boolean dutchpayGroup;
@@ -262,7 +266,6 @@ public class MyApplication extends Application {
         } catch (final Exception e) {
             e.printStackTrace();
         }
-
         return builder;
     }
 

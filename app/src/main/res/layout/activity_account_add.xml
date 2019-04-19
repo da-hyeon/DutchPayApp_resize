@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/layoutBG"
+        android:orientation="vertical">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="56.28dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_horizontal"
+                android:fontFamily="@font/malgunfont"
+                android:gravity="center"
+                android:includeFontPadding="false"
+                android:text="계좌 정보 입력"
+                android:textColor="@color/topBarFontColor"
+                android:textSize="18.85dp"
+                android:textStyle="bold" />
+
+
+            <TextView
+                android:id="@+id/tvCancel"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="right"
+                android:layout_marginRight="17.14dp"
+                android:fontFamily="@font/malgunfont"
+                android:gravity="center"
+                android:includeFontPadding="false"
+                android:text="취소"
+                android:textColor="@color/topBarFontColor"
+                android:textSize="18.85dp" />
+        </FrameLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="@color/topBarLineColor" />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="17.14dp"
+            android:layout_marginTop="21.42dp"
+            android:layout_marginRight="17.14dp"
+            android:orientation="vertical">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="87dp"
+                android:background="@drawable/wallet_box"
+                android:orientation="vertical"
+                android:paddingLeft="17.14dp"
+                android:paddingRight="17.14dp">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="14.57dp"
+                    android:src="@drawable/wallet11_icon1" />
+
+                <TextView
+                    android:id="@+id/tvBankSelect"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="14.85dp"
+                    android:fontFamily="@font/malgunfont"
+                    android:hint="은행을 선택해주세요."
+                    android:includeFontPadding="false"
+                    android:textColor="@color/cardAddFontColor"
+                    android:textColorHint="@color/cardAddHintFontColor" />
+
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="87dp"
+                android:layout_marginTop="9.71dp"
+                android:background="@drawable/wallet_box"
+                android:orientation="vertical"
+                android:paddingLeft="17.14dp"
+                android:paddingRight="17.14dp">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="14.57dp"
+                    android:src="@drawable/wallet11_icon2" />
+
+                <LinearLayout
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp">
+
+
+                    <EditText
+                        android:id="@+id/etAccountNum"
+                        android:layout_width="match_parent"
+                        android:layout_height="34dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/wallet_box"
+                        android:gravity="center_vertical"
+                        android:hint="계좌번호를 입력해주세요"
+                        android:inputType="number"
+                        android:paddingLeft="10dp"
+                        android:paddingRight="10dp"
+                        android:textColor="@color/cardAddFontColor"
+                        android:textColorHint="@color/cardAddHintFontColor"
+                        android:textSize="11.42dp" />
+
+
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="87dp"
+                android:layout_marginTop="9.71dp"
+                android:background="@drawable/wallet_box"
+                android:orientation="vertical"
+                android:paddingLeft="17.14dp"
+                android:paddingRight="17.14dp">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="14.57dp"
+                    android:src="@drawable/wallet11_icon3" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp">
+
+
+                    <EditText
+                        android:id="@+id/etAccountPassword1"
+                        android:layout_width="34dp"
+                        android:layout_height="34dp"
+                        android:layout_marginRight="4.28dp"
+                        android:background="@drawable/wallet_box"
+                        android:fontFamily="@font/malgunfont"
+                        android:gravity="center"
+                        android:hint="*"
+                        android:inputType="numberPassword"
+                        android:maxLength="1"
+                        android:textColor="@color/cardAddFontColor"
+                        android:textColorHint="@color/cardAddHintFontColor"
+                        android:textSize="20dp"
+                        android:textStyle="bold" />
+
+
+                    <EditText
+                        android:id="@+id/etAccountPassword2"
+                        android:layout_width="34dp"
+                        android:layout_height="34dp"
+                        android:layout_marginRight="4.28dp"
+                        android:background="@drawable/wallet_box"
+                        android:fontFamily="@font/malgunfont"
+                        android:gravity="center"
+                        android:hint="*"
+                        android:inputType="numberPassword"
+                        android:maxLength="1"
+
+                        android:textColor="@color/cardAddFontColor"
+                        android:textColorHint="@color/cardAddHintFontColor"
+                        android:textSize="20dp"
+                        android:textStyle="bold" />
+
+
+                    <EditText
+                        android:id="@+id/etAccountPassword3"
+                        android:layout_width="34dp"
+                        android:layout_height="34dp"
+                        android:layout_marginRight="4.28dp"
+                        android:background="@drawable/wallet_box"
+                        android:fontFamily="@font/malgunfont"
+                        android:gravity="center"
+                        android:hint="*"
+                        android:inputType="numberPassword"
+                        android:maxLength="1"
+
+                        android:textColor="@color/cardAddFontColor"
+                        android:textColorHint="@color/cardAddHintFontColor"
+                        android:textSize="20dp"
+                        android:textStyle="bold" />
+
+
+                    <EditText
+                        android:id="@+id/etAccountPassword4"
+                        android:layout_width="34dp"
+                        android:layout_height="34dp"
+                        android:layout_marginRight="4.28dp"
+                        android:background="@drawable/wallet_box"
+                        android:fontFamily="@font/malgunfont"
+                        android:gravity="center"
+                        android:hint="*"
+                        android:inputType="numberPassword"
+                        android:maxLength="1"
+                        android:textColor="@color/cardAddFontColor"
+                        android:textColorHint="@color/cardAddHintFontColor"
+                        android:textSize="20dp"
+                        android:textStyle="bold" />
+
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <ImageView
+            android:id="@+id/ivAccountAdd"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="17.14dp"
+            android:src="@drawable/complete_btn" />
+
+    </LinearLayout>
+</layout>

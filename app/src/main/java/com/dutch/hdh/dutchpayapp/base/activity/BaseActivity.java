@@ -1,8 +1,15 @@
 package com.dutch.hdh.dutchpayapp.base.activity;
 
+<<<<<<< HEAD
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.pm.PackageManager;
+=======
+import android.app.Dialog;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+
+>>>>>>> sungguen
 import android.os.Bundle;
 import android.os.IBinder;
 import android.os.PersistableBundle;
@@ -10,15 +17,23 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Gravity;
 import android.view.View;
-import android.view.inputmethod.InputMethodManager;
+import android.view.Window;
+import android.view.WindowManager;
 
 import com.dutch.hdh.dutchpayapp.MyApplication;
 import com.dutch.hdh.dutchpayapp.R;
+import com.dutch.hdh.dutchpayapp.ui.view.CommonDialogView;
+import android.view.inputmethod.InputMethodManager;
+
 import com.dutch.hdh.dutchpayapp.data.util.LogUtils;
 import com.kinda.alert.KAlertDialog;
 
+<<<<<<< HEAD
 @SuppressLint("Registered")
+=======
+>>>>>>> sungguen
 public class BaseActivity extends AppCompatActivity implements BaseActivityContract.View {
 
     private BaseActivityContract.Presenter mPresenter;
@@ -28,10 +43,49 @@ public class BaseActivity extends AppCompatActivity implements BaseActivityContr
     @Override
     public void onCreate(Bundle savedInstanceState, PersistableBundle persistentState) {
         super.onCreate(savedInstanceState, persistentState);
+<<<<<<< HEAD
         mPresenter = new BaseActivityPresenter(this, this, this, getSupportFragmentManager());
         MyApplication myApplication = MyApplication.getInstance();
         myApplication.setActivity(this);
+=======
+        mPresenter = new BaseActivityPresenter(this, this, getSupportFragmentManager());
     }
+
+
+    @Override
+    public void showCommonDialog(String title, String content, boolean isBack) {
+        Dialog build = new Dialog(this);
+        build.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        build.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        build.setContentView(new CommonDialogView(this, title, content, true, new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (v.getId() == R.id.ivConfirm) {
+                    build.dismiss();
+                    if (isBack) {
+                        onBackPressed();
+                    }
+                }
+            }
+        }));
+        WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
+        lp.copyFrom(build.getWindow().getAttributes());
+        lp.width = WindowManager.LayoutParams.MATCH_PARENT;
+        lp.height = WindowManager.LayoutParams.MATCH_PARENT;
+        lp.gravity = Gravity.TOP;
+        build.show();
+        Window window = build.getWindow();
+        window.setAttributes(lp);
+        window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+>>>>>>> sungguen
+    }
+
+    /**
+     * 임시로 공용 다이얼로
+     */
+
+
 
     @Override
     public void finish() {

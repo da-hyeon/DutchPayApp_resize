@@ -1,12 +1,20 @@
 package com.dutch.hdh.dutchpayapp.ui.wallet.addcard;
 
+import android.app.Dialog;
 import android.databinding.DataBindingUtil;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.view.Gravity;
+import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 
 import com.dutch.hdh.dutchpayapp.R;
 import com.dutch.hdh.dutchpayapp.base.activity.BaseActivity;
 import com.dutch.hdh.dutchpayapp.databinding.ActivityCardAddBinding;
+import com.dutch.hdh.dutchpayapp.ui.view.CommonDialogView;
 
 public class AddCardActivity extends BaseActivity implements AddCardContract.View {
 
@@ -50,6 +58,11 @@ public class AddCardActivity extends BaseActivity implements AddCardContract.Vie
     public void cardData(String cardName, String cardCode) {
         mBinding.tvCardSelect.setText(cardName);
         mCardCode = cardCode;
+    }
+
+    @Override
+    public void showCommonDialog(String title, String content, boolean isBack) {
+        super.showCommonDialog(title, content, isBack);
     }
 
     @Override

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="292dp"
+            android:layout_marginLeft="123dp"
+            android:layout_marginTop="120dp"
+            android:layout_marginRight="123dp"
+            android:background="@drawable/round_box">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginBottom="6.57dp"
+                        android:fontFamily="@font/malgunfont"
+                        android:includeFontPadding="false"
+                        android:text="은행선택"
+                        android:gravity="center"
+                        android:textColor="@color/cardSelectFontColor"
+                        android:textSize="13.14dp"
+                        android:textStyle="bold" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1px"
+                        android:background="@color/cardSelectLineColor" />
+
+                    <ListView
+                        android:id="@+id/lvBankSelect"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:divider="@null"
+                        android:listSelector="@android:color/transparent"
+                        android:paddingTop="1.42dp"
+                        android:paddingBottom="12.28dp"
+                        android:scrollbars="none" />
+
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+</layout>

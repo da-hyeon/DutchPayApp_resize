@@ -23,7 +23,7 @@
                 android:fontFamily="@font/malgunfont"
                 android:gravity="center"
                 android:includeFontPadding="false"
-                android:text="카드 정보입력"
+                android:text="카드 정보 입력"
                 android:textColor="@color/topBarFontColor"
                 android:textSize="18.85dp"
                 android:textStyle="bold" />

@@ -8,13 +8,11 @@ import android.util.Log;
 import com.dutch.hdh.dutchpayapp.Constants;
 import com.dutch.hdh.dutchpayapp.MyApplication;
 import com.dutch.hdh.dutchpayapp.R;
-import com.dutch.hdh.dutchpayapp.adapter.CardManagementListAdapter;
-import com.dutch.hdh.dutchpayapp.data.db.CardManagement;
+import com.dutch.hdh.dutchpayapp.data.db.CardRegisterList;
 import com.dutch.hdh.dutchpayapp.databinding.ActivityCardManagementBinding;
 import com.dutch.hdh.dutchpayapp.ui.wallet.addcard.AddCardActivity;
 import com.dutch.hdh.dutchpayapp.ui.wallet.mycard.MyCardActivity;
-
-import java.util.ArrayList;
+import com.dutch.hdh.dutchpayapp.util.Trace;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -23,27 +21,29 @@ import retrofit2.Response;
 public class ManagementCardPresenter implements ManagementCardContract.Presenter {
 
     private Context mContext;
+
     private ManagementCardContract.View mView;
     private ActivityCardManagementBinding mBinding;
+    private MyApplication mMyApplication;
 
     public ManagementCardPresenter(Context context, ManagementCardContract.View view, ActivityCardManagementBinding activityCardManagementBinding) {
         this.mContext = context;
         this.mView = view;
         this.mBinding = activityCardManagementBinding;
+        mMyApplication = MyApplication.getInstance();
     }
 
     @Override
     public void clickCardAdd() {
-        Log.e("clickCardManagement", "clickCardManagement");
         Intent intent = new Intent(mContext, AddCardActivity.class);
         mContext.startActivity(intent);
-        if (mContext instanceof MyCardActivity) {
-            ((MyCardActivity) mContext).overridePendingTransition(R.anim.slide_up_in, R.anim.slide_down_out);
+        if (mContext instanceof ManagementCardActivity) {
+            ((ManagementCardActivity) mContext).overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
         }
     }
 
     @Override
-    public void cardDelete(String cardCode) {
+    public void setCardDelete(String cardCode) {
         Call<Void> cardDelete = MyApplication.getInstance()
                 .getRestAdapter()
                 .setCardDelete(cardCode);
@@ -51,10 +51,9 @@ public class ManagementCardPresenter implements ManagementCardContract.Presenter
         cardDelete.enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
-                if (response.body() == null) {
 
-                } else {
-
+                if (response.isSuccessful()) {
+                    getRegisterCardList();
                 }
             }
 
@@ -66,18 +65,27 @@ public class ManagementCardPresenter implements ManagementCardContract.Presenter
     }
 
     @Override
-    public void getCardRegisterList() {
+    public void getRegisterCardList() {
+        Call<CardRegisterList> cardRegisterList = MyApplication.getInstance()
+                .getRestAdapter()
+                .getRegisterCardList(mMyApplication.getUserInfo().getUserCode());
 
-    }
+        cardRegisterList.enqueue(new Callback<CardRegisterList>() {
+            @Override
+            public void onResponse(Call<CardRegisterList> call, Response<CardRegisterList> response) {
+                if (response.body() == null) {
 
-    @Override
-    public ArrayList<CardManagement.CardManagementListResult> getCardManagementDummyData() {
-        ArrayList<CardManagement.CardManagementListResult> managementListResultArrayList = new ArrayList<>();
+                } else {
+                    Trace.e("getRegisterCardList", "getRegisterCardList");
+                    mView.setRegisterCardList(response.body().getCardlist());
+                }
+            }
 
-        for (int i = 0; i < 6; i++) {
-            managementListResultArrayList.add(new CardManagement.CardManagementListResult("하나카드", "1111-****-****-1111", i));
-        }
-        return managementListResultArrayList;
+            @Override
+            public void onFailure(Call<CardRegisterList> call, Throwable t) {
+
+            }
+        });
     }
 
     @Override
@@ -85,5 +93,13 @@ public class ManagementCardPresenter implements ManagementCardContract.Presenter
         if (mContext instanceof ManagementCardActivity) {
             ((ManagementCardActivity) mContext).onBackPressed();
         }
+    }
+
+    @Override
+    public boolean isRepresentativeCard(String cardChoice) {
+        if ("0".equals(cardChoice)) {
+            return true;
+        }
+        return false;
     }
 }

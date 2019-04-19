@@ -1,16 +1,26 @@
 package com.dutch.hdh.dutchpayapp.base.fragment;
 
+import android.app.Dialog;
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.view.Gravity;
+import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
+
+import com.dutch.hdh.dutchpayapp.R;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 
 import com.dutch.hdh.dutchpayapp.data.util.LogUtils;
 import com.dutch.hdh.dutchpayapp.ui.main.activity.MainActivity;
+import com.dutch.hdh.dutchpayapp.ui.view.CommonDialogView;
 import com.kinda.alert.KAlertDialog;
 
 import java.util.Objects;
@@ -145,5 +155,33 @@ public class BaseFragment extends Fragment implements BaseFragmentContract.View 
         } catch (IllegalStateException e) {
             LogUtils.e(e);
         }
+    }
+
+
+    @Override
+    public void showCommonDialog(String title, String content, boolean isBack) {
+        Dialog build = new Dialog(mMainActivity);
+        build.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        build.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        build.setContentView(new CommonDialogView(mMainActivity, title, content, true, new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (v.getId() == R.id.ivConfirm) {
+                    build.dismiss();
+                    if (isBack) {
+                        getFragmentManager().popBackStack();
+                    }
+                }
+            }
+        }));
+        WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
+        lp.copyFrom(build.getWindow().getAttributes());
+        lp.width = WindowManager.LayoutParams.MATCH_PARENT;
+        lp.height = WindowManager.LayoutParams.MATCH_PARENT;
+        lp.gravity = Gravity.TOP;
+        build.show();
+        Window window = build.getWindow();
+        window.setAttributes(lp);
+        window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
     }
 }

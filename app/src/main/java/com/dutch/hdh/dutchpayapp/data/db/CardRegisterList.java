@@ -24,6 +24,9 @@ public class CardRegisterList {
         private String card_Tno;
         private String card_Price;
         private String status;
+        private String card_TypeName;
+        private String upload_Name;
+
 
         public String getCard_Code() {
             return card_Code;
@@ -88,6 +91,23 @@ public class CardRegisterList {
         public void setStatus(String status) {
             this.status = status;
         }
+
+        public String getCard_TypeName() {
+            return card_TypeName;
+        }
+
+        public void setCard_TypeName(String card_TypeName) {
+            this.card_TypeName = card_TypeName;
+        }
+
+        public String getUpload_Name() {
+            return upload_Name;
+        }
+
+        public void setUpload_Name(String upload_Name) {
+            this.upload_Name = upload_Name;
+        }
+
     }
 }
 

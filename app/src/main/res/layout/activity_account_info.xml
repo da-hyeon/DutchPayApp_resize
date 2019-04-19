@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/layoutBG"
+        android:orientation="vertical">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="56.28dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_horizontal"
+                android:fontFamily="@font/malgunfont"
+                android:gravity="center"
+                android:includeFontPadding="false"
+                android:text="My 계좌"
+                android:textColor="@color/topBarFontColor"
+                android:textSize="18.85dp"
+                android:textStyle="bold" />
+
+
+            <TextView
+                android:id="@+id/tvCancel"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="right"
+                android:layout_marginRight="17.14dp"
+                android:fontFamily="@font/malgunfont"
+                android:gravity="center"
+                android:includeFontPadding="false"
+                android:text="취소"
+                android:textColor="@color/topBarFontColor"
+                android:textSize="18.85dp" />
+        </FrameLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="@color/topBarLineColor" />
+
+
+        <FrameLayout
+            android:id="@+id/flAccountAdd"
+            android:layout_width="match_parent"
+            android:layout_height="240dp"
+            android:background="@android:color/white"
+            android:visibility="gone">
+
+
+            <LinearLayout
+                android:id="@+id/llAccountAdd"
+                android:layout_width="270.85dp"
+                android:layout_height="171.14dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="25.71dp"
+                android:background="@drawable/my_wallet_box"
+                android:gravity="center"
+                android:orientation="vertical">
+
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/wallet2_icon" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="14.28dp"
+                    android:fontFamily="@font/malgunfont"
+                    android:includeFontPadding="false"
+                    android:text="계좌를 등록해주세요"
+                    android:textColor="@color/walletQuadColor"
+                    android:textSize="10.28dp" />
+
+
+            </LinearLayout>
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/flAccountInfo"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="visible">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:id="@+id/llRepresentativeAccount"
+                    android:layout_width="match_parent"
+                    android:layout_height="172dp"
+                    android:layout_marginLeft="17.14dp"
+                    android:layout_marginTop="24.85dp"
+                    android:layout_marginRight="17.14dp"
+                    android:layout_marginBottom="24.85dp"
+                    >
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="17.14dp"
+                        android:layout_marginRight="17.14dp"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+
+                            <ImageView
+                                android:id="@+id/ivBankImage"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="29.14dp"
+                                 />
+
+                            <View
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1" />
+
+                            <ImageView
+                                android:id="@+id/ivRepresentativeAccount"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="bottom|right"
+                                android:src="@drawable/wallet12_1" />
+
+                        </LinearLayout>
+
+                        <TextView
+                            android:id="@+id/tvAccountNumber"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="32.86dp"
+                            android:layout_marginTop="26.57dp"
+                            android:text="12312341234-125-12435135" />
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@android:color/white"
+                    android:orientation="vertical">
+
+                    <ListView
+                        android:id="@+id/lvAccountList"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="25.71dp"
+                        android:layout_weight="1"
+                        android:divider="@null"
+                        android:dividerHeight="10dp"
+                        android:listSelector="@android:color/transparent"
+                        android:paddingLeft="17.14dp"
+                        android:paddingRight="17.14dp"
+                        android:scrollbars="none" />
+
+
+                    <ImageView
+                        android:id="@+id/ivAccountAdd"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="36.85dp"
+                        android:layout_marginLeft="17.14dp"
+                        android:layout_marginRight="17.14dp"
+                        android:layout_marginBottom="17.14dp"
+                        android:src="@drawable/wallet12_btn" />
+
+                </LinearLayout>
+            </LinearLayout>
+        </FrameLayout>
+    </LinearLayout>
+</layout>

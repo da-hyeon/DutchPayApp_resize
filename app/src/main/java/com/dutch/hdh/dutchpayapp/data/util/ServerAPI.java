@@ -1,19 +1,23 @@
 package com.dutch.hdh.dutchpayapp.data.util;
 
 import com.dutch.hdh.dutchpayapp.Constants;
-import com.dutch.hdh.dutchpayapp.data.db.CardCompanyList;
-import com.dutch.hdh.dutchpayapp.data.db.CardRegisterList;
-import com.dutch.hdh.dutchpayapp.data.db.DutchpayDetail;
-import com.dutch.hdh.dutchpayapp.data.db.Dutchpayhistory;
-import com.dutch.hdh.dutchpayapp.data.db.AccountList;
-import com.dutch.hdh.dutchpayapp.data.db.ErrorCode;
+import com.dutch.hdh.dutchpayapp.data.db.AccountBankList;
+import com.dutch.hdh.dutchpayapp.data.db.AccountRegisterList;
 import com.dutch.hdh.dutchpayapp.data.db.EventList;
 import com.dutch.hdh.dutchpayapp.data.db.MyGroup;
+import com.dutch.hdh.dutchpayapp.data.db.CardCompanyList;
+import com.dutch.hdh.dutchpayapp.data.db.CardRegisterList;
+<<<<<<< HEAD
+import com.dutch.hdh.dutchpayapp.data.db.DutchpayDetail;
+=======
+import com.dutch.hdh.dutchpayapp.data.db.PayHistoryList;
+>>>>>>> sungguen
+import com.dutch.hdh.dutchpayapp.data.db.Dutchpayhistory;
+import com.dutch.hdh.dutchpayapp.data.db.AccountList;
 import com.dutch.hdh.dutchpayapp.data.db.Product;
 import com.dutch.hdh.dutchpayapp.data.db.SearchEmail;
 import com.dutch.hdh.dutchpayapp.data.db.SearchPassword;
 import com.dutch.hdh.dutchpayapp.data.db.UserInfo;
-import com.dutch.hdh.dutchpayapp.data.db.UserList;
 
 import retrofit2.Call;
 import retrofit2.http.Field;
@@ -105,10 +109,19 @@ public interface ServerAPI {
 
 
 
+    @FormUrlEncoded
+    @POST(Constants.UPDATE_GROUP_REQUEST_URL)
+            Call<Void> updateGroup(
+            @Field("groupacode") String groupacode,
+            @Field("groupcontent") String groupcontent,
+            @Field("peoplenumber") String peoplenumber);
+
+
     /**
      * 등록할 카드목록가져오기
      */
     @GET(Constants.DUTCHPAY_CARD_COMPANY_SELECT)
+
     Call<CardCompanyList> getCardSelectList();
 
     /**
@@ -136,6 +149,20 @@ public interface ServerAPI {
 
 
     /**
+     * 대표카드 설정 요청
+     *
+     * @param maincardcode
+     * @param subcardcode
+     */
+    @FormUrlEncoded
+    @POST(Constants.DUTCHPAY_CARD_REPRESENTATIVE_CARD)
+    Call<Void> setCardRepresentativeCard(
+            @Field("maincardcode") String maincardcode,
+            @Field("subcardcode") String subcardcode
+    );
+
+
+    /**
      * 카드삭제 요청
      *
      * @param cardcode
@@ -144,6 +171,106 @@ public interface ServerAPI {
     Call<Void> setCardDelete(
             @Query("cardcode") String cardcode);
 
+
+    /**
+     *
+     * 은행 목록가져오기
+     */
+    @GET(Constants.DUTCHPAY_ACCOUNT_BANK_SELECT)
+    Call<AccountBankList> getBankSelectList();
+
+    /**
+     * 계좌등록 요청
+     *
+     * @param accountno
+     * @param accounttypecode
+     * @param usercode
+     */
+    @FormUrlEncoded
+    @POST(Constants.DUTCHPAY_ACCOUNT_REGISTER)
+    Call<Void> setAccountRegister(
+            @Field("accountno") String accountno,
+            @Field("accounttypecode") String accounttypecode,
+            @Field("usercode") String usercode);
+
+    /**
+     * 등록한 계좌목록 요청
+     *
+     * @param usercode
+     */
+    @GET(Constants.DUTCHPAY_ACCOUNT_REGISTER_SELECT)
+    Call<AccountRegisterList> getAccountRegisterList(
+            @Query("usercode") String usercode);
+
+
+    /**
+     * 대표계좌 설정 요청
+     *
+     * @param mainaccountcode
+     * @param subaccountcode
+     */
+    @FormUrlEncoded
+    @POST(Constants.DUTCHPAY_ACCOUNT_REPRESENTATIVE_ACCOUNT)
+    Call<Void> setAccountRepresentativeCard(
+            @Field("mainaccountcode") String mainaccountcode,
+            @Field("subaccountcode") String subaccountcode
+    );
+
+    /**
+     * 계좌삭제 요청
+     *
+     * @param accountcode
+     */
+    @GET(Constants.DUTCHPAY_ACCOUNT_DELETE)
+    Call<Void> setAccountDelete(
+            @Query("accountcode") String accountcode);
+
+
+    /**
+     * 포인트 보내기
+     *
+     * @param giveamount
+     * @param buttonnumber
+     * @param usercode
+     * @param pointqrcode
+     * @param phonenumber
+     * @param username
+     */
+    @FormUrlEncoded
+    @POST(Constants.DUTCHPAY_POINT_SEND)
+    Call<Void> setPointSend(
+            @Field("giveamount") String giveamount,
+            @Field("buttonnumber") String buttonnumber,
+            @Field("usercode") String usercode,
+            @Field("pointqrcode") String pointqrcode,
+            @Field("phonenumber") String phonenumber,
+            @Field("username") String username
+    );
+
+    /**
+     * 포인트 충전
+     * 상품권 번호로 충전
+     *
+     * @param qrcode
+     */
+    @FormUrlEncoded
+    @POST(Constants.DUTCHPAY_POINT_RECEIVE)
+    Call<Void> getPointReceive(
+            @Field("qrcode") String qrcode
+    );
+
+    /**
+     * 사용내역 목록 요청
+     *
+     * @param buttontype
+     * @param usercode
+     */
+    @FormUrlEncoded
+    @POST(Constants.DUTCHPAY_PAY_USAGE_HISTORY)
+    Call<PayHistoryList> getUsageHistoryList(
+            @Field("buttontype") String buttontype,
+            @Field("usercode") String usercode
+    );
 
     /**
      * 그룹 업데이트 요청
@@ -203,6 +330,7 @@ public interface ServerAPI {
 
     /**
      * 더치페이 내역 요청
+     *
      * @param usercode
      */
     @FormUrlEncoded
@@ -309,6 +437,7 @@ public interface ServerAPI {
 
     /**
      * QR코드 상품정보 요청
+     *
      * @param qrcode
      * @return
      */
@@ -319,21 +448,25 @@ public interface ServerAPI {
 
     /**
      * 결제번호 상품정보 요청
+     *
      * @param payproduct_code
      * @return
      */
+
     @FormUrlEncoded
     @POST(Constants.SELECT_PRODUCT_PAYMENT_NUMBER_REQUEST_URL)
     Call<Product> selectPaymentNumberProduct(@Field("payproduct_code") String payproduct_code);
 
     /**
      * 개인결제 결제 요청
+     *
      * @param qrcode
      * @param usercode
      * @return
      */
     @FormUrlEncoded
     @POST(Constants.UPDATE_PAYMENT_QRCODE_REQUEST_URL)
+<<<<<<< HEAD
     Call<String> updateQRCodePayment(@Field("qrcode") String qrcode ,
                                         @Field("usercode") String usercode);
 
@@ -348,4 +481,8 @@ public interface ServerAPI {
     @POST(Constants.USER_DELETE_REQUEST_URL)
     Call<Void> withdrawal(
             @Field("usercode") String usercode);
+=======
+    Call<String> updateQRCodePayment(@Field("qrcode") String qrcode,
+                                     @Field("usercode") String usercode);
+>>>>>>> sungguen
 }

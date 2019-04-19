@@ -2,10 +2,7 @@ package com.dutch.hdh.dutchpayapp.ui.wallet.mycard;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
-import android.os.Trace;
 import android.support.design.widget.TabLayout;
-import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.View;
@@ -13,13 +10,10 @@ import android.view.View;
 import com.dutch.hdh.dutchpayapp.Constants;
 import com.dutch.hdh.dutchpayapp.MyApplication;
 import com.dutch.hdh.dutchpayapp.R;
-import com.dutch.hdh.dutchpayapp.adapter.CardImageSliderAdapter;
 import com.dutch.hdh.dutchpayapp.data.db.CardRegisterList;
 import com.dutch.hdh.dutchpayapp.ui.wallet.addcard.AddCardActivity;
 import com.dutch.hdh.dutchpayapp.ui.wallet.managementcard.ManagementCardActivity;
-
-import java.util.ArrayList;
-import java.util.List;
+import com.dutch.hdh.dutchpayapp.util.Trace;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -29,36 +23,14 @@ public class MyCardPresenter implements MyCardContract.Presenter {
 
     private Context mContext;
     private MyCardContract.View mView;
+    private MyApplication mMyApplication;
 
     public MyCardPresenter(Context context, MyCardContract.View view) {
         this.mContext = context;
         this.mView = view;
+        mMyApplication = MyApplication.getInstance();
     }
 
-    @Override
-    public void setAdapter(ViewPager viewPager, TabLayout tabLayout) {
-        Call<CardRegisterList> cardRegisterList = MyApplication.getInstance()
-                .getRestAdapter()
-                .getRegisterCardList(Constants.USER_CODE);
-
-        cardRegisterList.enqueue(new Callback<CardRegisterList>() {
-            @Override
-            public void onResponse(Call<CardRegisterList> call, Response<CardRegisterList> response) {
-                if (response.body() == null) {
-
-                } else {
-                    CardImageSliderAdapter cardImageSliderAdapter = new CardImageSliderAdapter(mContext, response.body().getCardlist());
-                    viewPager.setAdapter(cardImageSliderAdapter);
-                    tabLayout.setupWithViewPager(viewPager, true);
-                }
-            }
-
-            @Override
-            public void onFailure(Call<CardRegisterList> call, Throwable t) {
-
-            }
-        });
-    }
 
     @Override
     public void clickCancel() {
@@ -78,9 +50,6 @@ public class MyCardPresenter implements MyCardContract.Presenter {
     @Override
     public void clickRight(ViewPager viewPager, TabLayout tabLayout) {
         viewPager.arrowScroll(View.FOCUS_RIGHT);
-
-//        Log.e("탭포지션", tabLayout.getSelectedTabPosition()+"");
-//        Log.e("카운터", viewPager.getAdapter().getCount()+"");
         if (tabLayout.getSelectedTabPosition() + 1 == viewPager.getAdapter().getCount()) {
             viewPager.setVisibility(View.GONE);
         }
@@ -92,7 +61,7 @@ public class MyCardPresenter implements MyCardContract.Presenter {
         Intent intent = new Intent(mContext, ManagementCardActivity.class);
         mContext.startActivity(intent);
         if (mContext instanceof MyCardActivity) {
-            ((MyCardActivity) mContext).overridePendingTransition(R.anim.slide_up_in, R.anim.slide_down_out);
+            ((MyCardActivity) mContext).overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
         }
     }
 
@@ -102,7 +71,81 @@ public class MyCardPresenter implements MyCardContract.Presenter {
         Intent intent = new Intent(mContext, AddCardActivity.class);
         mContext.startActivity(intent);
         if (mContext instanceof MyCardActivity) {
-            ((MyCardActivity) mContext).overridePendingTransition(R.anim.slide_up_in, R.anim.slide_down_out);
+            ((MyCardActivity) mContext).overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
         }
+    }
+
+
+    @Override
+    public void getRegisterCardList() {
+        Call<CardRegisterList> cardRegisterList = mMyApplication
+                .getRestAdapter()
+                .getRegisterCardList(mMyApplication.getUserInfo().getUserCode());
+
+        cardRegisterList.enqueue(new Callback<CardRegisterList>() {
+            @Override
+            public void onResponse(Call<CardRegisterList> call, Response<CardRegisterList> response) {
+                if (response.body() == null) {
+
+                } else {
+                    Trace.e("getRegisterCardList", "getRegisterCardList");
+                    mView.setRegisterCardList(response.body().getCardlist());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<CardRegisterList> call, Throwable t) {
+
+            }
+        });
+    }
+
+    @Override
+    public void setRepresentativeCard(String mainCardCode, String subCardCode) {
+
+        Call<Void> cardRegisterList = MyApplication.getInstance()
+                .getRestAdapter()
+                .setCardRepresentativeCard(mainCardCode, subCardCode);
+
+        cardRegisterList.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                if (response.isSuccessful()) {
+                    getRegisterCardList();
+                    Trace.e("setRepresentativeCard", "setRepresentativeCard");
+                } else {
+                    Trace.e("setRepresentativeCard", "setRepresentativeCard");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+
+            }
+        });
+    }
+
+    @Override
+    public void checkViewPager(ViewPager viewPager, TabLayout tabLayout) {
+
+        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int i, float v, int i1) {
+
+            }
+
+            @Override
+            public void onPageSelected(int i) {
+
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int i) {
+
+                if (tabLayout.getSelectedTabPosition() + 1 == viewPager.getAdapter().getCount()) {
+                    viewPager.setVisibility(View.GONE);
+                }
+            }
+        });
     }
 }
