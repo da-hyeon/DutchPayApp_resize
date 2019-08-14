@@ -274,7 +274,7 @@ public class DutchpayNewPresenter implements DutchpayNewContract.Presenter {
 
             if(dutchList.size() == 1){ //더치페이 마지막 멤버의 변화값 저장
                 lastCost = Integer.parseInt( mNewList.get(dutchList.get(0)).getCost());
-                lastMem = mNewList.indexOf(mNewList.get(dutchList.get(0)));
+                lastMem = dutchList.get(0);
             }
         } else { //금액 변동 가능한 더치페이 멤버가 없음_값 변동 금지
             if(mNewList.size() == 1){ //완전 삭제 보정

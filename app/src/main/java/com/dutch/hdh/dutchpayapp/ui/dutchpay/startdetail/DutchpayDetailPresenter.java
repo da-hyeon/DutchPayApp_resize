@@ -103,8 +103,8 @@ public class DutchpayDetailPresenter implements DutchpayDetailContract.Presenter
                             mMemPayCode = member.getMemDutchcode();
                             mMyCost = member.getMemCost();
 
-                            if(member.getPayComplete().equals("Y") || member.getPrePayed().equals("Y")){
-                                mView.setPointButtonGone();
+                            if(member.getPayComplete().equals("N") && member.getPrePayed().equals("N")){
+                                mView.setPointButtonView();
                             }
                         }
 

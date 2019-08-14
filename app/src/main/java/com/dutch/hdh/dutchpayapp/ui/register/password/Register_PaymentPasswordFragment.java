@@ -130,9 +130,9 @@ public class Register_PaymentPasswordFragment extends BaseFragment implements Re
     @Override
     public void dotImagesUpdate(int index, boolean checkState) {
         if(checkState){
-            mDotImage[index].setImageResource(R.drawable.password_on);
+            mDotImage[index].setImageResource(R.drawable.shape_40_copy);
         } else {
-            mDotImage[index].setImageResource(R.drawable.password_off);
+            mDotImage[index].setImageResource(R.drawable.layer_754);
         }
     }
 

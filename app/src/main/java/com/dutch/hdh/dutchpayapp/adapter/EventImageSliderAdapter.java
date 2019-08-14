@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.dutch.hdh.dutchpayapp.Constants;
 import com.dutch.hdh.dutchpayapp.MyApplication;
 import com.dutch.hdh.dutchpayapp.R;
@@ -59,6 +60,8 @@ public class EventImageSliderAdapter extends PagerAdapter {
         if (mEventArrayList.size() > 0) {
             Glide.with(mContext)
                     .load(MyApplication.getBaseUrl() + Constants.IMAGE_URL + mEventArrayList.get(position).getEventUploadName())
+                    .diskCacheStrategy(DiskCacheStrategy.NONE)// 디스크 캐시 저장 off
+                    .skipMemoryCache(true)// 메모리 캐시 저장 off
                     .error(R.drawable.intro_dutchpay_korea)
                     .into(mBinding.ivEventImage);
 

@@ -62,9 +62,9 @@ public class Register_TermsConditionsAgreementPresenter implements Register_Term
         for (int i = 0; i < mTOSCheckArray.length; i++) {
             mView.changeTOS(i, mTOSCheckArray[i]);
             if (mTOSCheckArray[i]) {
-                mView.changeAllView(i, R.drawable.view_all_on);
+                mView.changeAllView(i, R.drawable.allview_select);
             } else {
-                mView.changeAllView(i, R.drawable.view_all_off);
+                mView.changeAllView(i, R.drawable.allview_default);
                 allCheck = false;
             }
         }
@@ -77,9 +77,9 @@ public class Register_TermsConditionsAgreementPresenter implements Register_Term
             mView.changeTOS(i, state);
             mTOSCheckArray[i] = state;
             if (state) {
-                mView.changeAllView(i, R.drawable.view_all_on);
+                mView.changeAllView(i, R.drawable.allview_select);
             } else {
-                mView.changeAllView(i, R.drawable.view_all_off);
+                mView.changeAllView(i, R.drawable.allview_default);
             }
         }
     }
@@ -89,9 +89,9 @@ public class Register_TermsConditionsAgreementPresenter implements Register_Term
         mTOSCheckArray[index] = state;
 
         if (state) {
-            mView.changeAllView(index, R.drawable.view_all_on);
+            mView.changeAllView(index, R.drawable.allview_select);
         } else {
-            mView.changeAllView(index, R.drawable.view_all_off);
+            mView.changeAllView(index, R.drawable.allview_default);
         }
 
         for (boolean aMTOSCheckArray : mTOSCheckArray) {

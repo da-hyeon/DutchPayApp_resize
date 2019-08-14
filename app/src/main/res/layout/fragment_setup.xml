@@ -44,6 +44,7 @@
                 android:switchPadding="0dp"
                 android:thumb="@drawable/switch_thumb"
                 android:track="@color/transparent"
+                android:onClick="@{()-> Presenter.swAutoLoginClick()}"
                 app:layout_constraintBottom_toBottomOf="@+id/textView11"
                 app:layout_constraintEnd_toEndOf="@+id/swPush"
                 app:layout_constraintTop_toTopOf="@+id/textView11" />
@@ -58,6 +59,7 @@
                 android:switchPadding="0dp"
                 android:thumb="@drawable/switch_thumb"
                 android:track="@color/transparent"
+                android:onClick="@{()-> Presenter.swPushClick()}"
                 app:layout_constraintBottom_toBottomOf="@+id/textView12"
                 app:layout_constraintEnd_toEndOf="@+id/swMarketing"
                 app:layout_constraintTop_toTopOf="@+id/textView12" />
@@ -74,6 +76,7 @@
                 android:switchPadding="0dp"
                 android:thumb="@drawable/switch_thumb"
                 android:track="@color/transparent"
+                android:onClick="@{()-> Presenter.swMarketingClick()}"
                 app:layout_constraintBottom_toBottomOf="@+id/textView18"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/textView18" />
@@ -205,6 +208,7 @@
             android:layout_height="48dp"
             android:layout_marginTop="11dp"
             android:background="@drawable/box7"
+            android:onClick="@{()-> Presenter.clickGoHomePage()}"
             app:layout_constraintEnd_toEndOf="@+id/constraintLayout10"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/constraintLayout10"

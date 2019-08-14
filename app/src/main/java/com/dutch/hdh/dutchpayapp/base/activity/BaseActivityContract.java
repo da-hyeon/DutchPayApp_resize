@@ -1,5 +1,7 @@
 package com.dutch.hdh.dutchpayapp.base.activity;
 
+import android.support.v4.app.FragmentManager;
+
 public interface BaseActivityContract {
     interface View{
 
@@ -14,6 +16,7 @@ public interface BaseActivityContract {
         void finish();
 
         void hideKeyboard();
+
     }
 
     interface Presenter{

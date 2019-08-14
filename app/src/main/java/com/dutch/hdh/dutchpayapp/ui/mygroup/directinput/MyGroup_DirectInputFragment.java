@@ -33,11 +33,11 @@ public class MyGroup_DirectInputFragment extends BaseFragment implements MyGroup
         initData();
 
         mBinding.ibAddMember.setOnClickListener(v ->
-            mPresenter.clickAddMember()
+                mPresenter.clickMemberAdditionConfirmed(getArguments())
         );
 
         mBinding.btMemberAdditionConfirmed.setOnClickListener(v ->
-            mPresenter.clickMemberAdditionConfirmed(getArguments())
+                mPresenter.clickAddMember()
         );
 
         getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_NOTHING);

@@ -58,8 +58,8 @@ public class DutchpayDetailFragment extends BaseFragment implements DutchpayDeta
     }
 
     @Override
-    public void setPointButtonGone() {
-        mBinding.btPointSend.setVisibility(View.GONE);
+    public void setPointButtonView() {
+        mBinding.btPointSend.setVisibility(View.VISIBLE);
     }
 
     /**

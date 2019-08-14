@@ -8,19 +8,21 @@ public interface SetupContract {
 
         FragmentManager getFragmentManager();
 
+        void setDefaultMainStack();
+
     }
 
     interface Presenter{
 
+        void AutologinInit();
+
         //클릭
-        void autoOnClick();
-        void autoOffClick();
-        void pushOnClick();
-        void pushOffClick();
-        void marketingOnClick();
-        void marketingOffClick();
+        void swAutoLoginClick();
+        void swPushClick();
+        void swMarketingClick();
 
         void clickGoHomePage();
-
+        void onLogoutClick();
+        void onInviteClick();
     }
 }

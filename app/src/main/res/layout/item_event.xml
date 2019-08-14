@@ -6,7 +6,7 @@
     <android.support.constraint.ConstraintLayout
         android:id="@+id/clView"
         android:layout_width="match_parent"
-        android:layout_height="142.28dp"
+        android:layout_height="125dp"
         android:background="#ffffff">
 
         <TextView
@@ -15,7 +15,7 @@
             android:layout_height="wrap_content"
             android:text="아이유와 함께하는 더치페이 할인 이벤트"
             android:textColor="#383838"
-            android:textSize="10.28dp"
+            android:textSize="9sp"
             android:fontFamily="@font/malgunfont"
             android:includeFontPadding="false"
             android:textStyle="bold"/>
@@ -24,7 +24,7 @@
             android:id="@+id/ivImage"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginTop="4.8dp"
+            android:layout_marginTop="4dp"
             app:layout_constraintTop_toBottomOf="@+id/tvEventTitle"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"

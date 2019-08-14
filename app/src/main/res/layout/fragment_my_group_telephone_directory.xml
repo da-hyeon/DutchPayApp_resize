@@ -10,9 +10,9 @@
         <EditText
             android:id="@+id/etSearch"
             android:layout_width="match_parent"
-            android:layout_height="44.85dp"
+            android:layout_height="39dp"
             android:layout_marginLeft="17.14dp"
-            android:layout_marginTop="23.14dp"
+            android:layout_marginTop="26dp"
             android:layout_marginRight="17.14dp"
             android:background="@drawable/outline_round_dialog"
             android:fontFamily="@font/malgunfont"
@@ -23,14 +23,14 @@
             android:inputType="text"
             android:includeFontPadding="false"
             android:paddingLeft="18.85dp"
-            android:textSize="15.42dp"
+            android:textSize="13.3sp"
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="18.28dp"
-            android:src="@drawable/book_search_btn"
+            android:src="@drawable/layer_1416"
             app:layout_constraintBottom_toBottomOf="@+id/etSearch"
             app:layout_constraintRight_toRightOf="@+id/etSearch"
             app:layout_constraintTop_toTopOf="@+id/etSearch" />
@@ -60,25 +60,24 @@
             android:fontFamily="@string/myGroup_buttonText"
             android:includeFontPadding="false"
             android:text="추가인원"
+            android:layout_marginLeft="51dp"
             android:textColor="#bdbcbc"
-            android:textSize="40dp"
+            android:textSize="35sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@+id/llWhiteBackground"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="@+id/tvAddMemberCount"
             app:layout_constraintTop_toTopOf="@+id/llWhiteBackground" />
 
         <TextView
             android:id="@+id/tvAddMemberCount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="40dp"
-            android:layout_marginRight="25.14dp"
+            android:layout_marginRight="21.7dp"
             android:fontFamily="@string/myGroup_buttonText"
             android:includeFontPadding="false"
             android:textColor="#929292"
-            android:textSize="60dp"
-            android:textStyle="bold"
+            android:textSize="62.5sp"
+            android:text="3"
             app:layout_constraintBottom_toBottomOf="@+id/llWhiteBackground"
             app:layout_constraintRight_toLeftOf="@+id/ibAddMember"
             app:layout_constraintTop_toTopOf="@+id/llWhiteBackground" />
@@ -89,7 +88,7 @@
             android:layout_height="wrap_content"
             android:layout_marginRight="17.14dp"
             android:background="@color/transparent"
-            android:src="@drawable/directinput_add"
+            android:src="@drawable/shape_6_copy"
             app:layout_constraintBottom_toBottomOf="@+id/llWhiteBackground"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="@+id/llWhiteBackground" />

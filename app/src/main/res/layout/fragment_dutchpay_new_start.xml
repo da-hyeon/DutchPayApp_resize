@@ -273,6 +273,15 @@
                 app:layout_constraintStart_toStartOf="@+id/constraintLayout5"
                 app:layout_constraintTop_toBottomOf="@+id/constraintLayout5" />
 
+            <View
+                android:id="@+id/vwCover"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toBottomOf="@+id/rvMemberlist"
+                app:layout_constraintEnd_toEndOf="@+id/rvMemberlist"
+                app:layout_constraintStart_toStartOf="@+id/rvMemberlist"
+                app:layout_constraintTop_toTopOf="@+id/rvMemberlist" />
+
         </android.support.constraint.ConstraintLayout>
     </android.support.constraint.ConstraintLayout>
 </layout>

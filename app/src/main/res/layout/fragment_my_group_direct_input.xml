@@ -12,12 +12,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="17.14dp"
-            android:layout_marginTop="22dp"
+            android:layout_marginTop="19.7dp"
             android:fontFamily="@font/malgunfont"
             android:includeFontPadding="false"
             android:text="참여자 직접 추가"
             android:textColor="#1e1e1e"
-            android:textSize="15.42dp"
+            android:textSize="13.7sp"
             android:textStyle="bold"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -27,7 +27,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginLeft="17.14dp"
-            android:layout_marginTop="16.28dp"
+            android:layout_marginTop="13.7dp"
             android:layout_marginRight="17.14dp"
             android:layout_marginBottom="36.85dp"
             android:divider="@color/layoutBG"
@@ -38,7 +38,7 @@
         <Button
             android:id="@+id/btMemberAdditionConfirmed"
             android:layout_width="match_parent"
-            android:layout_height="47.42dp"
+            android:layout_height="41.7dp"
             android:layout_marginLeft="17.14dp"
             android:layout_marginRight="17.14dp"
             android:layout_marginBottom="20.28dp"
@@ -47,7 +47,7 @@
             android:includeFontPadding="false"
             android:text="멤버 추가하기"
             android:textColor="#ffffff"
-            android:textSize="20dp"
+            android:textSize="18dp"
             android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@+id/llWhiteBackground" />
 

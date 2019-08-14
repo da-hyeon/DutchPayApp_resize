@@ -50,6 +50,7 @@ public class IntroActivity extends BaseActivity {
             Button ok = notiPopup.findViewById(R.id.btn_noti_next);
             ok.setOnClickListener(v ->{
                     //확인버튼
+                    popupWindow.dismiss();
                     startActivity(new Intent(IntroActivity.this, MainActivity.class));
                     finish();
             });
@@ -74,6 +75,7 @@ public class IntroActivity extends BaseActivity {
             Call<UserInfo> userInfo = MyApplication
                     .getRestAdapter()
                     .getFineUser(userID, userPassword);
+
 
             userInfo.enqueue(new Callback<UserInfo>() {
                 @Override

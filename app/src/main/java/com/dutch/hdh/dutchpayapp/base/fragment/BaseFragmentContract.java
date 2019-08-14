@@ -1,5 +1,7 @@
 package com.dutch.hdh.dutchpayapp.base.fragment;
 
+import android.support.v4.app.FragmentManager;
+
 public interface BaseFragmentContract {
     interface View {
 
@@ -12,7 +14,6 @@ public interface BaseFragmentContract {
         void showFailDialog(String title, String content);
 
         void hideKeyboard();
-
     }
     interface Presenter {
 

@@ -28,6 +28,7 @@ public class TempNewListModel {
 
         @Override
         public void afterTextChanged(Editable s) {
+
             if(s.toString().equals("") || Integer.parseInt(s.toString()) == 0){
                 cost = "0";
             } else {
@@ -36,7 +37,7 @@ public class TempNewListModel {
 
             editedCheck = true;
         }
-    };
+    };;
 
     public TempNewListModel(String name, String phone) {
         this.name = name;
@@ -57,7 +58,13 @@ public class TempNewListModel {
 
             @Override
             public void afterTextChanged(Editable s) {
-                cost = s.toString();
+
+                if(s.toString().equals("") || Integer.parseInt(s.toString()) == 0){
+                    cost = "0";
+                } else {
+                    cost = s.toString();
+                }
+
                 editedCheck = true;
             }
         };

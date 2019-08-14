@@ -5,7 +5,7 @@
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="74.57dp"
+        android:layout_height="66dp"
         android:background="@color/layoutBG">
 
         <android.support.constraint.ConstraintLayout
@@ -15,7 +15,7 @@
            <EditText
                android:id="@+id/etName"
                android:layout_width="0dp"
-               android:layout_height="36.28dp"
+               android:layout_height="32dp"
                android:background="#ffffff"
                android:layout_marginRight="19.71dp"
                android:maxLength="4"
@@ -23,7 +23,7 @@
                app:layout_constraintLeft_toLeftOf="parent"
                android:paddingLeft="12dp"
                android:inputType="text"
-               android:textSize="13.71dp"
+               android:textSize="12sp"
                android:fontFamily="@font/malgunfont"
                android:includeFontPadding="false"
                app:layout_constraintRight_toLeftOf="@+id/ibDelete"/>
@@ -31,11 +31,11 @@
             <EditText
                 android:id="@+id/etPhoneNumber"
                 android:layout_width="0dp"
-                android:layout_height="36.28dp"
+                android:layout_height="32dp"
                 android:background="#ffffff"
                 android:paddingLeft="12dp"
                 android:inputType="number"
-                android:textSize="13.71dp"
+                android:textSize="12sp"
                 android:maxLength="11"
                 android:hint="연락처를 입력하세요."
                 android:fontFamily="@font/malgunfont"

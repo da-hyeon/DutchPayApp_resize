@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.dutch.hdh.dutchpayapp.Constants;
 import com.dutch.hdh.dutchpayapp.MyApplication;
 import com.dutch.hdh.dutchpayapp.R;
@@ -65,6 +66,8 @@ public class Listview_EventAdapter extends BaseAdapter {
 
         Glide.with(mContext)
                 .load(MyApplication.getBaseUrl() + Constants.IMAGE_URL + mEventArrayList.get(position).getEventUploadName())
+                .diskCacheStrategy(DiskCacheStrategy.NONE)// 디스크 캐시 저장 off
+                .skipMemoryCache(true)// 메모리 캐시 저장 off
                 .error(R.drawable.intro_dutchpay_korea)
                 .into(mBinding.ivImage);
 

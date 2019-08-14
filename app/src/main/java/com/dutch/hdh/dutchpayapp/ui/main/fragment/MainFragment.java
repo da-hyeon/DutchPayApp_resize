@@ -47,13 +47,13 @@ public class MainFragment extends BaseFragment implements MainFragmentContract.V
         );
 
         //모든 이벤트 보기 버튼 클릭
-        mBinding.llAllEvent.setOnClickListener(v ->
+        mBinding.ibAllEvent.setOnClickListener(v ->
                 mPresenter.clickAllEvent()
         );
 
 
-        mBinding.layoutSuccessLogin.setOnClickListener(v -> {
-            if (mBinding.layoutSuccessLogin.getVisibility() == View.VISIBLE) {
+        mBinding.clSuccessLogin.setOnClickListener(v -> {
+            if (mBinding.clSuccessLogin.getVisibility() == View.VISIBLE) {
                 mPresenter.clickMyMoney();
             }
         });
@@ -98,14 +98,14 @@ public class MainFragment extends BaseFragment implements MainFragmentContract.V
     @Override
     public void showUserInfo(String userName, int userDutchMoney, boolean state) {
         if (state) {
-            mBinding.layoutSuccessLogin.setVisibility(View.VISIBLE);
-            mBinding.layoutNoneLogin.setVisibility(View.GONE);
+            mBinding.clSuccessLogin.setVisibility(View.VISIBLE);
+            mBinding.clNoneLogin.setVisibility(View.GONE);
 
-            mBinding.txtUserName.setText(userName + "님, 안녕하세요!");
+            mBinding.tvUserName.setText(userName + "님, 안녕하세요!");
             mBinding.txtUserDutchMoney.setText(String.format("%,d", userDutchMoney) + " ");
         } else {
-            mBinding.layoutSuccessLogin.setVisibility(View.GONE);
-            mBinding.layoutNoneLogin.setVisibility(View.VISIBLE);
+            mBinding.clSuccessLogin.setVisibility(View.GONE);
+            mBinding.clNoneLogin.setVisibility(View.VISIBLE);
         }
     }
 

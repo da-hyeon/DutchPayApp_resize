@@ -295,5 +295,11 @@ public class Constants {
                 return R.drawable.group_icon01;
         }
     }
+
+    /**
+     * 웹뷰 페이지 접근 경로
+     */
+    public static String WEBVIEW_NOTICE = "공지사항";
+    public static String WEBVIEW_INFO = "이용안내";
 }
 

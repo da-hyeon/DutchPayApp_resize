@@ -24,7 +24,7 @@ public class MyGroup_TelephoneDirectoryPresenter implements MyGroup_TelephoneDir
     private Context mContext;
     private FragmentManager mFragmentManager;
     private Bundle mBundle;
-    
+
     private MyApplication mMyApplication;
 
     private ListView_TelephoneDirectoryAdapter mListview_telephoneDirectoryAdapter;
@@ -40,7 +40,7 @@ public class MyGroup_TelephoneDirectoryPresenter implements MyGroup_TelephoneDir
         this.mContext = mContext;
         this.mFragmentManager = mFragmentManager;
         this.mBundle = mBundle;
-        
+
         mMyApplication = MyApplication.getInstance();
         mTelephoneDirectoryArrayList = new ArrayList<>();
         mTelephoneDirectorySaveArrayList = new ArrayList<>();
@@ -74,26 +74,35 @@ public class MyGroup_TelephoneDirectoryPresenter implements MyGroup_TelephoneDir
 
             if (cursor != null) {
                 do {
-                    String name = cursor.getString
-                            (cursor.getColumnIndex(ContactsContract
-                                    .CommonDataKinds.Phone.DISPLAY_NAME));
-                    String phoneNumber = cursor.getString
-                            (cursor.getColumnIndex(ContactsContract
-                                    .CommonDataKinds.Phone.NUMBER));
+                    try {
+                        String name = cursor.getString
+                                (cursor.getColumnIndex(ContactsContract
+                                        .CommonDataKinds.Phone.DISPLAY_NAME));
+                        String phoneNumber = cursor.getString
+                                (cursor.getColumnIndex(ContactsContract
+                                        .CommonDataKinds.Phone.NUMBER));
 
 
-                    boolean duplicateCheck = false;
-                    String directoryPhoneNumber = PhoneNumberUtils.formatNumber(phoneNumber, Locale.getDefault().getCountry());
-                    //리스트에 있는 정보는 제외하고 Add해야함.
-                    for (int i = 0; i < count; i++) {
-                        //전화번호가 같다면
-                        if (PhoneNumberUtils.formatNumber(duplicateCheckArrayList.get(i).getPhoneNumber(), Locale.getDefault().getCountry()).equals(directoryPhoneNumber)) {
-                            duplicateCheck = true;
+                        boolean duplicateCheck = false;
+                        String directoryPhoneNumber = PhoneNumberUtils.formatNumber(phoneNumber, Locale.getDefault().getCountry());
+                        //리스트에 있는 정보는 제외하고 Add해야함.
+                        for (int i = 0; i < count; i++) {
+                            //전화번호가 같다면
+                            if (PhoneNumberUtils.formatNumber(duplicateCheckArrayList.get(i).getPhoneNumber(), Locale.getDefault().getCountry()).equals(directoryPhoneNumber)) {
+                                duplicateCheck = true;
+                            }
                         }
-                    }
-                    if (!duplicateCheck) {
-                        mTelephoneDirectoryArrayList.add(new TelephoneDirectory(name, directoryPhoneNumber, false));
-                        mTelephoneDirectorySaveArrayList.add(new TelephoneDirectory(name, directoryPhoneNumber.replace("-", ""), false));
+                        if (!duplicateCheck) {
+                            mTelephoneDirectoryArrayList.add(new TelephoneDirectory(name, directoryPhoneNumber, false));
+                            mTelephoneDirectorySaveArrayList.add(new TelephoneDirectory(name, directoryPhoneNumber.replace("-", ""), false));
+                        }
+                    } catch (SecurityException e){
+                        Bundle bundle = new Bundle();
+                        bundle.putParcelableArrayList("itemList", mBundle.getParcelableArrayList("itemList"));
+                        bundle.putParcelableArrayList("InputMember", null);
+                        bundle.putParcelableArrayList("telephoneInputMember", null);
+                        mMyApplication.getMyGroup_EditFragment().setArguments(bundle);
+                        mView.showErrorDialog("실패", "전화부호부에 연락처가 없습니다.");
                     }
                 }while (cursor.moveToNext());
             }

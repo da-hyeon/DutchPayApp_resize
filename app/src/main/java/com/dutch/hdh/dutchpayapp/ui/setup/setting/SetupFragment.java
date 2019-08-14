@@ -5,6 +5,7 @@ import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.FragmentManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -32,44 +33,7 @@ public class SetupFragment extends BaseFragment implements SetupContract.View{
         mBinding.setPresenter(mPresenter);
 
         //저장한 유저 셋팅 불러오기
-        SharedPreferences sharedPreferences = getActivity().getSharedPreferences(Constants.USER_SETTING, MODE_PRIVATE);
-        boolean autologin = sharedPreferences.getBoolean(Constants.USER_AUTOLOGIN, false);
-
-        String t = autologin ? "t" : "f";
-        Log.e("autologin ->", t);
-        mPresenter.autoFlag.set(autologin);
-
-        mBinding.swAutoLogin.setOnClickListener(v -> {
-            if(mPresenter.autoFlag.get()){
-                mPresenter.autoOffClick();
-            } else {
-                mPresenter.autoOnClick();
-            }
-            mPresenter.autoFlag.set( !(mPresenter.autoFlag.get()));
-        });
-
-        mBinding.swPush.setOnClickListener(v -> {
-            if(mPresenter.pushFlag.get()){
-                mPresenter.pushOffClick();
-            } else {
-                mPresenter.pushOnClick();
-            }
-            mPresenter.pushFlag.set( !(mPresenter.pushFlag.get()));
-        });
-
-        mBinding.swMarketing.setOnClickListener(v -> {
-            if(mPresenter.marketingFlag.get()){
-                mPresenter.marketingOffClick();
-            } else {
-                mPresenter.marketingOnClick();
-            }
-            mPresenter.marketingFlag.set( !(mPresenter.marketingFlag.get()));
-        });
-
-        mBinding.clGoHomePage.setOnClickListener(v->
-            mPresenter.clickGoHomePage()
-        );
-
+        mPresenter.AutologinInit();
 
         return mBinding.getRoot();
     }

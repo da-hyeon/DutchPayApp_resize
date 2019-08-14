@@ -40,23 +40,59 @@ public class SetupPresenter implements SetupContract.Presenter {
         mMyApplication = MyApplication.getInstance();
     }
 
-    public void onInviteClick() {
-        FragmentManager fm = mView.getFragmentManager();
-
-        FragmentTransaction fragmentTransaction = fm.beginTransaction();
-        fragmentTransaction.setCustomAnimations(R.anim.fade_in, 0, 0, R.anim.fade_out);
-
-        InviteFragment inviteFragment = new InviteFragment();
-        fragmentTransaction.replace(R.id.flFragmentContainer, inviteFragment, InviteFragment.class.getName());
-        fragmentTransaction.addToBackStack(InviteFragment.class.getName());
-        fragmentTransaction.commit();
+    /**
+     * 자동 로그인 스위치
+     */
+    @Override
+    public void swAutoLoginClick(){
+        if(autoFlag.get()){
+            autoOffClick();
+        } else {
+            autoOnClick();
+        }
+        autoFlag.set( !(autoFlag.get()) );
     }
 
     /**
-     * 로그아웃
+     * 푸시 알림 스위치
      */
+    @Override
+    public void swPushClick(){
+        if(pushFlag.get()){
+            pushOffClick();
+        } else {
+            pushOnClick();
+        }
+        pushFlag.set( !(pushFlag.get()) );
+    }
+
+    /**
+     *  마켓팅 이용동의 스위치
+     */
+    @Override
+    public void swMarketingClick(){
+        if(marketingFlag.get()){
+            marketingOffClick();
+        } else {
+            marketingOnClick();
+        }
+        marketingFlag.set( !(marketingFlag.get()) );
+    }
+
+    /**
+     * 친구 초대 클릭
+     */
+    @Override
+    public void onInviteClick() {
+        moveToInviteFragment();
+    }
+
+    /**
+     * 로그아웃 클릭
+     */
+    @Override
     public void onLogoutClick() {
-        setDefaultMainStack();
+        mView.setDefaultMainStack();
         mMyApplication.getUserInfo().setUserState(false);
         ((MainActivity) mActivity).showUserInfo(mMyApplication.getUserInfo().isUserState() , null);
         ((MainActivity) mActivity).mPresenter.getMainFragment().showUserInfo(null, 0, false);
@@ -64,57 +100,36 @@ public class SetupPresenter implements SetupContract.Presenter {
         // mMainFragment.showUserInfo(null, 0, false) ;
     }
 
-    //자동 로그인 온 설정
-    @Override
-    public void autoOnClick() {
-        autoLogin(true);
-        settingSave();
-    }
-
-    //자동 로글인 오프 설정
-    @Override
-    public void autoOffClick() {
-        autoLogin(false);
-        settingSave();
-    }
-
-    //푸시 온 설정
-    @Override
-    public void pushOnClick() {
-
-    }
-
-    //푸시 오프 설정
-    @Override
-    public void pushOffClick() {
-
-    }
-
-    //마켓팅 온 설정
-    @Override
-    public void marketingOnClick() {
-
-    }
-
-    //마켓팅 오프 설정
-    @Override
-    public void marketingOffClick() {
-
-    }
-
+    /**
+     * 홈페이지 버튼 클릭
+     */
     @Override
     public void clickGoHomePage() {
-
+        //홈페이지 이동
     }
 
     /**
-     * 메인 프래그먼트 빼고 모두 스택에서 제거
+     *  자동 로그인 저장 상태 반영
      */
-    private void setDefaultMainStack() {
-        int count = mFragmentManager.getBackStackEntryCount() - 1;
-        for (int i = 0; i < count; ++i) {
-            mFragmentManager.popBackStack();
-        }
+    @Override
+    public void AutologinInit(){
+        SharedPreferences sharedPreferences = mActivity.getSharedPreferences(Constants.USER_SETTING, MODE_PRIVATE);
+        boolean autologin = sharedPreferences.getBoolean(Constants.USER_AUTOLOGIN, false);
+
+        autoFlag.set(autologin);
+    }
+
+    /**
+     *  변경 사항 저장
+     */
+    private void settingSave(){
+        SharedPreferences sharedPreferences = mActivity.getSharedPreferences(Constants.USER_SETTING, MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+
+        //앱 내에 유저설정 저장
+        editor.putBoolean(Constants.USER_AUTOLOGIN, !(autoFlag.get()) ); //자동 로그인 설정 저장
+
+        editor.commit();
     }
 
     /**
@@ -136,19 +151,52 @@ public class SetupPresenter implements SetupContract.Presenter {
         editor.commit();
     }
 
-    /**
-     *  변경 사항 저장
-     */
-    private void settingSave(){
-        SharedPreferences sharedPreferences = mActivity.getSharedPreferences(Constants.USER_SETTING, MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-
-        //앱 내에 유저설정 저장
-        editor.putBoolean(Constants.USER_AUTOLOGIN, !(autoFlag.get()) ); //자동 로그인 설정 저장
-
-        String t = autoFlag.get() ? "t" : "f";
-        Log.e("autoFlag ->", t);
-
-        editor.commit();
+    //자동 로그인 온 처리
+    private void autoOnClick() {
+        autoLogin(true);
+        settingSave();
     }
+
+    //자동 로그인 오프 처리
+    private void autoOffClick() {
+        autoLogin(false);
+        settingSave();
+    }
+
+    //푸시 온 처리
+    private void pushOnClick() {
+
+    }
+
+    //푸시 오프 처리
+    private void pushOffClick() {
+
+    }
+
+    //마켓팅 온 처리
+    private void marketingOnClick() {
+
+    }
+
+    //마켓팅 오프 처리
+    private void marketingOffClick() {
+
+    }
+
+    /**
+     * 친구 초대 페이지 이동
+     */
+    private void moveToInviteFragment(){
+        FragmentManager fm = mView.getFragmentManager();
+
+        FragmentTransaction fragmentTransaction = fm.beginTransaction();
+        fragmentTransaction.setCustomAnimations(R.anim.fade_in, 0, 0, R.anim.fade_out);
+
+        InviteFragment inviteFragment = new InviteFragment();
+        fragmentTransaction.replace(R.id.flFragmentContainer, inviteFragment, InviteFragment.class.getName());
+        fragmentTransaction.addToBackStack(InviteFragment.class.getName());
+        fragmentTransaction.commit();
+    }
+
+    //홈페이지로 이동
 }

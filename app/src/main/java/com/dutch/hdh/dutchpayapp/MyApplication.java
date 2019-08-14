@@ -46,12 +46,11 @@ public class MyApplication extends Application {
     //true = 로그인 , false = 비로그인
     public static boolean isLoginState;
 
-    private static final String BASE_URL = "http://dutchkor02.cafe24.com/";
+    private static final String BASE_URL = "https://dutchkor02.cafe24.com/";
 
     //더치페이 그룹 체크용
     private boolean dutchpayGroup;
     private boolean dutchpayBack;
-
 
     //타임아웃
     private static final int CONNECT_TIMEOUT = 15;

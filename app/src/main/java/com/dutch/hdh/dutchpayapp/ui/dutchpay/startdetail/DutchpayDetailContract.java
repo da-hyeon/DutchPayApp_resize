@@ -13,7 +13,7 @@ public interface DutchpayDetailContract {
         void setDutchpayTitle(String title);
         void setDutchpayCost(String cost);
         void setDutchpayMemCount(String memCount);
-        void setPointButtonGone();
+        void setPointButtonView();
 
         //어댑터 초기 설정
         void adapterInit();

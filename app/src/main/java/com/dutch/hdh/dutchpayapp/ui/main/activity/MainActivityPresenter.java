@@ -2,12 +2,14 @@ package com.dutch.hdh.dutchpayapp.ui.main.activity;
 
 import android.app.Activity;
 import android.content.Context;
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 
+import com.dutch.hdh.dutchpayapp.Constants;
 import com.dutch.hdh.dutchpayapp.MyApplication;
 import com.dutch.hdh.dutchpayapp.R;
 import com.dutch.hdh.dutchpayapp.ui.customer.CustomerFragment;
@@ -27,7 +29,6 @@ import com.dutch.hdh.dutchpayapp.ui.mygroup.edit.MyGroup_EditFragment;
 import com.dutch.hdh.dutchpayapp.ui.mygroup.main.MyGroup_MainFragment;
 import com.dutch.hdh.dutchpayapp.ui.mygroup.telephonedirectory.MyGroup_TelephoneDirectoryFragment;
 import com.dutch.hdh.dutchpayapp.ui.mypage.main.MyPage_MainFragment;
-import com.dutch.hdh.dutchpayapp.ui.notice.NoticeFragment;
 import com.dutch.hdh.dutchpayapp.ui.payment_password.PaymentPasswordFragment;
 import com.dutch.hdh.dutchpayapp.ui.personal_payment.main.PersonalPayment_MainFragment;
 import com.dutch.hdh.dutchpayapp.ui.personal_payment.scan.PersonalPayment_ScanFragment;
@@ -43,6 +44,7 @@ import com.dutch.hdh.dutchpayapp.ui.wallet.mywallet.MyWalletFragment;
 import com.dutch.hdh.dutchpayapp.ui.wallet.payhistory.PayUsageHistoryFragment;
 import com.dutch.hdh.dutchpayapp.ui.wallet.payhistorydetail.PayUsageHistoryDetailFragment;
 import com.dutch.hdh.dutchpayapp.ui.wallet.sendandreceive.SendReceiveFragment;
+import com.dutch.hdh.dutchpayapp.ui.webview.WebViewFragment;
 
 import java.util.List;
 
@@ -178,12 +180,6 @@ public class MainActivityPresenter implements MainActivityContract.Presenter {
             mView.showExit();
         }
 
-        else if (getCurrentFragment() instanceof InfoFragment) {
-            mView.changeTitle("이용안내");
-            mView.hideBell();
-            mView.showExit();
-        }
-
         else if (getCurrentFragment() instanceof CustomerFragment) {
             mView.changeTitle("고객센터");
             mView.hideBell();
@@ -192,6 +188,8 @@ public class MainActivityPresenter implements MainActivityContract.Presenter {
 
         else if (getCurrentFragment() instanceof MyWalletFragment) {
             mView.changeTitle("My 지갑");
+            mView.hideBell();
+            mView.showExit();
         }
 
         else if (getCurrentFragment() instanceof MyPage_MainFragment) {
@@ -268,10 +266,16 @@ public class MainActivityPresenter implements MainActivityContract.Presenter {
             mView.showExit();
         }
 
-        else if (getCurrentFragment() instanceof NoticeFragment){
-            mView.changeTitle("공지사항");
-            mView.hideBell();
-            mView.showExit();
+        else if (getCurrentFragment() instanceof WebViewFragment){
+            if( getCurrentFragment() == mFragmentManager.findFragmentByTag(Constants.WEBVIEW_NOTICE) ) {
+                mView.changeTitle("공지사항");
+                mView.hideBell();
+                mView.showExit();
+            } else if ( getCurrentFragment() == mFragmentManager.findFragmentByTag(Constants.WEBVIEW_INFO) ){
+                mView.changeTitle("이용안내");
+                mView.hideBell();
+                mView.showExit();
+            }
         }
 
         else if (getCurrentFragment() instanceof MainFragment) {
@@ -642,8 +646,10 @@ public class MainActivityPresenter implements MainActivityContract.Presenter {
         //메뉴 닫기 , 프래그먼트 닫기
         mView.hideDrawerLayout();
 
-        if (getCurrentFragment() instanceof NoticeFragment)
+        if (getCurrentFragment() instanceof WebViewFragment){
+            if(getCurrentFragment() == mFragmentManager.findFragmentByTag(Constants.WEBVIEW_NOTICE))
             return;
+        }
 
         setDefaultMainStack();
 
@@ -651,9 +657,13 @@ public class MainActivityPresenter implements MainActivityContract.Presenter {
         FragmentTransaction fragmentTransaction = mFragmentManager.beginTransaction();
         fragmentTransaction.setCustomAnimations(R.anim.fade_in, 0, 0, R.anim.fade_out);
 
-        NoticeFragment noticeFragment = new NoticeFragment();
-        fragmentTransaction.replace(R.id.flFragmentContainer, noticeFragment, NoticeFragment.class.getName());
-        fragmentTransaction.addToBackStack(NoticeFragment.class.getName());
+        Bundle bundle = new Bundle();
+        bundle.putString("url","https://dutchkor02.cafe24.com/app/dutchpay_faq.html");
+
+        WebViewFragment webViewFragment = new WebViewFragment();
+        webViewFragment.setArguments(bundle);
+        fragmentTransaction.replace(R.id.flFragmentContainer, webViewFragment, Constants.WEBVIEW_NOTICE);
+        fragmentTransaction.addToBackStack(Constants.WEBVIEW_NOTICE);
         fragmentTransaction.commit();
     }
 
@@ -664,18 +674,25 @@ public class MainActivityPresenter implements MainActivityContract.Presenter {
     public void clickService() {
         //메뉴 닫기 , 프래그먼트 닫기
         mView.hideDrawerLayout();
-        setDefaultMainStack();
 
-        if (getCurrentFragment() instanceof InfoFragment)
-            return;
+        if (getCurrentFragment() instanceof WebViewFragment) {
+            if( getCurrentFragment() == mFragmentManager.findFragmentByTag(Constants.WEBVIEW_INFO) )
+                return;
+        }
+
+        setDefaultMainStack();
 
         //프래그먼트 이동
         FragmentTransaction fragmentTransaction = mFragmentManager.beginTransaction();
         fragmentTransaction.setCustomAnimations(R.anim.fade_in, 0, 0, R.anim.fade_out);
 
-        InfoFragment infoFragment = new InfoFragment();
-        fragmentTransaction.replace(R.id.flFragmentContainer, infoFragment, InfoFragment.class.getName());
-        fragmentTransaction.addToBackStack(InfoFragment.class.getName());
+        Bundle bundle = new Bundle();
+        bundle.putString("url","https://dutchkor02.cafe24.com/app/operation_guide.html");
+
+        WebViewFragment webViewFragment = new WebViewFragment();
+        webViewFragment.setArguments(bundle);
+        fragmentTransaction.replace(R.id.flFragmentContainer, webViewFragment, Constants.WEBVIEW_INFO);
+        fragmentTransaction.addToBackStack(Constants.WEBVIEW_INFO);
         fragmentTransaction.commit();
     }
 
